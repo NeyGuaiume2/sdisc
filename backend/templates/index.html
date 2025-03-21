@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Avaliação DISC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Avaliação DISC</h1>
+            <p>Descubra seu perfil comportamental</p>
+        </header>
+        
+        <main>
+            <section id="intro">
+                <h2>Bem-vindo à Avaliação DISC</h2>
+                <p>A avaliação DISC é uma metodologia criada por William Moulton Marston, pesquisador da Universidade de Harvard.</p>
+                <p>Esta ferramenta ajuda a identificar seu estilo comportamental predominante.</p>
+                
+                <div class="instructions">
+                    <h3>Instruções:</h3>
+                    <ul>
+                        <li>Em cada tela haverá quatro adjetivos.</li>
+                        <li>Marque o que MAIS tem a ver com você e o que MENOS tem a ver com você.</li>
+                        <li>Cada tela mudará automaticamente após 15 segundos.</li>
+                        <li>Seja sincero e responda como você realmente é no seu dia-a-dia.</li>
+                    </ul>
+                </div>
+                
+                <button id="start-btn" class="btn primary">Iniciar Avaliação</button>
+            </section>
+            
+            <section id="assessment" style="display: none;">
+                <div class="timer">Tempo restante: <span id="countdown">15</span>s</div>
+                
+                <div class="question-container">
+                    <h3>Questão <span id="question-number">1</span> de 25</h3>
+                    
+                    <div class="options-container">
+                        <div class="column-header">
+                            <div>Adjetivo</div>
+                            <div>MAIS</div>
+                            <div>MENOS</div>
+                        </div>
+                        <div id="options-list"></div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button id="prev-btn" class="btn secondary" disabled>Anterior</button>
+                    <button id="next-btn" class="btn primary" disabled>Próximo</button>
+                </div>
+            </section>
+            
+            <section id="results" style="display: none;">
+                <h2>Seus Resultados DISC</h2>
+                <div class="results-container">
+                    <div class="chart-container">
+                        <canvas id="disc-chart"></canvas>
+                    </div>
+                    <div class="profile-description">
+                        <h3>Seu Perfil Comportamental</h3>
+                        <div id="primary-profile"></div>
+                        <div id="profile-details"></div>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button id="download-pdf" class="btn primary">Baixar Relatório PDF</button>
+                    <button id="new-assessment" class="btn secondary">Nova Avaliação</button>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Sistema de Avaliação DISC</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
