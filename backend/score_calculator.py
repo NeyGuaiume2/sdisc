@@ -1,4 +1,4 @@
- """
+﻿"""
 Algoritmo de pontuação para a avaliação DISC.
 Calcula o perfil DISC com base nas respostas MAIS e MENOS.
 """

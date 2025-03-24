@@ -1,0 +1,45 @@
+version: 2
+updates:
+  # Verificar atualizações de dependências do Python
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "pip"
+      include: "scope"
+
+  # Verificar atualizações do GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "github-actions"
+      include: "scope"
+      
+  # Verificar atualizações de dependências npm (para o frontend)
+  - package-ecosystem: "npm"
+    directory: "/static/frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "javascript"
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+
+  # Ignorar certas dependências (adicionar conforme necessário)
+  # ignore:
+  #   - dependency-name: "some-dependency"
+  #     versions: [">=4.0.0"]

@@ -1,0 +1,317 @@
+<!-- Arquivo: c:\pyp\sdisc\app\templates\results.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Resultados da Avaliação DISC{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4">Seu Perfil DISC</h1>
+            <p class="lead">Avaliação realizada em {{ result.date_created.strftime('%d/%m/%Y') }}</p>
+        </div>
+    </div>
+
+    <!-- Gráfico de perfil DISC -->
+    <div class="row mb-5">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Gráfico DISC</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="discChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Perfis predominantes -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Seu Perfil Predominante</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Perfil Primário: 
+                                {% if result.primary_profile == 'D' %}
+                                    <span class="text-danger">Dominância</span>
+                                {% elif result.primary_profile == 'I' %}
+                                    <span class="text-warning">Influência</span>
+                                {% elif result.primary_profile == 'S' %}
+                                    <span class="text-success">Estabilidade</span>
+                                {% elif result.primary_profile == 'C' %}
+                                    <span class="text-primary">Conformidade</span>
+                                {% endif %}
+                            </h5>
+                            <p>{{ profile_interpretations[result.primary_profile].descricao }}</p>
+                            
+                            <h6>Pontos Fortes:</h6>
+                            <ul>
+                                {% for ponto in profile_interpretations[result.primary_profile].pontos_fortes %}
+                                <li>{{ ponto }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Perfil Secundário:
+                                {% if result.secondary_profile == 'D' %}
+                                    <span class="text-danger">Dominância</span>
+                                {% elif result.secondary_profile == 'I' %}
+                                    <span class="text-warning">Influência</span>
+                                {% elif result.secondary_profile == 'S' %}
+                                    <span class="text-success">Estabilidade</span>
+                                {% elif result.secondary_profile == 'C' %}
+                                    <span class="text-primary">Conformidade</span>
+                                {% endif %}
+                            </h5>
+                            <p>{{ profile_interpretations[result.secondary_profile].descricao }}</p>
+                            
+                            <h6>Áreas de Desenvolvimento:</h6>
+                            <ul>
+                                {% for area in profile_interpretations[result.primary_profile].areas_desenvolvimento %}
+                                <li>{{ area }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detalhamento de todos os fatores -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header text-white" style="background-color: #d9534f;">
+                    <h5 class="mb-0">Dominância ({{ result.d_intensity }})</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{ profile_interpretations['D'].descricao }}</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-danger" role="progressbar" 
+                             style="width: {{ (result.d_score / 25) * 100 }}%" 
+                             aria-valuenow="{{ result.d_score }}" aria-valuemin="0" aria-valuemax="25">
+                            {{ result.d_score }}/25
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header text-white" style="background-color: #f0ad4e;">
+                    <h5 class="mb-0">Influência ({{ result.i_intensity }})</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{ profile_interpretations['I'].descricao }}</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-warning" role="progressbar" 
+                             style="width: {{ (result.i_score / 25) * 100 }}%" 
+                             aria-valuenow="{{ result.i_score }}" aria-valuemin="0" aria-valuemax="25">
+                            {{ result.i_score }}/25
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header text-white" style="background-color: #5cb85c;">
+                    <h5 class="mb-0">Estabilidade ({{ result.s_intensity }})</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{ profile_interpretations['S'].descricao }}</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" 
+                             style="width: {{ (result.s_score / 25) * 100 }}%" 
+                             aria-valuenow="{{ result.s_score }}" aria-valuemin="0" aria-valuemax="25">
+                            {{ result.s_score }}/25
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header text-white" style="background-color: #5bc0de;">
+                    <h5 class="mb-0">Conformidade ({{ result.c_intensity }})</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{ profile_interpretations['C'].descricao }}</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-info" role="progressbar" 
+                             style="width: {{ (result.c_score / 25) * 100 }}%" 
+                             aria-valuenow="{{ result.c_score }}" aria-valuemin="0" aria-valuemax="25">
+                            {{ result.c_score }}/25
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reflexões e Próximos Passos -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Reflexões sobre seus resultados</h4>
+                </div>
+                <div class="card-body">
+                    <h5>Perguntas para refletir</h5>
+                    <ul>
+                        <li>Quais pontos fortes da sua essência irão te ajudar na sua jornada?</li>
+                        <li>Quais fraquezas da sua essência você precisa tomar cuidado?</li>
+                        <li>Quais pontos fortes de outra natureza você precisa desenvolver?</li>
+                        <li>Que ações podem ser feitas para alimentar a natureza desejada?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Botões de ação -->
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="btnExportPDF" class="btn btn-primary mr-2">
+                <i class="fas fa-file-pdf"></i> Exportar PDF
+            </button>
+            <button id="btnShareResults" class="btn btn-success mr-2">
+                <i class="fas fa-share-alt"></i> Compartilhar
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                <i class="fas fa-home"></i> Página Inicial
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para o gráfico -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Configuração do gráfico DISC
+        const ctx = document.getElementById('discChart').getContext('2d');
+        const discChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Dominância', 'Influência', 'Estabilidade', 'Conformidade'],
+                datasets: [{
+                    label: 'Seu perfil DISC',
+                    data: [{{ result.d_score }}, {{ result.i_score }}, {{ result.s_score }}, {{ result.c_score }}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: [
+                        'rgba(217, 83, 79, 1)',
+                        'rgba(240, 173, 78, 1)',
+                        'rgba(92, 184, 92, 1)',
+                        'rgba(91, 192, 222, 1)'
+                    ],
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 25
+                    }
+                }
+            }
+        });
+        
+        // Função para exportar como PDF
+        document.getElementById('btnExportPDF').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            
+            // Criar instância do PDF
+            const doc = new jsPDF('p', 'mm', 'a4');
+            
+            // Título
+            doc.setFontSize(22);
+            doc.text('Relatório de Perfil DISC', 105, 20, { align: 'center' });
+            
+            // Data
+            doc.setFontSize(12);
+            doc.text('Data: {{ result.date_created.strftime("%d/%m/%Y") }}', 105, 30, { align: 'center' });
+            
+            // Capturar o gráfico
+            const canvas = document.getElementById('discChart');
+            const imgData = canvas.toDataURL('image/png');
+            doc.addImage(imgData, 'PNG', 50, 40, 110, 80);
+            
+            // Perfil predominante
+            doc.setFontSize(16);
+            doc.text('Perfil Predominante', 20, 140);
+            
+            doc.setFontSize(14);
+            doc.text('Primário: {% if result.primary_profile == "D" %}Dominância{% elif result.primary_profile == "I" %}Influência{% elif result.primary_profile == "S" %}Estabilidade{% elif result.primary_profile == "C" %}Conformidade{% endif %}', 20, 150);
+            
+            doc.setFontSize(14);
+            doc.text('Secundário: {% if result.secondary_profile == "D" %}Dominância{% elif result.secondary_profile == "I" %}Influência{% elif result.secondary_profile == "S" %}Estabilidade{% elif result.secondary_profile == "C" %}Conformidade{% endif %}', 20, 160);
+            
+            // Pontuações
+            doc.setFontSize(16);
+            doc.text('Pontuações', 20, 180);
+            
+            doc.setFontSize(12);
+            doc.text(`Dominância: {{ result.d_score }}/25 ({{ result.d_intensity }})`, 20, 190);
+            doc.text(`Influência: {{ result.i_score }}/25 ({{ result.i_intensity }})`, 20, 200);
+            doc.text(`Estabilidade: {{ result.s_score }}/25 ({{ result.s_intensity }})`, 20, 210);
+            doc.text(`Conformidade: {{ result.c_score }}/25 ({{ result.c_intensity }})`, 20, 220);
+            
+            // Rodapé
+            doc.setFontSize(10);
+            doc.text('Sistema de Avaliação DISC - www.seusite.com.br', 105, 280, { align: 'center' });
+            
+            // Salvar o PDF
+            doc.save('relatorio-disc.pdf');
+        });
+        
+        // Compartilhar resultados
+        document.getElementById('btnShareResults').addEventListener('click', function() {
+            const shareUrl = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Meu perfil DISC',
+                    text: 'Confira meus resultados da avaliação DISC',
+                    url: shareUrl
+                })
+                .catch(error => {
+                    console.error('Erro ao compartilhar:', error);
+                    alert('Use este link para compartilhar: ' + shareUrl);
+                });
+            } else {
+                // Fallback para navegadores que não suportam a API Web Share
+                const dummy = document.createElement('input');
+                document.body.appendChild(dummy);
+                dummy.value = shareUrl;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                
+                alert('Link copiado para a área de transferência!');
+            }
+        });
+    });
+</script>
+{% endblock %}

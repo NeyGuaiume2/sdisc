@@ -236,6 +236,27 @@ function finishAssessment() {
     // Parar timer
     clearInterval(timerInterval);
     
+    // Verificar se todas as perguntas foram respondidas
+    const questionsAnswered = Object.keys(responses).length;
+    
+    if (questionsAnswered < questions.length) {
+        alert(`Você respondeu apenas ${questionsAnswered} de ${questions.length} perguntas. Certifique-se de responder todas as perguntas.`);
+        // Voltar para a primeira pergunta não respondida
+        for (let i = 0; i < questions.length; i++) {
+            const questionId = questions[i].id;
+            if (!responses[questionId] || !responses[questionId].most || !responses[questionId].least) {
+                loadQuestion(i);
+                return;
+            }
+        }
+        return;
+    }
+    
+    // Exibir indicador de carregamento
+    resultsSection.innerHTML = '<div class="loading">Calculando seus resultados...</div>';
+    assessmentSection.style.display = 'none';
+    resultsSection.style.display = 'block';
+    
     // Enviar respostas para cálculo
     fetch('/api/calculate', {
         method: 'POST',
@@ -244,12 +265,22 @@ function finishAssessment() {
         },
         body: JSON.stringify(responses)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('Resultados calculados:', data);
         
+        // Verificar se há resultados
+        if (!data || !data.results) {
+            throw new Error('Resultados inválidos recebidos do servidor');
+        }
+        
         // Exibir resultados
-        displayResults(data);
+        displayResults(data.results);
         
         // Salvar avaliação
         return fetch('/api/assessment', {
@@ -269,11 +300,166 @@ function finishAssessment() {
     })
     .catch(error => {
         console.error('Erro ao processar avaliação:', error);
+        resultsSection.innerHTML = `
+            <div class="error-message">
+                <h3>Ocorreu um erro ao processar seus resultados</h3>
+                <p>${error.message}</p>
+                <button class="btn primary" onclick="location.reload()">Tentar novamente</button>
+            </div>
+        `;
     });
-    
-    // Esconder seção de avaliação e mostrar resultados
-    assessmentSection.style.display = 'none';
-    resultsSection.style.display = 'block';
 }
 
-// Ex
+// Função para exibir resultados
+function displayResults(results) {
+    // Elementos para exibir na seção de resultados
+    const resultsHTML = `
+        <h2>Seus Resultados DISC</h2>
+        
+        <div class="results-container">
+            <div class="chart-container">
+                <h3>Seu Perfil DISC</h3>
+                <canvas id="disc-chart"></canvas>
+                
+                <div class="disc-scores">
+                    <div class="disc-score">
+                        <strong>D (Dominância):</strong> ${results.disc_scores.D} - ${results.disc_levels.D}
+                    </div>
+                    <div class="disc-score">
+                        <strong>I (Influência):</strong> ${results.disc_scores.I} - ${results.disc_levels.I}
+                    </div>
+                    <div class="disc-score">
+                        <strong>S (Estabilidade):</strong> ${results.disc_scores.S} - ${results.disc_levels.S}
+                    </div>
+                    <div class="disc-score">
+                        <strong>C (Conformidade):</strong> ${results.disc_scores.C} - ${results.disc_levels.C}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-description">
+                <h3>Seu Perfil: ${results.primary_type} - ${results.primary_description.title}</h3>
+                <p>${results.profile_summary}</p>
+            </div>
+        </div>
+        
+        <div class="detailed-report">
+            <h3>Relatório Detalhado</h3>
+            
+            <h4>Pontos Fortes</h4>
+            <ul>
+                ${results.detailed_report.primary_strengths.map(strength => `<li>${strength}</li>`).join('')}
+            </ul>
+            
+            <h4>Áreas de Desenvolvimento</h4>
+            <ul>
+                ${results.detailed_report.development_areas_list.map(area => `<li>${area}</li>`).join('')}
+            </ul>
+            
+            <h4>Como Trabalhar com Você</h4>
+            <p>${results.primary_description.how_to_work_with}</p>
+        </div>
+        
+        <div class="actions">
+            <button class="btn primary" id="download-btn">Baixar Relatório PDF</button>
+            <button class="btn secondary" id="restart-btn">Fazer Novo Teste</button>
+        </div>
+    `;
+    
+    // Atualizar o conteúdo da seção de resultados
+    resultsSection.innerHTML = resultsHTML;
+    
+    // Adicionar eventos aos novos botões
+    document.getElementById('restart-btn').addEventListener('click', () => {
+        location.reload();
+    });
+    
+    document.getElementById('download-btn').addEventListener('click', () => {
+        // Implementação para download do relatório em PDF
+        alert('Funcionalidade de download em desenvolvimento');
+    });
+    
+    // Criar gráfico com Chart.js (assumindo que está incluído na página)
+    try {
+        if (typeof Chart !== 'undefined') {
+            const ctx = document.getElementById('disc-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['D', 'I', 'S', 'C'],
+                    datasets: [{
+                        label: 'Pontuação DISC',
+                        data: [
+                            results.disc_scores.D,
+                            results.disc_scores.I,
+                            results.disc_scores.S,
+                            results.disc_scores.C
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(75, 192, 192, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        } else {
+            console.warn('Chart.js não está disponível. Incluir <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> no HTML.');
+            
+            // Alternativa simples sem Chart.js
+            const chartContainer = document.querySelector('.chart-container');
+            const canvas = document.getElementById('disc-chart');
+            canvas.remove();
+            
+            const simpleChart = document.createElement('div');
+            simpleChart.className = 'simple-chart';
+            simpleChart.innerHTML = `
+                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.D * 5 + 50)}%;">D: ${results.disc_scores.D}</div>
+                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.I * 5 + 50)}%;">I: ${results.disc_scores.I}</div>
+                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.S * 5 + 50)}%;">S: ${results.disc_scores.S}</div>
+                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.C * 5 + 50)}%;">C: ${results.disc_scores.C}</div>
+            `;
+            
+            chartContainer.insertBefore(simpleChart, chartContainer.firstChild);
+            
+            // Adicionar CSS para barras simples
+            const style = document.createElement('style');
+            style.textContent = `
+                .simple-chart {
+                    height: 200px;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-around;
+                    margin: 20px 0;
+                }
+                .simple-bar {
+                    width: 40px;
+                    height: var(--value);
+                    background-color: #3498db;
+                    color: white;
+                    text-align: center;
+                    padding-top: 5px;
+                    border-radius: 4px 4px 0 0;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    } catch (e) {
+        console.error('Erro ao criar gráfico:', e);
+    }
+}

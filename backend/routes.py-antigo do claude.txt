@@ -1,0 +1,79 @@
+"""
+Definição das rotas da API para a aplicação DISC.
+"""
+
+from flask import Blueprint, jsonify, request, render_template
+from datetime import datetime
+import json
+import os
+from backend.score_calculator import calculate_disc_scores, get_profile_summary, generate_detailed_report
+from backend.models.disc_result import DISCResult
+from backend.db import db
+
+# Cria blueprint para as rotas principais
+main_bp = Blueprint('main', __name__)
+
+# Configuração de dados
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR)
+
+# Arquivo para armazenar os dados das avaliações
+ASSESSMENTS_FILE = os.path.join(DATA_DIR, 'assessments.json')
+
+# Inicializa o arquivo de avaliações se não existir
+if not os.path.exists(ASSESSMENTS_FILE):
+    with open(ASSESSMENTS_FILE, 'w') as f:
+        json.dump([], f)
+
+# Rota principal
+@main_bp.route('/')
+def index():
+    return render_template('index.html')
+
+# Rota para obter as perguntas do questionário DISC
+@main_bp.route('/api/questions', methods=['GET'])
+def get_questions():
+    # Carregando as perguntas do questionário DISC
+    questions = [
+        {
+            "id": 1,
+            "options": [
+                {"id": "A", "text": "DETERMINADO"},
+                {"id": "B", "text": "CONFIANTE"},
+                {"id": "C", "text": "CONSISTENTE"},
+                {"id": "D", "text": "PRECISO"}
+            ]
+        },
+        # Exemplo com mais uma pergunta
+        {
+            "id": 2,
+            "options": [
+                {"id": "A", "text": "DIRETO"},
+                {"id": "B", "text": "PERSUASIVO"},
+                {"id": "C", "text": "LEAL"},
+                {"id": "D", "text": "CUIDADOSO"}
+            ]
+        },
+        # Adicione mais perguntas conforme necessário
+    ]
+    
+    return jsonify(questions)
+
+# Rota para salvar uma avaliação completa
+@main_bp.route('/api/assessment', methods=['POST'])
+def save_assessment():
+    data = request.json
+    
+    # Adicionar timestamp
+    data['timestamp'] = datetime.now().isoformat()
+    
+    # Carregar avaliações existentes
+    with open(ASSESSMENTS_FILE, 'r') as f:
+        assessments = json.load(f)
+    
+    # Adicionar nova avaliação
+    assessments.append(data)
+    
+    # Salvar de volta no arquivo
+    with open(ASSESSMENTS_FILE, 'w') 

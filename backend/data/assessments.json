@@ -1,0 +1,986 @@
+[
+  {
+    "responses": {
+      "1": {
+        "most": "A",
+        "least": "D"
+      },
+      "2": {
+        "most": "A",
+        "least": "B"
+      },
+      "3": {
+        "most": "A",
+        "least": "D"
+      },
+      "4": {
+        "most": "B",
+        "least": "D"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Trabalhar a paci\u00eancia e empatia com os outros",
+          "Desenvolver habilidades de escuta ativa"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "primary_strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "primary_weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio I (Influ\u00eancia) adiciona caracter\u00edsticas de entusiasta, otimista, persuasivo.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": -3,
+        "D": 3,
+        "I": 0,
+        "S": 0
+      },
+      "primary_description": {
+        "characteristics": [
+          "direto",
+          "decisivo",
+          "orientado a resultados",
+          "competitivo",
+          "assertivo"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "motivation": "resultados, poder e desafios",
+        "strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "title": "Domin\u00e2ncia",
+        "weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ]
+      },
+      "primary_type": "D",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 3,
+          "menos": 0
+        },
+        "B": {
+          "mais": 1,
+          "menos": 1
+        },
+        "C": {
+          "mais": 0,
+          "menos": 0
+        },
+        "D": {
+          "mais": 0,
+          "menos": 3
+        }
+      },
+      "raw_scores": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": -3
+      },
+      "secondary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "secondary_type": "I"
+    },
+    "timestamp": "2025-03-24T14:18:44.654244"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "A",
+        "least": "D"
+      },
+      "2": {
+        "most": "D",
+        "least": "A"
+      },
+      "3": {
+        "most": "A",
+        "least": "D"
+      },
+      "4": {
+        "most": "C",
+        "least": "B"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Trabalhar a paci\u00eancia e empatia com os outros",
+          "Desenvolver habilidades de escuta ativa"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "primary_strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "primary_weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio S (Estabilidade) adiciona caracter\u00edsticas de paciente, leal, previs\u00edvel.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": -1,
+        "D": 1,
+        "I": -1,
+        "S": 1
+      },
+      "primary_description": {
+        "characteristics": [
+          "direto",
+          "decisivo",
+          "orientado a resultados",
+          "competitivo",
+          "assertivo"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "motivation": "resultados, poder e desafios",
+        "strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "title": "Domin\u00e2ncia",
+        "weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ]
+      },
+      "primary_type": "D",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 2,
+          "menos": 1
+        },
+        "B": {
+          "mais": 0,
+          "menos": 1
+        },
+        "C": {
+          "mais": 1,
+          "menos": 0
+        },
+        "D": {
+          "mais": 1,
+          "menos": 2
+        }
+      },
+      "raw_scores": {
+        "A": 1,
+        "B": -1,
+        "C": 1,
+        "D": -1
+      },
+      "secondary_description": {
+        "characteristics": [
+          "paciente",
+          "leal",
+          "previs\u00edvel",
+          "cooperativo",
+          "calmo"
+        ],
+        "how_to_work_with": "Seja consistente, sincero e evite mudan\u00e7as bruscas.",
+        "motivation": "coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade",
+        "strengths": [
+          "Coopera\u00e7\u00e3o",
+          "Consist\u00eancia",
+          "Paci\u00eancia"
+        ],
+        "title": "Estabilidade",
+        "weaknesses": [
+          "Resist\u00eancia a mudan\u00e7as",
+          "Dificuldade em dizer n\u00e3o"
+        ]
+      },
+      "secondary_type": "S"
+    },
+    "timestamp": "2025-03-24T14:20:49.007354"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "A",
+        "least": "D"
+      },
+      "2": {
+        "most": "A",
+        "least": "B"
+      },
+      "3": {
+        "most": "A",
+        "least": "D"
+      },
+      "4": {
+        "most": "B",
+        "least": "D"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Trabalhar a paci\u00eancia e empatia com os outros",
+          "Desenvolver habilidades de escuta ativa"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "primary_strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "primary_weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio I (Influ\u00eancia) adiciona caracter\u00edsticas de entusiasta, otimista, persuasivo.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": -3,
+        "D": 3,
+        "I": 0,
+        "S": 0
+      },
+      "primary_description": {
+        "characteristics": [
+          "direto",
+          "decisivo",
+          "orientado a resultados",
+          "competitivo",
+          "assertivo"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "motivation": "resultados, poder e desafios",
+        "strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "title": "Domin\u00e2ncia",
+        "weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ]
+      },
+      "primary_type": "D",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 3,
+          "menos": 0
+        },
+        "B": {
+          "mais": 1,
+          "menos": 1
+        },
+        "C": {
+          "mais": 0,
+          "menos": 0
+        },
+        "D": {
+          "mais": 0,
+          "menos": 3
+        }
+      },
+      "raw_scores": {
+        "A": 3,
+        "B": 0,
+        "C": 0,
+        "D": -3
+      },
+      "secondary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "secondary_type": "I"
+    },
+    "timestamp": "2025-03-24T14:26:37.435151"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "A",
+        "least": "B"
+      },
+      "2": {
+        "most": "B",
+        "least": "A"
+      },
+      "3": {
+        "most": "C",
+        "least": "A"
+      },
+      "4": {
+        "most": "B",
+        "least": "C"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Melhorar a organiza\u00e7\u00e3o e aten\u00e7\u00e3o aos detalhes",
+          "Desenvolver disciplina para concluir tarefas"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "primary_strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "primary_weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio S (Estabilidade) adiciona caracter\u00edsticas de paciente, leal, previs\u00edvel.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Influ\u00eancia (I), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil I dominante, voc\u00ea tende a ser motivado por: reconhecimento social, persuas\u00e3o e popularidade.\n\nSuas principais caracter\u00edsticas incluem:\n- entusiasta\n- otimista\n- persuasivo\n- soci\u00e1vel\n- comunicativo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": 0,
+        "D": -1,
+        "I": 1,
+        "S": 0
+      },
+      "primary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "primary_type": "I",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Influ\u00eancia (I), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil I dominante, voc\u00ea tende a ser motivado por: reconhecimento social, persuas\u00e3o e popularidade.\n\nSuas principais caracter\u00edsticas incluem:\n- entusiasta\n- otimista\n- persuasivo\n- soci\u00e1vel\n- comunicativo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 1,
+          "menos": 2
+        },
+        "B": {
+          "mais": 2,
+          "menos": 1
+        },
+        "C": {
+          "mais": 1,
+          "menos": 1
+        },
+        "D": {
+          "mais": 0,
+          "menos": 0
+        }
+      },
+      "raw_scores": {
+        "A": -1,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "secondary_description": {
+        "characteristics": [
+          "paciente",
+          "leal",
+          "previs\u00edvel",
+          "cooperativo",
+          "calmo"
+        ],
+        "how_to_work_with": "Seja consistente, sincero e evite mudan\u00e7as bruscas.",
+        "motivation": "coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade",
+        "strengths": [
+          "Coopera\u00e7\u00e3o",
+          "Consist\u00eancia",
+          "Paci\u00eancia"
+        ],
+        "title": "Estabilidade",
+        "weaknesses": [
+          "Resist\u00eancia a mudan\u00e7as",
+          "Dificuldade em dizer n\u00e3o"
+        ]
+      },
+      "secondary_type": "S"
+    },
+    "timestamp": "2025-03-24T14:40:05.098395"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "A",
+        "least": "C"
+      },
+      "2": {
+        "most": "C",
+        "least": "A"
+      },
+      "3": {
+        "most": "B",
+        "least": "D"
+      },
+      "4": {
+        "least": "A",
+        "most": "C"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Melhorar a organiza\u00e7\u00e3o e aten\u00e7\u00e3o aos detalhes",
+          "Desenvolver disciplina para concluir tarefas"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "primary_strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "primary_weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio S (Estabilidade) adiciona caracter\u00edsticas de paciente, leal, previs\u00edvel.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Influ\u00eancia (I), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil I dominante, voc\u00ea tende a ser motivado por: reconhecimento social, persuas\u00e3o e popularidade.\n\nSuas principais caracter\u00edsticas incluem:\n- entusiasta\n- otimista\n- persuasivo\n- soci\u00e1vel\n- comunicativo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": -1,
+        "D": -1,
+        "I": 1,
+        "S": 1
+      },
+      "primary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "primary_type": "I",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Influ\u00eancia (I), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil I dominante, voc\u00ea tende a ser motivado por: reconhecimento social, persuas\u00e3o e popularidade.\n\nSuas principais caracter\u00edsticas incluem:\n- entusiasta\n- otimista\n- persuasivo\n- soci\u00e1vel\n- comunicativo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 1,
+          "menos": 2
+        },
+        "B": {
+          "mais": 1,
+          "menos": 0
+        },
+        "C": {
+          "mais": 2,
+          "menos": 1
+        },
+        "D": {
+          "mais": 0,
+          "menos": 1
+        }
+      },
+      "raw_scores": {
+        "A": -1,
+        "B": 1,
+        "C": 1,
+        "D": -1
+      },
+      "secondary_description": {
+        "characteristics": [
+          "paciente",
+          "leal",
+          "previs\u00edvel",
+          "cooperativo",
+          "calmo"
+        ],
+        "how_to_work_with": "Seja consistente, sincero e evite mudan\u00e7as bruscas.",
+        "motivation": "coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade",
+        "strengths": [
+          "Coopera\u00e7\u00e3o",
+          "Consist\u00eancia",
+          "Paci\u00eancia"
+        ],
+        "title": "Estabilidade",
+        "weaknesses": [
+          "Resist\u00eancia a mudan\u00e7as",
+          "Dificuldade em dizer n\u00e3o"
+        ]
+      },
+      "secondary_type": "S"
+    },
+    "timestamp": "2025-03-24T14:52:11.565418"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "B",
+        "least": "C"
+      },
+      "2": {
+        "most": "A",
+        "least": "C"
+      },
+      "3": {
+        "most": "A",
+        "least": "C"
+      },
+      "4": {
+        "most": "D",
+        "least": "C"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Trabalhar a paci\u00eancia e empatia com os outros",
+          "Desenvolver habilidades de escuta ativa"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "primary_strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "primary_weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio I (Influ\u00eancia) adiciona caracter\u00edsticas de entusiasta, otimista, persuasivo.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): Baixo\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "Baixo"
+      },
+      "disc_scores": {
+        "C": 1,
+        "D": 2,
+        "I": 1,
+        "S": -4
+      },
+      "primary_description": {
+        "characteristics": [
+          "direto",
+          "decisivo",
+          "orientado a resultados",
+          "competitivo",
+          "assertivo"
+        ],
+        "how_to_work_with": "Seja direto, focado em resultados e evite detalhes desnecess\u00e1rios.",
+        "motivation": "resultados, poder e desafios",
+        "strengths": [
+          "Lideran\u00e7a",
+          "Tomada de decis\u00e3o r\u00e1pida",
+          "Resolu\u00e7\u00e3o de problemas"
+        ],
+        "title": "Domin\u00e2ncia",
+        "weaknesses": [
+          "Impaci\u00eancia",
+          "Insensibilidade \u00e0s necessidades dos outros"
+        ]
+      },
+      "primary_type": "D",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Domin\u00e2ncia (D), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): Baixo\n- C (Conformidade): M\u00e9dio\n\nComo perfil D dominante, voc\u00ea tende a ser motivado por: resultados, poder e desafios.\n\nSuas principais caracter\u00edsticas incluem:\n- direto\n- decisivo\n- orientado a resultados\n- competitivo\n- assertivo\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 2,
+          "menos": 0
+        },
+        "B": {
+          "mais": 1,
+          "menos": 0
+        },
+        "C": {
+          "mais": 0,
+          "menos": 4
+        },
+        "D": {
+          "mais": 1,
+          "menos": 0
+        }
+      },
+      "raw_scores": {
+        "A": 2,
+        "B": 1,
+        "C": -4,
+        "D": 1
+      },
+      "secondary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "secondary_type": "I"
+    },
+    "timestamp": "2025-03-24T14:54:57.046061"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "C",
+        "least": "A"
+      },
+      "2": {
+        "least": "C",
+        "most": "B"
+      },
+      "3": {
+        "least": "A",
+        "most": "D"
+      },
+      "4": {
+        "least": "B",
+        "most": "A"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Ser menos cr\u00edtico e mais aberto a novas abordagens",
+          "Desenvolver habilidades de comunica\u00e7\u00e3o interpessoal"
+        ],
+        "how_to_work_with": "Forne\u00e7a detalhes, seja preciso e use abordagem l\u00f3gica.",
+        "primary_strengths": [
+          "An\u00e1lise detalhada",
+          "Qualidade do trabalho",
+          "Organiza\u00e7\u00e3o"
+        ],
+        "primary_weaknesses": [
+          "Perfeccionismo",
+          "Excesso de cr\u00edtica"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio I (Influ\u00eancia) adiciona caracter\u00edsticas de entusiasta, otimista, persuasivo.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Conformidade (C), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil C dominante, voc\u00ea tende a ser motivado por: qualidade, precis\u00e3o e expertise.\n\nSuas principais caracter\u00edsticas incluem:\n- anal\u00edtico\n- detalhista\n- preciso\n- sistem\u00e1tico\n- organizado\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": 1,
+        "D": -1,
+        "I": 0,
+        "S": 0
+      },
+      "primary_description": {
+        "characteristics": [
+          "anal\u00edtico",
+          "detalhista",
+          "preciso",
+          "sistem\u00e1tico",
+          "organizado"
+        ],
+        "how_to_work_with": "Forne\u00e7a detalhes, seja preciso e use abordagem l\u00f3gica.",
+        "motivation": "qualidade, precis\u00e3o e expertise",
+        "strengths": [
+          "An\u00e1lise detalhada",
+          "Qualidade do trabalho",
+          "Organiza\u00e7\u00e3o"
+        ],
+        "title": "Conformidade",
+        "weaknesses": [
+          "Perfeccionismo",
+          "Excesso de cr\u00edtica"
+        ]
+      },
+      "primary_type": "C",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Conformidade (C), com Influ\u00eancia (I) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil C dominante, voc\u00ea tende a ser motivado por: qualidade, precis\u00e3o e expertise.\n\nSuas principais caracter\u00edsticas incluem:\n- anal\u00edtico\n- detalhista\n- preciso\n- sistem\u00e1tico\n- organizado\n\nSeu perfil secund\u00e1rio I contribui com elementos de reconhecimento social, persuas\u00e3o e popularidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 1,
+          "menos": 2
+        },
+        "B": {
+          "mais": 1,
+          "menos": 1
+        },
+        "C": {
+          "mais": 1,
+          "menos": 1
+        },
+        "D": {
+          "mais": 1,
+          "menos": 0
+        }
+      },
+      "raw_scores": {
+        "A": -1,
+        "B": 0,
+        "C": 0,
+        "D": 1
+      },
+      "secondary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "secondary_type": "I"
+    },
+    "timestamp": "2025-03-24T14:55:26.976732"
+  },
+  {
+    "responses": {
+      "1": {
+        "most": "B",
+        "least": "A"
+      },
+      "2": {
+        "most": "D",
+        "least": "C"
+      },
+      "3": {
+        "most": "C",
+        "least": "A"
+      },
+      "4": {
+        "most": "A",
+        "least": "D"
+      }
+    },
+    "results": {
+      "detailed_report": {
+        "development_areas": "\u00c1reas para desenvolvimento pessoal:",
+        "development_areas_list": [
+          "Melhorar a organiza\u00e7\u00e3o e aten\u00e7\u00e3o aos detalhes",
+          "Desenvolver disciplina para concluir tarefas"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "primary_strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "primary_weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ],
+        "secondary_influence": "Seu perfil secund\u00e1rio S (Estabilidade) adiciona caracter\u00edsticas de paciente, leal, previs\u00edvel.",
+        "summary": "Seu perfil DISC \u00e9 predominantemente Influ\u00eancia (I), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil I dominante, voc\u00ea tende a ser motivado por: reconhecimento social, persuas\u00e3o e popularidade.\n\nSuas principais caracter\u00edsticas incluem:\n- entusiasta\n- otimista\n- persuasivo\n- soci\u00e1vel\n- comunicativo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n"
+      },
+      "disc_levels": {
+        "C": "M\u00e9dio",
+        "D": "M\u00e9dio",
+        "I": "M\u00e9dio",
+        "S": "M\u00e9dio"
+      },
+      "disc_scores": {
+        "C": 0,
+        "D": -1,
+        "I": 1,
+        "S": 0
+      },
+      "primary_description": {
+        "characteristics": [
+          "entusiasta",
+          "otimista",
+          "persuasivo",
+          "soci\u00e1vel",
+          "comunicativo"
+        ],
+        "how_to_work_with": "Seja amig\u00e1vel, demonstre interesse e permita tempo para socializa\u00e7\u00e3o.",
+        "motivation": "reconhecimento social, persuas\u00e3o e popularidade",
+        "strengths": [
+          "Comunica\u00e7\u00e3o",
+          "Networking",
+          "Motiva\u00e7\u00e3o de equipes"
+        ],
+        "title": "Influ\u00eancia",
+        "weaknesses": [
+          "Desorganiza\u00e7\u00e3o",
+          "Falta de aten\u00e7\u00e3o aos detalhes"
+        ]
+      },
+      "primary_type": "I",
+      "profile_summary": "Seu perfil DISC \u00e9 predominantemente Influ\u00eancia (I), com Estabilidade (S) como secund\u00e1rio.\n\nSeus n\u00edveis DISC s\u00e3o:\n- D (Domin\u00e2ncia): M\u00e9dio\n- I (Influ\u00eancia): M\u00e9dio\n- S (Estabilidade): M\u00e9dio\n- C (Conformidade): M\u00e9dio\n\nComo perfil I dominante, voc\u00ea tende a ser motivado por: reconhecimento social, persuas\u00e3o e popularidade.\n\nSuas principais caracter\u00edsticas incluem:\n- entusiasta\n- otimista\n- persuasivo\n- soci\u00e1vel\n- comunicativo\n\nSeu perfil secund\u00e1rio S contribui com elementos de coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade.\n",
+      "raw_counts": {
+        "A": {
+          "mais": 1,
+          "menos": 2
+        },
+        "B": {
+          "mais": 1,
+          "menos": 0
+        },
+        "C": {
+          "mais": 1,
+          "menos": 1
+        },
+        "D": {
+          "mais": 1,
+          "menos": 1
+        }
+      },
+      "raw_scores": {
+        "A": -1,
+        "B": 1,
+        "C": 0,
+        "D": 0
+      },
+      "secondary_description": {
+        "characteristics": [
+          "paciente",
+          "leal",
+          "previs\u00edvel",
+          "cooperativo",
+          "calmo"
+        ],
+        "how_to_work_with": "Seja consistente, sincero e evite mudan\u00e7as bruscas.",
+        "motivation": "coopera\u00e7\u00e3o, seguran\u00e7a e confiabilidade",
+        "strengths": [
+          "Coopera\u00e7\u00e3o",
+          "Consist\u00eancia",
+          "Paci\u00eancia"
+        ],
+        "title": "Estabilidade",
+        "weaknesses": [
+          "Resist\u00eancia a mudan\u00e7as",
+          "Dificuldade em dizer n\u00e3o"
+        ]
+      },
+      "secondary_type": "S"
+    },
+    "timestamp": "2025-03-24T14:56:15.650969"
+  }
+]
