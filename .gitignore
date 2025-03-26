@@ -2,31 +2,34 @@
 venv/
 env/
 .env
-ECHO est† desativado.
+
 # Arquivos de cache Python
 __pycache__/
 *.py[cod]
 *$py.class
-ECHO est† desativado.
+
 # Arquivos de distribui√ß√£o
 dist/
 build/
 *.egg-info/
-ECHO est† desativado.
+
 # Arquivos de banco de dados SQLite
 *.sqlite
 *.db
-ECHO est† desativado.
+
 # Arquivos de log
 *.log
-ECHO est† desativado.
+
 # Arquivos espec√≠ficos do VS Code
 .vscode/
-ECHO est† desativado.
+
 # Arquivos espec√≠ficos do Node.js
 node_modules/
 package-lock.json
-ECHO est† desativado.
+
 # Arquivos tempor√°rios
 temp/
 tmp/
+
+# Configura√ß√µes de produ√ß√£o
+prod_config.py
