@@ -1,0 +1,82 @@
+README.md
+app/
+    __init__.py
+    models/
+        __init__.py
+        database.py
+        disc_model.py
+    security.py
+    templates/
+        results.html
+        results.txt
+backend/
+    __init__.py
+    app.py
+    config/
+        __init__.py
+        security.py
+    config.py
+    data/
+        assessments.json
+    db.py
+    disc_data.py
+    models/
+        __init__.py
+        disc-result.py
+        disc.py
+        user.py
+    pyrightconfig.json
+    routes.py
+    score_calculator.py
+    static/
+        css/
+            styles.css
+        images/
+            favicon-16.ico
+            favicon-32.ico
+            favicon-48.ico
+            favicon-64.ico
+            favicon.ico
+        js/
+            disc_questions.js
+            disc_quiz.js
+            disc_scoring.js
+            script.js
+    templates/
+        index.html
+        quiz.html
+deploy.bat
+estrutura_do_projeto.txt
+estrutura_projeto.txt
+frontend/
+    README.md
+    public/
+    src/
+        assets/
+            css/
+            images/
+        components/
+        pages/
+generate_favicon.py
+gerar_estrutura.py
+gunicorn_config.py
+models/
+    app/
+        models.py
+        routes.py
+        routes.txt
+    results.py
+prod_config.py
+requirements.txt
+scripts/
+    update_requirements.py
+sessões.txt
+setup-git.bat
+templates/
+tests/
+    integration-tests.py
+    security_test.py
+    test_app.py
+    test_disc_scoring.py
+uso windows.txt
+wsgi.py

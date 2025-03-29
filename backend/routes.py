@@ -5,23 +5,26 @@ Definição das rotas da API para a aplicação DISC.
 from flask import Blueprint, jsonify, request, render_template
 from datetime import datetime
 import json
+import os
 from backend.score_calculator import calculate_disc_scores, get_profile_summary, generate_detailed_report
-# Removido: from backend.models.disc_result import DISCResult
-# Removido: from backend.db import db
 
 # Cria blueprint para as rotas principais
 main_bp = Blueprint('main', __name__)
-
 
 # Rota principal
 @main_bp.route('/')
 def index():
     return render_template('index.html')
 
+# Nova rota para o questionário DISC
+@main_bp.route('/quiz')
+def quiz():
+    return render_template('quiz.html')
+
 # Rota para obter as perguntas do questionário DISC
 @main_bp.route('/api/questions', methods=['GET'])
 def get_questions():
-    # Carregando as perguntas do questionário DISC (exemplo)
+    # Carregando as perguntas do questionário DISC 
     questions = [
         {
             "id": 1,
@@ -41,10 +44,9 @@ def get_questions():
                 {"id": "D", "text": "CUIDADOSO"}
             ]
         },
-        # ... mais perguntas ...
+        # Adicione mais perguntas aqui
     ]
     return jsonify(questions)
-
 
 # Rota para salvar uma avaliação completa
 @main_bp.route('/api/assessment', methods=['POST'])
@@ -52,23 +54,27 @@ def save_assessment():
     data = request.json
     data['timestamp'] = datetime.now().isoformat()
 
-    # Corrigido: Acesso ao ASSESSMENTS_FILE usando app.config
-    assessments_file = main_bp.root_path + '/data/assessments.json'
+    # Caminho para o arquivo de avaliações
+    assessments_file = os.path.join(main_bp.root_path, 'data', 'assessments.json')
 
+    # Criar o diretório se não existir
+    os.makedirs(os.path.dirname(assessments_file), exist_ok=True)
 
-    with open(assessments_file, 'r') as f:
-        try:
+    # Carregar avaliações existentes
+    try:
+        with open(assessments_file, 'r') as f:
             assessments = json.load(f)
-        except json.JSONDecodeError:
-            assessments = []
+    except (FileNotFoundError, json.JSONDecodeError):
+        assessments = []
 
+    # Adicionar nova avaliação
     assessments.append(data)
 
+    # Salvar avaliações atualizadas
     with open(assessments_file, 'w') as f:
         json.dump(assessments, f, indent=2)
 
     return jsonify({"success": True, "id": data.get('id', len(assessments))})
-
 
 # Rota para processar e calcular os resultados DISC
 @main_bp.route('/api/calculate', methods=['POST'])

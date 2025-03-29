@@ -33,3 +33,8 @@ tmp/
 
 # Configurações de produção
 prod_config.py
+.pytest_cache/
+uso windows.txt
+__pycache__/
+sessões.txt
+backend/pyrightconfig.jsonbackend/static/images/

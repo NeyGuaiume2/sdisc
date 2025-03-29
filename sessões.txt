@@ -60,7 +60,7 @@ Implementação Atual: Integração com GitHub e Segurança
 sessão 7
 1. Template HTML para o Questionário DISC resolvido, arquivo quiz.html criado com sucesso.
 
-sessão 8
+sessão 8 (em andamento)
 1. Implementação Atual: Deploy Final e Testes de Integração
 2. Corrigir o script de deploy que falhou anteriormente
 3. Implementar testes de integração para garantir que todas as partes funcionem corretamente
