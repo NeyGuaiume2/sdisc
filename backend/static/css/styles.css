@@ -1,5 +1,5 @@
 /* Estilos Gerais */
-/* Versão: 1.0.1 - Adicionado timestamp para bust de cache */
+/* Versão: 1.0.7 - Revisando layout do grid */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,197 +14,274 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 800px; /* Reduzi um pouco para melhor visualização em telas médias */
+    margin: 20px auto; /* Adicionado espaço no topo/fundo */
     padding: 20px;
+    background-color: #ffffff; /* Fundo branco para o container principal */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+    border-radius: 8px;
 }
 
 /* Cabeçalho */
 header {
     text-align: center;
-    margin-bottom: 40px;
-    padding: 20px 0;
-    border-bottom: 1px solid #D7CFE5;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
 }
 
 header h1 {
-    color: #444444;
-    margin-bottom: 10px;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 2em; /* Tamanho maior */
 }
+header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
 
 /* Seções */
 section {
-    background-color: #FFF9F0;
+    background-color: #fff; /* Mudado de #FFF9F0 para branco */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); - Removido, sombra já está no container */
+    padding: 25px; /* Padding ligeiramente ajustado */
     margin-bottom: 30px;
+    border: 1px solid #e5e5e5; /* Borda sutil */
 }
 
-h2 {
-    color: #444444;
+h2, h3 {
+    color: #444;
     margin-bottom: 20px;
 }
 
-h3 {
-    color: #444444;
-    margin-bottom: 15px;
-}
 
+/* --- Bloco de Instruções --- */
 .instructions {
-    background-color: #C1D8E2;
-    padding: 20px;
+    background-color: #e9f5ff; /* Azul mais claro */
+    padding: 15px 20px;
     border-radius: 6px;
-    margin: 20px 0;
+    margin: 25px 0;
+    border: 1px solid #bce0ff; /* Borda azul clara */
+    color: #31708f; /* Cor do texto mais escura */
 }
 
 .instructions ul {
     padding-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .instructions li {
     margin-bottom: 8px;
 }
 
-/* Botões */
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+.instructions strong {
+     color: #1c4a5f; /* Destaque mais escuro */
 }
 
-.btn.primary {
-    background-color: #c1d3c4;
-    color: #444444;
-}
-
-.btn.primary:hover {
-    background-color: #a9c1ac;
-}
-
-.btn.secondary {
-    background-color: #D7CFE5;
-    color: #444444;
-}
-
-.btn.secondary:hover {
-    background-color: #C7BADC;
-}
-
-.btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* Timer */
-.timer {
-    font-size: 18px;
+.warning {
+    color: #c0392b;
     font-weight: bold;
-    color: #444444;
-    margin-bottom: 20px;
-    text-align: center;
+    margin-top: 15px;
 }
 
-/* Questões */
-.question-container {
-    margin-bottom: 30px;
-}
 
-.column-header {
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-    background-color: #C1D8E2;
-    color: #444444;
-    padding: 10px;
-    border-radius: 4px 4px 0 0;
-    font-weight: bold;
-    text-align: center;
-}
-
+/* --- Layout das Opções (PONTO CRÍTICO) --- */
 .options-container {
     border: 1px solid #D7CFE5;
     border-radius: 4px;
     overflow: hidden;
+    margin-top: 20px; /* Espaço acima da tabela de opções */
+}
+
+.column-header {
+    display: grid; /* Deve ser grid */
+    grid-template-columns: 4fr 1fr 1fr; /* Ajuste: Mais espaço para adjetivo */
+    background-color: #B2D7E5;
+    color: #333; /* Texto mais escuro */
+    padding: 12px 10px; /* Aumentar padding vertical */
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    text-align: center;
+    align-items: center; /* Alinhar verticalmente */
+}
+
+.column-header > div:first-child {
+    text-align: left;
+    padding-left: 15px; /* Aumentar padding esquerdo */
 }
 
 #options-list {
-    display: flex;
+    display: flex; /* Não interfere no grid dos filhos */
     flex-direction: column;
 }
 
 .option-item {
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr;
-    padding: 15px 10px;
+    display: grid !important; /* Forçar o grid aqui para testes, remover !important depois se funcionar */
+    grid-template-columns: 4fr 1fr 1fr; /* Mesma proporção do header */
+    padding: 0; /* Remover padding aqui, controlar dentro dos filhos */
     border-bottom: 1px solid #D7CFE5;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
+    align-items: stretch; /* Fazer filhos ocuparem altura total */
+    min-height: 50px; /* Altura mínima para cada linha */
+    transition: background-color 0.2s ease;
 }
-
-.option-item:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f0f0f0;
-}
-
 .option-item:last-child {
     border-bottom: none;
+}
+.option-item:hover {
+    background-color: #f9f9f9;
 }
 
 .option-text {
     font-weight: 500;
+    padding: 15px 15px; /* Padding interno para o texto */
+    display: flex;
+    align-items: center; /* Alinhar texto verticalmente */
+    border-right: 1px solid #eee; /* Linha separadora vertical (opcional) */
 }
 
 .radio-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    padding: 15px 0; /* Padding vertical para centralizar melhor */
+    border-right: 1px solid #eee; /* Linha separadora vertical (opcional) */
+}
+.radio-container:last-child {
+    border-right: none; /* Remove borda do último */
 }
 
+.radio-container:hover {
+    background-color: #eef5ff; /* Fundo suave no hover da célula */
+}
+
+input[type="radio"] {
+    width: 18px; /* Tamanho ligeiramente menor */
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4a90e2; /* Cor azul para seleção */
+}
+/* --- Fim do Layout das Opções --- */
+
+
+/* --- Timer e Contador --- */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinhar itens verticalmente */
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa; /* Fundo leve */
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.timer-container, .question-counter {
+    font-size: 1em; /* Tamanho ajustado */
+    font-weight: 500; /* Peso ajustado */
+    color: #495057;
+}
+#countdown {
+    font-weight: bold;
+    color: #dc3545; /* Vermelho para destaque */
+}
+
+
+/* --- Navegação --- */
 .navigation {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 30px; /* Mais espaço acima dos botões */
 }
 
-/* Botões de Opção */
-.option-btn {
-    padding: 15px 20px;
-    min-height: 60px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 10px 20px; /* Padding ligeiramente menor */
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 1em; /* Tamanho padrão */
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-decoration: none;
     text-align: center;
+    line-height: 1.5; /* Melhorar alinhamento vertical do texto */
 }
 
-.option-btn:hover {
-    background-color: #C7BADC;
-    cursor: pointer;
+.btn.primary {
+    background-color: #28a745; /* Verde */
+    color: #fff;
+}
+.btn.primary:hover {
+    background-color: #218838;
+}
+.btn.primary:disabled {
+    background-color: #a5d6a7; /* Verde claro para desabilitado */
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
-/* Resultados */
+
+.btn.secondary {
+    background-color: #6c757d; /* Cinza */
+    color: #fff;
+}
+.btn.secondary:hover {
+    background-color: #5a6268;
+}
+.btn.secondary:disabled {
+     background-color: #ced4da; /* Cinza claro para desabilitado */
+     cursor: not-allowed;
+     opacity: 0.8;
+}
+
+
+/* --- Seção de Resultados --- */
+#results {
+    border-top: 2px solid #eee;
+    padding-top: 30px;
+}
 .results-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr; /* Mais espaço para descrição */
     gap: 30px;
+    align-items: start; /* Alinha os containers no topo */
 }
 
 .chart-container {
     min-height: 300px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #fdfdfd;
 }
 
 .profile-description {
     padding: 20px;
-    background-color: #B9E6C2;
+    background-color: #f8f9fa; /* Fundo suave */
     border-radius: 6px;
+    border: 1px solid #e9ecef;
 }
+.profile-description h3 {
+     margin-top: 0;
+     color: #007bff; /* Azul */
+}
+.profile-description ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+.profile-description h4 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #17a2b8; /* Azul claro */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
 
 .actions {
     margin-top: 30px;
@@ -213,22 +290,51 @@ h3 {
     gap: 20px;
 }
 
+
 /* Rodapé */
 footer {
     text-align: center;
     padding: 20px 0;
-    color: #444444;
-    font-size: 14px;
+    color: #888; /* Cinza mais claro */
+    font-size: 0.9em; /* Menor */
     margin-top: 40px;
+    border-top: 1px solid #eee;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        padding: 15px;
+    }
     .results-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
     }
-    
-    .option-item {
-        grid-template-columns: 2fr 1fr 1fr;
+    .column-header, .option-item {
+        grid-template-columns: 3fr 1fr 1fr; /* Ajustar proporção se necessário */
     }
+    header h1 { font-size: 1.8em; }
+    .btn { padding: 12px 18px; font-size: 0.95em; }
+}
+
+@media (max-width: 480px) {
+     .column-header, .option-item {
+        grid-template-columns: 2.5fr 1fr 1fr; /* Ainda mais espaço relativo para texto */
+        font-size: 0.9em; /* Reduzir fonte geral das opções */
+    }
+     .column-header > div:first-child { padding-left: 10px; }
+     .option-text { padding: 10px; }
+     input[type="radio"] { width: 16px; height: 16px; }
+     .navigation { flex-direction: column; gap: 10px; } /* Botões um abaixo do outro */
+     .btn { width: 100%; } /* Botões ocupam largura total */
+     .results-container { gap: 20px; }
+}
+
+/* Classe para feedback de erro no botão */
+.btn-flash-error {
+  animation: flash-error 0.5s ease-out;
+}
+@keyframes flash-error {
+  0%, 100% { background-color: #28a745; } /* Cor original do botão Próximo */
+  50% { background-color: #dc3545; } /* Vermelho para erro */
 }

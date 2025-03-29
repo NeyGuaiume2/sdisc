@@ -1,7 +1,7 @@
 # git-sync.ps1
 # Para executar no PowerShell do VSCode:
 # .\git-sync.ps1
-# .\git-sync.ps1 -commitMessage "Implementação da funcionalidade DISC"
+# .\git-sync.ps1 -commitMessage "progresso"
 # Script para automatizar o envio de alterações para o GitHub
 
 # Verifica se há mensagem de commit como parâmetro
