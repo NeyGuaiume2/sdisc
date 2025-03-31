@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block title %}Seu Perfil DISC{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Seu Perfil DISC</h1>
+
+    {% if result %}
+    <div class="row">
+        <!-- Coluna do Gráfico -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Gráfico do Perfil DISC
+                </div>
+                <div class="card-body">
+                    <canvas id="discChart"></canvas>
+                    <p class="text-muted small mt-2 text-center">Este gráfico representa a intensidade de cada fator DISC.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna do Resumo -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Resumo do Perfil
+                </div>
+                <div class="card-body">
+                    <p><strong>Perfil Primário:</strong> {{ result.primary_profile }} ({{ profile_interpretations[result.primary_profile]['title'] }})</p>
+                    <p><strong>Perfil Secundário:</strong> {{ result.secondary_profile }} ({{ profile_interpretations[result.secondary_profile]['title'] }})</p>
+                    <hr>
+                    <p><strong>Níveis de Intensidade:</strong></p>
+                    <ul>
+                        <li><strong>D (Dominância):</strong> {{ result.d_intensity }}</li>
+                        <li><strong>I (Influência):</strong> {{ result.i_intensity }}</li>
+                        <li><strong>S (Estabilidade):</strong> {{ result.s_intensity }}</li>
+                        <li><strong>C (Conformidade):</strong> {{ result.c_intensity }}</li>
+                    </ul>
+                     <p class="small text-muted">Data da Avaliação: {{ result.date_created.strftime('%d/%m/%Y %H:%M') if result.date_created else 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Interpretação Detalhada -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            Interpretação Detalhada
+        </div>
+        <div class="card-body">
+            <!-- Abas para cada perfil -->
+            <ul class="nav nav-tabs mb-3" id="discTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="primary-tab" data-bs-toggle="tab" data-bs-target="#primary-content" type="button" role="tab" aria-controls="primary-content" aria-selected="true">
+                        Perfil Primário: {{ profile_interpretations[result.primary_profile]['title'] }} ({{ result.primary_profile }})
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="secondary-tab" data-bs-toggle="tab" data-bs-target="#secondary-content" type="button" role="tab" aria-controls="secondary-content" aria-selected="false">
+                        Influência Secundária: {{ profile_interpretations[result.secondary_profile]['title'] }} ({{ result.secondary_profile }})
+                    </button>
+                </li>
+                 <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-content" type="button" role="tab" aria-controls="general-content" aria-selected="false">
+                        Visão Geral
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Conteúdo das Abas -->
+            <div class="tab-content" id="discTabsContent">
+                <!-- Conteúdo do Perfil Primário -->
+                <div class="tab-pane fade show active" id="primary-content" role="tabpanel" aria-labelledby="primary-tab">
+                    <h4>Perfil {{ profile_interpretations[result.primary_profile]['title'] }} ({{ result.primary_profile }})</h4>
+                    <p><strong>Descrição Geral:</strong> {{ profile_interpretations[result.primary_profile]['description'] }}</p>
+                    <p><strong>Motivação Principal:</strong> {{ profile_interpretations[result.primary_profile]['motivation'] }}</p>
+                    <h5>Características Comuns:</h5>
+                    <ul>
+                        {% for characteristic in profile_interpretations[result.primary_profile]['characteristics'] %}
+                        <li>{{ characteristic }}</li>
+                        {% endfor %}
+                    </ul>
+                     <h5>Pontos Fortes:</h5>
+                    <ul>
+                        {% for strength in profile_interpretations[result.primary_profile]['strengths'] %}
+                        <li>{{ strength }}</li>
+                        {% endfor %}
+                    </ul>
+                     <h5>Áreas de Desenvolvimento:</h5>
+                    <ul>
+                        {% for weakness in profile_interpretations[result.primary_profile]['weaknesses'] %}
+                        <li>{{ weakness }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h5>Como se Relacionar (Dicas):</h5>
+                     <ul>
+                        {% for tip in profile_interpretations[result.primary_profile]['how_to_work_with'] %}
+                        <li>{{ tip }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Conteúdo do Perfil Secundário -->
+                <div class="tab-pane fade" id="secondary-content" role="tabpanel" aria-labelledby="secondary-tab">
+                     <h4>Influência do Perfil {{ profile_interpretations[result.secondary_profile]['title'] }} ({{ result.secondary_profile }})</h4>
+                    <p>Seu perfil secundário adiciona nuances ao seu comportamento primário.</p>
+                    <p><strong>Descrição Geral:</strong> {{ profile_interpretations[result.secondary_profile]['description'] }}</p>
+                    <p><strong>Motivação Principal:</strong> {{ profile_interpretations[result.secondary_profile]['motivation'] }}</p>
+                    <h5>Características Comuns:</h5>
+                    <ul>
+                        {% for characteristic in profile_interpretations[result.secondary_profile]['characteristics'] %}
+                        <li>{{ characteristic }}</li>
+                        {% endfor %}
+                    </ul>
+                     <h5>Pontos Fortes:</h5>
+                    <ul>
+                        {% for strength in profile_interpretations[result.secondary_profile]['strengths'] %}
+                        <li>{{ strength }}</li>
+                        {% endfor %}
+                    </ul>
+                     <h5>Áreas de Desenvolvimento:</h5>
+                    <ul>
+                        {% for weakness in profile_interpretations[result.secondary_profile]['weaknesses'] %}
+                        <li>{{ weakness }}</li>
+                        {% endfor %}
+                    </ul>
+                     <h5>Como se Relacionar (Dicas):</h5>
+                     <ul>
+                        {% for tip in profile_interpretations[result.secondary_profile]['how_to_work_with'] %}
+                        <li>{{ tip }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                 <!-- Conteúdo Geral -->
+                <div class="tab-pane fade" id="general-content" role="tabpanel" aria-labelledby="general-tab">
+                    <h4>Visão Geral do seu Perfil</h4>
+                    <p>Esta seção combina as influências dos seus perfis primário e secundário.</p>
+                    {% if result.profile_summary %}
+                        <p>{{ result.profile_summary | replace('\n', '<br>') | safe }}</p>
+                    {% endif %}
+                    {% if result.detailed_report and result.detailed_report.development_areas_list %}
+                        <h5>Sugestões Gerais para Desenvolvimento:</h5>
+                        <ul>
+                            {% for area in result.detailed_report.development_areas_list %}
+                            <li>{{ area }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <p class="mt-3">Lembre-se que o perfil DISC é uma ferramenta para autoconhecimento e desenvolvimento, não um rótulo definitivo. Todos os perfis têm pontos fortes e desafios.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4 mb-5">
+         <!-- CORREÇÃO APLICADA AQUI -->
+        <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Voltar ao Início</a>
+        <a href="{{ url_for('main.quiz') }}" class="btn btn-primary">Refazer Teste</a>
+        <!-- Adicionar botão de exportar PDF se implementado -->
+        <!-- <button class="btn btn-success">Exportar para PDF</button> -->
+    </div>
+
+    {% else %}
+    <div class="alert alert-warning text-center" role="alert">
+        Nenhum resultado de avaliação encontrado. Por favor, <a href="{{ url_for('main.quiz') }}">inicie o teste</a>.
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Incluir Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Garante que o código só rode depois que a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('discChart');
+
+        // Só tenta criar o gráfico se o elemento canvas existir E houver dados de resultado
+        {% if result %}
+        if (ctx) {
+            const discChart = new Chart(ctx.getContext('2d'), {
+                type: 'radar', // Ou 'bar', 'doughnut' etc.
+                data: {
+                    labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
+                    datasets: [{
+                        label: 'Seu Perfil DISC',
+                         // Usar os scores do resultado passado pelo Flask
+                        data: [
+                            {{ result.d_score | default(0) }},
+                            {{ result.i_score | default(0) }},
+                            {{ result.s_score | default(0) }},
+                            {{ result.c_score | default(0) }}
+                        ],
+                        fill: true,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Azul claro com transparência
+                        borderColor: 'rgb(54, 162, 235)', // Azul sólido
+                        pointBackgroundColor: 'rgb(54, 162, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(54, 162, 235)'
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: { // Configurações da escala radial (radar)
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: -10, // Ajuste conforme a escala dos seus scores
+                            suggestedMax: 10,  // Ajuste conforme a escala dos seus scores
+                            ticks: {
+                                stepSize: 2 // Intervalo dos números na escala
+                            },
+                             pointLabels: {
+                                font: {
+                                    size: 12 // Tamanho da fonte dos rótulos (D, I, S, C)
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true, // Mostra a legenda ('Seu Perfil DISC')
+                            position: 'top',
+                        },
+                        tooltip: {
+                            enabled: true // Mostra tooltips ao passar o mouse
+                        }
+                    },
+                    // Manter proporção para evitar distorções
+                     maintainAspectRatio: true,
+                     aspectRatio: 1.5 // Ajuste para melhor visualização (ex: 2 para mais largo, 1 para quadrado)
+                }
+            });
+        } else {
+             console.warn("Elemento canvas 'discChart' não encontrado.");
+        }
+        {% else %}
+            console.log("Nenhum dado de resultado disponível para renderizar o gráfico.");
+            // Opcional: Esconder ou mostrar uma mensagem se não houver gráfico
+             const chartContainer = document.querySelector('.col-md-6.mb-4 .card'); // Encontra o card do gráfico
+             if (chartContainer) {
+                 // chartContainer.style.display = 'none'; // Esconde o card inteiro
+                 // Ou adiciona uma mensagem dentro do card body
+                 const cardBody = chartContainer.querySelector('.card-body');
+                 if(cardBody) cardBody.innerHTML = '<p class="text-center text-muted">Gráfico indisponível sem resultados.</p>';
+             }
+        {% endif %}
+    });
+</script>
+{% endblock %}

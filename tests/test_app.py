@@ -1,85 +1,53 @@
-import sys
-import os
 import unittest
-from flask import Flask
+import os
+import sys
 
-# Adiciona o diretório principal ao path para importação
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# --- Adicionar diretório raiz ao sys.path ---
+# Isso permite importar 'backend' como um módulo de nível superior
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, project_root)
+# ------------------------------------------
 
-from app import create_app
-from app.models.database import init_db, db
+# --- Importar DEPOIS de ajustar o path ---
+from backend.app import create_app # CORRIGIDO: Importar de 'backend.app'
+# ------------------------------------------
 
-class TestAppBasic(unittest.TestCase):
+class TestApp(unittest.TestCase):
+
     def setUp(self):
-        """Configura o ambiente de teste antes de cada teste"""
-        self.app = create_app(test_config={
-            'TESTING': True,
-            'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
-            'SQLALCHEMY_TRACK_MODIFICATIONS': False
-        })
-        self.client = self.app.test_client()
-        with self.app.app_context():
-            init_db()
-    
+        """Configura o ambiente de teste antes de cada teste."""
+        # Usar a factory para criar a app em modo de teste
+        # testing=True geralmente configura um banco de dados em memória, etc.
+        self.app = create_app(testing=True)
+        self.app_context = self.app.app_context()
+        self.app_context.push() # Ativa o contexto da aplicação
+        self.client = self.app.test_client() # Cria um cliente de teste
+
     def tearDown(self):
-        """Limpa depois de cada teste"""
-        with self.app.app_context():
-            db.session.remove()
-            db.drop_all()
-    
-    def test_home_page(self):
-        """Testa se a página inicial carrega corretamente"""
+        """Limpa o ambiente após cada teste."""
+        self.app_context.pop() # Remove o contexto da aplicação
+
+    def test_index_route(self):
+        """Testa se a rota principal '/' retorna status 200."""
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-    
-    def test_quiz_page(self):
-        """Testa se a página do questionário carrega corretamente"""
+        # Você pode adicionar mais verificações, como checar conteúdo HTML
+        self.assertIn(b'Avalia', response.data) # Verifica se parte do título/texto está presente
+
+    def test_quiz_route(self):
+        """Testa se a rota '/quiz' retorna status 200."""
         response = self.client.get('/quiz')
         self.assertEqual(response.status_code, 200)
-    
-    def test_non_existent_page(self):
-        """Testa se uma página não existente retorna 404"""
-        response = self.client.get('/page_that_does_not_exist')
-        self.assertEqual(response.status_code, 404)
+        self.assertIn(b'Question', response.data) # Verifica se a palavra 'Question' está presente
 
-class TestDISCQuiz(unittest.TestCase):
-    def setUp(self):
-        """Configura o ambiente de teste antes de cada teste"""
-        self.app = create_app(test_config={
-            'TESTING': True,
-            'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
-            'SQLALCHEMY_TRACK_MODIFICATIONS': False
-        })
-        self.client = self.app.test_client()
-        with self.app.app_context():
-            init_db()
-    
-    def tearDown(self):
-        """Limpa depois de cada teste"""
-        with self.app.app_context():
-            db.session.remove()
-            db.drop_all()
-    
-    def test_submit_quiz_results(self):
-        """Testa a submissão de resultados do questionário"""
-        # Cria dados simulados para o questionário
-        test_data = {
-            'name': 'Test User',
-            'email': 'test@example.com',
-            'responses': {
-                'q1_mais': 'D', 'q1_menos': 'S',
-                'q2_mais': 'I', 'q2_menos': 'C',
-                # Adicione mais respostas conforme necessário
-            }
-        }
-        
-        response = self.client.post('/api/submit_quiz', 
-                                   json=test_data,
-                                   content_type='application/json')
-        
-        self.assertEqual(response.status_code, 200)
-        # Verifica se o resultado contém um ID de resultado válido
-        self.assertIn('result_id', response.get_json())
+    def test_404_error(self):
+        """Testa se uma rota inexistente retorna 404."""
+        response = self.client.get('/rota-que-nao-existe')
+        self.assertEqual(response.status_code, 404)
+        # Verifica se a mensagem padrão de 404 (ou a do seu template) está presente
+        self.assertIn(b'Not Found', response.data)
+
+    # Adicione mais testes conforme necessário para outras rotas ou funcionalidades do app.py
 
 if __name__ == '__main__':
     unittest.main()

@@ -38,4 +38,4 @@ uso windows.txt
 __pycache__/
 sessões.txt
 backend/pyrightconfig.jsonbackend/static/images/
-gerar_estrutura.py
+.env

@@ -1,14 +1,4 @@
 README.md
-app/
-    __init__.py
-    models/
-        __init__.py
-        database.py
-        disc_model.py
-    security.py
-    templates/
-        results.html
-        results.txt
 backend/
     __init__.py
     app.py
@@ -22,8 +12,8 @@ backend/
     disc_data.py
     models/
         __init__.py
-        disc-result.py
         disc.py
+        disc_result.py
         user.py
     pyrightconfig.json
     routes.py
@@ -32,20 +22,23 @@ backend/
         css/
             styles.css
         images/
-            favicon-16.ico
-            favicon-32.ico
-            favicon-48.ico
-            favicon-64.ico
             favicon.ico
+            favicon_16.ico
+            favicon_32.ico
+            favicon_48.ico
+            favicon_64.ico
         js/
             disc_questions.js
             disc_quiz.js
             disc_scoring.js
             script.js
     templates/
+        base.html
         index.html
         quiz.html
-deploy.bat
+        results.html
+code_meu.py
+deploy.txt
 estrutura_do_projeto.txt
 estrutura_projeto.txt
 frontend/
@@ -58,8 +51,11 @@ frontend/
         components/
         pages/
 generate_favicon.py
+generate_secret_key.py
 gerar_estrutura.py
+git-sync.ps1
 gunicorn_config.py
+instance/
 models/
     app/
         models.py
@@ -71,10 +67,8 @@ requirements.txt
 scripts/
     update_requirements.py
 sessões.txt
-setup-git.bat
-templates/
 tests/
-    integration-tests.py
+    integration_tests.py
     security_test.py
     test_app.py
     test_disc_scoring.py
