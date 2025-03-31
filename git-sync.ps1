@@ -1,7 +1,7 @@
 # git-sync.ps1
 # Para executar no PowerShell do VSCode:
 # .\git-sync.ps1
-# .\git-sync.ps1 -commitMessage "dom30_03_2025_funcional_simples_erros_corrigidos"
+# .\git-sync.ps1 -commitMessage "31_03_25_css_e_js_OK"
 # Script para automatizar o envio de alterações para o GitHub
 
 # Verifica se há mensagem de commit como parâmetro

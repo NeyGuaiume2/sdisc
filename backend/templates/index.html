@@ -1,56 +1,50 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Avaliação DISC</title>
-    <!-- Atualize o '?v=' se fizer mais mudanças no CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=1.0.5">
-    <!-- Favicons (exemplo usando url_for se estiverem na pasta static/images) -->
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" sizes="any">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon-16.ico') }}" sizes="16x16">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon-32.ico') }}" sizes="32x32">
-    <!-- Adicione outros tamanhos se necessário -->
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Sistema de Avaliação DISC</h1>
-            <p>Descubra seu perfil comportamental</p>
-        </header>
+{% extends "base.html" %}
 
-        <main>
-            <section id="intro">
-                <h2>Bem-vindo à Avaliação DISC</h2>
-                <p>A avaliação DISC é uma metodologia criada por William Moulton Marston, pesquisador da Universidade de Harvard.</p>
-                <p>Esta ferramenta ajuda a identificar seu estilo comportamental predominante.</p>
+{% block title %}Início - Sistema de Avaliação DISC{% endblock %}
 
-                <div class="instructions">
-                    <h3>Instruções Gerais:</h3>
-                    <ul>
-                        <li>A avaliação consiste em 25 grupos de quatro adjetivos.</li>
-                        <li>Em cada grupo, você deverá escolher qual adjetivo <strong>MAIS</strong> se parece com você e qual <strong>MENOS</strong> se parece com você no seu ambiente de trabalho ou dia a dia.</li>
-                        <li>Você terá 15 segundos para responder a cada grupo de adjetivos.</li>
-                        <li>Não há respostas certas ou erradas.</li>
-                    </ul>
-                    <!-- Aviso adicionado aqui -->
-                    <p class="warning">Por favor, seja honesto com suas respostas. O temporizador de 15 segundos ajuda a capturar sua resposta mais instintiva.</p>
-                </div>
-
-                <!-- CORREÇÃO APLICADA AQUI: Alterado 'quiz_page' para 'main.quiz' -->
-                <a href="{{ url_for('main.quiz') }}" id="start-btn" class="btn primary">Iniciar Avaliação</a>
-
-            </section>
-
-        </main>
-
-        <footer>
-            <!-- Usei 2024, ajuste se necessário -->
-            <p>© 2024 Sistema de Avaliação DISC</p>
-        </footer>
+{% block content %}
+    <!-- Header centralizado -->
+    <div class="text-center pt-4 pb-4"> <!-- Padding vertical -->
+        <h1>Sistema de Avaliação DISC</h1>
+        <p class="lead">Descubra seu perfil comportamental</p>
     </div>
 
-    <!-- Scripts podem não ser necessários no index.html se ele for apenas informativo -->
-    <!-- <script src="{{ url_for('static', filename='js/script.js') }}?v=1.0.5"></script> -->
-</body>
-</html>
+    <!-- Seção de Introdução e Instruções -->
+    <section id="intro" class="mb-5">
+        <!-- Usar row/col do Bootstrap para centralizar e controlar largura -->
+        <div class="row justify-content-center">
+             <div class="col-md-10 col-lg-8"> <!-- Define largura máxima em telas médias/grandes -->
+                <h2 class="text-center mb-4">Bem-vindo à Avaliação DISC</h2>
+                <p>A avaliação DISC é uma metodologia criada por William Moulton Marston, pesquisador da Universidade de Harvard. Esta ferramenta ajuda a identificar seu estilo comportamental predominante.</p>
+
+                <!-- Card para Instruções (melhor visualmente) -->
+                <div class="card my-4 shadow-sm">
+                    <div class="card-header text-center bg-primary text-white"> <!-- Cabeçalho destacado -->
+                         <h3 class="mb-0">Instruções Gerais</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush"> <!-- Lista sem bordas internas -->
+                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>A avaliação consiste em 25 grupos de quatro adjetivos.</li>
+                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>Em cada grupo, escolha o adjetivo <strong>MAIS</strong> e o <strong>MENOS</strong> parecido com você.</li>
+                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>Você terá <strong>15 segundos</strong> para responder a cada grupo.</li>
+                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>Não há respostas certas ou erradas.</li>
+                            <li class="list-group-item text-danger mt-2"><i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Importante:</strong> Seja honesto. O tempo ajuda a capturar sua resposta instintiva.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Botão de Ação - MAIS DESTACADO e CENTRALIZADO -->
+                <div class="text-center mt-4 pt-3"> <!-- Margem superior e padding -->
+                    <a href="{{ url_for('main.quiz') }}" id="start-btn" class="btn btn-success btn-lg px-5 py-3 shadow-lg"> <!-- Botão VERDE, bem grande, com sombra forte -->
+                        <i class="bi bi-play-circle-fill me-2"></i> Iniciar Avaliação Agora!
+                    </a>
+                    <p class="text-muted mt-2"><small>Clique no botão acima para começar.</small></p> <!-- Texto auxiliar -->
+                </div>
+             </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Nenhum JS extra necessário por enquanto -->
+{% endblock %}
