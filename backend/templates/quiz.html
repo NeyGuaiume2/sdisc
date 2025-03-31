@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação DISC - Questionário</title>
-    <!-- CHANGE: Incrementando versão do CSS -->
+    <!-- Link para o CSS (mantendo a versão) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=1.0.9">
+    <!-- Favicon (mantido) -->
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" sizes="any">
-    <!-- ... outros favicons ... -->
+    <!-- ... outros links de favicon podem estar aqui ... -->
 </head>
 <body>
     <div class="container">
@@ -17,10 +18,20 @@
 
         <main id="quiz-container">
 
-            <section id="assessment">
+            <!-- Indicador de Carregamento (para fetchQuestions) -->
+            <div id="loading-indicator" style="display: none; text-align: center; padding: 20px; font-style: italic;">
+                <p>Carregando questões...</p>
+                <!-- Pode adicionar um spinner Bootstrap ou similar aqui se desejar -->
+                 <!-- <div class="spinner-border text-primary" role="status">
+                     <span class="visually-hidden">Carregando...</span>
+                 </div> -->
+            </div>
+
+            <!-- Seção Principal do Quiz -->
+            <section id="assessment" style="display: none;"> <!-- Inicialmente escondida até JS iniciar -->
                 <div class="quiz-header">
                     <div class="question-counter">
-                        Questão <span id="question-number">1</span> de <span id="total-questions">25</span>
+                        Questão <span id="question-number">1</span> de <span id="total-questions">{{ total_questions | default(28) }}</span> <!-- Total vindo do Flask -->
                     </div>
                 </div>
 
@@ -37,6 +48,7 @@
                     </div>
                 </div>
 
+                <!-- Wrapper para o conteúdo da questão (controlado por JS para fade) -->
                 <div id="question-content-wrapper">
                     <div class="options-container">
                         <div class="column-header">
@@ -44,53 +56,76 @@
                             <div>MAIS</div>
                             <div>MENOS</div>
                         </div>
+                        <!-- Área onde as opções são carregadas pelo JavaScript -->
                         <div id="options-list">
-                            <!-- Conteúdo gerado por script.js -->
+                            <!-- As opções de resposta (rádios com palavras) são geradas dinamicamente por script.js aqui -->
+                            <!-- Exemplo (NÃO USAR, apenas ilustrativo): -->
+                            <!--
+                            <div class="option-item">
+                                <div class="option-text">Palavra Exemplo</div>
+                                <div class="radio-container mais">
+                                    <input type="radio" id="most_1_D" name="most_1" value="Palavra Exemplo" class="most-option" data-question-id="1" data-profile="D">
+                                </div>
+                                <div class="radio-container menos">
+                                    <input type="radio" id="least_1_D" name="least_1" value="Palavra Exemplo" class="least-option" data-question-id="1" data-profile="D">
+                                </div>
+                            </div>
+                            -->
                         </div>
                     </div>
                 </div>
 
-                <!-- CHANGE: Nova seção para conclusão do Quiz -->
+                <!-- Seção de Conclusão (inicialmente escondida) -->
                 <div id="quiz-completion" style="display: none;">
                     <h2>Avaliação Concluída!</h2>
                     <p>Você respondeu todas as questões. Clique abaixo para ver o seu perfil comportamental.</p>
                     <div class="completion-actions">
+                         <!-- Botão para finalizar e enviar respostas -->
                          <button id="view-results-btn" class="btn primary large">Ver Meus Resultados</button>
+                         <!-- O script.js adicionará um overlay de loading aqui ao clicar -->
                     </div>
                 </div>
-                <!-- Fim da seção de conclusão -->
 
-            </section>
+            </section> <!-- Fim de #assessment -->
 
+            <!-- Seção de Resultados (Esta seção provavelmente NÃO é usada aqui, pois há redirecionamento) -->
             <section id="results" style="display: none;">
-                <!-- Conteúdo da seção de resultados (sem mudanças aqui) -->
+                <!--
+                    Conteúdo da seção de resultados (Gráfico, Descrição, etc.).
+                    No fluxo atual implementado (com API e redirecionamento para /results),
+                    esta seção dentro de quiz.html não será preenchida ou exibida.
+                    Ela é mantida aqui apenas por referência ao estado anterior do arquivo,
+                    mas o conteúdo real é mostrado em /results (template results.html).
+                    -->
                  <h2>Seus Resultados DISC</h2>
-                <div class="results-container">
-                    <div class="chart-container">
-                        <canvas id="disc-chart"></canvas>
-                    </div>
-                    <div class="profile-description">
-                        <h3>Seu Perfil Comportamental</h3>
-                        <div id="primary-profile"></div>
-                        <div id="profile-details"></div>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button id="download-pdf" class="btn primary" disabled>Baixar Relatório PDF</button>
-                    <button id="new-assessment" class="btn secondary">Nova Avaliação</button>
-                </div>
+                 <!-- Conteúdo suprimido, pois a exibição ocorre em outra página/rota -->
+                 <p style="text-align:center; font-style:italic; color:grey;">(O conteúdo detalhado dos resultados é exibido na página /results)</p>
             </section>
+
         </main>
 
          <footer>
-             <p>© 2024 Sistema de Avaliação DISC</p>
+             <!-- Usando fallback para o ano caso não venha de um base.html -->
+             <p>© {{ current_year | default("2025") }} Sistema de Avaliação DISC</p>
          </footer>
-    </div>
+    </div> <!-- Fim .container -->
 
+    <!-- Scripts JS -->
+    <!-- Chart.js (Pode ser removido daqui se a seção #results acima for garantidamente não usada) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.js"></script>
-    <script src="{{ url_for('static', filename='js/disc_questions.js') }}?v=1.0.1"></script>
-    <!-- CHANGE: Incrementando versão do JS -->
-    <script src="{{ url_for('static', filename='js/script.js') }}?v=1.0.9"></script>
+
+    <!-- Script de questões local foi REMOVIDO -->
+    <!-- <script src="{{ url_for('static', filename='js/disc_questions.js') }}?v=1.0.1"></script> -->
+
+    <!-- Script principal da lógica do quiz (mantendo a versão) -->
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=1.1.0"></script>
+
+    <!-- Script para passar TOTAL_QUESTIONS globalmente foi REMOVIDO -->
+    <!--
+    <script>
+        const TOTAL_QUESTIONS = parseInt('{{ total_questions | default(28) }}');
+    </script>
+    -->
 
 </body>
 </html>
