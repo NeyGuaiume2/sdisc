@@ -1,10 +1,10 @@
 # Importante
-- responda sempre em português
-- para correções de arquivos, peça arquivos não informados que forem necessários para a correção
-- importantíssimo, entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
-- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
-- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
- 
+1- responda sempre em português
+2- para correções de arquivos, peça arquivos não informados que forem necessários para a correção
+3- importantíssimo, entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
+4- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
+5- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
+6- este arquivo é atualizado manualmente, então ele serve só como referência e praticamente sempre está desatualizado 
 
 # ambiente de trabalho:
 SO windows 11

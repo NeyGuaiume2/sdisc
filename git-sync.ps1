@@ -1,7 +1,7 @@
 # git-sync.ps1
 # Para executar no PowerShell do VSCode:
 # .\git-sync.ps1
-# .\git-sync.ps1 -commitMessage "implentadas_28_questões"
+# .\git-sync.ps1 -commitMessage "results funcionando"
 # Script para automatizar o envio de alterações para o GitHub
 
 # git-sync.ps1

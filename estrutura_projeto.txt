@@ -28,7 +28,6 @@ backend/
             favicon_48.ico
             favicon_64.ico
         js/
-            disc_questions.js
             disc_quiz.js
             disc_scoring.js
             script.js
@@ -38,7 +37,6 @@ backend/
         quiz.html
         results.html
 code_meu.py
-deploy.txt
 estrutura_do_projeto.txt
 estrutura_projeto.txt
 frontend/
@@ -53,7 +51,7 @@ frontend/
 generate_favicon.py
 generate_secret_key.py
 gerar_estrutura.py
-git-sync.ps1
+git-sync.ps1.txt
 gunicorn_config.py
 instance/
 models/
@@ -62,13 +60,25 @@ models/
         routes.py
         routes.txt
     results.py
+playwright-videos/
 prod_config.py
 requirements.txt
+run_test_video.py
 scripts/
     update_requirements.py
 sessões.txt
+test-results/
+    tests-e2e-test-disc-quiz-py-test-complete-quiz-flow-chromium/
+        video.webm
 tests/
+    conftest.py
+    e2e/
+        __init__.py
+        test_disc_quiz.py
+        test_helpers.py
+        test_home.py
     integration_tests.py
+    screenshots/
     security_test.py
     test_app.py
     test_disc_scoring.py

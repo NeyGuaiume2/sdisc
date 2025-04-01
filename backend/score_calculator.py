@@ -4,136 +4,182 @@
 Algoritmo de pontuação para a avaliação DISC.
 Calcula o perfil DISC com base nas respostas MAIS e MENOS, utilizando as palavras selecionadas.
 """
+import logging
+from typing import List, Dict, Any, Optional
+from datetime import datetime
 
 # Importa as descrições e a função para buscar o perfil pela palavra
-# Não precisamos mais de disc_mapping para o cálculo principal
-from .disc_data import disc_descriptions, get_profile_for_word, disc_questions # Importamos disc_questions para garantir que os dados estão carregados
+try:
+    # Tenta import relativo primeiro
+    from .disc_data import disc_descriptions, get_profile_for_word, disc_questions
+except ImportError:
+    # Fallback para absoluto (menos ideal dentro de um pacote)
+    from disc_data import disc_descriptions, get_profile_for_word, disc_questions
+    logging.warning("Usando import absoluto em score_calculator.py")
 
-# Import List e Dict para type hinting (opcional, mas boa prática)
-from typing import List, Dict, Any, Optional
+# Cria um logger específico para este módulo
+logger = logging.getLogger(__name__)
 
 def calculate_disc_scores(responses: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
     """
     Calcula as pontuações DISC com base nas respostas fornecidas (palavras).
 
     Args:
-        responses: Lista de dicionários, onde cada dicionário representa a resposta
-                   de uma questão no formato:
-                   {'question_id': int, 'mais': 'palavra_escolhida', 'menos': 'palavra_escolhida'}
+        responses: Lista de dicionários {'questionId': int, 'mais': 'palavra', 'menos': 'palavra'}
+                   (Note o 'questionId' em camelCase vindo do frontend)
 
     Returns:
-        Dicionário com os resultados DISC, incluindo:
-        - disc_scores: Pontuações para cada fator DISC (D, I, S, C)
-        - disc_levels: Nível (Alto, Médio, Baixo) para cada fator
-        - primary_profile: Perfil DISC predominante (letra)
-        - secondary_profile: Perfil DISC secundário (letra)
-        - primary_description: Dicionário com descrições do perfil primário
-        - secondary_description: Dicionário com descrições do perfil secundário
-        Retorna None se a entrada for inválida ou vazia.
+        Dicionário com os resultados DISC (incluindo scores NUMÉRICOS) ou None se falhar.
     """
     if not responses:
-        print("WARN: Nenhuma resposta fornecida para calcular scores.") # Use logging em produção
+        logger.warning("Nenhuma resposta fornecida para calcular scores.")
         return None
 
-    # Inicializa scores diretamente para os perfis DISC
+    # Inicializa scores DISC
     disc_scores = {'D': 0, 'I': 0, 'S': 0, 'C': 0}
+    valid_responses_processed = 0 # Contador para respostas válidas
+
+    # Loga as primeiras respostas para verificar o formato recebido
+    if responses:
+        logger.debug(f"Recebido {len(responses)} respostas. Exemplo da primeira: {responses[0]}")
 
     # Processa cada resposta
-    for answer in responses:
-        question_id = answer.get('question_id')
-        mais_word = answer.get('mais')
-        menos_word = answer.get('menos')
+    for idx, answer in enumerate(responses):
+        question_id_val = None # Renomeado para evitar conflito com nome da chave
+        mais_word = None
+        menos_word = None
 
-        # Validação básica da resposta
-        if not all([question_id, mais_word, menos_word]):
-            print(f"WARN: Resposta inválida ou incompleta ignorada: {answer}") # Use logging
-            continue # Pula para a próxima resposta
-
-        # Encontra o perfil correspondente para a palavra MAIS
-        profile_mais = get_profile_for_word(question_id, mais_word)
-        if profile_mais:
-            disc_scores[profile_mais] += 1
+        # --- CORREÇÃO APLICADA AQUI ---
+        # Verifica se é um dicionário e se contém as chaves ESPERADAS do frontend ('questionId', 'mais', 'menos')
+        if isinstance(answer, dict) and 'questionId' in answer and 'mais' in answer and 'menos' in answer:
+            question_id_val = answer.get('questionId') # Usa 'questionId'
+            mais_word = answer.get('mais')
+            menos_word = answer.get('menos')
+            logger.debug(f"Processando resposta {idx+1}: ID={question_id_val}, Mais='{mais_word}', Menos='{menos_word}'")
+        # Mantém o fallback para formato antigo, caso exista (improvável agora)
+        elif isinstance(answer, dict) and 'response' in answer and isinstance(answer['response'], dict):
+             try:
+                 # Assumindo que a ordem da lista `responses` corresponde à ordem das questões
+                 question_id_val = disc_questions[idx]['id']
+                 mais_word = answer['response'].get('mais')
+                 menos_word = answer['response'].get('menos')
+                 logger.debug(f"Processando resposta {idx+1} (formato antigo): ID={question_id_val} (inferido), Mais='{mais_word}', Menos='{menos_word}'")
+             except (IndexError, KeyError):
+                 logger.warning(f"Erro ao tentar inferir question_id para resposta de formato antigo no índice {idx}. Resposta: {answer}")
+                 continue
         else:
-            print(f"WARN: Perfil não encontrado para MAIS='{mais_word}' na questão {question_id}") # Use logging
+             # Loga se o formato não for reconhecido (NÃO DEVE MAIS CAIR AQUI com a correção acima)
+             logger.warning(f"Formato de resposta inesperado no índice {idx} (APÓS verificação), ignorando: {answer}")
+             continue
+        # --- FIM DA CORREÇÃO ---
 
-        # Encontra o perfil correspondente para a palavra MENOS
-        profile_menos = get_profile_for_word(question_id, menos_word)
-        if profile_menos:
-            # Verifica se a mesma palavra foi escolhida para MAIS e MENOS (não deveria acontecer com UI correta)
-            if profile_mais == profile_menos:
-                 print(f"WARN: Mesma palavra ('{mais_word}') escolhida para MAIS e MENOS na questão {question_id}. Ignorando MENOS.") # Use logging
+
+        # Validação dos dados extraídos (garante que não são None ou vazios)
+        # Usa a variável `question_id_val` aqui
+        if not question_id_val or not mais_word or not menos_word:
+            logger.warning(f"Resposta {idx+1} inválida ou incompleta (após extração). ID={question_id_val}, Mais='{mais_word}', Menos='{menos_word}'. Resposta original: {answer}")
+            continue
+
+        # --- CHAMADAS A get_profile_for_word COM LOGGING DETALHADO ---
+        profile_mais = None
+        profile_menos = None
+        try:
+            # Encontra o perfil para a palavra MAIS (passa question_id_val)
+            profile_mais = get_profile_for_word(question_id_val, mais_word)
+            if profile_mais:
+                disc_scores[profile_mais] += 1
+                logger.debug(f"Q{question_id_val}: MAIS='{mais_word}' -> Perfil={profile_mais}. Score {profile_mais} agora = {disc_scores[profile_mais]}")
             else:
-                disc_scores[profile_menos] -= 1
-        else:
-            print(f"WARN: Perfil não encontrado para MENOS='{menos_word}' na questão {question_id}") # Use logging
+                logger.warning(f"Q{question_id_val}: Perfil NÃO ENCONTRADO para MAIS='{mais_word}'. Verifique disc_data.py e a palavra exata enviada.")
 
-    # Verifica se algum score foi calculado (evita erro no sorted se todos forem 0 ou respostas inválidas)
-    if not any(disc_scores.values()):
-         print("WARN: Nenhum score DISC pôde ser calculado a partir das respostas.") # Use logging
-         # Poderia retornar um resultado padrão ou None/Exception
-         # Por enquanto, vamos continuar e eles serão ordenados como 0
-         pass
+            # Encontra o perfil para a palavra MENOS (passa question_id_val)
+            profile_menos = get_profile_for_word(question_id_val, menos_word)
+            if profile_menos:
+                if profile_mais == profile_menos and profile_mais is not None:
+                     logger.warning(f"Q{question_id_val}: Mesma palavra ('{mais_word}') escolhida para MAIS e MENOS. Ignorando pontuação MENOS.")
+                else:
+                    disc_scores[profile_menos] -= 1
+                    logger.debug(f"Q{question_id_val}: MENOS='{menos_word}' -> Perfil={profile_menos}. Score {profile_menos} agora = {disc_scores[profile_menos]}")
+            else:
+                logger.warning(f"Q{question_id_val}: Perfil NÃO ENCONTRADO para MENOS='{menos_word}'. Verifique disc_data.py e a palavra exata enviada.")
 
+            # Se pelo menos um perfil foi encontrado para esta resposta, conta como válida
+            if profile_mais or profile_menos:
+                valid_responses_processed += 1
 
-    # Identifica os perfis predominantes
-    # Ordena os itens do dicionário (perfil, score) por score em ordem decrescente
-    sorted_profiles = sorted(disc_scores.items(), key=lambda item: item[1], reverse=True)
+        except Exception as e:
+            logger.error(f"Erro inesperado ao processar resposta para Q{question_id_val} (Mais='{mais_word}', Menos='{menos_word}'): {e}", exc_info=True)
+            continue
+        # --- FIM DAS CHAMADAS ---
 
-    primary_profile = sorted_profiles[0][0]
-    # Garante que há pelo menos dois perfis para definir um secundário
-    secondary_profile = sorted_profiles[1][0] if len(sorted_profiles) > 1 else primary_profile # Ou None, ou outro default
+    # Verifica se alguma resposta válida foi processada
+    if valid_responses_processed == 0:
+         logger.error(f"Nenhuma resposta válida pôde ser processada (verificar formato JSON ou get_profile_for_word?). Scores permanecem {disc_scores}. Verifique os warnings anteriores.")
+         # Retorna None aqui para indicar falha total no processamento
+         return None
 
-    # Determina o nível para cada fator (Alto, Médio, Baixo)
-    # Estes limites podem precisar de ajuste dependendo da escala final dos scores (-28 a +28 teoricamente)
-    # Vamos usar uma faixa mais ampla, por exemplo: Alto > 5, Baixo < -5
-    disc_levels = {}
-    for factor, score in disc_scores.items():
-        # Ajuste os limites conforme necessário para sua escala
-        if score > 5: # Exemplo: Limite para Alto
-            level = "Alto"
-        elif score < -5: # Exemplo: Limite para Baixo
-            level = "Baixo"
-        else:
-            level = "Médio"
-        disc_levels[factor] = level
+    # Verifica se algum score foi calculado (após processar respostas válidas)
+    if not any(v != 0 for v in disc_scores.values()):
+         logger.warning(f"Todos os scores DISC finais são zero após processar {valid_responses_processed} respostas válidas. Scores: {disc_scores}. Verifique a lógica ou os dados de entrada.")
+         # Pode acontecer se +1 e -1 se cancelarem. Continuamos.
 
-    # Prepara o resultado completo
-    # Removemos raw_counts e raw_scores que eram baseados nas letras A,B,C,D
-    result = {
-        'disc_scores': disc_scores,
-        'disc_levels': disc_levels,
+    # --- Identificação dos perfis predominantes ---
+    try:
+        all_scores = {p: disc_scores.get(p, 0) for p in ['D', 'I', 'S', 'C']}
+        sorted_profiles = sorted(all_scores.items(), key=lambda item: item[1], reverse=True)
+        primary_profile = sorted_profiles[0][0]
+        secondary_profile = primary_profile
+        for profile, score in sorted_profiles[1:]:
+            if profile != primary_profile:
+                 secondary_profile = profile
+                 break
+    except Exception as e:
+        logger.error(f"Erro ao determinar perfis primário/secundário: {e}", exc_info=True)
+        primary_profile = 'D'
+        secondary_profile = 'I' # Fallback seguro
+
+    # ---- GERAÇÃO DO RESULTADO FINAL ----
+    result_base = {
+        'd_score': all_scores.get('D', 0),
+        'i_score': all_scores.get('I', 0),
+        's_score': all_scores.get('S', 0),
+        'c_score': all_scores.get('C', 0),
         'primary_profile': primary_profile,
         'secondary_profile': secondary_profile,
-        # Inclui as descrições completas para facilitar o uso no template/API
-        'primary_description': disc_descriptions.get(primary_profile, {}),
-        'secondary_description': disc_descriptions.get(secondary_profile, {}),
-        # Adiciona as interpretações para uso direto (opcional)
-        'profile_interpretations': disc_descriptions # Passa todas as descrições
+        'profile_interpretations': disc_descriptions, # Passa todas as descrições
+        'date_created': datetime.now()
     }
 
-    return result
+    # Gera o relatório detalhado
+    detailed_report_data = generate_detailed_report(result_base)
 
-# --- As funções auxiliares get_profile_summary e generate_detailed_report ---
-# --- permanecem praticamente as mesmas, pois dependem da ESTRUTURA ---
-# --- do resultado ('disc_scores', 'primary_profile', etc.) que foi mantida. ---
+    # Combina o resultado base com o relatório detalhado
+    final_result = {**result_base, 'detailed_report': detailed_report_data}
+    final_result['profile_summary'] = detailed_report_data.get('profile_summary')
+
+    logger.info(f"Scores DISC calculados: D={final_result['d_score']}, I={final_result['i_score']}, S={final_result['s_score']}, C={final_result['c_score']}. Primário: {primary_profile}, Secundário: {secondary_profile}. Processadas {valid_responses_processed}/{len(responses)} respostas.")
+    return final_result
+
+
+# --- Funções Auxiliares (get_profile_summary, generate_detailed_report) ---
+# (Nenhuma alteração necessária aqui, elas já recebem o resultado processado)
+# --- Cole as funções get_profile_summary e generate_detailed_report da versão anterior aqui ---
+# --- (Elas não foram incluídas aqui para brevidade, mas devem estar no seu arquivo) ---
 
 def get_profile_summary(disc_result: Dict[str, Any]) -> str:
-    """
-    Gera um resumo textual do perfil DISC com base nos resultados calculados.
-
-    Args:
-        disc_result: Dicionário com os resultados do cálculo DISC retornado por calculate_disc_scores.
-
-    Returns:
-        String com o resumo do perfil ou mensagem de erro.
-    """
-    if not disc_result or 'primary_profile' not in disc_result:
+    """Gera um resumo textual do perfil DISC."""
+    if not disc_result or not all(k in disc_result for k in ['primary_profile', 'secondary_profile', 'd_score', 'i_score', 's_score', 'c_score']):
+        logger.error("Dados de resultado inválidos para gerar resumo.")
         return "Não foi possível gerar o resumo do perfil (dados de resultado inválidos)."
 
     primary = disc_result['primary_profile']
     secondary = disc_result['secondary_profile']
-    levels = disc_result.get('disc_levels', {})
-    descriptions = disc_result.get('profile_interpretations', disc_descriptions) # Usa o passado ou o global
+    scores = {
+        'D': disc_result['d_score'], 'I': disc_result['i_score'],
+        'S': disc_result['s_score'], 'C': disc_result['c_score']
+    }
+    # Usa as descrições passadas no resultado, ou o default global como fallback
+    descriptions = disc_result.get('profile_interpretations', disc_descriptions or {})
 
     primary_title = descriptions.get(primary, {}).get('title', primary)
     secondary_title = descriptions.get(secondary, {}).get('title', secondary)
@@ -144,104 +190,103 @@ def get_profile_summary(disc_result: Dict[str, Any]) -> str:
     else:
          summary += ".\n\n"
 
-
-    summary += "**Níveis de Intensidade por Fator:**\n"
-    for factor, level in levels.items():
+    summary += "**Intensidade por Fator (Scores):**\n"
+    # Garante a ordem D, I, S, C
+    for factor in ['D', 'I', 'S', 'C']:
         factor_name = descriptions.get(factor, {}).get('title', factor)
-        score = disc_result.get('disc_scores', {}).get(factor, 'N/A')
-        summary += f"- **{factor} ({factor_name}):** {level} (Score: {score})\n"
+        score = scores.get(factor, 'N/A')
+        summary += f"- **{factor} ({factor_name}):** {score}\n" # Mostra o score diretamente
 
-    primary_desc = descriptions.get(primary, {})
-    if primary_desc:
-        summary += f"\nComo perfil **{primary}** dominante, você tende a ser motivado(a) por: *{primary_desc.get('motivation', 'N/A')}*.\n\n"
+    primary_desc_data = descriptions.get(primary, {})
+    if primary_desc_data:
+        summary += f"\nComo perfil **{primary}** dominante, você tende a ser motivado(a) por: *{primary_desc_data.get('motivation', 'N/A')}*.\n"
+        # Adicionar mais detalhes se desejar
+    else:
+         logger.warning(f"Descrição não encontrada para o perfil primário: {primary}")
 
-        summary += "**Características Comuns Associadas:**\n"
-        # Mostra algumas características do primário
-        characteristics = primary_desc.get('characteristics', [])
-        for characteristic in characteristics[:3]:  # Mostra as 3 primeiras
-            summary += f"- {characteristic.capitalize()}\n"
 
-    secondary_desc = descriptions.get(secondary, {})
-    if primary != secondary and secondary_desc:
-        summary += f"\nSua influência secundária **{secondary}** pode adicionar traços como *{secondary_desc.get('motivation', 'N/A')}* ao seu comportamento.\n"
+    if primary != secondary:
+        secondary_desc_data = descriptions.get(secondary, {})
+        if secondary_desc_data:
+             summary += f"\nSua influência secundária **{secondary}** pode adicionar traços relacionados à motivação por: *{secondary_desc_data.get('motivation', 'N/A')}*.\n"
+        else:
+             logger.warning(f"Descrição não encontrada para o perfil secundário: {secondary}")
+
 
     return summary
 
-def generate_detailed_report(disc_result: Dict[str, Any]) -> Dict[str, Any]:
+def generate_detailed_report(disc_result_base: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Gera um relatório mais detalhado do perfil DISC.
-
-    Args:
-        disc_result: Dicionário com os resultados do cálculo DISC.
-
-    Returns:
-        Dicionário com seções detalhadas do relatório.
+    Gera um relatório mais detalhado do perfil DISC. Recebe o dicionário base
+    com scores e perfis já calculados.
     """
-    if not disc_result or 'primary_profile' not in disc_result:
+    if not disc_result_base or not all(k in disc_result_base for k in ['primary_profile', 'secondary_profile']):
+        logger.error("Dados de resultado base inválidos para gerar relatório detalhado.")
         return {"error": "Dados de resultado inválidos para gerar relatório detalhado."}
 
-    primary = disc_result['primary_profile']
-    secondary = disc_result['secondary_profile']
-    descriptions = disc_result.get('profile_interpretations', disc_descriptions)
+    primary = disc_result_base['primary_profile']
+    secondary = disc_result_base['secondary_profile']
+    # Usa as descrições do resultado base, ou o default global como fallback
+    descriptions = disc_result_base.get('profile_interpretations', disc_descriptions or {})
 
     primary_desc = descriptions.get(primary, {})
     secondary_desc = descriptions.get(secondary, {})
 
+    # Cria o resumo usando os dados base
+    profile_summary_text = get_profile_summary(disc_result_base)
+
     report = {
-        'profile_summary': get_profile_summary(disc_result), # Reutiliza o resumo
+        'profile_summary': profile_summary_text,
         'primary_profile_details': {
             'title': primary_desc.get('title', primary),
             'motivation': primary_desc.get('motivation', 'N/A'),
             'characteristics': primary_desc.get('characteristics', []),
             'strengths': primary_desc.get('strengths', []),
             'weaknesses': primary_desc.get('weaknesses', []),
-            'how_to_work_with': primary_desc.get('how_to_work_with', 'N/A')
+             # Garante que how_to_work_with seja uma lista ou None/string padrão
+            'how_to_work_with': primary_desc.get('how_to_work_with', ['Nenhuma dica específica.'])
         },
         'secondary_profile_details': None, # Preenchido se for diferente do primário
         'development_areas_list': [],
-        'raw_scores': disc_result.get('disc_scores', {}) # Inclui os scores numéricos
     }
 
     if primary != secondary and secondary_desc:
          report['secondary_profile_details'] = {
              'title': secondary_desc.get('title', secondary),
-             'motivation': secondary_desc.get('motivation', 'N/A'),
-             'characteristics': secondary_desc.get('characteristics', []),
-             'strengths': secondary_desc.get('strengths', []),
-             'weaknesses': secondary_desc.get('weaknesses', []),
-             'how_to_work_with': secondary_desc.get('how_to_work_with', 'N/A')
+            'motivation': secondary_desc.get('motivation', 'N/A'),
+            'characteristics': secondary_desc.get('characteristics', []),
+            'strengths': secondary_desc.get('strengths', []),
+            'weaknesses': secondary_desc.get('weaknesses', []),
+            'how_to_work_with': secondary_desc.get('how_to_work_with', ['Nenhuma dica específica.'])
         }
+    elif primary != secondary:
+        logger.warning(f"Descrição não encontrada para perfil secundário '{secondary}' ao gerar detalhes.")
+
 
     # Adiciona áreas de desenvolvimento genéricas baseadas no perfil primário
-    # (Esta lógica pode ser muito mais sofisticada)
     development_areas = []
-    if primary == 'D':
-        development_areas.extend([
-            "Desenvolver maior paciência e empatia nas interações.",
-            "Praticar a escuta ativa para compreender melhor outras perspectivas.",
-            "Delegar tarefas e confiar mais na equipe."
-        ])
-    elif primary == 'I':
-        development_areas.extend([
-            "Melhorar a organização pessoal e o gerenciamento do tempo.",
-            "Aumentar o foco na conclusão de tarefas e atenção aos detalhes.",
-            "Ser mais objetivo(a) na análise de dados e informações."
-        ])
-    elif primary == 'S':
-        development_areas.extend([
-            "Desenvolver maior assertividade para expressar necessidades e opiniões.",
-            "Aumentar a adaptabilidade a mudanças e novas situações.",
-            "Praticar a tomada de decisões de forma mais independente."
-        ])
-    elif primary == 'C':
-        development_areas.extend([
-            "Ser mais flexível e aberto(a) a abordagens diferentes.",
-            "Desenvolver a capacidade de tomar decisões com informações 'suficientes' (evitar paralisia por análise).",
-            "Praticar a comunicação interpessoal de forma mais calorosa e direta."
-        ])
+    if primary_desc: # Adiciona apenas se a descrição primária foi encontrada
+        weaknesses = primary_desc.get('weaknesses', [])
+        if weaknesses:
+             development_areas.append(f"Considerar formas de mitigar ou desenvolver as seguintes áreas associadas ao perfil {primary}: {', '.join(weaknesses)}.")
+        else:
+             development_areas.append(f"Nenhuma fraqueza específica listada para o perfil {primary} para sugerir desenvolvimento.")
 
-    # Considerar também o perfil secundário para sugestões mais ricas (lógica futura)
-    # Ex: Se for D primário e S secundário, uma sugestão poderia ser "Equilibrar a busca por resultados com a manutenção da harmonia da equipe".
+        # Adiciona sugestões mais direcionadas (exemplo)
+        if primary == 'D': development_areas.append("Praticar a escuta ativa, a paciência e considerar o impacto das decisões nas pessoas.")
+        elif primary == 'I': development_areas.append("Melhorar a organização, o foco em detalhes e o acompanhamento de tarefas até a conclusão.")
+        elif primary == 'S': development_areas.append("Desenvolver maior assertividade ao expressar necessidades, adaptabilidade a mudanças rápidas e iniciativa.")
+        elif primary == 'C': development_areas.append("Ser mais flexível com regras quando apropriado, tomar decisões com dados suficientes (sem paralisia por análise) e expressar mais o raciocínio.")
+
+    else:
+        logger.warning(f"Não foi possível adicionar áreas de desenvolvimento pois a descrição do perfil primário {primary} não foi encontrada.")
+
+    # Lógica mais sofisticada pode combinar primário e secundário (Exemplo)
+    if primary != secondary and secondary_desc:
+        if primary == 'D' and secondary == 'S':
+            development_areas.append("Buscar equilibrar a busca por resultados (D) com a manutenção da harmonia e apoio da equipe (S).")
+        # Adicionar outras combinações aqui se desejar...
+        pass
 
     report['development_areas_list'] = development_areas
 

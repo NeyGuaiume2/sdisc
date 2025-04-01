@@ -6,45 +6,66 @@
 <div class="container mt-5">
     <h1 class="mb-4 text-center">Seu Perfil DISC</h1>
 
-    {% if result %}
-    <div class="row">
+    {# Bloco principal que só mostra conteúdo se 'result' existir E tiver perfis definidos #}
+    {% if result and result.primary_profile and result.secondary_profile %}
+    <div class="row mb-4">
         <!-- Coluna do Gráfico -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
+        <div class="col-md-6 mb-4 mb-md-0"> {# Ajuste de margem para telas menores #}
+            <div class="card shadow-sm h-100"> {# h-100 para igualar altura se necessário #}
                 <div class="card-header">
                     Gráfico do Perfil DISC
                 </div>
-                <div class="card-body">
-                    <canvas id="discChart"></canvas>
+                <div class="card-body d-flex flex-column justify-content-center align-items-center"> {# Centraliza conteúdo se gráfico falhar #}
+                    {# O Canvas para o Chart.js - será preenchido pelo JS ou mostrará mensagem de erro/fallback #}
+                    <div style="position: relative; width: 100%; max-width: 450px; margin: auto; height: 300px;"> {# Container para controlar tamanho do gráfico #}
+                         <canvas id="discChart"></canvas>
+                    </div>
+                    {# Mensagem fallback visível apenas se o JS não conseguir criar o gráfico ou se não houver dados #}
+                    <div id="chartFallback" class="text-center mt-3" style="display: none;">
+                         {# Mensagem específica será adicionada pelo JS se houver erro ou dados inválidos #}
+                    </div>
                     <p class="text-muted small mt-2 text-center">Este gráfico representa a intensidade de cada fator DISC.</p>
                 </div>
             </div>
         </div>
 
         <!-- Coluna do Resumo -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100"> {# h-100 para igualar altura #}
                 <div class="card-header">
                     Resumo do Perfil
                 </div>
                 <div class="card-body">
-                    <p><strong>Perfil Primário:</strong> {{ result.primary_profile }} ({{ profile_interpretations[result.primary_profile]['title'] }})</p>
-                    <p><strong>Perfil Secundário:</strong> {{ result.secondary_profile }} ({{ profile_interpretations[result.secondary_profile]['title'] }})</p>
+                    {# Usa .get() para acesso seguro e verifica se profile_interpretations existe #}
+                    {% if profile_interpretations %}
+                        <p><strong>Perfil Primário:</strong> {{ result.primary_profile }} ({{ profile_interpretations.get(result.primary_profile, {}).get('title', 'N/A') }})</p>
+                        <p><strong>Perfil Secundário:</strong> {{ result.secondary_profile }} ({{ profile_interpretations.get(result.secondary_profile, {}).get('title', 'N/A') }})</p>
+                    {% else %}
+                        <p><strong>Perfil Primário:</strong> {{ result.primary_profile }}</p>
+                        <p><strong>Perfil Secundário:</strong> {{ result.secondary_profile }}</p>
+                        <p class="text-danger small">Interpretações não carregadas.</p>
+                    {% endif %}
                     <hr>
-                    <p><strong>Níveis de Intensidade:</strong></p>
+                    <p><strong>Níveis de Intensidade (Scores):</strong></p>
+                    {# Usar 'default' garante que 'N/A' seja mostrado se o score for None ou não existir #}
+                    {# A validação principal para o gráfico é feita no Javascript com 'is number' #}
                     <ul>
-                        <li><strong>D (Dominância):</strong> {{ result.d_intensity }}</li>
-                        <li><strong>I (Influência):</strong> {{ result.i_intensity }}</li>
-                        <li><strong>S (Estabilidade):</strong> {{ result.s_intensity }}</li>
-                        <li><strong>C (Conformidade):</strong> {{ result.c_intensity }}</li>
+                        <li><strong>D (Dominância):</strong> {{ result.get('d_score') | default('N/A') }}</li>
+                        <li><strong>I (Influência):</strong> {{ result.get('i_score') | default('N/A') }}</li>
+                        <li><strong>S (Estabilidade):</strong> {{ result.get('s_score') | default('N/A') }}</li>
+                        <li><strong>C (Conformidade):</strong> {{ result.get('c_score') | default('N/A') }}</li>
                     </ul>
-                     <p class="small text-muted">Data da Avaliação: {{ result.date_created.strftime('%d/%m/%Y %H:%M') if result.date_created else 'N/A' }}</p>
+                     <hr>
+                     {# Mostra a data/hora da criação se disponível e for um objeto datetime #}
+                     <p class="small text-muted">Data da Avaliação: {{ result.get('date_created').strftime('%d/%m/%Y %H:%M') if result.get('date_created') and hasattr(result.get('date_created'), 'strftime') else 'N/A' }}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Seção de Interpretação Detalhada -->
+    {# Só mostra esta seção se houver interpretações carregadas #}
+    {% if profile_interpretations %}
     <div class="card shadow-sm mb-4">
         <div class="card-header">
             Interpretação Detalhada
@@ -54,12 +75,12 @@
             <ul class="nav nav-tabs mb-3" id="discTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="primary-tab" data-bs-toggle="tab" data-bs-target="#primary-content" type="button" role="tab" aria-controls="primary-content" aria-selected="true">
-                        Perfil Primário: {{ profile_interpretations[result.primary_profile]['title'] }} ({{ result.primary_profile }})
+                        Perfil Primário: {{ profile_interpretations.get(result.primary_profile, {}).get('title', result.primary_profile) }} ({{ result.primary_profile }})
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="secondary-tab" data-bs-toggle="tab" data-bs-target="#secondary-content" type="button" role="tab" aria-controls="secondary-content" aria-selected="false">
-                        Influência Secundária: {{ profile_interpretations[result.secondary_profile]['title'] }} ({{ result.secondary_profile }})
+                        Influência Secundária: {{ profile_interpretations.get(result.secondary_profile, {}).get('title', result.secondary_profile) }} ({{ result.secondary_profile }})
                     </button>
                 </li>
                  <li class="nav-item" role="presentation">
@@ -73,188 +94,228 @@
             <div class="tab-content" id="discTabsContent">
                 <!-- Conteúdo do Perfil Primário -->
                 <div class="tab-pane fade show active" id="primary-content" role="tabpanel" aria-labelledby="primary-tab">
-                    <h4>Perfil {{ profile_interpretations[result.primary_profile]['title'] }} ({{ result.primary_profile }})</h4>
-                    <p><strong>Descrição Geral:</strong> {{ profile_interpretations[result.primary_profile]['description'] }}</p>
-                    <p><strong>Motivação Principal:</strong> {{ profile_interpretations[result.primary_profile]['motivation'] }}</p>
+                    {% set primary_data = profile_interpretations.get(result.primary_profile, {}) %}
+                    <h4>Perfil {{ primary_data.get('title', result.primary_profile) }} ({{ result.primary_profile }})</h4>
+                    <p><strong>Descrição Geral:</strong> {{ primary_data.get('description', 'N/A') }}</p>
+                    <p><strong>Motivação Principal:</strong> {{ primary_data.get('motivation', 'N/A') }}</p>
+
+                    {# Função auxiliar para renderizar listas com segurança #}
+                    {% macro render_list(items, default_message='Nenhuma informação disponível.') %}
+                        <ul>
+                            {% if items is iterable and items is not string and items %}
+                                {% for item in items %} <li>{{ item }}</li> {% endfor %}
+                            {% else %}
+                                <li>{{ default_message }}</li>
+                            {% endif %}
+                        </ul>
+                    {% endmacro %}
+
                     <h5>Características Comuns:</h5>
-                    <ul>
-                        {% for characteristic in profile_interpretations[result.primary_profile]['characteristics'] %}
-                        <li>{{ characteristic }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(primary_data.get('characteristics'), 'Nenhuma característica listada.') }}
+
                      <h5>Pontos Fortes:</h5>
-                    <ul>
-                        {% for strength in profile_interpretations[result.primary_profile]['strengths'] %}
-                        <li>{{ strength }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(primary_data.get('strengths'), 'Nenhum ponto forte listado.') }}
+
                      <h5>Áreas de Desenvolvimento:</h5>
-                    <ul>
-                        {% for weakness in profile_interpretations[result.primary_profile]['weaknesses'] %}
-                        <li>{{ weakness }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(primary_data.get('weaknesses'), 'Nenhuma área de desenvolvimento listada.') }}
+
                     <h5>Como se Relacionar (Dicas):</h5>
-                     <ul>
-                        {% for tip in profile_interpretations[result.primary_profile]['how_to_work_with'] %}
-                        <li>{{ tip }}</li>
-                        {% endfor %}
-                    </ul>
+                    {# A correção em disc_data.py é essencial aqui #}
+                    {{ render_list(primary_data.get('how_to_work_with'), 'Nenhuma dica de relacionamento listada.') }}
                 </div>
 
                 <!-- Conteúdo do Perfil Secundário -->
                 <div class="tab-pane fade" id="secondary-content" role="tabpanel" aria-labelledby="secondary-tab">
-                     <h4>Influência do Perfil {{ profile_interpretations[result.secondary_profile]['title'] }} ({{ result.secondary_profile }})</h4>
+                    {% set secondary_data = profile_interpretations.get(result.secondary_profile, {}) %}
+                     <h4>Influência do Perfil {{ secondary_data.get('title', result.secondary_profile) }} ({{ result.secondary_profile }})</h4>
                     <p>Seu perfil secundário adiciona nuances ao seu comportamento primário.</p>
-                    <p><strong>Descrição Geral:</strong> {{ profile_interpretations[result.secondary_profile]['description'] }}</p>
-                    <p><strong>Motivação Principal:</strong> {{ profile_interpretations[result.secondary_profile]['motivation'] }}</p>
+                    <p><strong>Descrição Geral:</strong> {{ secondary_data.get('description', 'N/A') }}</p>
+                    <p><strong>Motivação Principal:</strong> {{ secondary_data.get('motivation', 'N/A') }}</p>
+
                     <h5>Características Comuns:</h5>
-                    <ul>
-                        {% for characteristic in profile_interpretations[result.secondary_profile]['characteristics'] %}
-                        <li>{{ characteristic }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(secondary_data.get('characteristics'), 'Nenhuma característica listada.') }}
+
                      <h5>Pontos Fortes:</h5>
-                    <ul>
-                        {% for strength in profile_interpretations[result.secondary_profile]['strengths'] %}
-                        <li>{{ strength }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(secondary_data.get('strengths'), 'Nenhum ponto forte listado.') }}
+
                      <h5>Áreas de Desenvolvimento:</h5>
-                    <ul>
-                        {% for weakness in profile_interpretations[result.secondary_profile]['weaknesses'] %}
-                        <li>{{ weakness }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(secondary_data.get('weaknesses'), 'Nenhuma área de desenvolvimento listada.') }}
+
                      <h5>Como se Relacionar (Dicas):</h5>
-                     <ul>
-                        {% for tip in profile_interpretations[result.secondary_profile]['how_to_work_with'] %}
-                        <li>{{ tip }}</li>
-                        {% endfor %}
-                    </ul>
+                    {{ render_list(secondary_data.get('how_to_work_with'), 'Nenhuma dica de relacionamento listada.') }}
                 </div>
 
                  <!-- Conteúdo Geral -->
                 <div class="tab-pane fade" id="general-content" role="tabpanel" aria-labelledby="general-tab">
                     <h4>Visão Geral do seu Perfil</h4>
-                    <p>Esta seção combina as influências dos seus perfis primário e secundário.</p>
-                    {% if result.profile_summary %}
-                        <p>{{ result.profile_summary | replace('\n', '<br>') | safe }}</p>
-                    {% endif %}
-                    {% if result.detailed_report and result.detailed_report.development_areas_list %}
-                        <h5>Sugestões Gerais para Desenvolvimento:</h5>
-                        <ul>
-                            {% for area in result.detailed_report.development_areas_list %}
-                            <li>{{ area }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                    <p class="mt-3">Lembre-se que o perfil DISC é uma ferramenta para autoconhecimento e desenvolvimento, não um rótulo definitivo. Todos os perfis têm pontos fortes e desafios.</p>
+                    <p>Esta seção combina as influências dos seus perfis primário e secundário para um entendimento mais completo.</p>
+                     {# Adicione aqui conteúdo específico da visão geral, se gerado no backend #}
+                     {% set primary_title_geral = profile_interpretations.get(result.primary_profile, {}).get('title', result.primary_profile) %}
+                     {% set secondary_title_geral = profile_interpretations.get(result.secondary_profile, {}).get('title', result.secondary_profile) %}
+
+                     {% if result.get('detailed_report') and result.detailed_report.get('profile_summary') %}
+                         {# Usa o sumário gerado pelo backend se existir #}
+                         <p>{{ result.detailed_report.profile_summary | replace('\n', '<br>') | safe }}</p>
+                     {% else %}
+                         {# Fallback com texto genérico #}
+                        <p>Combine as informações das abas "Perfil Primário" e "Influência Secundária" para entender como seus traços interagem no dia a dia.</p>
+                        <p>Pense em como as características de <strong>{{ primary_title_geral }}</strong> (seu perfil primário) são complementadas ou modificadas pelas tendências de <strong>{{ secondary_title_geral }}</strong> (seu perfil secundário).</p>
+                     {% endif %}
+
+                     {# Mostra sugestões de desenvolvimento se existirem no report detalhado #}
+                     {% if result.get('detailed_report') and result.detailed_report.get('development_areas_list') %}
+                         <h5 class="mt-4">Sugestões Gerais para Desenvolvimento:</h5>
+                         {{ render_list(result.detailed_report.development_areas_list) }}
+                     {% endif %}
+
+                     <p class="mt-4"><strong>Lembre-se:</strong> O perfil DISC é uma ferramenta poderosa para autoconhecimento e melhoria da comunicação, não um rótulo definitivo. Todos os perfis possuem qualidades valiosas e pontos a desenvolver. Use este resultado como um guia para entender melhor a si mesmo e aos outros.</p>
+
                 </div>
             </div>
         </div>
     </div>
+    {% else %}
+     {# Caso profile_interpretations não seja carregado #}
+     <div class="alert alert-warning" role="alert">
+        Informações detalhadas sobre os perfis não puderam ser carregadas. Verifique a configuração.
+    </div>
+    {% endif %} {# Fim do if profile_interpretations #}
 
+    <!-- Botões de Ação -->
     <div class="text-center mt-4 mb-5">
-         <!-- CORREÇÃO APLICADA AQUI -->
         <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Voltar ao Início</a>
-        <a href="{{ url_for('main.quiz') }}" class="btn btn-primary">Refazer Teste</a>
-        <!-- Adicionar botão de exportar PDF se implementado -->
-        <!-- <button class="btn btn-success">Exportar para PDF</button> -->
+        <a href="{{ url_for('main.quiz') }}" class="btn btn-primary" id="new-assessment">Refazer Teste</a>
+        <!-- <button class="btn btn-success" disabled>Exportar para PDF (Em breve)</button> -->
     </div>
 
     {% else %}
+    {# Mensagem se não houver resultado ('result' for None ou Falso) #}
     <div class="alert alert-warning text-center" role="alert">
-        Nenhum resultado de avaliação encontrado. Por favor, <a href="{{ url_for('main.quiz') }}">inicie o teste</a>.
+        Nenhum resultado de avaliação encontrado. Por favor, <a href="{{ url_for('main.quiz') }}" class="alert-link">inicie o teste</a> para ver seus resultados.
     </div>
-    {% endif %}
+    {% endif %} {# Fim do if result #}
 
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <!-- Incluir Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-    // Garante que o código só rode depois que a página carregar
     document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('discChart');
+        const canvasElement = document.getElementById('discChart');
+        const fallbackElement = document.getElementById('chartFallback');
+        let chartInstance = null; // Para guardar a instância do gráfico
 
-        // Só tenta criar o gráfico se o elemento canvas existir E houver dados de resultado
-        {% if result %}
-        if (ctx) {
-            const discChart = new Chart(ctx.getContext('2d'), {
-                type: 'radar', // Ou 'bar', 'doughnut' etc.
-                data: {
-                    labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
-                    datasets: [{
-                        label: 'Seu Perfil DISC',
-                         // Usar os scores do resultado passado pelo Flask
-                        data: [
-                            {{ result.d_score | default(0) }},
-                            {{ result.i_score | default(0) }},
-                            {{ result.s_score | default(0) }},
-                            {{ result.c_score | default(0) }}
-                        ],
-                        fill: true,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Azul claro com transparência
-                        borderColor: 'rgb(54, 162, 235)', // Azul sólido
-                        pointBackgroundColor: 'rgb(54, 162, 235)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(54, 162, 235)'
-                    }]
-                },
-                options: {
-                    elements: {
-                        line: {
-                            borderWidth: 3
-                        }
-                    },
-                    scales: {
-                        r: { // Configurações da escala radial (radar)
-                            angleLines: {
-                                display: true
-                            },
-                            suggestedMin: -10, // Ajuste conforme a escala dos seus scores
-                            suggestedMax: 10,  // Ajuste conforme a escala dos seus scores
-                            ticks: {
-                                stepSize: 2 // Intervalo dos números na escala
-                            },
-                             pointLabels: {
-                                font: {
-                                    size: 12 // Tamanho da fonte dos rótulos (D, I, S, C)
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true, // Mostra a legenda ('Seu Perfil DISC')
-                            position: 'top',
+        // Tenta criar o gráfico apenas se 'result' foi passado E os scores são NÚMEROS
+        {# Verifica se 'result' existe e se os scores são do tipo 'number' (int ou float) #}
+        {% if result and result.d_score is number and result.i_score is number and result.s_score is number and result.c_score is number %}
+            // Dados existem e são números
+            const dScore = {{ result.d_score }};
+            const iScore = {{ result.i_score }};
+            const sScore = {{ result.s_score }};
+            const cScore = {{ result.c_score }};
+
+            console.log("Dados numéricos recebidos para o gráfico:", { d: dScore, i: iScore, s: sScore, c: cScore });
+
+            if (canvasElement) {
+                const ctx = canvasElement.getContext('2d');
+
+                // Cores padrão DISC
+                const discBackgroundColors = {
+                    D: 'rgba(239, 68, 68, 0.7)',  I: 'rgba(250, 204, 21, 0.7)',
+                    S: 'rgba(34, 197, 94, 0.7)',  C: 'rgba(59, 130, 246, 0.7)'
+                };
+                const discBorderColors = {
+                    D: 'rgb(239, 68, 68)', I: 'rgb(250, 204, 21)',
+                    S: 'rgb(34, 197, 94)', C: 'rgb(59, 130, 246)'
+                };
+                // Determinar min/max para a escala Y baseado nos scores reais
+                const scores = [dScore, iScore, sScore, cScore];
+                let minY = Math.min(...scores);
+                let maxY = Math.max(...scores);
+                // Adicionar uma pequena margem e garantir que o zero esteja visível se os scores passarem por ele
+                const buffer = Math.max(2, Math.abs(maxY - minY) * 0.1); // Margem de 10% ou pelo menos 2
+                const suggestedMinY = Math.floor(Math.min(0, minY) - buffer); // Arredonda para baixo
+                const suggestedMaxY = Math.ceil(Math.max(0, maxY) + buffer); // Arredonda para cima
+
+
+                try {
+                     chartInstance = new Chart(ctx, {
+                        type: 'bar', // Gráfico de barras
+                        data: {
+                            labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
+                            datasets: [{
+                                label: 'Intensidade', // Tooltip mostrará "Intensidade: valor"
+                                data: scores,
+                                backgroundColor: [
+                                    discBackgroundColors.D, discBackgroundColors.I,
+                                    discBackgroundColors.S, discBackgroundColors.C
+                                ],
+                                borderColor: [
+                                    discBorderColors.D, discBorderColors.I,
+                                    discBorderColors.S, discBorderColors.C
+                                ],
+                                borderWidth: 1
+                            }]
                         },
-                        tooltip: {
-                            enabled: true // Mostra tooltips ao passar o mouse
+                        options: {
+                            scales: {
+                                y: { // Eixo Y (Valores)
+                                    beginAtZero: false, // Começa no mínimo real ou zero
+                                    suggestedMin: suggestedMinY, // Mínimo calculado
+                                    suggestedMax: suggestedMaxY, // Máximo calculado
+                                    grid: {
+                                        display: true,
+                                        color: 'rgba(0, 0, 0, 0.08)' // Linhas de grade mais sutis
+                                    },
+                                    ticks: { /* Chart.js geralmente ajusta bem */ }
+                                },
+                                x: { // Eixo X (Categorias)
+                                    grid: { display: false } // Ocultar linhas de grade verticais
+                                }
+                            },
+                            plugins: {
+                                legend: { display: false }, // Oculta a legenda geral
+                                tooltip: { enabled: true } // Manter tooltips
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false, // Permite controlar altura melhor via CSS/container
                         }
-                    },
-                    // Manter proporção para evitar distorções
-                     maintainAspectRatio: true,
-                     aspectRatio: 1.5 // Ajuste para melhor visualização (ex: 2 para mais largo, 1 para quadrado)
+                    });
+                    console.log("Gráfico de barras criado com sucesso.");
+                    if (fallbackElement) fallbackElement.style.display = 'none'; // Esconde fallback se gráfico ok
+
+                } catch (error) {
+                    console.error("Erro ao criar o gráfico Chart.js:", error);
+                    if(fallbackElement) {
+                         fallbackElement.innerHTML = '<p class="text-danger text-center fw-bold">Erro ao renderizar o gráfico.</p>';
+                         fallbackElement.style.display = 'block'; // Mostra a mensagem de erro
+                    }
+                    if(canvasElement) canvasElement.style.display = 'none'; // Esconde o canvas se deu erro
                 }
-            });
-        } else {
-             console.warn("Elemento canvas 'discChart' não encontrado.");
-        }
+
+            } else {
+                console.warn("Elemento canvas 'discChart' não encontrado no DOM.");
+                 if(fallbackElement) {
+                     fallbackElement.innerHTML = '<p class="text-warning text-center">Elemento do gráfico não encontrado na página.</p>';
+                     fallbackElement.style.display = 'block';
+                 }
+            }
         {% else %}
-            console.log("Nenhum dado de resultado disponível para renderizar o gráfico.");
-            // Opcional: Esconder ou mostrar uma mensagem se não houver gráfico
-             const chartContainer = document.querySelector('.col-md-6.mb-4 .card'); // Encontra o card do gráfico
-             if (chartContainer) {
-                 // chartContainer.style.display = 'none'; // Esconde o card inteiro
-                 // Ou adiciona uma mensagem dentro do card body
-                 const cardBody = chartContainer.querySelector('.card-body');
-                 if(cardBody) cardBody.innerHTML = '<p class="text-center text-muted">Gráfico indisponível sem resultados.</p>';
-             }
+            // Caso onde 'result' não existe ou falta algum score ou NÃO SÃO NÚMEROS
+            {# Usar tojson garante que None vira null e strings ficam entre aspas no log JS #}
+            console.warn("Dados inválidos ou ausentes para o gráfico ('result' ausente ou scores não numéricos). Scores recebidos:", {
+                d: {{ result.get('d_score') | default('null') | tojson }},
+                i: {{ result.get('i_score') | default('null') | tojson }},
+                s: {{ result.get('s_score') | default('null') | tojson }},
+                c: {{ result.get('c_score') | default('null') | tojson }}
+            });
+            if(fallbackElement) {
+                fallbackElement.innerHTML = '<p class="text-muted text-center">Gráfico indisponível sem resultados numéricos válidos.</p>';
+                fallbackElement.style.display = 'block'; // Mostra a mensagem de fallback
+            }
+             if(canvasElement) canvasElement.style.display = 'none'; // Esconde o canvas se não há dados válidos
         {% endif %}
     });
 </script>
