@@ -2,9 +2,6 @@ README.md
 backend/
     __init__.py
     app.py
-    config/
-        __init__.py
-        security.py
     config.py
     data/
         assessments.json
@@ -33,27 +30,27 @@ backend/
             script.js
     templates/
         base.html
+        errors/
+            500.html
         index.html
         quiz.html
         results.html
-code_meu.py
-estrutura_do_projeto.txt
 estrutura_projeto.txt
-frontend/
-    README.md
-    public/
-    src/
-        assets/
-            css/
-            images/
-        components/
-        pages/
 generate_favicon.py
 generate_secret_key.py
 gerar_estrutura.py
-git-sync.ps1.txt
+git-sync.ps1
 gunicorn_config.py
 instance/
+    dev.db
+migrations/
+    README
+    alembic.ini
+    env.py
+    script.py.mako
+    versions/
+        8d09feb8aae6_create_disc_results_table.py
+        d2bf2695aa10_refatorar_modelo_discresult_para_usar_.py
 models/
     app/
         models.py
@@ -74,13 +71,14 @@ tests/
     conftest.py
     e2e/
         __init__.py
+        test_basic_quiz_flow.py
         test_disc_quiz.py
         test_helpers.py
         test_home.py
     integration_tests.py
     screenshots/
+        test_complete_quiz_and_reach_results[chromium]_20250401-210548.png
     security_test.py
     test_app.py
     test_disc_scoring.py
-uso windows.txt
 wsgi.py

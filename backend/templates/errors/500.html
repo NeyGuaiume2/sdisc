@@ -1,0 +1,23 @@
+{# backend/templates/errors/500.html #}
+{% extends 'base.html' %}
+
+{% block title %}Erro Interno do Servidor{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Erro 500 - Erro Interno do Servidor</h4>
+        <p>Ocorreu um erro inesperado ao processar sua solicitação.</p>
+        <hr>
+        {# A variável 'message' é opcional, pode ser passada pela rota #}
+        {% if message %}
+            <p class="mb-0">{{ message }}</p>
+        {% else %}
+             <p class="mb-0">Por favor, tente novamente mais tarde ou contate o suporte se o problema persistir.</p>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary mt-3">Voltar ao Início</a>
+</div>
+{% endblock %}
+
+{% block extra_js %}{% endblock %} {# Sobrescreve JS extra se não for necessário #}

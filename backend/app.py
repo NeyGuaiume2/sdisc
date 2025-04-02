@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 # ------------------------------------
 from flask import Flask, jsonify, request, render_template, send_from_directory
 from flask_cors import CORS
+# >>> ADIÇÃO: Importar Migrate <<<
+from flask_migrate import Migrate
 import json
 import hashlib
 from datetime import datetime
@@ -33,26 +35,26 @@ else:
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
 # ---------------------------------
 
-# --- Importação das Rotas ---
-# Importar ANTES da factory `create_app` se a factory precisar delas imediatamente
-# ou se elas não dependerem da instância `app`.
-# Se as rotas precisarem da instância `app` (comum com Blueprints), importe DENTRO da factory.
-# Neste caso, o Blueprint `main_bp` é importado, então podemos fazer aqui.
+# >>> ADIÇÃO: Importar db <<<
 try:
-    # Tentar import relativo primeiro (padrão dentro de um pacote)
+    from .db import db # Importa a instância db
+    logging.info("Instância 'db' (SQLAlchemy) importada de backend.db.")
+except ImportError:
+    logging.critical("Falha fatal ao importar 'db' de backend.db. Verifique se o arquivo existe e está correto.")
+    sys.exit("Erro Crítico: Não foi possível importar a instância 'db' do SQLAlchemy.")
+# >>> FIM DA ADIÇÃO <<<
+
+# --- Importação das Rotas ---
+try:
     from .routes import main_bp
     logging.info("Importação relativa de 'backend.routes.main_bp' bem-sucedida.")
 except ImportError as e_rel:
     logging.warning(f"Falha na importação relativa de routes (.routes): {e_rel}. Tentando absoluta...")
     try:
-        # Fallback para import absoluto (pode funcionar dependendo de como é executado)
         from routes import main_bp
         logging.info("Importação absoluta de 'routes.main_bp' bem-sucedida (fallback).")
     except ImportError as e_abs:
-         # Se nem relativo nem absoluto funcionarem, é um erro crítico
          logging.critical(f"Falha fatal ao importar 'main_bp' de routes (relativo e absoluto falharam). Verifique a estrutura e PYTHONPATH. Erro: {e_abs}")
-         # Usar sys.exit() aqui é apropriado, pois a app não pode funcionar sem rotas.
-         # Não usar pytest.exit() aqui.
          sys.exit(f"Erro Crítico: Não foi possível importar as rotas necessárias (main_bp). Detalhes: {e_abs}")
 # -----------------------------
 
@@ -62,37 +64,45 @@ def inject_current_year():
     return {'current_year': datetime.now().year}
 
 # --- Factory Function para criar a App ---
-# Definir a factory DEPOIS das importações essenciais como `main_bp`
 def create_app(testing=False):
     """Cria e configura uma instância da aplicação Flask."""
-    # REMOVIDO: `from backend.app import create_app` - Esta era a causa da importação circular.
 
     app = Flask(__name__,
                 static_folder='static',
                 template_folder='templates',
-                static_url_path='/static') # URL base para arquivos estáticos
+                static_url_path='/static',
+                instance_path=os.path.join(project_root_dir, 'instance') # Define o instance_path corretamente
+               )
+    app.instance_path = os.path.join(project_root_dir, 'instance') # Garante que instance_path está correto
+    os.makedirs(app.instance_path, exist_ok=True) # Cria a pasta instance se não existir
 
-    # Lê FLASK_ENV do ambiente, default 'development'
     flask_env = os.environ.get('FLASK_ENV', 'development').lower()
     logging.info(f"Ambiente inicial detectado/definido como: '{flask_env}'. Parâmetro testing={testing}")
 
     # --- CARREGAMENTO DE CONFIGURAÇÃO ---
 
     if testing:
-        # Aplicação direta da configuração de teste
         logging.info("Aplicando configuração de TESTE diretamente na factory.")
+        # >>> CORREÇÃO: Definir instance_path também para testes <<<
+        test_instance_path = os.path.join(project_root_dir, 'instance_test') # Pasta separada para testes
+        os.makedirs(test_instance_path, exist_ok=True)
+        app.instance_path = test_instance_path
+        # >>> FIM DA CORREÇÃO <<<
         app.config.update(
             TESTING=True,
             DEBUG=False,
             ENV='testing',
             SECRET_KEY=os.environ.get('FLASK_TEST_SECRET_KEY', 'test-secret-fallback'),
-            SQLALCHEMY_DATABASE_URI=os.environ.get('TEST_DATABASE_URL', 'sqlite:///:memory:'),
-            SERVER_NAME='localhost.localdomain:5000', # Essencial para pytest-flask
+            # >>> CORREÇÃO: Usar um DB de teste no disco se :memory: causar problemas com migrate <<<
+            # SQLALCHEMY_DATABASE_URI=os.environ.get('TEST_DATABASE_URL', 'sqlite:///:memory:'),
+            SQLALCHEMY_DATABASE_URI=os.environ.get('TEST_DATABASE_URL', f'sqlite:///{os.path.join(test_instance_path, "test.db")}'),
+            # >>> FIM DA CORREÇÃO <<<
+            SERVER_NAME='localhost.localdomain:5000',
             WTF_CSRF_ENABLED=False,
             SESSION_COOKIE_SECURE=False,
             SQLALCHEMY_TRACK_MODIFICATIONS=False,
         )
-        app.config['ENV'] = 'testing'  # Define explicitamente o ambiente interno
+        app.config['ENV'] = 'testing'
 
     elif flask_env == 'production':
         logging.info("Tentando carregar configuração de PRODUÇÃO.")
@@ -117,7 +127,6 @@ def create_app(testing=False):
         config_loaded_from_file = False
         if os.path.exists(config_py_path):
             try:
-                # Tenta carregar a classe de configuração específica do módulo
                 app.config.from_object(f'{dev_config_module}.{dev_config_class}')
                 logging.info(f"Configuração de DESENVOLVIMENTO carregada de {dev_config_module}.{dev_config_class}.")
                 config_loaded_from_file = True
@@ -128,83 +137,91 @@ def create_app(testing=False):
         else:
             logging.warning(f"Arquivo {config_py_path} não encontrado.")
 
-        # Aplica fallbacks SE a configuração do arquivo falhar OU se o arquivo não existir
         if not config_loaded_from_file:
             logging.warning("Usando configurações padrão de DESENVOLVIMENTO (fallbacks).")
-            # Usar os valores do .env como prioridade nos fallbacks
-            app.config.setdefault('DEBUG', os.environ.get('FLASK_DEBUG', '1') == '1') # '1' para True
-            app.config.setdefault('ENV', 'development') # Já definido pelo FLASK_ENV, mas seguro colocar
-            app.config.setdefault('SECRET_KEY', os.environ.get('FLASK_SECRET_KEY', 'dev-secret-fallback-in-app')) # Usa do .env se disponível
-            # Usa DATABASE_URL do .env se disponível, senão um fallback final
-            # CORREÇÃO: Usar dev_sdisc.db como fallback se DATABASE_URL não estiver no .env
-            db_path_fallback = os.path.join(project_root_dir, 'instance', 'dev_sdisc.db')
-            os.makedirs(os.path.dirname(db_path_fallback), exist_ok=True)
-            app.config.setdefault('SQLALCHEMY_DATABASE_URI', os.environ.get('DATABASE_URL', f'sqlite:///{db_path_fallback}'))
-            # Define SERVER_NAME usando .env ou fallback
+            app.config.setdefault('DEBUG', os.environ.get('FLASK_DEBUG', '1') == '1')
+            app.config.setdefault('ENV', 'development')
+            app.config.setdefault('SECRET_KEY', os.environ.get('FLASK_SECRET_KEY', 'dev-secret-fallback-in-app'))
+            # --- Fallback DATABASE_URL ---
+            # Usa DATABASE_URL do .env se disponível, senão usa o fallback de config.py (dev.db) ou um último fallback
+            dev_db_fallback_path = os.path.join(app.instance_path, "dev.db") # Usa instance_path
+            # Verifica se DATABASE_URL está no ambiente E não está vazio
+            db_url_from_env = os.environ.get('DATABASE_URL')
+            if db_url_from_env:
+                app.config.setdefault('SQLALCHEMY_DATABASE_URI', db_url_from_env)
+                logging.info(f"Usando DATABASE_URL do ambiente: {db_url_from_env}")
+            else:
+                 # Se não estiver no env, usa o fallback definido em config.py (se existir na classe)
+                 # ou o fallback final (dev.db na instance)
+                 fallback_uri = getattr(DevelopmentConfig, 'SQLALCHEMY_DATABASE_URI', f'sqlite:///{dev_db_fallback_path}')
+                 app.config.setdefault('SQLALCHEMY_DATABASE_URI', fallback_uri)
+                 logging.info(f"Usando fallback para SQLALCHEMY_DATABASE_URI: {fallback_uri}")
+            # ------------------------------
             app.config.setdefault('SERVER_NAME', os.environ.get('FLASK_SERVER_NAME', '127.0.0.1:5000'))
 
-        # Garante que estes tenham um valor, mesmo que a config.py exista mas não os defina
         app.config.setdefault('DEBUG', True)
         app.config.setdefault('TESTING', False)
         app.config.setdefault('SQLALCHEMY_TRACK_MODIFICATIONS', False)
 
 
     # --- Configurações Pós-Carregamento (Garantir valores essenciais) ---
-    # Garante que SECRET_KEY tem um valor (mesmo que config/env falhe)
     if not app.config.get('SECRET_KEY'):
         app.config['SECRET_KEY'] = secrets.token_hex(16)
         logging.warning("Nenhuma SECRET_KEY definida via config ou env. Usando chave temporária gerada.")
 
-    # Garante que DATABASE_URL tem um valor
     if not app.config.get('SQLALCHEMY_DATABASE_URI'):
         fallback_db_name = 'final_fallback.db'
-        fallback_db_path_full = os.path.join(project_root_dir, 'instance', fallback_db_name)
-        os.makedirs(os.path.dirname(fallback_db_path_full), exist_ok=True)
+        fallback_db_path_full = os.path.join(app.instance_path, fallback_db_name) # Usa instance_path
         app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{fallback_db_path_full}'
         logging.warning(f"Nenhuma URI de DB definida via config ou env. Usando fallback final: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
-    # Garante que SERVER_NAME tem um valor para o bloco __main__
     if not app.config.get('SERVER_NAME'):
         app.config['SERVER_NAME'] = '127.0.0.1:5000'
         logging.warning(f"Nenhum SERVER_NAME definido via config ou env. Usando fallback final: {app.config['SERVER_NAME']}")
 
 
     # --- Inicializar Extensões ---
-    # (Mantenha comentado se não usar SQLAlchemy diretamente aqui)
-    # try:
-    #     from .db import db
-    #     db.init_app(app)
-    #     logging.info("Extensão SQLAlchemy inicializada.")
-    # except ImportError:
-    #     logging.warning("Arquivo backend/db.py não encontrado. SQLAlchemy não inicializado.")
-    # except Exception as e:
-    #     logging.error(f"Erro ao inicializar SQLAlchemy: {e}")
+    # >>> DESCOMENTADO E ATIVADO <<<
+    try:
+        db.init_app(app) # Inicializa SQLAlchemy com a app
+        logging.info("Extensão SQLAlchemy inicializada.")
+        # >>> ADIÇÃO: Inicializar Flask-Migrate <<<
+        # Importar o modelo aqui é necessário para o Migrate reconhecê-lo
+        # Faça isso *depois* de db.init_app(app)
+        with app.app_context():
+             # Importar modelos DENTRO do contexto da aplicação
+             # Ajuste o caminho se seus modelos estiverem em outro lugar
+             try:
+                 from .models import disc_result # Ou from .models.disc_result import DISCResult
+                 logging.info("Modelos importados dentro do contexto da aplicação para Migrate.")
+             except ImportError as e:
+                 logging.error(f"Erro ao importar modelos para Flask-Migrate: {e}. Verifique backend/models/__init__.py e os arquivos de modelo.")
+                 # Não necessariamente fatal, mas migrate pode não funcionar corretamente
+        migrate = Migrate(app, db) # Inicializa Flask-Migrate
+        logging.info("Extensão Flask-Migrate inicializada.")
+        # >>> FIM DA ADIÇÃO <<<
+    except NameError:
+        logging.error("Erro: A variável 'db' não foi importada corretamente antes de db.init_app().")
+    except Exception as e:
+        logging.error(f"Erro ao inicializar SQLAlchemy ou Flask-Migrate: {e}")
+    # >>> FIM DAS MODIFICAÇÕES <<<
 
     # --- Registrar Blueprints, Context Processors, Error Handlers ---
     app.context_processor(inject_current_year)
-
-    # >>> CORREÇÃO APLICADA AQUI PARA O ERRO 'hasattr' <<<
-    # Adiciona a função 'hasattr' ao ambiente global do Jinja para ser usada nos templates
     app.jinja_env.globals['hasattr'] = hasattr
     logging.info("Função 'hasattr' adicionada ao ambiente global do Jinja.")
-    # >>> FIM DA CORREÇÃO <<<
 
-    # Configurar CORS
-    # Simplificado: permite tudo em dev/test, revisar para produção
     if app.config.get('ENV') in ['development', 'testing'] or app.config.get('DEBUG'):
         CORS(app)
         logging.info(f"CORS configurado para {app.config.get('ENV', 'desconhecido')} (permitindo todas as origens).")
-    else: # Produção
-        # TODO: Configurar origens permitidas explicitamente em produção
+    else:
         CORS(app) # Temporário: permite tudo - REVISAR PARA PRODUÇÃO!
         logging.warning("CORS configurado para produção PERMITINDO TODAS AS ORIGENS. ISSO É INSEGURO!")
 
-    # Registrar o Blueprint principal (que foi importado no início do arquivo)
     try:
         app.register_blueprint(main_bp)
         logging.info("Blueprint 'main_bp' registrado.")
     except Exception as e:
-        # Usar sys.exit aqui também é válido se o blueprint for essencial
         logging.critical(f"Falha ao registrar o blueprint 'main_bp': {e}")
         sys.exit(f"Erro Crítico: Falha ao registrar blueprint principal: {e}")
 
@@ -213,13 +230,14 @@ def create_app(testing=False):
     def favicon():
         try:
             return send_from_directory(
-                os.path.join(app.root_path, 'static', 'images'),
+                os.path.join(app.static_folder, 'images'), # Usar app.static_folder
                 'favicon.ico',
                 mimetype='image/vnd.microsoft.icon'
             )
         except FileNotFoundError:
-            logging.warning("Arquivo favicon.ico não encontrado em static/images.")
-            return "Not Found", 404
+            logging.warning(f"Arquivo favicon.ico não encontrado em {os.path.join(app.static_folder, 'images')}.")
+            # Retorna 204 No Content em vez de 404 para evitar erros no console do browser
+            return '', 204
         except Exception as e:
             logging.error(f"Erro ao servir favicon.ico: {e}")
             return "Internal Server Error", 500
@@ -228,9 +246,7 @@ def create_app(testing=False):
     @app.errorhandler(404)
     def not_found_error(error):
         logging.info(f"Rota não encontrada (404): {request.path}")
-        # Tenta renderizar um template, senão retorna HTML simples
         try:
-            # Certifique-se que a pasta 'errors' existe em 'templates'
             return render_template('errors/404.html'), 404
         except Exception:
              logging.exception("Template errors/404.html não encontrado ou erro ao renderizar.")
@@ -238,11 +254,16 @@ def create_app(testing=False):
 
     @app.errorhandler(500)
     def internal_error(error):
-        # Loga a exceção original que causou o 500
-        logging.exception(f"Erro interno do servidor (500) na rota {request.path}.")
-        # Tenta renderizar um template customizado, senão retorna HTML simples
+        # >>> ADIÇÃO: Rollback da sessão do DB em caso de erro 500 <<<
         try:
-             # Certifique-se que a pasta 'errors' existe em 'templates'
+            db.session.rollback()
+            logging.info("Sessão do banco de dados revertida (rollback) devido a erro 500.")
+        except Exception as rollback_err:
+            logging.error(f"Erro ao tentar reverter a sessão do banco de dados: {rollback_err}")
+        # >>> FIM DA ADIÇÃO <<<
+
+        logging.exception(f"Erro interno do servidor (500) na rota {request.path}.")
+        try:
             return render_template('errors/500.html'), 500
         except Exception:
             logging.exception("Template errors/500.html não encontrado ou erro ao renderizar fallback.")
@@ -252,66 +273,57 @@ def create_app(testing=False):
     final_env = 'testing' if app.config.get('TESTING') else app.config.get('ENV', 'development')
     logging.info(f"Criação da aplicação Flask ('{app.name}') concluída para o ambiente '{final_env}'.")
     logging.info(f"Debug mode: {app.config.get('DEBUG')}")
-    logging.info(f"Database URI: {app.config.get('SQLALCHEMY_DATABASE_URI')}") # Log do DB URI
-    logging.info(f"Server Name: {app.config.get('SERVER_NAME')}") # Log do Server Name
+    logging.info(f"Database URI: {app.config.get('SQLALCHEMY_DATABASE_URI')}")
+    logging.info(f"Server Name: {app.config.get('SERVER_NAME')}")
+    logging.info(f"Instance Path: {app.instance_path}") # Log do instance_path
     return app
 
 # --- Ponto de Entrada Principal (para execução direta) ---
 if __name__ == '__main__':
-    # Cria a app usando a factory, SEM flag testing (usará config dev/prod)
     app_instance = create_app(testing=False)
-    is_debug = app_instance.config.get('DEBUG', False) # Pega o valor de DEBUG da config final
-    effective_host = '0.0.0.0' # Default para acesso externo
-    port = 5000 # Default
+    is_debug = app_instance.config.get('DEBUG', False)
+    effective_host = '0.0.0.0'
+    port = 5000
 
     try:
-        # Pega o valor da config, pode ser None ou vazio
         raw_server_name = app_instance.config.get('SERVER_NAME')
-
-        # Garante que temos uma string padrão se raw_server_name for None ou vazio
         server_name = raw_server_name if raw_server_name else '127.0.0.1:5000'
-        logging.info(f"Processando SERVER_NAME: {server_name!r}") # Log para ver o valor final
+        logging.info(f"Processando SERVER_NAME: {server_name!r}")
 
-        # Agora processa a string server_name (que garantidamente não é None nem vazia)
         if ':' in server_name:
-            host_from_config, port_str_from_config = server_name.rsplit(':', 1) # Divide no último ':'
-            # Valida o host (não pode ser vazio)
+            host_from_config, port_str_from_config = server_name.rsplit(':', 1)
             if host_from_config:
-                 # Usa 0.0.0.0 para acesso externo se o host configurado for localhost/127.0.0.1 ou vazio
                 effective_host = '0.0.0.0' if host_from_config in ['localhost', '127.0.0.1', ''] else host_from_config
             else:
                 logging.warning(f"Host vazio em SERVER_NAME ('{server_name}'). Usando host padrão {effective_host}.")
-
-            # Tenta converter a porta para inteiro
             try:
-                port = int(port_str_from_config) # type: ignore[arg-type] # Mantém ignore, pois Pylance pode reclamar
+                port = int(port_str_from_config)
             except ValueError:
                  logging.warning(f"Porta inválida em SERVER_NAME ('{port_str_from_config}'). Usando porta padrão {port}.")
-                 # Mantém o host já definido
         else:
-            # Se não tiver ':', assume que é só o host e usa porta padrão
             host_from_config = server_name
-            # Usa 0.0.0.0 para acesso externo se o host configurado for localhost/127.0.0.1 ou vazio
             effective_host = '0.0.0.0' if host_from_config in ['localhost', '127.0.0.1', ''] else host_from_config
-            # Porta padrão já é 5000
             logging.info(f"SERVER_NAME ('{server_name}') não especificou porta. Usando porta padrão {port}.")
 
-    except Exception as e: # Captura erros genéricos ao processar server_name
+    except Exception as e:
         logging.exception(f"Erro ao processar SERVER_NAME '{app_instance.config.get('SERVER_NAME')}': {e}. Usando padrões {effective_host}:{port}.")
-        # Mantém os defaults definidos no início do bloco try
 
     logging.info(f"Iniciando servidor Flask diretamente (Debug: {is_debug}) em http://{effective_host}:{port}/")
     try:
-        # Usa debug=is_debug para refletir a config carregada
-        app_instance.run(host=effective_host, port=port, debug=is_debug) # type: ignore[arg-type] # Mantém ignore
+        # Adiciona suporte a comandos Flask CLI (como flask db)
+        # Isso geralmente é feito automaticamente, mas garantir que a app_instance
+        # esteja disponível no contexto correto é importante.
+        # A execução direta com app_instance.run() já disponibiliza isso.
+        app_instance.run(host=effective_host, port=port, debug=is_debug)
     except OSError as e:
-         # Erro comum: porta já em uso
-         if "address already in use" in str(e).lower() or "somente uma utilização de cada endereço" in str(e).lower(): # Adicionado check em português
+         if "address already in use" in str(e).lower() or "somente uma utilização de cada endereço" in str(e).lower():
               logging.error(f"ERRO FATAL: A porta {port} já está em uso por outro processo.")
               logging.error("Verifique se outra instância do servidor está rodando ou se outro programa está usando esta porta.")
          else:
              logging.error(f"Erro de sistema ao iniciar o servidor Flask em {effective_host}:{port}. Erro: {e}")
+         sys.exit(1) # Sair com código de erro
     except Exception as e:
          logging.exception(f"Erro inesperado ao iniciar o servidor Flask: {e}")
+         sys.exit(1) # Sair com código de erro
 
 # --- Fim do Arquivo ---
