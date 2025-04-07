@@ -4,41 +4,40 @@
 
 {% block content %}
     <!-- Header centralizado -->
-    <div class="text-center pt-4 pb-4"> <!-- Padding vertical -->
+    <div class="text-center pt-3 pb-3">
         <h1>Sistema de Avaliação DISC</h1>
         <p class="lead">Descubra seu perfil comportamental</p>
     </div>
 
     <!-- Seção de Introdução e Instruções -->
-    <section id="intro" class="mb-5">
-        <!-- Usar row/col do Bootstrap para centralizar e controlar largura -->
+    <section id="intro" class="mb-4">
         <div class="row justify-content-center">
-             <div class="col-md-10 col-lg-8"> <!-- Define largura máxima em telas médias/grandes -->
-                <h2 class="text-center mb-4">Bem-vindo à Avaliação DISC</h2>
-                <p>A avaliação DISC é uma metodologia criada por William Moulton Marston, pesquisador da Universidade de Harvard. Esta ferramenta ajuda a identificar seu estilo comportamental predominante.</p>
+             <div class="col-md-10 col-lg-8">
+                <h2 class="text-center mb-3">Bem-vindo à Avaliação DISC</h2>
+                <p class="text-center px-md-3">A avaliação DISC ajuda a identificar seu estilo comportamental predominante, baseado na metodologia de William Moulton Marston.</p>
 
-                <!-- Card para Instruções (melhor visualmente) -->
-                <div class="card my-4 shadow-sm">
-                    <div class="card-header text-center bg-primary text-white"> <!-- Cabeçalho destacado -->
-                         <h3 class="mb-0">Instruções Gerais</h3>
+                <!-- Card para Instruções (Conteúdo ATUALIZADO) -->
+                <div class="card my-3 shadow-sm">
+                    <div class="card-header text-center bg-primary text-white">
+                         {# Título do Card Atualizado #}
+                         <h3 class="mb-0">Instruções para a Avaliação</h3>
                     </div>
                     <div class="card-body">
-                        <ul class="list-group list-group-flush"> <!-- Lista sem bordas internas -->
-                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>A avaliação consiste em 28 grupos de quatro adjetivos.</li>
-                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>Em cada grupo, escolha o adjetivo <strong>MAIS</strong> e o <strong>MENOS</strong> parecido com você.</li>
-                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>Você terá <strong>15 segundos</strong> para responder a cada grupo.</li>
-                            <li class="list-group-item"><i class="bi bi-check-lg text-primary me-2"></i>Não há respostas certas ou erradas.</li>
-                            <li class="list-group-item text-danger mt-2"><i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Importante:</strong> Seja honesto. O tempo ajuda a capturar sua resposta instintiva.</li>
-                        </ul>
+                        {# Lista UL substituída por parágrafos com as novas instruções #}
+                        <p><strong>Encontre um ambiente ideal:</strong> Antes de começar, procure um <strong>local tranquilo e confortável</strong>, onde você possa se concentrar totalmente no teste. Minimize distrações para garantir a precisão dos seus resultados.</p>
+                        <p><strong>Leia atentamente:</strong> Siga as instruções com <strong>atenção</strong> em cada etapa. Para cada questão, você selecionará a palavra que <strong>MAIS</strong> e a que <strong>MENOS</strong> se assemelha a você.</p> {# Adaptado para DISC #}
+                        <p><strong>Seja honesto(a):</strong> Sua <strong>honestidade</strong> é crucial para obter um resultado confiável e útil. Responda com base em sua experiência e percepção pessoal, sem se preocupar com julgamentos. Não há respostas certas ou erradas; o objetivo é entender melhor você mesmo(a).</p>
+                        <p><strong>Dedicação e tempo:</strong> Reserve <strong>tempo adequado</strong> (geralmente menos de 10 minutos) para completar o teste sem pressa. O temporizador de 15 segundos por questão ajuda a capturar sua resposta instintiva.</p> {# Adaptado e menciona o timer #}
+                        {# Removida a frase final "Espero que estas instruções..." #}
                     </div>
                 </div>
 
-                <!-- Botão de Ação - MAIS DESTACADO e CENTRALIZADO -->
-                <div class="text-center mt-4 pt-3"> <!-- Margem superior e padding -->
-                    <a href="{{ url_for('main.quiz') }}" id="start-btn" class="btn btn-success btn-lg px-5 py-3 shadow-lg"> <!-- Botão VERDE, bem grande, com sombra forte -->
-                        <i class="bi bi-play-circle-fill me-2"></i> Iniciar Avaliação Agora!
+                <!-- Botão de Ação -->
+                <div class="text-center mt-3 pt-2">
+                    <a href="{{ url_for('main.quiz') }}" id="start-btn" class="btn btn-success btn-lg px-4 py-2 shadow">
+                        Iniciar Avaliação Agora!
                     </a>
-                    <p class="text-muted mt-2"><small>Clique no botão acima para começar.</small></p> <!-- Texto auxiliar -->
+                    <p class="text-muted mt-2"><small>Clique no botão acima para começar.</small></p>
                 </div>
              </div>
         </div>
@@ -46,5 +45,6 @@
 {% endblock %}
 
 {% block extra_js %}
-<!-- Nenhum JS extra necessário por enquanto -->
+<!-- Adicionar ícones Bootstrap se não estiverem em base.html -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> -->
 {% endblock %}

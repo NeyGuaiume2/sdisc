@@ -1,313 +1,360 @@
 {% extends 'base.html' %}
 
-{% block title %}Seu Perfil DISC{% endblock %}
+{% block title %}Seu Perfil DISC - Resultado Detalhado{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4 text-center">Seu Perfil DISC</h1>
+<div class="container mt-4">
 
-    {# Bloco principal (sem alterações da versão anterior) #}
-    {% if result and result.primary_type != '?' and result.secondary_type != '?' %}
-        {% set scores_from_py = result.get_scores() %} {# Chama o método getter #}
-        {% set detailed_report_data = result.get_detailed_report() %} {# Chama o método getter #}
+    {# Verifica se temos resultado E interpretações E se o primário geral existe #}
+    {% if result and result.id and interpretations and interpretations.general and interpretations.general.primary and interpretations.general.primary.type %}
 
-        <div class="row mb-4">
-            <!-- Coluna do Gráfico -->
-            <div class="col-md-6 mb-4 mb-md-0">
-                <div class="card shadow-sm h-100">
-                    <div class="card-header">
-                        Gráfico do Perfil DISC
+        {# Define variáveis para facilitar acesso e checagem #}
+        {% set primary_gen = interpretations.general.primary %}
+        {% set secondary_gen = interpretations.general.get('secondary') %} {# Usa .get() para segurança #}
+        {% set primary_prof = interpretations.professional.get('primary') %} {# Usa .get() para segurança #}
+        {% set secondary_prof = interpretations.professional.get('secondary') %} {# Usa .get() para segurança #}
+        {# Pega os scores do método do modelo #}
+        {% set scores_display = result.get_scores() %}
+
+        <div id="report-content">
+            {# Título e Info do Usuário #}
+            <h1 class="mb-3 text-center">Seu Perfil DISC</h1>
+            {% if result.user_name or result.user_email %}
+            <p class="text-center text-muted mb-4">
+                Resultado para:
+                {% if result.user_name %}{{ result.user_name }}{% endif %}
+                {% if result.user_name and result.user_email %} ({{ result.user_email }}){% elif result.user_email %}{{ result.user_email }}{% endif %}
+                <br>
+                <span class="small">Gerado em: {{ result.timestamp.strftime('%d/%m/%Y %H:%M') if result.timestamp else 'N/A' }} (UTC)</span>
+            </p>
+            {% else %}
+             <p class="text-center text-muted mb-4 small">
+                Gerado em: {{ result.timestamp.strftime('%d/%m/%Y %H:%M') if result.timestamp else 'N/A' }} (UTC)
+             </p>
+            {% endif %}
+
+            {# --- Bloco Resumo e Gráfico --- #}
+            <div class="results-summary-grid mb-4">
+                <div class="chart-column">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center">Gráfico do Perfil (Normalizado %)</div>
+                        <div class="card-body">
+                            <div class="chart-container"><canvas id="discChart"></canvas></div>
+                            <div id="chartFallback" class="text-center mt-3" style="display: none;"></div>
+                        </div>
                     </div>
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                         {# Container do Gráfico - AJUSTE DE ALTURA OPCIONAL #}
-                        <div style="position: relative; width: 100%; max-width: 450px; margin: auto; height: 350px;"> {# Aumentei um pouco a altura para barras verticais ficarem melhores #}
-                            <canvas id="discChart"></canvas> {# Mantido ID 'discChart' #}
+                </div>
+                <div class="summary-column">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center">Resumo</div>
+                        <div class="card-body">
+                            {# Usa as variáveis definidas no início #}
+                            <p>
+                                <strong>Perfil Primário:</strong>
+                                {{ primary_gen.type | default('N/A') }} ({{ primary_gen.title | default('?') }})
+                                <span class="badge bg-secondary">{{ primary_gen.level | default('?') | capitalize }}</span>
+                            </p>
+                            {# Mostra secundário apenas se existir E tiver um tipo #}
+                            {% if secondary_gen and secondary_gen.type %}
+                            <p>
+                                <strong>Influência Secundária:</strong>
+                                {{ secondary_gen.type }} ({{ secondary_gen.title | default('?') }})
+                                 <span class="badge bg-light text-dark border">{{ secondary_gen.level | default('?') | capitalize }}</span>
+                            </p>
+                            {% else %}
+                            <p><strong>Influência Secundária:</strong> Nenhuma significativa</p>
+                            {% endif %}
+                            <hr>
+                            <p><strong>Pontuações DISC (Originais):</strong></p>
+                            {# Usa a variável scores_display #}
+                            {% if scores_display %}
+                            <ul>
+                                {# Usa .get() com fallback para segurança extra #}
+                                <li>D (Dominância): {{ scores_display.get('D', 'N/A') }}</li>
+                                <li>I (Influência): {{ scores_display.get('I', 'N/A') }}</li>
+                                <li>S (Estabilidade): {{ scores_display.get('S', 'N/A') }}</li>
+                                <li>C (Conformidade): {{ scores_display.get('C', 'N/A') }}</li>
+                            </ul>
+                            {% else %}
+                                 <p class="text-danger small">Pontuações indisponíveis.</p> {# Mensagem mais clara #}
+                            {% endif %}
                         </div>
-                        <div id="chartFallback" class="text-center mt-3" style="display: none;">
-                            {# Mensagem de fallback #}
-                        </div>
-                        <p class="text-muted small mt-2 text-center">Este gráfico representa a intensidade de cada fator DISC.</p>
                     </div>
                 </div>
             </div>
+            {# --- Fim Bloco Resumo e Gráfico --- #}
 
-            <!-- Coluna do Resumo (sem alterações da versão anterior) -->
-            <div class="col-md-6">
-                <div class="card shadow-sm h-100">
-                    <div class="card-header">
-                        Resumo do Perfil
-                    </div>
-                    <div class="card-body">
-                        {% set primary_title = profile_interpretations.get(result.primary_type, {}).get('title', result.primary_type) %}
-                        {% set secondary_title = profile_interpretations.get(result.secondary_type, {}).get('title', result.secondary_type) %}
-                        <p><strong>Perfil Primário:</strong> {{ result.primary_type }} ({{ primary_title }})</p>
-                        <p><strong>Perfil Secundário:</strong> {{ result.secondary_type }} ({{ secondary_title }})</p>
-                        {% if not profile_interpretations %}<p class="text-danger small">Interpretações dos títulos não carregadas.</p>{% endif %}
-                        <hr>
-                        <p><strong>Níveis de Intensidade (Scores):</strong></p>
-                        {% if scores_from_py %}
-                        <ul>
-                            <li><strong>D (Dominância):</strong> {{ scores_from_py.get('D', 'N/A') }}</li>
-                            <li><strong>I (Influência):</strong> {{ scores_from_py.get('I', 'N/A') }}</li>
-                            <li><strong>S (Estabilidade):</strong> {{ scores_from_py.get('S', 'N/A') }}</li>
-                            <li><strong>C (Conformidade):</strong> {{ scores_from_py.get('C', 'N/A') }}</li>
-                        </ul>
-                        {% elif scores_from_py is none %}<p class="text-danger small">Erro ao carregar scores do banco de dados.</p>
-                        {% else %}<p class="text-warning small">Scores não disponíveis ou inválidos.</p>{% endif %}
-                        <hr>
-                        <p class="small text-muted">Data da Avaliação (UTC):
-                           {% if result.timestamp and hasattr(result.timestamp, 'strftime') %}
-                             {{ result.timestamp.strftime('%d/%m/%Y %H:%M:%S') }}
-                           {% else %} N/A {% endif %}
-                         </p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Seção de Interpretação Detalhada (sem alterações da versão anterior) -->
-        {% if profile_interpretations and detailed_report_data %}
-            {# (Conteúdo das abas e detalhes aqui - igual à versão anterior) #}
+            {# --- Abas para Geral e Profissional --- #}
             <div class="card shadow-sm mb-4">
-                <div class="card-header">Interpretação Detalhada</div>
-                <div class="card-body">
-                    <ul class="nav nav-tabs mb-3" id="discTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                           <button class="nav-link active" id="primary-tab" data-bs-toggle="tab" data-bs-target="#primary-content" type="button" role="tab" aria-controls="primary-content" aria-selected="true">
-                               Perfil Primário: {{ primary_title }} ({{ result.primary_type }})
-                           </button>
-                       </li>
-                       {% if result.primary_type != result.secondary_type %}
-                       <li class="nav-item" role="presentation">
-                           <button class="nav-link" id="secondary-tab" data-bs-toggle="tab" data-bs-target="#secondary-content" type="button" role="tab" aria-controls="secondary-content" aria-selected="false">
-                               Influência Secundária: {{ secondary_title }} ({{ result.secondary_type }})
-                           </button>
-                       </li>
-                       {% endif %}
-                        <li class="nav-item" role="presentation">
-                           <button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-content" type="button" role="tab" aria-controls="general-content" aria-selected="false">
-                               Visão Geral
-                           </button>
-                       </li>
-                    </ul>
-                    <div class="tab-content" id="discTabsContent">
-                        {# Macro para lista #}
-                        {% macro render_list(items, default_message='Nenhuma informação disponível.') %}
-                        <ul>
-                            {% if items is iterable and items is not string and items %}
-                                {% for item in items %} <li>{{ item }}</li> {% endfor %}
-                            {% else %}
-                                <li>{{ default_message }}</li>
-                            {% endif %}
-                        </ul>
-                        {% endmacro %}
+                 <div class="card-header">
+                     <ul class="nav nav-tabs card-header-tabs" id="interpretationTabs" role="tablist">
+                         <li class="nav-item" role="presentation">
+                             <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-panel" type="button" role="tab" aria-controls="general-panel" aria-selected="true">Visão Geral</button>
+                         </li>
+                         <li class="nav-item" role="presentation">
+                             <button class="nav-link" id="professional-tab" data-bs-toggle="tab" data-bs-target="#professional-panel" type="button" role="tab" aria-controls="professional-panel" aria-selected="false">Análise Profissional</button>
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="card-body">
+                     <div class="tab-content" id="interpretationTabsContent">
 
-                        <!-- Conteúdo Primário -->
-                        {% set primary_details = detailed_report_data.get('primary_profile_details', {}) %}
-                        <div class="tab-pane fade show active" id="primary-content" role="tabpanel" aria-labelledby="primary-tab">
-                            <h4>Perfil {{ primary_details.get('title', result.primary_type) }} ({{ result.primary_type }})</h4>
-                            <p><strong>Descrição Geral:</strong> {{ primary_details.get('description', 'N/A') }}</p>
-                            <p><strong>Motivação Principal:</strong> {{ primary_details.get('motivation', 'N/A') }}</p>
-                            <h5>Características Comuns:</h5> {{ render_list(primary_details.get('characteristics')) }}
-                            <h5>Pontos Fortes:</h5> {{ render_list(primary_details.get('strengths')) }}
-                            <h5>Áreas de Desenvolvimento:</h5> {{ render_list(primary_details.get('weaknesses')) }}
-                            <h5>Como se Relacionar (Dicas):</h5> {{ render_list(primary_details.get('how_to_work_with')) }}
-                        </div>
-                        <!-- Conteúdo Secundário -->
-                        {% if result.primary_type != result.secondary_type %}
-                            {% set secondary_details = detailed_report_data.get('secondary_profile_details', {}) %}
-                            <div class="tab-pane fade" id="secondary-content" role="tabpanel" aria-labelledby="secondary-tab">
-                                <h4>Influência do Perfil {{ secondary_details.get('title', result.secondary_type) }} ({{ result.secondary_type }})</h4>
-                                <p>Seu perfil secundário adiciona nuances ao seu comportamento primário.</p>
-                                <p><strong>Descrição Geral:</strong> {{ secondary_details.get('description', 'N/A') }}</p>
-                                <p><strong>Motivação Principal:</strong> {{ secondary_details.get('motivation', 'N/A') }}</p>
-                                <h5>Características Comuns:</h5> {{ render_list(secondary_details.get('characteristics')) }}
-                                <h5>Pontos Fortes:</h5> {{ render_list(secondary_details.get('strengths')) }}
-                                <h5>Áreas de Desenvolvimento:</h5> {{ render_list(secondary_details.get('weaknesses')) }}
-                                <h5>Como se Relacionar (Dicas):</h5> {{ render_list(secondary_details.get('how_to_work_with')) }}
-                           </div>
-                        {% endif %}
-                        <!-- Conteúdo Geral -->
-                        <div class="tab-pane fade" id="general-content" role="tabpanel" aria-labelledby="general-tab">
-                            <h4>Visão Geral do seu Perfil</h4>
-                            {% if detailed_report_data.get('profile_summary') %}
-                                <p>{{ detailed_report_data.profile_summary | replace('\n', '<br>') | safe }}</p>
-                            {% else %}
-                                <p>Combine as informações das abas anteriores para entender como seus traços interagem.</p>
-                            {% endif %}
-                            {% if detailed_report_data.get('development_areas_list') %}
-                                <h5 class="mt-4">Sugestões Gerais para Desenvolvimento:</h5>
-                                {{ render_list(detailed_report_data.development_areas_list) }}
-                            {% endif %}
-                            <p class="mt-4"><strong>Lembre-se:</strong> O perfil DISC é uma ferramenta [...]</p>
-                       </div>
-                   </div>
-               </div>
-           </div>
-        {% elif not detailed_report_data and result %}
-            <div class="alert alert-warning" role="alert">O resumo do perfil foi carregado, mas os detalhes não puderam ser extraídos.</div>
-        {% elif not profile_interpretations %}
-            <div class="alert alert-warning" role="alert">Informações de interpretação não puderam ser carregadas.</div>
-        {% endif %}
+                         {# --- Painel Visão Geral --- #}
+                         <div class="tab-pane fade show active" id="general-panel" role="tabpanel" aria-labelledby="general-tab" tabindex="0">
+                             <h3 class="mb-3">Visão Geral do Perfil</h3>
 
-        <!-- Botões de Ação (sem alterações) -->
-        <div class="text-center mt-4 mb-5">
+                             {# Primário Geral (já checado no if principal) #}
+                             <div class="mb-4 p-3 border rounded bg-light">
+                                 <h4>Perfil Primário: {{ primary_gen.title | default('?') }} ({{ primary_gen.type }}) - Intensidade {{ primary_gen.level | default('?') | capitalize }}</h4>
+                                 <hr>
+                                 {# Usa .get() com if para checar se a chave existe E não é vazia #}
+                                 {% if primary_gen.get('Descrição') %}<h5>Descrição</h5><p>{{ primary_gen['Descrição'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                 {% if primary_gen.get('Motivação') %}<h5>Motivação</h5><p>{{ primary_gen['Motivação'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                 {% if primary_gen.get('Características') %}<h5>Características</h5><p>{{ primary_gen['Características'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                 {% if primary_gen.get('Pontos Fortes') %}<h5>Pontos Fortes</h5><p>{{ primary_gen['Pontos Fortes'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                 {% if primary_gen.get('Áreas de Desenvolvimento') %}<h5>Áreas de Desenvolvimento</h5><p>{{ primary_gen['Áreas de Desenvolvimento'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                 {% if primary_gen.get('Relacionamento/Dicas') %}<h5>Relacionamento/Dicas</h5><p>{{ primary_gen['Relacionamento/Dicas'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                 {% if primary_gen.get('Como Você É (Tendência Natural)') %}<div class="alert alert-info mt-3"><strong>Tendência Natural:</strong> {{ primary_gen['Como Você É (Tendência Natural)'] | replace('\n', '<br>') | safe }}</div>{% endif %}
+                                 {% if primary_gen.get('Como Pode Melhorar (Reflexão para Crescimento)') %}<div class="alert alert-warning mt-3"><strong>Reflexão para Crescimento:</strong> {{ primary_gen['Como Pode Melhorar (Reflexão para Crescimento)'] | replace('\n', '<br>') | safe }}</div>{% endif %}
+                              </div>
+
+                             {# Secundário Geral (Combinação) - Verifica se existe e tem tipo #}
+                             {% if secondary_gen and secondary_gen.type %}
+                                 <div class="mb-4 p-3 border rounded">
+                                     <h4>Influência Secundária: {{ secondary_gen.title | default('?') }} ({{ secondary_gen.type }}) - Intensidade {{ secondary_gen.level | default('?') | capitalize }}</h4>
+                                     <p><em>Esta influência secundária complementa suas características principais.</em></p>
+                                     <hr>
+                                     {% if secondary_gen.get('Descrição') %}<h5>Descrição (Influência)</h5><p>{{ secondary_gen['Descrição'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                     {% if secondary_gen.get('Motivação') %}<h5>Motivação (Influência)</h5><p>{{ secondary_gen['Motivação'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                     {% if secondary_gen.get('Características') %}<h5>Características (Influência)</h5><p>{{ secondary_gen['Características'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                     {% if secondary_gen.get('Pontos Fortes') %}<h5>Pontos Fortes (Influência)</h5><p>{{ secondary_gen['Pontos Fortes'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                     {% if secondary_gen.get('Áreas de Desenvolvimento') %}<h5>Áreas de Desenvolvimento (Influência)</h5><p>{{ secondary_gen['Áreas de Desenvolvimento'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                     {% if secondary_gen.get('Relacionamento/Dicas') %}<h5>Relacionamento/Dicas (Considerando Influência)</h5><p>{{ secondary_gen['Relacionamento/Dicas'] | replace('\n', '<br>') | safe }}</p>{% endif %}
+                                  </div>
+                             {% elif result.secondary_type and result.secondary_type != '?' %} {# Mostra aviso se deveria ter um secundário mas não veio #}
+                                 <p class="text-warning">Interpretação da influência secundária ({{ result.secondary_type }}) não encontrada.</p>
+                             {% endif %}
+                         </div>
+                         {# --- Fim Painel Visão Geral --- #}
+
+
+                         {# --- Painel Análise Profissional --- #}
+                         <div class="tab-pane fade" id="professional-panel" role="tabpanel" aria-labelledby="professional-tab" tabindex="0">
+                             <h3 class="mb-3">Análise Profissional</h3>
+
+                             {# Primário Profissional - Verifica se existe e tem tipo #}
+                             {% if primary_prof and primary_prof.type %}
+                                 <div class="mb-4 p-3 border rounded bg-light">
+                                     {# Usa os dados do primário geral para o título aqui, para consistência #}
+                                     <h4>Tendências Profissionais - {{ primary_gen.title | default('?') }} ({{ primary_gen.type }}) - Intensidade {{ primary_gen.level | default('?') | capitalize }}</h4>
+                                     <hr>
+                                     {# Itera sobre as chaves, excluindo as de controle #}
+                                     {% for key, value in primary_prof.items() if key not in ['type', 'level', 'title', 'score'] %}
+                                        {% if value %} {# Só mostra se tiver valor #}
+                                            <h5>{{ key }}</h5>
+                                            {# Adiciona replace para quebras de linha do JSON serem renderizadas como <br> #}
+                                            <p>{{ value | replace('\n', '<br>') | safe }}</p>
+                                        {% endif %}
+                                     {% endfor %}
+                                 </div>
+                             {% else %}
+                                 <p class="text-danger">Análise profissional primária não disponível.</p>
+                             {% endif %}
+
+                             {# Secundário Profissional (Combinação) - Verifica se existe e tem tipo #}
+                             {% if secondary_prof and secondary_prof.type %}
+                                 <div class="mb-4 p-3 border rounded">
+                                      {# Usa os dados do secundário geral para o título aqui #}
+                                      <h4>Influência Profissional Secundária - {{ secondary_gen.title | default('?') }} ({{ secondary_gen.type }}) - Intensidade {{ secondary_gen.level | default('?') | capitalize }}</h4>
+                                      <p><em>Como a influência secundária molda suas tendências profissionais.</em></p>
+                                      <hr>
+                                      {# Itera sobre as chaves, excluindo as de controle #}
+                                      {% for key, value in secondary_prof.items() if key not in ['type', 'level', 'title', 'score'] %}
+                                        {% if value %} {# Só mostra se tiver valor #}
+                                             <h5>{{ key }} (Influência)</h5>
+                                             {# Adiciona replace para quebras de linha do JSON serem renderizadas como <br> #}
+                                             <p>{{ value | replace('\n', '<br>') | safe }}</p>
+                                        {% endif %}
+                                      {% endfor %}
+                                 </div>
+                             {% elif result.secondary_type and result.secondary_type != '?' %} {# Aviso se deveria ter mas não veio #}
+                                <p class="text-warning">Análise da influência profissional secundária ({{ result.secondary_type }}) não encontrada.</p>
+                             {% endif %}
+                         </div>
+                         {# --- Fim Painel Análise Profissional --- #}
+
+                     </div> {# Fim tab-content #}
+                 </div> {# Fim card-body #}
+            </div> {# Fim card #}
+            {# --- Fim Abas --- #}
+
+        </div> {# Fim #report-content #}
+
+        {# --- NOVA SEÇÃO: Links Rápidos para Abas --- #}
+        <div class="text-center mb-4 mt-n3"> {# Margem negativa para subir um pouco #}
+            <small>
+                Navegar para:
+                <a href="#" data-bs-toggle="tab" data-bs-target="#general-panel" class="text-decoration-none">Visão Geral</a> |
+                <a href="#" data-bs-toggle="tab" data-bs-target="#professional-panel" class="text-decoration-none">Análise Profissional</a>
+            </small>
+        </div>
+        {# --- FIM NOVA SEÇÃO --- #}
+
+
+        {# --- Botões de Ação --- #}
+        <div class="text-center mt-4 mb-5 actions">
             <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Voltar ao Início</a>
             <a href="{{ url_for('main.quiz') }}" class="btn btn-primary" id="new-assessment">Refazer Teste</a>
+            {# Alterado o nome do botão PDF para refletir que será mais completo #}
+            <a href="{{ url_for('main.download_pdf', result_id=result.id) }}" class="btn btn-info" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                </svg>
+                Baixar Relatório PDF
+            </a>
         </div>
 
     {% else %}
-        {# Mensagem se não houver resultado válido (sem alterações) #}
+        {# Mensagem de erro (melhorada) #}
         <div class="alert alert-warning text-center" role="alert">
-            {% if result and (result.primary_type == '?' or result.secondary_type == '?') %}
-                 Ocorreu um erro ao calcular ou salvar os resultados anteriores (ID: {{ result.id }}). Por favor, <a href="{{ url_for('main.quiz') }}" class="alert-link">refaça o teste</a>.
-            {% elif not result %}
-                 Nenhum resultado de avaliação encontrado na sessão. Por favor, <a href="{{ url_for('main.quiz') }}" class="alert-link">inicie o teste</a>.
-            {% else %}
-                 Não foi possível exibir os resultados. <a href="{{ url_for('main.quiz') }}" class="alert-link">Tente refazer o teste</a>.
-            {% endif %}
+             {% if result and not result.id %}
+                 Ocorreu um erro ao carregar o resultado (ID inválido).
+             {% elif interpretations is none or not interpretations.general or not interpretations.general.primary or not interpretations.general.primary.type %}
+                 Ocorreu um erro ao carregar as interpretações para o seu perfil (dados ausentes ou inválidos).
+             {% else %}
+                 Nenhum resultado de avaliação válido encontrado ou a sessão expirou.
+             {% endif %}
+             Por favor, <a href="{{ url_for('main.quiz') }}" class="alert-link">inicie um novo teste</a>.
+             {% if result and (not result.id or result.primary_type == '?') %}
+                  <br><small>(O resultado anterior pode ter sido salvo com erro/incompleto - ID: {{ result.id if result.id else 'Inválido' }})</small>
+             {% endif %}
         </div>
-    {% endif %} {# Fim do if result and result.primary_type != '?' #}
+    {% endif %} {# Fim do if principal #}
 
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<!-- Incluir Chart.js -->
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+    // --- INÍCIO DO BLOCO JAVASCRIPT ---
+    // (Mantido igual à última versão fornecida, que deve estar correta)
     document.addEventListener('DOMContentLoaded', function() {
-        const canvasElement = document.getElementById('discChart'); // Usa o ID correto do canvas
+        const canvasElement = document.getElementById('discChart');
         const fallbackElement = document.getElementById('chartFallback');
-        let chartInstance = null;
-
-        // --- Lógica do Gráfico de Barras Verticais ---
-        {% set scores_from_py = result.get_scores() if result else None %} // Pega os scores do objeto result, se ele existir
-
-        const scoresData = {{ scores_from_py | tojson if scores_from_py is not none else 'null' }}; // Passa para JS (ou null se não houver scores)
-
-        // Log para depuração no console do navegador
-        console.log('Dados recebidos do backend para o gráfico:', scoresData);
+        const scoresData = {{ scores_for_chart | tojson | safe if scores_for_chart is not none else 'null' }};
 
         let scoresAreValid = false;
-        let dScore, iScore, sScore, cScore;
+        let dScore = 0, iScore = 0, sScore = 0, cScore = 0;
+        let dScoreNormalized = 0, iScoreNormalized = 0, sScoreNormalized = 0, cScoreNormalized = 0;
 
-        // Validação robusta dos dados no JS
+        function normalizeScoreTo100(score, minPossible = -28, maxPossible = 28) {
+            const range = maxPossible - minPossible;
+            if (range === 0) return 50;
+            const numericScore = (typeof score === 'number' && !isNaN(score)) ? score : 0;
+            let normalizedScore = ((numericScore - minPossible) / range) * 100;
+            return Math.max(0, Math.min(100, normalizedScore));
+        }
+
         if (scoresData && typeof scoresData === 'object' &&
-            scoresData.hasOwnProperty('D') && typeof scoresData.D === 'number' &&
-            scoresData.hasOwnProperty('I') && typeof scoresData.I === 'number' &&
-            scoresData.hasOwnProperty('S') && typeof scoresData.S === 'number' &&
-            scoresData.hasOwnProperty('C') && typeof scoresData.C === 'number')
+            scoresData.hasOwnProperty('D') && typeof scoresData.D === 'number' && !isNaN(scoresData.D) &&
+            scoresData.hasOwnProperty('I') && typeof scoresData.I === 'number' && !isNaN(scoresData.I) &&
+            scoresData.hasOwnProperty('S') && typeof scoresData.S === 'number' && !isNaN(scoresData.S) &&
+            scoresData.hasOwnProperty('C') && typeof scoresData.C === 'number' && !isNaN(scoresData.C))
         {
             scoresAreValid = true;
             dScore = scoresData.D;
             iScore = scoresData.I;
             sScore = scoresData.S;
             cScore = scoresData.C;
-            console.log("Validação JS passou. Scores numéricos:", { d: dScore, i: iScore, s: sScore, c: cScore });
+            dScoreNormalized = normalizeScoreTo100(dScore);
+            iScoreNormalized = normalizeScoreTo100(iScore);
+            sScoreNormalized = normalizeScoreTo100(sScore);
+            cScoreNormalized = normalizeScoreTo100(cScore);
         } else {
-            console.warn("Validação JS FALHOU. Dados recebidos (scoresData) são inválidos ou ausentes:", scoresData);
+            console.warn("Scores inválidos ou ausentes para o gráfico JS:", scoresData);
         }
 
         if (scoresAreValid && canvasElement) {
             const ctx = canvasElement.getContext('2d');
-
-            // Cores (iguais ao exemplo e versões anteriores)
-            const discBackgroundColors = { D: 'rgba(239, 68, 68, 0.7)', I: 'rgba(250, 204, 21, 0.7)', S: 'rgba(34, 197, 94, 0.7)', C: 'rgba(59, 130, 246, 0.7)' };
-            const discBorderColors = { D: 'rgb(239, 68, 68)', I: 'rgb(250, 204, 21)', S: 'rgb(34, 197, 94)', C: 'rgb(59, 130, 246)' };
-
-            // Dados para o gráfico
-            const actualScores = [dScore, iScore, sScore, cScore];
-
-            // Cálculo dinâmico dos limites do eixo Y para acomodar negativos
-            let minY = Math.min(...actualScores);
-            let maxY = Math.max(...actualScores);
-            const buffer = Math.max(2, Math.abs(maxY - minY) * 0.1); // Margem de 10% ou >= 2
-            const suggestedMinY = Math.floor(Math.min(0, minY) - buffer); // Garante que o 0 e negativos fiquem visíveis
-            const suggestedMaxY = Math.ceil(Math.max(0, maxY) + buffer); // Garante que positivos fiquem visíveis
+            const discBG = { D: 'rgba(239, 68, 68, 0.7)', I: 'rgba(250, 204, 21, 0.7)', S: 'rgba(34, 197, 94, 0.7)', C: 'rgba(59, 130, 246, 0.7)' };
+            const discB = { D: 'rgb(239, 68, 68)', I: 'rgb(250, 204, 21)', S: 'rgb(34, 197, 94)', C: 'rgb(59, 130, 246)' };
+            const normScores = [dScoreNormalized, iScoreNormalized, sScoreNormalized, cScoreNormalized];
+            const origScores = [dScore, iScore, sScore, cScore];
 
             try {
-                 chartInstance = new Chart(ctx, {
-                    type: 'bar', // TIPO BARRA
+                new Chart(ctx, {
+                    type: 'bar',
                     data: {
                         labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
                         datasets: [{
-                            label: 'Intensidade', // Legenda do dataset (aparece no tooltip)
-                            data: actualScores,
-                            backgroundColor: [discBackgroundColors.D, discBackgroundColors.I, discBackgroundColors.S, discBackgroundColors.C],
-                            borderColor: [discBorderColors.D, discBorderColors.I, discBorderColors.S, discBorderColors.C],
-                            borderWidth: 1
+                            label: 'Intensidade (%)',
+                            data: normScores,
+                            backgroundColor: [discBG.D, discBG.I, discBG.S, discBG.C],
+                            borderColor: [discB.D, discB.I, discB.S, discB.C],
+                            borderWidth: 1,
+                            originalScores: origScores
                         }]
                     },
                     options: {
-                        // indexAxis: 'x', // Eixo X para categorias (PADRÃO para 'bar', não precisa especificar) -> Barras Verticais
                         scales: {
-                            // Eixo Y (Valores) - Configuração para barras verticais
                             y: {
-                                beginAtZero: false, // IMPORTANTE para scores negativos
-                                suggestedMin: suggestedMinY, // Usa limite calculado
-                                suggestedMax: suggestedMaxY, // Usa limite calculado
-                                grid: {
-                                    display: true, // Mostrar linhas de grade horizontais
-                                    color: 'rgba(0, 0, 0, 0.08)'
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Score' // Título do Eixo Y
-                                }
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: 'rgba(0, 0, 0, 0.08)' },
+                                title: { display: true, text: 'Intensidade Normalizada (%)' },
+                                ticks: { callback: function(value) { return value + '%'; } }
                             },
-                            // Eixo X (Categorias) - Configuração para barras verticais
-                            x: {
-                                grid: {
-                                    display: false // Ocultar linhas de grade verticais
+                            x: { grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    title: function(tooltipItems){ return tooltipItems[0].label || ''; },
+                                    label: function(context){
+                                        let normValue = context.parsed.y;
+                                        let origValue = context.dataset.originalScores[context.dataIndex];
+                                        return [
+                                            `Intensidade Norm.: ${normValue.toFixed(1)}%`,
+                                            `Valor Original: ${origValue.toFixed(1)}`
+                                        ];
+                                    }
                                 }
                             }
                         },
-                        plugins: {
-                            legend: {
-                                display: false // Ocultar legenda geral (cores bastam)
-                            },
-                            tooltip: {
-                                enabled: true, // Habilitar tooltips
-                                callbacks: { // Opcional: Formatar tooltip
-                                     label: function(context) {
-                                         let label = context.dataset.label || '';
-                                         if (label) { label += ': '; }
-                                         if (context.parsed.y !== null) { label += context.parsed.y; }
-                                         return label;
-                                     }
-                                 }
-                             }
-                        },
                         responsive: true,
-                        maintainAspectRatio: false // Permite controlar altura via CSS no container
+                        maintainAspectRatio: false
                     }
                 });
-                console.log("Gráfico de barras criado com sucesso.");
-                if (fallbackElement) fallbackElement.style.display = 'none';
-
-            } catch (error) { // Tratamento de erro (sem alterações)
-                console.error("Erro ao criar o gráfico Chart.js:", error);
-                if(fallbackElement) { fallbackElement.innerHTML = '<p class="text-danger text-center fw-bold">Erro ao renderizar o gráfico.</p>'; fallbackElement.style.display = 'block'; }
-                if(canvasElement) canvasElement.style.display = 'none';
+                console.log("Gráfico Chart.js criado na página.");
+                if (fallbackElement) { fallbackElement.style.display = 'none'; }
+            } catch (e) {
+                console.error("Erro ao criar Chart.js:", e);
+                 if (fallbackElement) {
+                     fallbackElement.innerHTML = '<p class="text-danger fw-bold">Erro ao exibir o gráfico.</p>';
+                     fallbackElement.style.display = 'block';
+                 }
+                 if (canvasElement) { canvasElement.style.display = 'none'; }
             }
-
-        } else { // Fallback (sem alterações, já usa a mensagem correta)
-             let fallbackMessage = '';
+        } else {
+            let fbMsg = '';
              if (!canvasElement) {
-                 console.warn("Elemento canvas 'discChart' não encontrado no DOM.");
-                 fallbackMessage = '<p class="text-warning text-center">Elemento do gráfico não encontrado na página.</p>';
-             } else if (!scoresAreValid) {
-                 console.warn("Gráfico não pode ser criado: scoresAreValid é false.");
-                  fallbackMessage = '<p class="text-muted text-center">Gráfico indisponível. Os scores não puderam ser carregados ou são inválidos.</p>';
-                 if(canvasElement) canvasElement.style.display = 'none';
+                 fbMsg = '<p class="text-warning">Elemento do gráfico não encontrado na página.</p>';
+             } else {
+                 fbMsg = '<p class="text-muted">Gráfico indisponível (scores inválidos ou ausentes).</p>';
+                 if (canvasElement) { canvasElement.style.display = 'none'; }
              }
-             if(fallbackElement && fallbackMessage) {
-                 fallbackElement.innerHTML = fallbackMessage;
+             if (fallbackElement) {
+                 fallbackElement.innerHTML = fbMsg;
                  fallbackElement.style.display = 'block';
              }
         }
-        // --- Fim da Lógica do Gráfico ---
-    });
+    }); // Fim do DOMContentLoaded
+    // --- FIM DO BLOCO JAVASCRIPT ---
 </script>
 {% endblock %}

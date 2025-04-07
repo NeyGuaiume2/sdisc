@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 #     'D': 'C'
 # }
 
-# Descrições dos Perfis (sem alterações da versão anterior)
+# Descrições dos Perfis (mantidas conforme o original)
 disc_descriptions = {
     'D': {
         'title': 'Dominância',
@@ -81,37 +81,38 @@ disc_descriptions = {
     }
 }
 
-# Lista com as 28 Questões DISC ATUALIZADA
+# Lista com as 28 Questões DISC ATUALIZADA com base em palavras.md
 disc_questions = [
-    {"id": 1, "D": "Determinado(a)", "I": "Persuasivo(a)", "S": "Paciente", "C": "Preciso(a)"},
-    {"id": 2, "D": "Direto(a)", "I": "Entusiasmado(a)", "S": "Estável", "C": "Analítico(a)"},
-    {"id": 3, "D": "Competitivo(a)", "I": "Otimista", "S": "Calmo(a)", "C": "Exato(a)"},
-    {"id": 4, "D": "Decisivo(a)", "I": "Sociável", "S": "Solidário(a)", "C": "Sistemático(a)"},
-    {"id": 5, "D": "Assertivo(a)", "I": "Extrovertido(a)", "S": "Tolerante", "C": "Cuidadoso(a)"},
-    {"id": 6, "D": "Conquistador(a)", "I": "Charmoso(a)", "S": "Compreensivo(a)", "C": "Detalhista"},
-    {"id": 7, "D": "Líder", "I": "Comunicativo(a)", "S": "Colaborativo(a)", "C": "Organizado(a)"},
-    {"id": 8, "D": "Independente", "I": "Inspirador(a)", "S": "Gentil", "C": "Criterioso(a)"},
-    {"id": 9, "D": "Ousado(a)", "I": "Popular", "S": "Constante", "C": "Objetivo(a)"},
-    {"id": 10, "D": "Enérgico(a)", "I": "Confiante", "S": "Bondoso(a)", "C": "Consciente"},
-    {"id": 11, "D": "Pioneiro(a)", "I": "Amigável", "S": "Leal", "C": "Investigador(a)"},
-    {"id": 12, "D": "Arrojado(a)", "I": "Convincente", "S": "Cooperativo(a)", "C": "Planejador(a)"},
-    {"id": 13, "D": "Desafiador(a)", "I": "Animado(a)", "S": "Relaxado(a)", "C": "Metódico(a)"},
-    {"id": 14, "D": "Impulsionador(a)", "I": "Alegre", "S": "Agradável", "C": "Racional"},
-    {"id": 15, "D": "Vigoroso(a)", "I": "Magnético(a)", "S": "Equilibrado(a)", "C": "Perfeccionista"},
-    {"id": 16, "D": "Aventureiro(a)", "I": "Demonstrativo(a)", "S": "Pacífico(a)", "C": "Caprichoso(a)"},
-    {"id": 17, "D": "Realizador(a)", "I": "Expressivo(a)", "S": "Sensível", "C": "Minucioso(a)"},
-    {"id": 18, "D": "Autônomo(a)", "I": "Influente", "S": "Bom(boa) ouvinte", "C": "Disciplinado(a)"},
-    {"id": 19, "D": "Determinado(a)", "I": "Falante", "S": "Sincero(a)", "C": "Precavido(a)"},
-    {"id": 20, "D": "Empreendedor(a)", "I": "Carismático(a)", "S": "Apoiador(a)", "C": "Formal"},
-    {"id": 21, "D": "Inovador(a)", "I": "Envolvente", "S": "Atencioso(a)", "C": "Lógico(a)"},
-    {"id": 22, "D": "Rápido(a)", "I": "Espontâneo(a)", "S": "Dedicado(a)", "C": "Estruturado(a)"},
-    {"id": 23, "D": "Autoritário(a)", "I": "Bem-humorado(a)", "S": "Harmonioso(a)", "C": "Sistemático(a)"},
-    {"id": 24, "D": "Exigente", "I": "Brincalhão(ona)", "S": "Moderado(a)", "C": "Judicioso(a)"},
-    {"id": 25, "D": "Ambicioso(a)", "I": "Aberto(a)", "S": "Confiável", "C": "Exigente"}, # Confirmado: Exigente é C aqui
-    {"id": 26, "D": "Focado", "I": "Interativo(a)", "S": "Atencioso(a)", "C": "Organizado(a)"},
-    {"id": 27, "D": "Proativo(a)", "I": "Agradável", "S": "Consistente", "C": "Normativo(a)"},
-    {"id": 28, "D": "Decisivo(a)", "I": "Estimulante", "S": "Previsível", "C": "Correto(a)"}
+    {"id": 1, "D": "Determinado", "I": "Persuasivo", "S": "Paciente", "C": "Preciso"},
+    {"id": 2, "D": "Direto", "I": "Entusiasmado", "S": "Estável", "C": "Analítico"},
+    {"id": 3, "D": "Competitivo", "I": "Otimista", "S": "Calmo", "C": "Exato"},
+    {"id": 4, "D": "Decisivo", "I": "Sociável", "S": "Solidário", "C": "Sistemático"},
+    {"id": 5, "D": "Assertivo", "I": "Extrovertido", "S": "Tolerante", "C": "Cuidadoso"},
+    {"id": 6, "D": "Conquistador", "I": "Charmoso", "S": "Compreensivo", "C": "Detalhista"},
+    {"id": 7, "D": "Líder", "I": "Comunicativo", "S": "Colaborativo", "C": "Organizado"},
+    {"id": 8, "D": "Independente", "I": "Inspirador", "S": "Gentil", "C": "Criterioso"},
+    {"id": 9, "D": "Ousado", "I": "Popular", "S": "Constante", "C": "Objetivo"},
+    {"id": 10, "D": "Enérgico", "I": "Confiante", "S": "Bondoso", "C": "Consciente"},
+    {"id": 11, "D": "Pioneiro", "I": "Amigável", "S": "Leal", "C": "Investigador"},
+    {"id": 12, "D": "Arrojado", "I": "Convincente", "S": "Cooperativo", "C": "Planejador"},
+    {"id": 13, "D": "Desafiador", "I": "Animado", "S": "Relaxado", "C": "Metódico"},
+    {"id": 14, "D": "Impulsionador", "I": "Alegre", "S": "Agradável", "C": "Racional"},
+    {"id": 15, "D": "Vigoroso", "I": "Magnético", "S": "Equilibrado", "C": "Perfeccionista"},
+    {"id": 16, "D": "Aventureiro", "I": "Afetivo", "S": "Pacífico", "C": "Caprichoso"}, # Atenção: "Afetivo" em vez de "Demonstrativo" do código antigo
+    {"id": 17, "D": "Realizador", "I": "Expressivo", "S": "Sensível", "C": "Minucioso"},
+    {"id": 18, "D": "Autônomo", "I": "Influente", "S": "Bom ouvinte", "C": "Disciplinado"}, # Atenção: "Bom ouvinte" em vez de "Bom(boa) ouvinte"
+    {"id": 19, "D": "Determinado", "I": "Falante", "S": "Sincero", "C": "Precavido"},
+    {"id": 20, "D": "Empreendedor", "I": "Carismático", "S": "Apoiador", "C": "Formal"},
+    {"id": 21, "D": "Inovador", "I": "Envolvente", "S": "Atencioso", "C": "Lógico"},
+    {"id": 22, "D": "Rápido", "I": "Espontâneo", "S": "Dedicado", "C": "Estruturado"},
+    {"id": 23, "D": "Autoritário", "I": "Bem-humorado", "S": "Harmonioso", "C": "Sistemático"},
+    {"id": 24, "D": "Exigente", "I": "Brincalhão", "S": "Moderado", "C": "Judicioso"}, # Atenção: "Brincalhão" em vez de "Brincalhão(ona)"
+    {"id": 25, "D": "Ambicioso", "I": "Aberto", "S": "Confiável", "C": "Exigente"},
+    {"id": 26, "D": "Focado", "I": "Interativo", "S": "Atencioso", "C": "Organizado"},
+    {"id": 27, "D": "Proativo", "I": "Agradável", "S": "Consistente", "C": "Convencional"}, # Atenção: "Convencional" em vez de "Normativo(a)"
+    {"id": 28, "D": "Decisivo", "I": "Estimulante", "S": "Previsível", "C": "Correto"}
 ]
+
 
 # --- Funções auxiliares (sem alterações da versão anterior) ---
 def get_question_by_id(question_id):
@@ -149,11 +150,13 @@ def get_profile_for_word(question_id, selected_word):
     for profile, word_in_data in question.items():
         if profile in ['D', 'I', 'S', 'C'] and isinstance(word_in_data, str):
             # Normaliza a palavra dos dados da questão
-            normalized_word_in_data = word_in_data.strip().lower()
+            # Remove parênteses e conteúdo para normalização (ex: "Determinado(a)" -> "determinado")
+            word_to_normalize = word_in_data.split('(')[0].strip()
+            normalized_word_in_data = word_to_normalize.lower()
             if normalized_word_in_data == normalized_selected_word:
                 found_profiles.append(profile)
 
-    # Tratamento de Múltiplos Matches (não deve ocorrer com os dados corrigidos)
+    # Tratamento de Múltiplos Matches (não deve ocorrer com os dados validados)
     if len(found_profiles) == 1:
         return found_profiles[0]
     elif len(found_profiles) > 1:
@@ -161,7 +164,7 @@ def get_profile_for_word(question_id, selected_word):
         logger.error(f"ERRO NOS DADOS (inesperado)! Q{question_id}: Palavra '{selected_word}' encontrada para múltiplos perfis: {found_profiles}. Retornando o primeiro ({found_profiles[0]}). VERIFICAR disc_questions!")
         return found_profiles[0]
     else:
-        # Log movido para score_calculator para evitar duplicação se a palavra não for encontrada
+        # Log é feito no score_calculator se a palavra não for encontrada lá
         # logger.warning(f"Q{question_id}: NENHUM perfil encontrado para a palavra '{selected_word}' (normalizada: '{normalized_selected_word}').")
         return None
 
@@ -174,12 +177,12 @@ def validate_disc_data():
     question_count = len(disc_questions)
     if question_count != 28:
          logger.warning(f"Validação: Número de questões encontrado é {question_count}, esperado era 28.")
-         # Pode definir valid = False aqui se o número exato for crítico
+         # valid = False # Decide se isso invalida os dados
 
     for i, question in enumerate(disc_questions):
         q_id = question.get('id')
-        if not isinstance(q_id, int):
-            logger.error(f"Erro nos dados: Questão {i+1} (índice {i}) não tem um 'id' inteiro: {question}")
+        if not isinstance(q_id, int) or q_id <= 0: # Garante que ID é inteiro positivo
+            logger.error(f"Erro nos dados: Questão {i+1} (índice {i}) não tem um 'id' inteiro positivo: {question}")
             valid = False
             continue
 
@@ -190,12 +193,17 @@ def validate_disc_data():
 
         words_in_question = {} # {palavra_normalizada: [perfis]}
         profiles_in_question = set()
+        expected_profiles = {'D', 'I', 'S', 'C'}
+
         for profile, word in question.items():
             if profile == 'id': continue # Ignora o ID
 
-            if profile not in ['D', 'I', 'S', 'C']:
+            if profile not in expected_profiles:
                 logger.error(f"Erro nos dados: Q{q_id}, perfil inválido encontrado: '{profile}'")
                 valid = False
+            elif profile in profiles_in_question:
+                 logger.error(f"Erro nos dados: Q{q_id}, perfil duplicado encontrado: '{profile}'")
+                 valid = False
             profiles_in_question.add(profile)
 
             if not isinstance(word, str) or not word.strip():
@@ -203,28 +211,43 @@ def validate_disc_data():
                  valid = False
                  continue
 
-            normalized_word = word.strip().lower()
+            # Normaliza removendo parênteses para validação de duplicação
+            normalized_word = word.split('(')[0].strip().lower()
+            if not normalized_word: # Checa se sobrou algo após normalização
+                 logger.error(f"Erro nos dados: Q{q_id}, Perfil {profile}, palavra resultou em string vazia após normalização: '{word}'")
+                 valid = False
+                 continue
+
             if normalized_word in words_in_question:
-                 # Palavra duplicada DENTRO da mesma questão
-                 logger.error(f"Erro nos dados: Q{q_id}, palavra duplicada encontrada: '{word}' (normalizada: '{normalized_word}') aparece para perfis {words_in_question[normalized_word]} e {profile}")
+                 # Palavra duplicada DENTRO da mesma questão (após normalização)
+                 original_profiles = words_in_question[normalized_word]
+                 logger.error(f"Erro nos dados: Q{q_id}, palavra normalizada duplicada encontrada: '{normalized_word}' (de '{word}') aparece para perfis {original_profiles} e {profile}")
                  words_in_question[normalized_word].append(profile)
                  valid = False
             else:
                 words_in_question[normalized_word] = [profile]
 
-        # Verifica se todos os 4 perfis estão presentes
-        if len(profiles_in_question) != 4:
-             logger.error(f"Erro nos dados: Q{q_id} não contém exatamente 4 perfis (D, I, S, C). Encontrados: {profiles_in_question}")
+        # Verifica se todos os 4 perfis esperados estão presentes
+        if profiles_in_question != expected_profiles:
+             missing_profiles = expected_profiles - profiles_in_question
+             extra_profiles = profiles_in_question - expected_profiles
+             msg = f"Erro nos dados: Q{q_id} não contém exatamente os perfis D, I, S, C."
+             if missing_profiles: msg += f" Faltando: {missing_profiles}."
+             if extra_profiles: msg += f" Extras: {extra_profiles}."
+             logger.error(msg + f" Encontrados: {profiles_in_question}")
              valid = False
 
-    # Verifica se todos os IDs de 1 a 28 estão presentes
-    expected_ids = set(range(1, 29))
-    if all_ids != expected_ids:
-        missing = expected_ids - all_ids
-        extra = all_ids - expected_ids
-        if missing: logger.error(f"Erro nos dados: IDs de questão faltando: {missing}")
-        if extra: logger.error(f"Erro nos dados: IDs de questão extras/inválidos: {extra}")
-        valid = False
+    # Verifica se todos os IDs de 1 a 28 estão presentes (se o número de questões for 28)
+    if question_count == 28:
+        expected_ids = set(range(1, 29))
+        if all_ids != expected_ids:
+            missing = expected_ids - all_ids
+            extra = all_ids - expected_ids
+            if missing: logger.error(f"Erro nos dados: IDs de questão faltando: {sorted(list(missing))}")
+            if extra: logger.error(f"Erro nos dados: IDs de questão extras/inválidos: {sorted(list(extra))}")
+            valid = False
+    elif question_count > 0:
+         logger.warning(f"Validação: Verificação de sequência de IDs (1-28) pulada pois o número de questões é {question_count}.")
 
 
     if valid:
@@ -233,5 +256,6 @@ def validate_disc_data():
         logger.error("Validação de disc_questions encontrou ERROS. Verifique os logs acima.")
     return valid
 
-# Executa a validação quando o módulo é importado (recomendado durante desenvolvimento)
-# validate_disc_data()
+# Executa a validação quando o módulo é importado
+# Comente ou remova a linha abaixo em produção se não for desejado
+validate_disc_data()

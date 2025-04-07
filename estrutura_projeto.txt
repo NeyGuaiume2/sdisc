@@ -7,6 +7,14 @@ backend/
         assessments.json
     db.py
     disc_data.py
+    interpretation_loader.py
+    interpretation_logic.py
+    interpretations.py
+    interpretations_data/
+        general_primary.json
+        general_secondary_combinations.json
+        professional_primary.json
+        professional_secondary_combinations.json
     models/
         __init__.py
         disc.py
@@ -25,8 +33,6 @@ backend/
             favicon_48.ico
             favicon_64.ico
         js/
-            disc_quiz.js
-            disc_scoring.js
             script.js
     templates/
         base.html
@@ -43,6 +49,8 @@ git-sync.ps1
 gunicorn_config.py
 instance/
     dev.db
+    dev.sqbpro
+interpretacoes_disc.md
 migrations/
     README
     alembic.ini
@@ -57,9 +65,13 @@ models/
         routes.py
         routes.txt
     results.py
+ngrok/
+    ngrok.exe
+palavras.md
 playwright-videos/
 prod_config.py
 requirements.txt
+requirements.txt.bak-20250405100109
 run_test_video.py
 scripts/
     update_requirements.py

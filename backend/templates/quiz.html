@@ -4,128 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação DISC - Questionário</title>
-    <!-- Link para o CSS (mantendo a versão) -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=1.0.9">
-    <!-- Favicon (mantido) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    {# Versão do CSS incrementada #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=1.0.12">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" sizes="any">
-    <!-- ... outros links de favicon podem estar aqui ... -->
 </head>
 <body>
-    <div class="container">
+    <div class="container quiz-page-container">
         <header>
             <h1>Avaliação de Perfil Comportamental DISC</h1>
         </header>
 
         <main id="quiz-container">
-
-            <!-- Indicador de Carregamento (para fetchQuestions) -->
-            <div id="loading-indicator" style="display: none; text-align: center; padding: 20px; font-style: italic;">
+            <div id="loading-indicator" style="display: none; text-align: center; padding: 20px;">
                 <p>Carregando questões...</p>
-                <!-- Pode adicionar um spinner Bootstrap ou similar aqui se desejar -->
-                 <!-- <div class="spinner-border text-primary" role="status">
+                 <div class="spinner-border text-primary spinner-border-sm" role="status">
                      <span class="visually-hidden">Carregando...</span>
-                 </div> -->
+                 </div>
             </div>
 
-            <!-- Seção Principal do Quiz -->
-            <section id="assessment" style="display: none;"> <!-- Inicialmente escondida até JS iniciar -->
-                <div class="quiz-header">
-                    <div class="question-counter">
-                        Questão <span id="question-number">1</span> de <span id="total-questions">{{ total_questions | default(28) }}</span> <!-- Total vindo do Flask -->
-                    </div>
-                </div>
-
+            <section id="assessment" style="display: none;">
                 <div class="instructions">
-                    <p>Para cada grupo de 4 características, selecione:</p>
+                    <p class="instruction-lead">Para cada questão com 4 características, selecione <strong>UMA</strong> única opção para:</p>
                     <ul>
-                        <li><strong>MAIS</strong>: a característica que <strong>MAIS</strong> se assemelha a você</li>
-                        <li><strong>MENOS</strong>: a característica que <strong>MENOS</strong> se assemelha a você</li>
+                        <li><span class="badge bg-primary me-1">MAIS</span>: a característica que <strong>MAIS</strong> se assemelha a você.</li>
+                        <li><span class="badge bg-secondary me-1">MENOS</span>: a característica que <strong>MENOS</strong> se assemelha a você.</li>
                     </ul>
-                    <p class="warning">Por favor, seja honesto com suas respostas. O temporizador de 15 segundos ajuda a capturar sua resposta mais instintiva.</p>
+                </div>
+                <div class="progress-container mb-3">
+                    <div class="progress" style="height: 8px;">
+                        <div id="quiz-progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div id="progress-text" class="text-center text-muted small mt-1">Questão 1 / {{ total_questions | default(28) }}</div>
+                </div>
+                 <div class="instructions-footer mt-2">
+                    <p class="warning mb-2"><strong>Atenção:</strong> Você não pode marcar a mesma característica como MAIS e MENOS.</p>
+                    <p class="instruction-detail mb-2">Seja honesto(a) e rápido(a). O temporizador de <strong>15 segundos</strong> ajuda a capturar sua resposta mais instintiva.</p>
                     <div class="timer-container moved-timer">
                         <span>Tempo restante: </span>
-                        <span id="countdown">15</span> segundos
+                        <span id="countdown">15</span> seg
                     </div>
-                </div>
-
-                <!-- Wrapper para o conteúdo da questão (controlado por JS para fade) -->
+                 </div>
                 <div id="question-content-wrapper">
                     <div class="options-container">
                         <div class="column-header">
-                            <div>Adjetivo</div>
+                            <div>Característica</div>
                             <div>MAIS</div>
                             <div>MENOS</div>
                         </div>
-                        <!-- Área onde as opções são carregadas pelo JavaScript -->
-                        <div id="options-list">
-                            <!-- As opções de resposta (rádios com palavras) são geradas dinamicamente por script.js aqui -->
-                            <!-- Exemplo (NÃO USAR, apenas ilustrativo): -->
-                            <!--
-                            <div class="option-item">
-                                <div class="option-text">Palavra Exemplo</div>
-                                <div class="radio-container mais">
-                                    <input type="radio" id="most_1_D" name="most_1" value="Palavra Exemplo" class="most-option" data-question-id="1" data-profile="D">
-                                </div>
-                                <div class="radio-container menos">
-                                    <input type="radio" id="least_1_D" name="least_1" value="Palavra Exemplo" class="least-option" data-question-id="1" data-profile="D">
-                                </div>
+                        <div id="options-list"></div>
+                    </div>
+                </div>
+
+                <!-- Seção de Conclusão com Campos de Nome/Email -->
+                <div id="quiz-completion">
+                    <h2>Avaliação Concluída!</h2>
+
+                    {# Mensagem de status (atualizada por JS) #}
+                    <p class="completion-message mb-4">Suas respostas foram registradas. Preencha seus dados para ver o resultado.</p>
+
+                    {# Formulário para Nome e Email #}
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="mb-3">
+                                <label for="user-name" class="form-label">Seu Nome (Opcional):</label>
+                                <input type="text" class="form-control" id="user-name" placeholder="Digite seu nome">
                             </div>
-                            -->
+                            <div class="mb-3">
+                                <label for="user-email" class="form-label">Seu Email (Opcional):</label>
+                                <input type="email" class="form-control" id="user-email" placeholder="exemplo@dominio.com">
+                                <div id="emailHelp" class="form-text small text-muted">Usado apenas para associar a este resultado.</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    {# Fim Formulário #}
 
-                <!-- Seção de Conclusão (inicialmente escondida) -->
-                <div id="quiz-completion" style="display: none;">
-                    <h2>Avaliação Concluída!</h2>
-                    <p>Você respondeu todas as questões. Clique abaixo para ver o seu perfil comportamental.</p>
                     <div class="completion-actions">
-                         <!-- Botão para finalizar e enviar respostas -->
                          <button id="view-results-btn" class="btn primary large">Ver Meus Resultados</button>
-                         <!-- O script.js adicionará um overlay de loading aqui ao clicar -->
                     </div>
                 </div>
 
-            </section> <!-- Fim de #assessment -->
-
-            <!-- Seção de Resultados (Esta seção provavelmente NÃO é usada aqui, pois há redirecionamento) -->
-            <section id="results" style="display: none;">
-                <!--
-                    Conteúdo da seção de resultados (Gráfico, Descrição, etc.).
-                    No fluxo atual implementado (com API e redirecionamento para /results),
-                    esta seção dentro de quiz.html não será preenchida ou exibida.
-                    Ela é mantida aqui apenas por referência ao estado anterior do arquivo,
-                    mas o conteúdo real é mostrado em /results (template results.html).
-                    -->
-                 <h2>Seus Resultados DISC</h2>
-                 <!-- Conteúdo suprimido, pois a exibição ocorre em outra página/rota -->
-                 <p style="text-align:center; font-style:italic; color:grey;">(O conteúdo detalhado dos resultados é exibido na página /results)</p>
             </section>
-
         </main>
 
-         <footer>
-             <!-- Usando fallback para o ano caso não venha de um base.html -->
+         <footer class="quiz-footer">
              <p>© {{ current_year | default("2025") }} Sistema de Avaliação DISC</p>
          </footer>
-    </div> <!-- Fim .container -->
+    </div>
 
-    <!-- Scripts JS -->
-    <!-- Chart.js (Pode ser removido daqui se a seção #results acima for garantidamente não usada) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.0/chart.min.js"></script>
-
-    <!-- Script de questões local foi REMOVIDO -->
-    <!-- <script src="{{ url_for('static', filename='js/disc_questions.js') }}?v=1.0.1"></script> -->
-
-    <!-- Script principal da lógica do quiz (mantendo a versão) -->
-    <script src="{{ url_for('static', filename='js/script.js') }}?v=1.1.0"></script>
-
-    <!-- Script para passar TOTAL_QUESTIONS globalmente foi REMOVIDO -->
-    <!--
-    <script>
-        const TOTAL_QUESTIONS = parseInt('{{ total_questions | default(28) }}');
-    </script>
-    -->
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    {# Versão do script incrementada #}
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=1.1.3"></script>
 </body>
 </html>
