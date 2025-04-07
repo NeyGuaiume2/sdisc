@@ -1,41 +1,261 @@
-disc_mapping = {
-    'A': 'D',
-    'B': 'I',
-    'C': 'S',
-    'D': 'C'
-}
+# backend/disc_data.py
 
+import logging
+
+# Cria um logger específico para este módulo
+logger = logging.getLogger(__name__)
+
+# Mapeamento interno (remover se não for usado em nenhum lugar)
+# disc_mapping = {
+#     'A': 'D',
+#     'B': 'I',
+#     'C': 'S',
+#     'D': 'C'
+# }
+
+# Descrições dos Perfis (mantidas conforme o original)
 disc_descriptions = {
     'D': {
         'title': 'Dominância',
+        'description': 'Pessoas com alta Dominância são diretas, assertivas, focadas em resultados e gostam de desafios e controle. São competitivas e tomam decisões rapidamente.',
         'motivation': 'resultados, poder e desafios',
-        'characteristics': ['direto', 'decisivo', 'orientado a resultados', 'competitivo', 'assertivo'],
-        'strengths': ['Liderança', 'Tomada de decisão rápida', 'Resolução de problemas'],
-        'weaknesses': ['Impaciência', 'Insensibilidade às necessidades dos outros'],
-        'how_to_work_with': 'Seja direto, focado em resultados e evite detalhes desnecessários.'
+        'characteristics': ['direto', 'decisivo', 'orientado a resultados', 'competitivo', 'assertivo', 'independente', 'focado', 'ousado'],
+        'strengths': ['Liderança', 'Tomada de decisão rápida', 'Resolução de problemas', 'Foco em metas', 'Iniciativa'],
+        'weaknesses': ['Impaciência', 'Insensibilidade às necessidades dos outros', 'Pode ser visto como autoritário', 'Tende a assumir controle excessivo'],
+        'how_to_work_with': [
+            'Seja direto e objetivo.',
+            'Foque nos resultados e metas (o "quê").',
+            'Evite detalhes excessivos ou conversas longas não relacionadas ao objetivo.',
+            'Apresente os fatos de forma lógica e concisa.',
+            'Dê espaço para autonomia e tomada de decisão.',
+            'Mostre competência e confiança.'
+        ]
     },
     'I': {
         'title': 'Influência',
+        'description': 'Indivíduos com alta Influência são entusiastas, otimistas, sociáveis e persuasivos. Gostam de interagir, motivar os outros e buscam reconhecimento social.',
         'motivation': 'reconhecimento social, persuasão e popularidade',
-        'characteristics': ['entusiasta', 'otimista', 'persuasivo', 'sociável', 'comunicativo'],
-        'strengths': ['Comunicação', 'Networking', 'Motivação de equipes'],
-        'weaknesses': ['Desorganização', 'Falta de atenção aos detalhes'],
-        'how_to_work_with': 'Seja amigável, demonstre interesse e permita tempo para socialização.'
+        'characteristics': ['entusiasta', 'otimista', 'persuasivo', 'sociável', 'comunicativo', 'inspirador', 'amigável', 'falante'],
+        'strengths': ['Comunicação', 'Networking', 'Motivação de equipes', 'Persuasão', 'Entusiasmo'],
+        'weaknesses': ['Desorganização', 'Falta de atenção aos detalhes', 'Impulsividade', 'Pode evitar conflitos para manter a popularidade', 'Otimismo excessivo'],
+        'how_to_work_with': [
+            'Seja amigável, positivo e demonstre entusiasmo.',
+            'Permita tempo para interação social e conversa.',
+            'Reconheça publicamente suas contribuições e ideias.',
+            'Evite excesso de dados, rotinas rígidas ou isolamento.',
+            'Foque no "quadro geral", nos relacionamentos e na inspiração (o "quem").',
+            'Apresente ideias de forma animada.'
+        ]
     },
     'S': {
         'title': 'Estabilidade',
+        'description': 'Pessoas com alta Estabilidade são pacientes, calmas, leais e cooperativas. Valorizam a segurança, a harmonia e relacionamentos consistentes. São bons ouvintes.',
         'motivation': 'cooperação, segurança e confiabilidade',
-        'characteristics': ['paciente', 'leal', 'previsível', 'cooperativo', 'calmo'],
-        'strengths': ['Cooperação', 'Consistência', 'Paciência'],
-        'weaknesses': ['Resistência a mudanças', 'Dificuldade em dizer não'],
-        'how_to_work_with': 'Seja consistente, sincero e evite mudanças bruscas.'
+        'characteristics': ['paciente', 'leal', 'previsível', 'cooperativo', 'calmo', 'bom ouvinte', 'constante', 'atencioso'],
+        'strengths': ['Cooperação', 'Consistência', 'Paciência', 'Lealdade', 'Bom ouvinte', 'Trabalho em equipe'],
+        'weaknesses': ['Resistência a mudanças', 'Dificuldade em dizer não', 'Evita conflitos', 'Pode guardar ressentimentos', 'Demora a se adaptar'],
+        'how_to_work_with': [
+            'Seja paciente, calmo e sincero.',
+            'Construa um relacionamento de confiança e mostre interesse genuíno.',
+            'Evite mudanças bruscas, pressão excessiva ou conflitos abertos.',
+            'Explique as coisas passo a passo, de forma clara e lógica (o "como").',
+            'Demonstre apreço pela sua lealdade e consistência.',
+            'Ofereça suporte e segurança.'
+        ]
     },
     'C': {
         'title': 'Conformidade',
+        'description': 'Indivíduos com alta Conformidade são analíticos, precisos, organizados e focados em qualidade e regras. São cuidadosos, lógicos e buscam informações detalhadas.',
         'motivation': 'qualidade, precisão e expertise',
-        'characteristics': ['analítico', 'detalhista', 'preciso', 'sistemático', 'organizado'],
-        'strengths': ['Análise detalhada', 'Qualidade do trabalho', 'Organização'],
-        'weaknesses': ['Perfeccionismo', 'Excesso de crítica'],
-        'how_to_work_with': 'Forneça detalhes, seja preciso e use abordagem lógica.'
+        'characteristics': ['analítico', 'detalhista', 'preciso', 'sistemático', 'organizado', 'cauteloso', 'disciplinado', 'lógico'],
+        'strengths': ['Análise detalhada', 'Qualidade do trabalho', 'Organização', 'Planejamento', 'Precisão', 'Seguir regras'],
+        'weaknesses': ['Perfeccionismo', 'Excesso de crítica (a si e aos outros)', 'Pode ser indeciso sem dados suficientes (paralisia por análise)', 'Dificuldade com ambiguidades', 'Pode parecer frio ou distante'],
+        'how_to_work_with': [
+            'Forneça informações detalhadas, fatos e dados.',
+            'Seja preciso, lógico e organizado na comunicação.',
+            'Evite abordagens emocionais, pressão por decisões rápidas ou informações vagas.',
+            'Dê tempo suficiente para análise e planejamento.',
+            'Respeite a necessidade de regras, procedimentos e qualidade (o "porquê").',
+            'Prepare-se bem antes de interagir.'
+        ]
     }
 }
+
+# Lista com as 28 Questões DISC ATUALIZADA com base em palavras.md
+disc_questions = [
+    {"id": 1, "D": "Determinado", "I": "Persuasivo", "S": "Paciente", "C": "Preciso"},
+    {"id": 2, "D": "Direto", "I": "Entusiasmado", "S": "Estável", "C": "Analítico"},
+    {"id": 3, "D": "Competitivo", "I": "Otimista", "S": "Calmo", "C": "Exato"},
+    {"id": 4, "D": "Decisivo", "I": "Sociável", "S": "Solidário", "C": "Sistemático"},
+    {"id": 5, "D": "Assertivo", "I": "Extrovertido", "S": "Tolerante", "C": "Cuidadoso"},
+    {"id": 6, "D": "Conquistador", "I": "Charmoso", "S": "Compreensivo", "C": "Detalhista"},
+    {"id": 7, "D": "Líder", "I": "Comunicativo", "S": "Colaborativo", "C": "Organizado"},
+    {"id": 8, "D": "Independente", "I": "Inspirador", "S": "Gentil", "C": "Criterioso"},
+    {"id": 9, "D": "Ousado", "I": "Popular", "S": "Constante", "C": "Objetivo"},
+    {"id": 10, "D": "Enérgico", "I": "Confiante", "S": "Bondoso", "C": "Consciente"},
+    {"id": 11, "D": "Pioneiro", "I": "Amigável", "S": "Leal", "C": "Investigador"},
+    {"id": 12, "D": "Arrojado", "I": "Convincente", "S": "Cooperativo", "C": "Planejador"},
+    {"id": 13, "D": "Desafiador", "I": "Animado", "S": "Relaxado", "C": "Metódico"},
+    {"id": 14, "D": "Impulsionador", "I": "Alegre", "S": "Agradável", "C": "Racional"},
+    {"id": 15, "D": "Vigoroso", "I": "Magnético", "S": "Equilibrado", "C": "Perfeccionista"},
+    {"id": 16, "D": "Aventureiro", "I": "Afetivo", "S": "Pacífico", "C": "Caprichoso"}, # Atenção: "Afetivo" em vez de "Demonstrativo" do código antigo
+    {"id": 17, "D": "Realizador", "I": "Expressivo", "S": "Sensível", "C": "Minucioso"},
+    {"id": 18, "D": "Autônomo", "I": "Influente", "S": "Bom ouvinte", "C": "Disciplinado"}, # Atenção: "Bom ouvinte" em vez de "Bom(boa) ouvinte"
+    {"id": 19, "D": "Determinado", "I": "Falante", "S": "Sincero", "C": "Precavido"},
+    {"id": 20, "D": "Empreendedor", "I": "Carismático", "S": "Apoiador", "C": "Formal"},
+    {"id": 21, "D": "Inovador", "I": "Envolvente", "S": "Atencioso", "C": "Lógico"},
+    {"id": 22, "D": "Rápido", "I": "Espontâneo", "S": "Dedicado", "C": "Estruturado"},
+    {"id": 23, "D": "Autoritário", "I": "Bem-humorado", "S": "Harmonioso", "C": "Sistemático"},
+    {"id": 24, "D": "Exigente", "I": "Brincalhão", "S": "Moderado", "C": "Judicioso"}, # Atenção: "Brincalhão" em vez de "Brincalhão(ona)"
+    {"id": 25, "D": "Ambicioso", "I": "Aberto", "S": "Confiável", "C": "Exigente"},
+    {"id": 26, "D": "Focado", "I": "Interativo", "S": "Atencioso", "C": "Organizado"},
+    {"id": 27, "D": "Proativo", "I": "Agradável", "S": "Consistente", "C": "Convencional"}, # Atenção: "Convencional" em vez de "Normativo(a)"
+    {"id": 28, "D": "Decisivo", "I": "Estimulante", "S": "Previsível", "C": "Correto"}
+]
+
+
+# --- Funções auxiliares (sem alterações da versão anterior) ---
+def get_question_by_id(question_id):
+    """Retorna o dicionário da questão com o ID fornecido."""
+    try:
+        target_id = int(question_id)
+    except (ValueError, TypeError):
+        logger.warning(f"ID de questão inválido recebido: {question_id}. Não é um inteiro.")
+        return None
+
+    for question in disc_questions:
+        if question.get('id') == target_id:
+            return question
+    logger.warning(f"Questão com ID {target_id} não encontrada em disc_questions.")
+    return None
+
+def get_profile_for_word(question_id, selected_word):
+    """
+    Retorna o perfil (D, I, S, C) para uma palavra específica em uma questão,
+    ignorando maiúsculas/minúsculas e espaços extras.
+    """
+    question = get_question_by_id(question_id)
+    if not question:
+        return None
+
+    if not selected_word or not isinstance(selected_word, str):
+        logger.warning(f"Palavra selecionada inválida para Q{question_id}: {selected_word}")
+        return None
+
+    # Normaliza a palavra selecionada
+    normalized_selected_word = selected_word.strip().lower()
+
+    found_profiles = []
+
+    for profile, word_in_data in question.items():
+        if profile in ['D', 'I', 'S', 'C'] and isinstance(word_in_data, str):
+            # Normaliza a palavra dos dados da questão
+            # Remove parênteses e conteúdo para normalização (ex: "Determinado(a)" -> "determinado")
+            word_to_normalize = word_in_data.split('(')[0].strip()
+            normalized_word_in_data = word_to_normalize.lower()
+            if normalized_word_in_data == normalized_selected_word:
+                found_profiles.append(profile)
+
+    # Tratamento de Múltiplos Matches (não deve ocorrer com os dados validados)
+    if len(found_profiles) == 1:
+        return found_profiles[0]
+    elif len(found_profiles) > 1:
+        # Log de erro caso a validação falhe ou não seja executada
+        logger.error(f"ERRO NOS DADOS (inesperado)! Q{question_id}: Palavra '{selected_word}' encontrada para múltiplos perfis: {found_profiles}. Retornando o primeiro ({found_profiles[0]}). VERIFICAR disc_questions!")
+        return found_profiles[0]
+    else:
+        # Log é feito no score_calculator se a palavra não for encontrada lá
+        # logger.warning(f"Q{question_id}: NENHUM perfil encontrado para a palavra '{selected_word}' (normalizada: '{normalized_selected_word}').")
+        return None
+
+# --- Função de validação inicial dos dados (sem alterações) ---
+def validate_disc_data():
+    """Verifica por IDs duplicados e palavras duplicadas dentro da mesma questão."""
+    all_ids = set()
+    valid = True
+    logger.info("Iniciando validação dos dados de disc_questions...")
+    question_count = len(disc_questions)
+    if question_count != 28:
+         logger.warning(f"Validação: Número de questões encontrado é {question_count}, esperado era 28.")
+         # valid = False # Decide se isso invalida os dados
+
+    for i, question in enumerate(disc_questions):
+        q_id = question.get('id')
+        if not isinstance(q_id, int) or q_id <= 0: # Garante que ID é inteiro positivo
+            logger.error(f"Erro nos dados: Questão {i+1} (índice {i}) não tem um 'id' inteiro positivo: {question}")
+            valid = False
+            continue
+
+        if q_id in all_ids:
+            logger.error(f"Erro nos dados: ID de questão duplicado encontrado: {q_id}")
+            valid = False
+        all_ids.add(q_id)
+
+        words_in_question = {} # {palavra_normalizada: [perfis]}
+        profiles_in_question = set()
+        expected_profiles = {'D', 'I', 'S', 'C'}
+
+        for profile, word in question.items():
+            if profile == 'id': continue # Ignora o ID
+
+            if profile not in expected_profiles:
+                logger.error(f"Erro nos dados: Q{q_id}, perfil inválido encontrado: '{profile}'")
+                valid = False
+            elif profile in profiles_in_question:
+                 logger.error(f"Erro nos dados: Q{q_id}, perfil duplicado encontrado: '{profile}'")
+                 valid = False
+            profiles_in_question.add(profile)
+
+            if not isinstance(word, str) or not word.strip():
+                 logger.error(f"Erro nos dados: Q{q_id}, Perfil {profile} tem palavra inválida ou vazia: '{word}'")
+                 valid = False
+                 continue
+
+            # Normaliza removendo parênteses para validação de duplicação
+            normalized_word = word.split('(')[0].strip().lower()
+            if not normalized_word: # Checa se sobrou algo após normalização
+                 logger.error(f"Erro nos dados: Q{q_id}, Perfil {profile}, palavra resultou em string vazia após normalização: '{word}'")
+                 valid = False
+                 continue
+
+            if normalized_word in words_in_question:
+                 # Palavra duplicada DENTRO da mesma questão (após normalização)
+                 original_profiles = words_in_question[normalized_word]
+                 logger.error(f"Erro nos dados: Q{q_id}, palavra normalizada duplicada encontrada: '{normalized_word}' (de '{word}') aparece para perfis {original_profiles} e {profile}")
+                 words_in_question[normalized_word].append(profile)
+                 valid = False
+            else:
+                words_in_question[normalized_word] = [profile]
+
+        # Verifica se todos os 4 perfis esperados estão presentes
+        if profiles_in_question != expected_profiles:
+             missing_profiles = expected_profiles - profiles_in_question
+             extra_profiles = profiles_in_question - expected_profiles
+             msg = f"Erro nos dados: Q{q_id} não contém exatamente os perfis D, I, S, C."
+             if missing_profiles: msg += f" Faltando: {missing_profiles}."
+             if extra_profiles: msg += f" Extras: {extra_profiles}."
+             logger.error(msg + f" Encontrados: {profiles_in_question}")
+             valid = False
+
+    # Verifica se todos os IDs de 1 a 28 estão presentes (se o número de questões for 28)
+    if question_count == 28:
+        expected_ids = set(range(1, 29))
+        if all_ids != expected_ids:
+            missing = expected_ids - all_ids
+            extra = all_ids - expected_ids
+            if missing: logger.error(f"Erro nos dados: IDs de questão faltando: {sorted(list(missing))}")
+            if extra: logger.error(f"Erro nos dados: IDs de questão extras/inválidos: {sorted(list(extra))}")
+            valid = False
+    elif question_count > 0:
+         logger.warning(f"Validação: Verificação de sequência de IDs (1-28) pulada pois o número de questões é {question_count}.")
+
+
+    if valid:
+        logger.info(f"Validação de disc_questions ({question_count} questões) concluída. Nenhum erro óbvio encontrado.")
+    else:
+        logger.error("Validação de disc_questions encontrou ERROS. Verifique os logs acima.")
+    return valid
+
+# Executa a validação quando o módulo é importado
+# Comente ou remova a linha abaixo em produção se não for desejado
+validate_disc_data()

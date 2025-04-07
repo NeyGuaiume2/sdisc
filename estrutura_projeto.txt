@@ -1,0 +1,96 @@
+README.md
+backend/
+    __init__.py
+    app.py
+    config.py
+    data/
+        assessments.json
+    db.py
+    disc_data.py
+    interpretation_loader.py
+    interpretation_logic.py
+    interpretations.py
+    interpretations_data/
+        general_primary.json
+        general_secondary_combinations.json
+        professional_primary.json
+        professional_secondary_combinations.json
+    models/
+        __init__.py
+        disc.py
+        disc_result.py
+        user.py
+    pyrightconfig.json
+    routes.py
+    score_calculator.py
+    static/
+        css/
+            styles.css
+        images/
+            favicon.ico
+            favicon_16.ico
+            favicon_32.ico
+            favicon_48.ico
+            favicon_64.ico
+        js/
+            script.js
+    templates/
+        base.html
+        errors/
+            500.html
+        index.html
+        quiz.html
+        results.html
+estrutura_projeto.txt
+generate_favicon.py
+generate_secret_key.py
+gerar_estrutura.py
+git-sync.ps1
+gunicorn_config.py
+instance/
+    dev.db
+    dev.sqbpro
+interpretacoes_disc.md
+migrations/
+    README
+    alembic.ini
+    env.py
+    script.py.mako
+    versions/
+        8d09feb8aae6_create_disc_results_table.py
+        d2bf2695aa10_refatorar_modelo_discresult_para_usar_.py
+models/
+    app/
+        models.py
+        routes.py
+        routes.txt
+    results.py
+ngrok/
+    ngrok.exe
+palavras.md
+playwright-videos/
+prod_config.py
+requirements.txt
+requirements.txt.bak-20250405100109
+run_test_video.py
+scripts/
+    update_requirements.py
+sessões.txt
+test-results/
+    tests-e2e-test-disc-quiz-py-test-complete-quiz-flow-chromium/
+        video.webm
+tests/
+    conftest.py
+    e2e/
+        __init__.py
+        test_basic_quiz_flow.py
+        test_disc_quiz.py
+        test_helpers.py
+        test_home.py
+    integration_tests.py
+    screenshots/
+        test_complete_quiz_and_reach_results[chromium]_20250401-210548.png
+    security_test.py
+    test_app.py
+    test_disc_scoring.py
+wsgi.py

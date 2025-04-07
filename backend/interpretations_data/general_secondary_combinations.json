@@ -1,0 +1,314 @@
+{
+  "D_moderate": {
+    "I": {
+      "Descrição": "Seu perfil primário é Dominância (D), orientado a resultados e assertivo. O secundário Influência (I) acrescenta uma dose moderada de sociabilidade e entusiasmo.",
+      "Motivação": "Enquanto o D é motivado por desafios e controle, a influência I adiciona o desejo de interagir, persuadir e criar um ambiente mais positivo.",
+      "Características": "A influência I suaviza a assertividade do D, manifestando-se como uma capacidade de comunicar suas ideias de forma mais envolvente e carismática.",
+      "Pontos Fortes": "Você combina determinação e foco em resultados (D) com habilidades de comunicação e persuasão (I), tornando sua liderança mais inspiradora.",
+      "Áreas de Desenvolvimento": "Equilibre a necessidade de controle (D) com a abertura para colaboração (I). Evite que o entusiasmo o desvie dos objetivos principais.",
+      "Relacionamento/Dicas": "Use sua assertividade (D) para definir direções e seu carisma (I) para engajar e motivar as pessoas. Ouça ativamente para fortalecer as conexões."
+    },
+    "S": {
+      "Descrição": "Com um perfil primário Dominância (D), você é assertivo e focado em resultados. O secundário Estabilidade (S) adiciona uma camada moderada de paciência e consideração pelas pessoas.",
+      "Motivação": "Enquanto o D busca desafios e controle, a influência S traz uma valorização da segurança, da cooperação e de um ritmo mais ponderado.",
+      "Características": "A influência S modera a impaciência do D, manifestando-se como uma maior capacidade de ouvir e considerar o impacto das decisões na equipe.",
+      "Pontos Fortes": "Você combina determinação (D) com uma abordagem mais estável e colaborativa (S), resultando em uma liderança firme, porém mais atenta às pessoas.",
+      "Áreas de Desenvolvimento": "Trabalhe o equilíbrio entre a urgência por resultados (D) e a necessidade de processos estáveis (S). Aprenda a delegar e confiar na equipe.",
+      "Relacionamento/Dicas": "Seja direto sobre os objetivos (D), mas demonstre paciência e apoio (S) ao lidar com a equipe. Crie um ambiente onde a eficiência e a estabilidade coexistam."
+    },
+    "C": {
+      "Descrição": "Seu perfil primário é Dominância (D), focado em resultados e assertividade. O secundário Conformidade (C) adiciona uma camada moderada de análise, precisão e atenção aos detalhes.",
+      "Motivação": "Enquanto o D busca desafios e controle, a influência C adiciona uma preocupação com a qualidade, a lógica e a correção dos processos.",
+      "Características": "A influência C modera a impulsividade do D, trazendo uma abordagem mais planejada, analítica e focada em dados para a tomada de decisão.",
+      "Pontos Fortes": "Você combina determinação e foco em resultados (D) com planejamento e análise crítica (C), resultando em decisões assertivas, porém bem fundamentadas.",
+      "Áreas de Desenvolvimento": "Equilibre a necessidade de ação rápida (D) com a análise detalhada (C). Evite a \"paralisia por análise\" ou a crítica excessiva que pode desmotivar os outros.",
+      "Relacionamento/Dicas": "Seja direto sobre os objetivos (D), mas apresente dados e lógica (C) para embasar suas decisões. Valorize a precisão e a qualidade no trabalho dos outros."
+    }
+  },
+  "D_significant": {
+    "I": {
+      "Descrição": "Com a Dominância (D) como base, você é assertivo(a) e orientado(a) a resultados. A influência significativa do perfil Influência (I) secundário adiciona uma forte camada de extroversão, carisma e necessidade de interação social. Você busca liderar e alcançar metas, mas também precisa de conexão e reconhecimento.",
+      "Motivação": "Existe uma dualidade motivacional forte: impulsionado(a) tanto pela conquista e controle (D) quanto pela interação social, reconhecimento público e entusiasmo (I). Pode alternar entre um foco intense em tarefas e uma grande necessidade de socializar.",
+      "Características": "Uma combinação dinâmica de assertividade direta (D) com comunicação expansiva e persuasiva (I). Pode ser um(a) líder ou pessoa de iniciativa que é ao mesmo tempo exigente e muito sociável. Assume a frente com energia, usando tanto a diretividade quanto o carisma.",
+      "Pontos Fortes": "Liderança ou iniciativa muito energéticas e carismáticas. Capacidade de \"vender\" ideias e projetos com paixão (I) e direcionar a ação com firmeza (D). Persuasivo(a) e orientado(a) para a ação rápida. Mobiliza pessoas através do entusiasmo e da clareza de objetivo.",
+      "Áreas de Desenvolvimento": "Risco de ser percebido(a) como inconsistente (ora muito social, ora muito direto/impaciente). Pode ter dificuldade em equilibrar a necessidade de atenção/reconhecimento (I) com a necessidade de controle/resultados (D). A impulsividade pode ser acentuada pela combinação. Precisa gerenciar a tendência a interromper ou dominar conversas.",
+      "Relacionamento/Dicas": "Reconheça ambas as facetas. Dê espaço para sua expressão e interação (I), mas também apresente desafios e foque em resultados (D). Seja claro(a) sobre prazos e expectativas, mas use uma abordagem motivadora. Esteja preparado(a) para um ritmo rápido e dinâmico."
+    },
+    "S": {
+      "Descrição": "Com a Dominância (D) como base, você é orientado(a) a resultados e assertivo(a). A influência significativa do Estabilidade (S) secundário introduz uma forte necessidade de segurança, planejamento e consideração pelo bem-estar da equipe ou grupo, moderando consideravelmente sua impaciência.",
+      "Motivação": "Apresenta uma motivação dual importante: busca desafios e controle (D), mas também valoriza intensamente a segurança, a estabilidade e relacionamentos de confiança (S). Pode priorizar a manutenção da estabilidade sobre a busca incessante por novos desafios.",
+      "Características": "Uma combinação de firmeza e determinação (D) com grande paciência, lealdade e método (S). Toma decisões de forma ponderada, considerando os riscos e o impacto a longo prazo. É um(a) ouvinte mais atento(a) e busca construir consenso antes de agir de forma muito diretiva.",
+      "Pontos Fortes": "Liderança ou abordagem equilibrada, que une foco em resultados (D) com forte capacidade de planejamento, organização e cuidado com as pessoas (S). Altamente confiável e consistente. Bom(a) em implementar mudanças de forma estruturada e segura.",
+      "Áreas de Desenvolvimento": "Pode tornar-se resistente a mudanças muito rápidas ou radicais devido à forte influência S. A necessidade de segurança pode inibir a tomada de riscos necessários. Pode ter dificuldade em confrontar diretamente ou tomar decisões impopulares, mesmo quando assertivo(a) (D), para preservar a harmonia (S).",
+      "Relacionamento/Dicas": "Apresente informações de forma lógica e estruturada, focando tanto nos resultados (D) quanto na segurança e estabilidade do processo (S). Evite surpresas e pressão excessiva. Valorize sua abordagem ponderada e confiável. Demonstre lealdade e construa confiança."
+    },
+    "C": {
+      "Descrição": "Com a Dominância (D) como base, você é assertivo(a) e orientado(a) a resultados. A influência significativa do Conformidade (C) secundário introduz uma forte necessidade de análise, precisão, dados e processos corretos, impactando sua forma de tomar decisões e agir.",
+      "Motivação": "Apresenta uma motivação dual forte: busca desafios e controle (D), mas também é intensamente motivado(a) pela qualidade, lógica, precisão e por fazer as coisas da maneira \"certa\" e comprovada (C).",
+      "Características": "Uma combinação de assertividade (D) com forte pensamento analítico e crítico (C). Toma decisões baseadas em dados e lógica, é muito organizado(a) e planejado(a). Pode ser exigente tanto com resultados (D) quanto com a qualidade e precisão (C). Questionador(a) e cético(a).",
+      "Pontos Fortes": "Liderança ou abordagem focada em resultados (D) com base em análise profunda e planejamento estratégico (C). Excelente em tomar decisões complexas que exigem tanto assertividade quanto rigor técnico. Habilidade para implementar padrões elevados com determinação.",
+      "Áreas de Desenvolvimento": "Risco acentuado de \"paralisia por análise\", onde a busca por dados perfeitos (C) atrasa a ação necessária (D). Pode ser percebido(a) como excessivamente crítico(a) ou perfeccionista. A impaciência do D pode entrar em conflito com a necessidade de análise do C, gerando frustração interna. Dificuldade em lidar com ambiguidades.",
+      "Relacionamento/Dicas": "Comunique-se com extrema lógica, dados e fatos comprovados. Apresente planos bem estruturados. Esteja preparado(a) para questionamentos detalhados. Valorize a qualidade e a precisão. Evite abordagens puramente emocionais ou subjetivas. Respeite a necessidade de análise, mas reforce a importância dos prazos (D)."
+    }
+  },
+  "D_high": {
+    "I": {
+      "Descrição": "Sua base Dominância (D) é forte, mas a influência altíssima do Influência (I) secundário cria um perfil intensamente extrovertido, carismático e assertivo. Você combina uma necessidade extrema de interação e reconhecimento (I) com um forte desejo de controle e resultados (D).",
+      "Motivação": "Altamente motivado(a) por uma mistura potente de aclamação social, estar no centro das atenções (I) e poder, controle e vitória (D). Busca liderar de forma visível, influenciar massivamente e alcançar grandes feitos que tragam reconhecimento.",
+      "Características": "Perfil \"showman\" com forte direcionamento. Extremamente energético(a), comunicativo(a), persuasivo(a) (I), mas também muito direto(a), impaciente, exigente e que busca ativamente o controle (D). Assume a liderança de forma natural e carismática, mas pode ser avassalador(a) e impulsivo(a).",
+      "Pontos Fortes": "Liderança ou presença extremamente carismática e dominante. Capacidade extraordinária de mobilizar e energizar grandes grupos para objetivos ambiciosos. Visão inspiradora (I) combinada com determinação férrea para executar (D). Altamente orientado(a) para a ação e resultados espetaculares.",
+      "Áreas de Desenvolvimento": "Risco muito alto de ser percebido(a) como dominador(a), egocêntrico(a) ou impaciente. Grande dificuldade em ouvir ativamente e em ceder controle. A necessidade de atenção (I) pode se manifestar como autopromoção excessiva, enquanto a necessidade de controle (D) pode levar a uma impaciência extrema com qualquer obstáculo ou lentidão. Equilibrar essas duas forças intensas é o maior desafio. Dificuldade em manter o foco em detalhes ou processos longos.",
+      "Relacionamento/Dicas": "Interaja com energia, entusiasmo e dinamismo. Reconheça tanto seu carisma quanto sua força diretiva. Seja claro(a), conciso(a) e focado(a) em resultados, mas permita espaço para sua expressividade. Apresente desafios e oportunidades de destaque. Seja firme, mas evite confrontos desnecessários de poder."
+    },
+    "S": {
+      "Descrição": "Sua base Dominância (D) lhe confere assertividade, mas a influência altíssima do Estabilidade (S) secundário cria um perfil complexo, onde a necessidade extrema de segurança, previsibilidade e harmonia (S) se choca ou modera intensamente o impulso por ação e controle (D).",
+      "Motivação": "Movido(a) por uma tensão motivacional constante e profunda entre o desejo de controle e resultados (D) e a necessidade primordial de segurança, rotina e ausência de conflitos (S). A segurança tende a prevalecer sobre o risco.",
+      "Características": "Apresenta uma assertividade (D) muito contida pela necessidade de estabilidade (S). Pode ser firme em suas convicções, mas expressá-las de forma extremamente calma e metódica. Altamente resistente a mudanças, planejador(a) minucioso(a), leal ao extremo, mas pode ter grande dificuldade em tomar iniciativas que perturbem o status quo.",
+      "Pontos Fortes": "Capacidade excepcional de planejamento a longo prazo com foco em segurança e estabilidade. Extremamente confiável, leal e consistente. Habilidade para implementar procedimentos complexos com grande paciência e método. Liderança ou presença muito estabilizadora em ambientes caóticos (embora prefira evitá-los).",
+      "Áreas de Desenvolvimento": "Extrema dificuldade em lidar com mudanças, ambiguidades ou crises inesperadas. A necessidade de segurança (S) pode paralisar a capacidade de decisão assertiva (D). Pode ser percebido(a) como excessivamente lento(a) ou resistente ao progresso. Dificuldade imensa em lidar com conflitos ou em tomar ações rápidas e decisivas que gerem instabilidade.",
+      "Relacionamento/Dicas": "Ofereça máxima segurança, previsibilidade e clareza. Comunique qualquer mudança com enorme antecedência, detalhamento e justificativa focada em segurança. Seja extremamente paciente e evite qualquer tipo de pressão ou confronto. Construa confiança a longo prazo através da lealdade e consistência."
+    },
+    "C": {
+      "Descrição": "Sua base Dominância (D) lhe confere assertividade e foco em resultados, mas a influência altíssima do Conformidade (C) secundário cria um perfil onde a necessidade extrema de precisão, análise, dados e controle de qualidade (C) modera ou entra em conflito direto com o impulso por ação rápida e controle (D).",
+      "Motivação": "Movido(a) por uma tensão motivacional intensa entre o desejo de controle e resultados rápidos (D) e a necessidade primordial de certeza, perfeição, lógica irrefutável e eliminação de erros (C). A busca pela correção pode superar a urgência.",
+      "Características": "Apresenta uma assertividade (D) fortemente filtrada pela análise crítica e pelo ceticismo (C). Pode ser firme em suas conclusões (baseadas em análise profunda), mas muito hesitante em agir sem dados completos. Extremamente organizado(a), planejador(a), detalhista e perfeccionista. Questiona tudo.",
+      "Pontos Fortes": "Capacidade excepcional de análise estratégica e planejamento de longo prazo com foco em minimizar riscos (C) e atingir objetivos sólidos (D). Tomada de decisão extremamente fundamentada em cenários complexos. Habilidade para criar e implementar sistemas e padrões de altíssima qualidade com rigor.",
+      "Áreas de Desenvolvimento": "Risco extremo de \"paralisia por análise\" e perfeccionismo que impede a ação. Pode ser percebido(a) como excessivamente crítico(a), cético(a) e lento(a). A forte necessidade de certeza (C) pode inibir completamente a tomada de riscos inerente à assertividade do D. Dificuldade imensa em lidar com ambiguidades, mudanças ou pressão por tempo.",
+      "Relacionamento/Dicas": "Baseie *toda* a interação em dados, fatos, lógica e evidências irrefutáveis. Seja extremamente preparado(a), preciso(a) e detalhado(a). Dê tempo abundante (ou mais) para análise. Evite qualquer pressão por decisões rápidas ou improvisação. Valorize a lógica e a qualidade acima de tudo. Apresente planos de contingência."
+    }
+  },
+  "I_moderate": {
+    "D": {
+      "Descrição": "Seu perfil predominante é o Influência (I), marcado por uma natureza comunicativa e entusiasta. O secundário Dominância (D) adiciona um toque de assertividade e foco em resultados, de forma moderada.",
+      "Motivação": "Enquanto o I é motivado pelo reconhecimento e pelas relações interpessoais, o D contribui com o desejo de agir, tomar decisões e alcançar metas.",
+      "Características": "A influência D se manifesta como uma discreta assertividade, conferindo-lhe a capacidade de direcionar conversas e iniciativas sem perder a espontaneidade do I.",
+      "Pontos Fortes": "Você combina carisma e energia com uma determinação moderada, o que favorece a liderança e a iniciativa nas interações.",
+      "Áreas de Desenvolvimento": "Aprimore sua assertividade de forma equilibrada, para que a necessidade de ação não comprometa a naturalidade e o calor humano do I.",
+      "Relacionamento/Dicas": "Utilize sua comunicação calorosa aliada a uma postura objetiva. Estabeleça metas claras sem se tornar autoritário, valorizando o feedback da equipe."
+    },
+    "S": {
+      "Descrição": "Seu perfil primário é Influência (I), caracterizado pelo entusiasmo e sociabilidade. O secundário Estabilidade (S) adiciona uma influência moderada de calma, paciência e foco em relacionamentos de longo prazo.",
+      "Motivação": "Enquanto o I busca reconhecimento e interação, a influência S valoriza a segurança, a harmonia e a lealdade nas conexões.",
+      "Características": "A influência S equilibra o entusiasmo do I, trazendo uma abordagem mais calma, atenta e focada em construir confiança e apoio mútuo.",
+      "Pontos Fortes": "Você combina carisma e otimismo (I) com lealdade e empatia (S), sendo excelente em construir relacionamentos fortes e criar um ambiente de equipe positivo e estável.",
+      "Áreas de Desenvolvimento": "Evite que a busca por aceitação (I) e harmonia (S) o impeça de tomar decisões difíceis ou de dar feedback construtivo quando necessário.",
+      "Relacionamento/Dicas": "Use seu entusiasmo (I) para iniciar conexões e sua natureza apoiadora (S) para mantê-las. Demonstre interesse genuíno e ofereça suporte constante."
+    },
+    "C": {
+      "Descrição": "Com um perfil primário Influência (I), você é comunicativo e entusiasta. O secundário Conformidade (C) adiciona uma influência moderada de organização, análise e atenção aos detalhes.",
+      "Motivação": "Enquanto o I busca interação e reconhecimento, a influência C traz uma valorização da qualidade, da precisão e de um certo grau de estrutura.",
+      "Características": "A influência C ajuda a organizar o entusiasmo do I, manifestando-se como uma maior atenção aos detalhes na comunicação e no planejamento.",
+      "Pontos Fortes": "Você combina persuasão e carisma (I) com uma abordagem mais estruturada e analítica (C), sendo capaz de apresentar ideias de forma envolvente e organizada.",
+      "Áreas de Desenvolvimento": "Trabalhe a paciência e a atenção aos detalhes (C) de forma que sua expressividade (I) seja complementada por uma comunicação mais precisa e fundamentada.",
+      "Relacionamento/Dicas": "Equilibre a energia e o entusiasmo (I) com uma postura analítica (C), utilizando fatos e dados para reforçar sua mensagem e construir relações de confiança."
+    }
+  },
+  "I_significant": {
+    "D": {
+      "Descrição": "Seu perfil Influência (I) é forte, tornando-o muito comunicativo e sociável. No entanto, a influência significativa do Dominância (D) secundário traz uma forte veia de assertividade, competitividade e foco em resultados. Você busca tanto a conexão social quanto a liderança e a ação concreta.",
+      "Motivação": "Existe uma dualidade motivacional: você é energizado tanto pelo reconhecimento e interação social (I) quanto pela superação de desafios, controle e alcance de metas (D). Pode haver uma tensão entre querer agradar e querer liderar/vencer.",
+      "Características": "Apresenta uma mistura dinâmica de entusiasmo e persuasão (I) com assertividade direta e impaciência por resultados (D). Pode ser um comunicador carismático que também é bastante direto e exigente. Assume a liderança facilmente, usando tanto a influência quanto a diretividade.",
+      "Pontos Fortes": "Liderança ou iniciativa muito dinâmica e inspiradora, capaz de motivar (I) e direcionar (D) simultaneamente. Grande capacidade de iniciar projetos com energia e assertividade. Persuasivo e orientado para a ação.",
+      "Áreas de Desenvolvimento": "Risco de ser percebido como inconsistente (ora muito social, ora muito direto/impaciente). Pode ter dificuldade em equilibrar a necessidade de atenção/reconhecimento (I) com a necessidade de controle/resultados (D). A impulsividade pode ser acentuada pela combinação. Precisa gerenciar a tendência a interromper ou dominar conversas.",
+      "Relacionamento/Dicas": "Reconheça ambas as facetas. Dê espaço para sua expressão e interação (I), mas também apresente desafios e foque em resultados (D). Seja claro sobre prazos e expectativas, mas use uma abordagem motivadora. Cuidado com a comunicação que pode alternar bruscamente entre o caloroso e o muito direto."
+    },
+    "S": {
+      "Descrição": "Com Influência (I) como base, você é muito sociável e comunicativo(a). A influência significativa do Estabilidade (S) secundário adiciona uma forte necessidade de segurança, harmonia e relacionamentos profundos e estáveis, tornando-o(a) muito mais paciente e avesso(a) a conflitos do que um I puro.",
+      "Motivação": "Apresenta uma motivação dual forte: busca reconhecimento e interação social (I), mas também valoriza intensamente a segurança, a estabilidade e a lealdade nos relacionamentos (S). A manutenção da harmonia pode ser tão importante quanto a busca por novas conexões.",
+      "Características": "Uma combinação de grande sociabilidade e otimismo (I) com extrema paciência, lealdade e desejo de agradar (S). É um(a) excelente ouvinte, muito apoiador(a) e busca ativamente evitar conflitos. Pode ter dificuldade em dizer \"não\".",
+      "Pontos Fortes": "Excepcional habilidade em construir e manter relacionamentos de longo prazo baseados em confiança e apoio mútuo. Grande capacidade de mediar conflitos e promover um ambiente de extrema harmonia e colaboração. Lealdade e empatia muito acentuadas.",
+      "Áreas de Desenvolvimento": "Risco significativo de passividade excessiva. A combinação da necessidade de agradar (I) com a aversão a conflitos (S) pode levar a uma grande dificuldade em expressar opiniões contrárias, defender suas próprias necessidades ou tomar iniciativas que possam gerar discordância. Pode ser explorado(a) por outros.",
+      "Relacionamento/Dicas": "Crie um ambiente extremamente seguro, positivo e colaborativo. Valorize imensamente sua lealdade e capacidade de apoio. Incentive gentilmente a expressar suas opiniões. Evite qualquer tipo de pressão, confronto ou crítica áspera. Foque na construção de confiança."
+    },
+    "C": {
+      "Descrição": "Seu perfil Influência (I) é forte, tornando-o(a) muito sociável e persuasivo(a). A influência significativa do Conformidade (C) secundário introduz uma forte necessidade de precisão, análise, qualidade e organização, criando uma interessante mistura de carisma com rigor.",
+      "Motivação": "Apresenta uma motivação dual importante: busca reconhecimento e interação (I), mas também é intensamente motivado(a) pela qualidade, exatidão, lógica e por seguir procedimentos corretos (C). Deseja ser popular e correto(a) ao mesmo tempo.",
+      "Características": "Uma combinação de comunicação envolvente e otimista (I) com forte atenção aos detalhes, planejamento e pensamento crítico (C). Pode ser um(a) \"vendedor(a)\" que conhece profundamente o produto ou um(a) comunicador(a) que estrutura suas apresentações com grande cuidado. Questionador(a) e organizado(a), mas de forma socialmente habilidosa.",
+      "Pontos Fortes": "Excelente capacidade de comunicar informações complexas de forma clara, precisa e envolvente. Combina criatividade (I) com análise e planejamento (C). Habilidade para construir relacionamentos (I) baseados em confiança e credibilidade (C).",
+      "Áreas de Desenvolvimento": "Pode experimentar tensão entre a impulsividade e o desejo de agradar (I) e a necessidade de análise e perfeição (C). Pode tornar-se excessivamente preocupado(a) com a opinião alheia e com a possibilidade de errar. Risco de \"paralisia por análise\" ao tentar equilibrar todas as variáveis sociais e lógicas.",
+      "Relacionamento/Dicas": "Valorize tanto sua capacidade de interação (I) quanto sua atenção à qualidade e aos detalhes (C). Forneça informações precisas e lógicas, mas faça-o de forma amigável e encorajadora. Dê tempo para análise, mas também ofereça reconhecimento social."
+    }
+  },
+  "I_high": {
+    "D": {
+      "Descrição": "Sua base Influência (I) é muito forte, sendo extremamente sociável e expressivo, mas a influência altíssima do Dominância (D) secundário cria um perfil complexo e poderoso. Há uma combinação intensa de carisma e necessidade de interação com uma assertividade extrema, desejo de controle e foco implacável em resultados.",
+      "Motivação": "Motivado por uma mistura potente e potencialmente conflitante de aclamação social (I) e poder/controle/vitória (D). Busca liderar, influenciar e estar no centro das atenções, tudo ao mesmo tempo e com grande intensidade.",
+      "Características": "Perfil \"líder carismático dominante\". Extremamente energético, comunicativo, persuasivo (I), mas também muito direto, impaciente, exigente e potencialmente intimidador (D). Assume o controle de forma natural e carismática, mas pode ser avassalador.",
+      "Pontos Fortes": "Liderança carismática e dominante excepcional. Capacidade extraordinária de mobilizar e direcionar grandes grupos para objetivos ambiciosos. Visão e energia contagiantes combinadas com determinação férrea. Altamente orientado para a ação e resultados rápidos.",
+      "Áreas de Desenvolvimento": "Risco muito alto de ser percebido como dominador, egocêntrico ou insensível. Grande dificuldade em ouvir e em ceder controle. A necessidade de atenção (I) pode se manifestar como autopromoção, enquanto a necessidade de controle (D) pode levar a microgerenciamento ou impaciência extrema. Equilibrar essas duas forças intensas é o maior desafio.",
+      "Relacionamento/Dicas": "Interaja com energia e dinamismo. Reconheça tanto seu carisma quanto sua força diretiva. Seja extremamente claro, conciso e focado em resultados, mas reserve momentos específicos para escuta ativa. Defina limites claros e não se intimide, mas evite confrontos diretos desnecessários. Foque em como a colaboração pode *acelerar* os resultados (apelo para o D)."
+    },
+    "S": {
+      "Descrição": "Sua base Influência (I) é muito forte, mas a influência altíssima do Estabilidade (S) secundário cria um perfil onde a necessidade extrema de segurança, harmonia e evitar conflitos (S) modera ou entra em conflito com a busca por interação e reconhecimento (I).",
+      "Motivação": "Movido(a) por uma tensão motivacional profunda entre o desejo de interação social e aprovação (I) e a necessidade primordial de segurança absoluta, rotina e ausência total de conflitos (S). Evitar desconforto pode superar a busca por novas interações.",
+      "Características": "Apresenta uma sociabilidade (I) muito focada em agradar e obter aprovação, combinada com a extrema paciência e aversão a conflitos do S. Pode ser extremamente amigável e apoiador(a), mas com grande dificuldade em expressar qualquer tipo de negatividade ou discordância. Evita situações de pressão ou mudança.",
+      "Pontos Fortes": "Capacidade excepcional de criar e manter um ambiente de apoio e harmonia extrema. Habilidade para conectar-se com muitas pessoas em um nível superficialmente positivo (I) enquanto oferece apoio consistente (S). Promove um clima de aceitação e cooperação.",
+      "Áreas de Desenvolvimento": "Extrema dificuldade em lidar com qualquer tipo de conflito, crítica, rejeição ou pressão. Passividade muito acentuada. A necessidade de agradar a todos (I+S) torna quase impossível tomar decisões difíceis, impor limites ou expressar necessidades autênticas. Risco de burnout por tentar agradar sempre.",
+      "Relacionamento/Dicas": "Ofereça um ambiente extremamente seguro, positivo e cheio de validação e reconhecimento. Evite *qualquer* tipo de conflito, crítica ou pressão. Seja muito gentil, paciente e encorajador(a). Foque nos aspectos positivos e na construção de um relacionamento estável e agradável."
+    },
+    "C": {
+      "Descrição": "Sua base Influência (I) é muito forte, mas a influência altíssima do Conformidade (C) secundário cria um perfil complexo onde a necessidade extrema de precisão, análise, dados e perfeição (C) modera ou entra em conflito com a busca por interação social, espontaneidade e reconhecimento (I).",
+      "Motivação": "Movido(a) por uma tensão motivacional profunda entre o desejo de ser popular e aceito (I) e a necessidade primordial de estar correto(a), preciso(a) e evitar qualquer erro (C). O medo de errar ou ser criticado(a) pode ser muito forte.",
+      "Características": "Apresenta uma sociabilidade (I) fortemente filtrada pela cautela, análise e perfeccionismo (C). Pode ser amigável, mas muito reservado(a) até ter certeza da situação ou da informação. Extremamente organizado(a), detalhista, questionador(a) e preocupado(a) com regras e qualidade. A espontaneidade do I é muito contida.",
+      "Pontos Fortes": "Capacidade excepcional de pesquisa, análise e comunicação precisa de informações detalhadas. Habilidade para construir relacionamentos (I) baseados em extrema confiabilidade e competência técnica (C). Planejamento e organização impecáveis em projetos que envolvam interação.",
+      "Áreas de Desenvolvimento": "Risco extremo de perfeccionismo e \"paralisia por análise\", especialmente em situações sociais onde teme ser julgado(a). Pode ser percebido(a) como excessivamente crítico(a), ansioso(a) ou hesitante. A necessidade de aprovação (I) combinada com o medo de errar (C) pode gerar grande ansiedade e dificuldade em tomar decisões ou agir espontaneamente.",
+      "Relacionamento/Dicas": "Baseie a interação em lógica, fatos e dados, mas mantenha um tom positivo e encorajador (I). Seja extremamente claro(a), preciso(a) e forneça todas as informações possíveis. Dê tempo abundante para análise e evite colocá-lo(a) \"na berlinda\". Ofereça segurança e valide tanto sua competência (C) quanto sua pessoa (I)."
+    }
+  },
+  "S_moderate": {
+    "D": {
+      "Descrição": "Com o perfil primário Estabilidade (S), você valoriza a segurança e a colaboração. O secundário Dominância (D) introduz uma leve influência de assertividade e foco em resultados, mantendo a moderação.",
+      "Motivação": "O S busca segurança e apoio, enquanto a influência D impulsiona a agir e tomar decisões pontuais para garantir a estabilidade desejada.",
+      "Características": "A influência D se manifesta como uma capacidade sutil de tomar a frente quando necessário, sem comprometer a natureza colaborativa e paciente do S.",
+      "Pontos Fortes": "Você equilibra a paciência e a cooperação com uma determinação moderada, o que permite defender suas posições de forma calma, mas firme.",
+      "Áreas de Desenvolvimento": "Desenvolva a confiança para expressar suas necessidades e limites, garantindo que sua assertividade moderada seja utilizada de forma eficaz.",
+      "Relacionamento/Dicas": "Combine sua abordagem calma e estável com uma comunicação clara sobre objetivos e expectativas. Seja firme quando necessário, mas sempre valorizando a harmonia."
+    },
+    "I": {
+      "Descrição": "Com um perfil primário Estabilidade (S), você busca harmonia e segurança. O secundário Influência (I) adiciona uma camada moderada de extroversão e comunicação.",
+      "Motivação": "Enquanto o S valoriza a segurança e a cooperação, a influência I traz o desejo de interagir socialmente e construir relacionamentos positivos.",
+      "Características": "A influência I se manifesta como uma maior abertura para o diálogo e interação social, complementando a natureza calma e reservada do S.",
+      "Pontos Fortes": "Você combina a lealdade e a paciência (S) com uma comunicação mais aberta e amigável (I), facilitando a criação de um ambiente de equipe coeso e positivo.",
+      "Áreas de Desenvolvimento": "Trabalhe a assertividade para que a busca por harmonia (S) e aceitação social (I) não o impeça de expressar suas necessidades ou discordâncias.",
+      "Relacionamento/Dicas": "Use sua natureza acolhedora (S) e sua comunicação amigável (I) para construir confiança. Seja claro sobre suas expectativas de forma gentil."
+    },
+    "C": {
+      "Descrição": "Com o perfil primário Estabilidade (S), você preza pela cooperação e harmonia. O secundário Conformidade (C) acrescenta uma leve influência de organização e atenção aos detalhes, de forma moderada.",
+      "Motivação": "Enquanto o S é motivado pela segurança e apoio, o C o impulsiona a buscar clareza e precisão na execução de tarefas.",
+      "Características": "A influência do C se manifesta discretamente, promovendo uma abordagem estruturada que complementa a natural cooperação do S.",
+      "Pontos Fortes": "Essa integração favorece a comunicação clara e fundamentada, enriquecendo o ambiente com uma base de organização e análise sem comprometer a harmonia.",
+      "Áreas de Desenvolvimento": "Busque desenvolver mais flexibilidade e reduzir a autocrítica, para que a busca por precisão não impeça uma interação mais fluida e adaptativa.",
+      "Relacionamento/Dicas": "Combine sua postura acolhedora (S) com uma comunicação estruturada (C), promovendo um ambiente onde a colaboração e a clareza caminhem juntas."
+    }
+  },
+  "S_significant": {
+    "D": {
+      "Descrição": "Sua base Estabilidade (S) o torna paciente, leal e buscador(a) de harmonia. A influência significativa do Dominância (D) secundário adiciona uma forte veia de assertividade, desejo de controle sobre seu ambiente seguro e foco em garantir resultados previsíveis.",
+      "Motivação": "Apresenta uma motivação dual importante: valoriza intensamente a segurança e a estabilidade (S), mas também é impulsionado(a) a agir, controlar e alcançar resultados para *manter* essa segurança (D). Pode ser protetor(a) do status quo.",
+      "Características": "Uma combinação de calma e paciência (S) com assertividade firme e determinação (D). Defende suas posições com tenacidade, especialmente se sentir que a segurança ou a estabilidade estão ameaçadas. Toma decisões ponderadas, mas com clareza de objetivo. Pode ser resistente a mudanças impostas externamente.",
+      "Pontos Fortes": "Grande capacidade de liderar ou agir de forma estável, porém determinada e focada. Habilidade para implementar planos de forma consistente e segura, superando obstáculos com persistência (S+D). Defende fortemente seus valores e as pessoas em quem confia.",
+      "Áreas de Desenvolvimento": "Pode haver tensão entre a aversão a conflitos (S) e a necessidade de ser assertivo(a) (D). Pode tornar-se teimoso(a) ou excessivamente controlador(a) para manter a previsibilidade. Dificuldade em lidar com mudanças rápidas que não controla.",
+      "Relacionamento/Dicas": "Respeite sua necessidade de estabilidade (S), mas reconheça sua força e determinação (D). Comunique-se de forma calma, lógica e previsível. Apresente mudanças como formas de *garantir* a segurança futura. Valorize sua lealdade e firmeza."
+    },
+    "I": {
+      "Descrição": "Sua base Estabilidade (S) o torna paciente, leal e buscador(a) de harmonia. A influência significativa do Influência (I) secundário adiciona uma forte necessidade de interação social, reconhecimento e expressão, tornando-o(a) muito mais sociável e comunicativo(a) do que um S puro.",
+      "Motivação": "Apresenta uma motivação dual forte: valoriza intensamente a segurança e relacionamentos estáveis (S), mas também é impulsionado(a) pela necessidade de conexão social, aprovação e um ambiente estimulante (I). Busca harmonia *e* popularidade.",
+      "Características": "Uma combinação de calma e paciência (S) com grande sociabilidade, otimismo e expressividade (I). É um(a) excelente ouvinte (S), mas também gosta de falar e interagir (I). Muito focado(a) em manter relacionamentos positivos e evitar desagradar.",
+      "Pontos Fortes": "Excepcional habilidade em construir e manter uma ampla rede de relacionamentos harmoniosos e positivos. Combina empatia profunda (S) com carisma e comunicação envolvente (I). Ótimo(a) em mediar, apoiar e criar um clima de cooperação e entusiasmo.",
+      "Áreas de Desenvolvimento": "Risco significativo de dificuldade em lidar com conflitos, tomar decisões difíceis ou dar feedback negativo, devido à combinação da aversão a conflitos (S) com a necessidade de agradar (I). Pode ter dificuldade em manter o foco em tarefas se a interação social for mais atraente. Dificuldade em ser assertivo(a).",
+      "Relacionamento/Dicas": "Crie um ambiente seguro, positivo e altamente interativo. Ofereça reconhecimento e validação social (I) juntamente com segurança e estabilidade (S). Seja gentil e evite críticas ásperas. Incentive a participação e valorize tanto a harmonia quanto a conexão."
+    },
+    "C": {
+      "Descrição": "Sua base Estabilidade (S) o torna paciente, leal e buscador(a) de harmonia. A influência significativa do Conformidade (C) secundário adiciona uma forte necessidade de precisão, análise, regras e qualidade, tornando-o(a) muito metódico(a), organizado(a) e cauteloso(a).",
+      "Motivação": "Apresenta uma motivação dual forte: valoriza intensamente a segurança e estabilidade (S), mas também é fortemente impulsionado(a) pela necessidade de fazer as coisas corretamente, com precisão e seguindo as regras (C). Busca segurança *através* da correção.",
+      "Características": "Uma combinação de extrema paciência e lealdade (S) com forte pensamento analítico, atenção aos detalhes e organização (C). É muito metódico(a), sistemático(a) e avesso(a) a erros. Prefere ambientes previsíveis com regras claras. Resistente a mudanças que não foram cuidadosamente analisadas.",
+      "Pontos Fortes": "Excepcional capacidade de realizar tarefas que exigem alta precisão, consistência e paciência a longo prazo. Altamente confiável e organizado(a). Habilidade para criar e seguir procedimentos detalhados. Promove um ambiente estável e focado na qualidade.",
+      "Áreas de Desenvolvimento": "Risco significativo de lentidão e resistência a mudanças. A combinação da aversão a conflitos (S) com a necessidade de certeza (C) pode levar à \"paralisia por análise\" ou a uma excessiva cautela. Dificuldade em lidar com ambiguidades ou em tomar decisões rápidas. Pode ser percebido(a) como inflexível.",
+      "Relacionamento/Dicas": "Crie um ambiente seguro, estável e com regras claras. Comunique-se de forma lógica, precisa e detalhada. Dê tempo suficiente para análise e planejamento. Valorize a qualidade, a precisão e a confiabilidade. Evite surpresas e pressão."
+    }
+  },
+  "S_high": {
+    "D": {
+      "Descrição": "Sua base Estabilidade (S) é muito forte, buscando extrema segurança e harmonia. A influência altíssima do Dominância (D) secundário cria um perfil complexo onde a assertividade extrema e o desejo de controle (D) são usados primariamente para *defender* a todo custo o ambiente seguro e previsível (S).",
+      "Motivação": "Movido(a) por uma tensão motivacional profunda entre a necessidade primordial de segurança e ausência de conflitos (S) e o desejo intenso de controlar o ambiente para garantir essa segurança (D). A ação (D) está a serviço da estabilidade (S).",
+      "Características": "Apresenta uma calma superficial (S) que pode esconder uma determinação e controle férreos (D). Extremamente resistente a mudanças ou ameaças percebidas ao status quo. Pode ser muito teimoso(a) e controlador(a) de forma passivo-agressiva ou através de regras rígidas. Assertividade usada para proteger, não necessariamente para inovar.",
+      "Pontos Fortes": "Capacidade excepcional de criar e manter sistemas extremamente estáveis e seguros através de controle e persistência. Defensor(a) implacável de seus valores, território ou das pessoas sob sua proteção. Resiliência passiva (aguenta pressão sem ceder).",
+      "Áreas de Desenvolvimento": "Extrema rigidez e resistência a qualquer mudança ou ideia externa. Pode ser percebido(a) como controlador(a), inflexível e avesso(a) a riscos. Dificuldade imensa em adaptar-se a novas circunstâncias. A assertividade (D) pode se manifestar como teimosia ou resistência passiva, dificultando a colaboração genuína.",
+      "Relacionamento/Dicas": "Garanta segurança e previsibilidade máximas. Evite surpresas ou confrontos diretos. Comunique-se de forma muito lógica, calma e focada em como as propostas mantêm ou aumentam a segurança. Reconheça sua força protetora, mas incentive gentilmente a flexibilidade. Construa confiança através de extrema consistência."
+    },
+    "I": {
+      "Descrição": "Sua base Estabilidade (S) é muito forte, mas a influência altíssima do Influência (I) secundário cria um perfil onde a necessidade extrema de interação, reconhecimento e aprovação social (I) coexiste com a aversão a conflitos e a busca por segurança (S).",
+      "Motivação": "Movido(a) por uma tensão motivacional profunda entre a necessidade primordial de segurança e harmonia (S) e o desejo intenso de ser popular, aceito(a) e estar no centro das interações sociais (I). O medo da rejeição (I) e do conflito (S) é muito alto.",
+      "Características": "Apresenta uma sociabilidade (I) muito focada em agradar e obter aprovação, combinada com a extrema paciência e aversão a conflitos do S. Pode ser extremamente amigável e apoiador(a), mas com grande dificuldade em expressar qualquer tipo de negatividade ou discordância. Evita situações de pressão ou mudança.",
+      "Pontos Fortes": "Capacidade excepcional de criar e manter um ambiente de apoio e harmonia extrema. Habilidade para conectar-se com muitas pessoas em um nível superficialmente positivo (I) enquanto oferece apoio consistente (S). Promove um clima de aceitação e cooperação.",
+      "Áreas de Desenvolvimento": "Extrema dificuldade em lidar com qualquer tipo de conflito, crítica, rejeição ou pressão. Passividade muito acentuada. A necessidade de agradar a todos (I+S) torna quase impossível tomar decisões difíceis, impor limites ou expressar necessidades autênticas. Risco de burnout por tentar agradar sempre.",
+      "Relacionamento/Dicas": "Ofereça um ambiente extremamente seguro, positivo e cheio de validação e reconhecimento. Evite *qualquer* tipo de conflito, crítica ou pressão. Seja muito gentil, paciente e encorajador(a). Foque nos aspectos positivos e na construção de um relacionamento estável e agradável."
+    },
+    "C": {
+      "Descrição": "Sua base Estabilidade (S) é muito forte, buscando extrema segurança e harmonia. A influência altíssima do Conformidade (C) secundário cria um perfil onde a necessidade extrema de precisão, análise, regras e perfeição (C) se combina com a aversão a riscos e conflitos (S).",
+      "Motivação": "Movido(a) por uma necessidade primordial dupla: segurança absoluta (S) e correção/perfeição absoluta (C). O medo do erro (C) e o medo da instabilidade/conflito (S) são extremamente elevados.",
+      "Características": "Apresenta uma calma (S) combinada com extremo perfeccionismo, análise minuciosa e adesão rígida a regras e procedimentos (C). Extremamente metódico(a), organizado(a), cauteloso(a) e resistente a qualquer tipo de mudança, erro ou ambiguidade. Evita riscos e confrontos a todo custo.",
+      "Pontos Fortes": "Capacidade extraordinária para tarefas que exigem máxima precisão, consistência, paciência e adesão a padrões por longos períodos. Nível de confiabilidade e organização impecáveis em ambientes estáveis. Habilidade para criar sistemas à prova de falhas (embora possa levar muito tempo).",
+      "Áreas de Desenvolvimento": "Extrema lentidão, rigidez e resistência a mudanças. Perfeccionismo paralisante e medo incapacitante de cometer erros. Dificuldade imensa em lidar com qualquer nível de incerteza, ambiguidade ou pressão. A combinação S+C pode levar a uma completa aversão a tomar iniciativas ou decisões que envolvam o mínimo risco.",
+      "Relacionamento/Dicas": "Ofereça máxima segurança, estabilidade, clareza e previsibilidade. Forneça informações exatas, completas e detalhadas com muita antecedência. Evite *qualquer* tipo de pressão, ambiguidade, crítica ou mudança abrupta. Valorize a precisão, a qualidade e a confiabilidade. Seja extremamente paciente e lógico(a)."
+    }
+  },
+  "C_moderate": {
+    "D": {
+      "Descrição": "Seu perfil primário é Conformidade (C), focado em precisão e análise. O secundário Dominância (D) adiciona uma camada moderada de assertividade e direcionamento para resultados.",
+      "Motivação": "Enquanto o C é motivado pela qualidade e correção, a influência D traz um impulso para aplicar essa precisão na busca por objetivos concretos.",
+      "Características": "A influência D se manifesta na capacidade de defender suas análises e padrões com firmeza, direcionando tarefas de forma organizada e lógica.",
+      "Pontos Fortes": "Você une análise detalhada com uma determinação moderada para garantir que os padrões de qualidade sejam seguidos e os objetivos alcançados.",
+      "Áreas de Desenvolvimento": "Trabalhe a flexibilidade para que a busca pela perfeição (C) e a assertividade (D) não resultem em rigidez excessiva. Aprenda a ponderar entre o ideal e o factível.",
+      "Relacionamento/Dicas": "Use sua capacidade analítica para apresentar argumentos sólidos (C) e sua assertividade moderada (D) para defender suas conclusões de forma clara e objetiva."
+    },
+    "I": {
+      "Descrição": "Seu perfil primário é Conformidade (C), focado em análise e precisão. O secundário Influência (I) introduz uma influência moderada de sociabilidade e expressividade.",
+      "Motivação": "Enquanto o C busca precisão e lógica, a influência I adiciona um toque de desejo por interação social e reconhecimento.",
+      "Características": "A influência I permite que você comunique suas análises e ideias de forma mais acessível e envolvente, superando a possível reserva do C.",
+      "Pontos Fortes": "Você combina rigor analítico (C) com habilidades de comunicação interpessoal (I), sendo capaz de explicar conceitos complexos de forma clara e cativante.",
+      "Áreas de Desenvolvimento": "Equilibre a necessidade de dados e fatos (C) com a intuição e a dinâmica social (I). Cuidado para não sacrificar a precisão pelo entusiasmo.",
+      "Relacionamento/Dicas": "Use sua clareza analítica (C) para estruturar suas ideias e seu carisma moderado (I) para apresentá-las de forma persuasiva e colaborativa."
+    },
+    "S": {
+      "Descrição": "Com um perfil primário Conformidade (C), você é analítico e preciso. O secundário Estabilidade (S) adiciona uma influência moderada de paciência, cooperação e foco em segurança.",
+      "Motivação": "Enquanto o C busca qualidade e correção, a influência S valoriza a segurança, a previsibilidade e um ambiente de trabalho harmonioso.",
+      "Características": "A influência S complementa a natureza analítica do C com uma abordagem mais calma, metódica e colaborativa na execução de tarefas.",
+      "Pontos Fortes": "Você combina precisão e atenção aos detalhes (C) com paciência e confiabilidade (S), sendo excelente em tarefas que exigem qualidade e consistência.",
+      "Áreas de Desenvolvimento": "Trabalhe a flexibilidade e a agilidade, pois a combinação C+S pode levar a uma resistência a mudanças ou a uma lentidão excessiva na tomada de decisões.",
+      "Relacionamento/Dicas": "Comunique suas análises (C) de forma calma e estruturada (S). Valorize a colaboração e ofereça suporte baseado em dados e procedimentos claros."
+    }
+  },
+  "C_significant": {
+    "D": {
+      "Descrição": "Com Conformidade (C) como base, você é analítico(a), preciso(a) e orientado(a) para a qualidade. A influência significativa do Dominância (D) secundário adiciona uma forte veia de assertividade, desejo de controle sobre os processos e foco em alcançar resultados baseados em seus altos padrões.",
+      "Motivação": "Apresenta uma motivação dual forte: busca precisão, lógica e qualidade (C), mas também é impulsionado(a) a agir, controlar e garantir que esses padrões levem a resultados concretos e eficientes (D). Quer estar certo(a) *e* no comando.",
+      "Características": "Uma combinação de forte pensamento crítico e analítico (C) com assertividade direta e foco em objetivos (D). Defende seus pontos de vista com dados e firmeza. É organizado(a), planejado(a) e exigente tanto com a qualidade (C) quanto com a execução (D). Pode ser cético(a) e diretivo(a).",
+      "Pontos Fortes": "Excelente capacidade de liderar projetos ou iniciativas que exigem alta qualidade técnica e foco em resultados. Habilidade para tomar decisões complexas baseadas em análise profunda (C) e implementá-las com determinação (D). Cria e impõe padrões elevados.",
+      "Áreas de Desenvolvimento": "Risco de ser percebido(a) como excessivamente crítico(a), controlador(a) e inflexível. A combinação da necessidade de estar certo(a) (C) com a assertividade (D) pode dificultar a aceitação de feedback ou ideias divergentes. Pode haver impaciência com quem não segue seus padrões ou lógica.",
+      "Relacionamento/Dicas": "Comunique-se com lógica, dados e foco em resultados. Apresente informações de forma estruturada e esteja preparado(a) para defender suas ideias com firmeza. Valorize a competência, a qualidade e a eficiência. Evite abordagens puramente emocionais e respeite sua necessidade de análise antes da ação."
+    },
+    "I": {
+      "Descrição": "Com Conformidade (C) como base, você é analítico(a), preciso(a) e orientado(a) para a qualidade. A influência significativa do Influência (I) secundário adiciona uma forte camada de sociabilidade, expressividade e necessidade de reconhecimento, criando um perfil que busca ser correto *e* popular.",
+      "Motivação": "Apresenta uma motivação dual forte: busca qualidade, lógica e precisão (C), mas também é intensamente motivado(a) pela interação social, reconhecimento e por ser aceito(a) e apreciado(a) pelos outros (I).",
+      "Características": "Uma combinação interessante de pensamento crítico e analítico (C) com comunicação envolvente, otimista e persuasiva (I). É organizado(a) e detalhista, mas também muito sociável e expressivo(a). Preocupa-se tanto com a correção dos fatos quanto com a forma como são recebidos.",
+      "Pontos Fortes": "Excelente capacidade de apresentar informações técnicas ou complexas de forma extremamente clara, envolvente e persuasiva. Combina análise profunda (C) com grande habilidade de comunicação e construção de relacionamentos (I). Consegue ser lógico(a) e carismático(a).",
+      "Áreas de Desenvolvimento": "Pode sentir uma tensão significativa entre a necessidade de precisão (C) e o desejo de agradar ou a impulsividade social (I). Risco de ansiedade elevada por medo de errar (C) e medo de rejeição (I). Pode ter dificuldade em dar feedback negativo ou em tomar decisões que desagradem, mesmo que logicamente corretas.",
+      "Relacionamento/Dicas": "Valorize tanto a lógica e a precisão (C) quanto a interação social e o reconhecimento (I). Forneça dados e fatos, mas faça-o de forma positiva e encorajadora. Dê espaço para interação e expressão, mas também aprecie a qualidade do trabalho. Evite críticas públicas."
+    },
+    "S": {
+      "Descrição": "Sua base Conformidade (C) o torna analítico(a), preciso(a) e orientado(a) para a qualidade. A influência significativa do Estabilidade (S) secundário adiciona uma forte necessidade de segurança, previsibilidade, harmonia e processos bem definidos, tornando-o(a) extremamente metódico(a) e avesso(a) a riscos.",
+      "Motivação": "Apresenta uma motivação dual forte: busca qualidade e correção (C), mas também valoriza intensamente a segurança, a estabilidade e um ambiente livre de conflitos (S). Busca a perfeição *dentro* de um ambiente seguro.",
+      "Características": "Uma combinação de forte pensamento analítico e crítico (C) com extrema paciência, método e resistência a mudanças (S). É muito organizado(a), sistemático(a), cauteloso(a) e avesso(a) a erros e a qualquer tipo de instabilidade ou conflito. Prefere seguir regras e procedimentos à risca.",
+      "Pontos Fortes": "Capacidade excepcional para tarefas que exigem máxima precisão, consistência, paciência e organização em ambientes estáveis. Altamente confiável, metódico(a) e leal. Habilidade para criar e manter sistemas e padrões de alta qualidade com grande rigor e estabilidade.",
+      "Áreas de Desenvolvimento": "Risco significativo de lentidão excessiva, rigidez e forte resistência a qualquer tipo de mudança ou inovação. A combinação de perfeccionismo (C) com aversão a riscos (S) pode levar à inação ou à \"paralisia\". Dificuldade em lidar com ambiguidades, pressão por tempo ou ambientes caóticos.",
+      "Relacionamento/Dicas": "Crie um ambiente extremamente seguro, estável, previsível e com regras claras. Comunique-se de forma muito lógica, precisa, detalhada e calma. Dê tempo abundante para análise e execução. Evite surpresas, pressão e conflitos. Valorize a precisão, a qualidade e a estabilidade."
+    }
+  },
+  "C_high": {
+    "D": {
+      "Descrição": "Sua base Conformidade (C) é muito forte, buscando extrema precisão e lógica. A influência altíssima do Dominância (D) secundário cria um perfil onde a assertividade extrema e o desejo de controle (D) são usados para impor e garantir a adesão a padrões perfeitos e processos lógicos (C).",
+      "Motivação": "Movido(a) por uma motivação intensa e focada: alcançar controle e resultados (D) *através* da implementação de sistemas perfeitos, lógicos e livres de erros (C). Quer que as coisas sejam feitas do jeito certo (o seu jeito, baseado em análise) e tem a força para impor isso.",
+      "Características": "Apresenta uma análise crítica (C) combinada com assertividade dominante (D). Pode ser extremamente exigente, controlador(a), cético(a) e direto(a) ao apontar falhas ou impor procedimentos. Busca a perfeição e usa sua força para direcionar outros a ela. Impaciente com erros ou desvios da lógica.",
+      "Pontos Fortes": "Capacidade excepcional de criar, implementar e controlar sistemas complexos que garantam altíssima qualidade e eficiência (baseada em sua lógica). Liderança técnica forte e assertiva. Habilidade para tomar decisões difíceis baseadas em análise profunda e impô-las. Foco implacável em padrões elevados.",
+      "Áreas de Desenvolvimento": "Risco extremo de ser percebido(a) como autoritário(a), excessivamente crítico(a), inflexível e insensível. A combinação de perfeccionismo (C) com dominância (D) pode sufocar a criatividade e a colaboração. Dificuldade imensa em lidar com ambiguidades, erros alheios ou abordagens diferentes da sua.",
+      "Relacionamento/Dicas": "Interaja com extrema lógica, dados, fatos e eficiência. Apresente argumentos irrefutáveis e demonstre competência. Esteja preparado(a) para um alto nível de exigência e crítica. Foque na qualidade e nos resultados. Evite erros e ambiguidades. Mostre como suas ideias se alinham com a lógica e os padrões dele(a)."
+    },
+    "I": {
+      "Descrição": "Sua base Conformidade (C) é muito forte, mas a influência altíssima do Influência (I) secundário cria um perfil complexo onde a necessidade extrema de interação, reconhecimento e aprovação social (I) coexiste e pode conflitar com a busca por perfeição e análise (C).",
+      "Motivação": "Movido(a) por uma tensão motivacional profunda entre a necessidade primordial de estar correto(a) e evitar erros (C) e o desejo intenso de ser popular, aceito(a) e admirado(a) (I). O medo da crítica (C) e da rejeição social (I) é extremamente alto.",
+      "Características": "Apresenta uma análise crítica e perfeccionismo (C) fortemente influenciados pela necessidade de aprovação social (I). Pode ser muito cauteloso(a) e hesitante, buscando incessantemente a validação externa tanto para a correção de suas ideias quanto para si mesmo(a). Comunica-se de forma a agradar, mesmo ao apresentar dados. Grande ansiedade social pode mascarar a lógica C.",
+      "Pontos Fortes": "Capacidade de realizar análises profundas (C) e comunicá-las de forma a obter máxima aceitação e engajamento (I). Habilidade para construir relacionamentos baseados em confiança (pela precisão C) e simpatia (pelo carisma I). Meticuloso(a) e socialmente consciente.",
+      "Áreas de Desenvolvimento": "Risco extremo de ansiedade, perfeccionismo e dificuldade em tomar decisões por medo de errar *e* de desagradar. Pode ser excessivamente sensível a críticas ou feedback negativo. A necessidade de agradar (I) pode comprometer a objetividade da análise (C). Dificuldade em ser assertivo(a) ou em lidar com qualquer tipo de conflito.",
+      "Relacionamento/Dicas": "Ofereça um ambiente extremamente seguro, positivo e cheio de validação. Forneça informações precisas (C) de forma muito gentil e encorajadora (I). Evite *qualquer* crítica direta ou situação de julgamento. Reconheça tanto a competência quanto a pessoa. Dê tempo para análise e ofereça muito apoio social."
+    },
+    "S": {
+      "Descrição": "Sua base Conformidade (C) é muito forte, buscando extrema precisão e lógica. A influência altíssima do Estabilidade (S) secundário cria um perfil onde a necessidade extrema de segurança, previsibilidade e ausência de conflitos (S) se combina com a busca pela perfeição e correção (C).",
+      "Motivação": "Movido(a) por uma necessidade primordial dupla: perfeição absoluta e ausência de erros (C) e segurança/estabilidade absoluta (S). O medo do erro (C) e o medo da mudança/conflito (S) são ambos extremamente elevados.",
+      "Características": "Apresenta um perfeccionismo (C) combinado com extrema aversão a riscos e mudanças (S). Extremamente metódico(a), organizado(a), cauteloso(a), paciente e resistente a qualquer alteração no status quo ou nos procedimentos estabelecidos. Evita conflitos e ambiguidades a todo custo. Foco intenso em seguir as regras perfeitamente.",
+      "Pontos Fortes": "Capacidade extraordinária para manter sistemas, padrões e rotinas com precisão e estabilidade impecáveis a longuíssimo prazo. Nível máximo de confiabilidade, consistência e paciência em ambientes totalmente previsíveis. Habilidade para tarefas que exigem zero erro e zero mudança.",
+      "Áreas de Desenvolvimento": "Extrema rigidez, lentidão e resistência a qualquer forma de mudança, inovação ou adaptação. Perfeccionismo paralisante combinado com aversão a riscos pode levar à completa inércia. Dificuldade imensa em lidar com qualquer nível de incerteza, pressão ou interação social não estruturada. Pode parecer completamente inflexível e isolado(a).",
+      "Relacionamento/Dicas": "Ofereça um ambiente de máxima segurança, estabilidade, previsibilidade e clareza absoluta. Siga regras e procedimentos à risca. Comunique-se com extrema lógica, precisão e paciência. Evite *qualquer* tipo de mudança, pressão, ambiguidade ou conflito. Valorize a perfeição, a estabilidade e a confiabilidade. Não espere flexibilidade ou rapidez."
+    }
+  }
+}

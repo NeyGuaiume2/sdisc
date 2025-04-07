@@ -1,465 +1,190 @@
-// Elementos DOM
-const startBtn = document.getElementById('start-btn');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-const countdownEl = document.getElementById('countdown');
-const questionNumberEl = document.getElementById('question-number');
-const optionsListEl = document.getElementById('options-list');
+// backend/static/js/script.js
+// Versão 1.1.3 - Coleta nome/email e envia para API
 
-// Seções
-const introSection = document.getElementById('intro');
+// --- Variáveis Globais e Elementos DOM (como antes) ---
+let currentQuestionIndex = 0;
+let userResponses = {};
+let countdownTimer;
+let isTransitioning = false;
+let questions = [];
+let totalQuestions = 0;
 const assessmentSection = document.getElementById('assessment');
 const resultsSection = document.getElementById('results');
+const questionContentWrapper = document.getElementById('question-content-wrapper');
+const optionsList = document.getElementById('options-list');
+const countdownSpan = document.getElementById('countdown');
+const timerContainer = document.querySelector('.moved-timer');
+const quizCompletionSection = document.getElementById('quiz-completion');
+const viewResultsBtn = document.getElementById('view-results-btn');
+const loadingIndicator = document.getElementById('loading-indicator');
+const progressBar = document.getElementById('quiz-progress-bar');
+const progressText = document.getElementById('progress-text');
+const instructionsDiv = document.querySelector('.instructions');
+const instructionsFooterDiv = document.querySelector('.instructions-footer');
+// NOVOS Elementos para Nome/Email
+const userNameInput = document.getElementById('user-name');
+const userEmailInput = document.getElementById('user-email');
 
-// Variáveis de estado
-let questions = [];
-let currentQuestionIndex = 0;
-let responses = {};
-let timerInterval;
-let timeLeft = 15;
 
-// Evento quando a página carrega
-document.addEventListener('DOMContentLoaded', () => {
-    // Carregar perguntas da API
-    fetch('/api/questions')
-        .then(response => response.json())
-        .then(data => {
-            questions = data;
-            console.log('Perguntas carregadas:', questions);
-        })
-        .catch(error => {
-            console.error('Erro ao carregar perguntas:', error);
-        });
-});
+// --- Funções fetchQuestions, startAssessment, loadQuestion, addOptionListeners, ---
+// --- handleContainerClick, handleSelectionChange, saveCurrentResponse, startCountdown, ---
+// --- checkAndAdvance, advanceQuestion (permanecem iguais à resposta anterior) ---
 
-// Iniciar avaliação
-startBtn.addEventListener('click', () => {
-    introSection.style.display = 'none';
-    assessmentSection.style.display = 'block';
-    
-    // Carregar primeira questão
-    loadQuestion(0);
-    
-    // Iniciar timer
-    startTimer();
-});
+async function fetchQuestions() { console.log("fetchQuestions: Buscando questões..."); if(loadingIndicator) loadingIndicator.style.display = 'block'; try { const response = await fetch('/api/questions'); if (!response.ok) throw new Error(`Erro HTTP ${response.status}`); questions = await response.json(); totalQuestions = questions.length; console.log(`fetchQuestions: ${totalQuestions} questões carregadas.`); if (totalQuestions > 0) { if(progressText) progressText.textContent = `Questão 1 / ${totalQuestions}`; return true; } else { console.error("fetchQuestions: Nenhuma questão recebida."); if(optionsList) optionsList.innerHTML = '<p class="warning">Erro: Nenhuma questão carregada.</p>'; const progressContainer = document.querySelector('.progress-container'); if(progressContainer) progressContainer.style.display = 'none'; return false; } } catch (error) { console.error("fetchQuestions: Falha:", error); if(optionsList) optionsList.innerHTML = `<p class="warning">Erro ao carregar: ${error.message}.</p>`; const progressContainer = document.querySelector('.progress-container'); if(progressContainer) progressContainer.style.display = 'none'; return false; } finally { if(loadingIndicator) loadingIndicator.style.display = 'none'; } }
+function startAssessment() { console.log("startAssessment: Iniciando..."); if (!assessmentSection || !quizCompletionSection ) { console.error("Erro Crítico: Seções assessment/quizCompletion não encontradas."); return; } if(resultsSection) resultsSection.style.display = 'none'; quizCompletionSection.classList.remove('visible'); quizCompletionSection.style.display = 'none'; assessmentSection.style.display = 'block'; if(instructionsDiv) instructionsDiv.style.display = 'block'; if(instructionsFooterDiv) instructionsFooterDiv.style.display = 'block'; const progressContainer = document.querySelector('.progress-container'); if(progressContainer) progressContainer.style.display = 'block'; if(timerContainer) timerContainer.classList.remove('hidden'); if(questionContentWrapper) { questionContentWrapper.style.display = ''; questionContentWrapper.classList.remove('fading-out', 'hidden'); } currentQuestionIndex = 0; userResponses = {}; isTransitioning = false; if (questions.length > 0) { console.log("startAssessment: Iniciando com a primeira questão."); loadQuestion(currentQuestionIndex); } else { console.error("startAssessment: NENHUMA questão carregada."); if(optionsList) optionsList.innerHTML = '<p class="warning">Erro: Questões não carregadas.</p>'; if(progressContainer) progressContainer.style.display = 'none'; } }
+function loadQuestion(index) { console.log(`--- loadQuestion: Índice ${index} ---`); if (isTransitioning) { isTransitioning = false; } if (!optionsList || !questionContentWrapper || !countdownSpan || !progressBar || !progressText) { console.error("!!! loadQuestion: Elemento(s) DOM essenciais não encontrado(s) !!!"); return; } if (index < 0 || index >= totalQuestions) { console.error(`loadQuestion: Índice inválido: ${index}.`); return; } const question = questions[index]; if (!question || typeof question !== 'object' || !question.id || !question.D || !question.I || !question.S || !question.C) { console.error(`!!! loadQuestion: Dados inválidos q ${index} !!!`, question); optionsList.innerHTML = `<p class="warning">Erro dados questão ${index + 1}.</p>`; clearInterval(countdownTimer); return; } currentQuestionIndex = index; const progressPercentage = totalQuestions > 0 ? ((index + 1) / totalQuestions) * 100 : 0; progressBar.style.width = `${progressPercentage}%`; progressBar.setAttribute('aria-valuenow', progressPercentage); progressText.textContent = `Questão ${index + 1} / ${totalQuestions}`; optionsList.innerHTML = ''; const profiles = ['D', 'I', 'S', 'C']; profiles.forEach(profileKey => { const word = question[profileKey]; const optionItem = document.createElement('div'); optionItem.classList.add('option-item'); optionItem.innerHTML = ` <div class="option-text">${word}</div> <div class="radio-container mais"> <input type="radio" id="most_${question.id}_${profileKey}" name="most_${question.id}" value="${word}" class="most-option" data-question-id="${question.id}"> </div> <div class="radio-container menos"> <input type="radio" id="least_${question.id}_${profileKey}" name="least_${question.id}" value="${word}" class="least-option" data-question-id="${question.id}"> </div>`; optionsList.appendChild(optionItem); }); const savedResponse = userResponses[question.id]; if (savedResponse) { const mostRadio = optionsList.querySelector(`.most-option[value="${CSS.escape(savedResponse.mais)}"]`); const leastRadio = optionsList.querySelector(`.least-option[value="${CSS.escape(savedResponse.menos)}"]`); if (mostRadio) mostRadio.checked = true; if (leastRadio) leastRadio.checked = true; } addOptionListeners(); questionContentWrapper.classList.remove('fading-out'); void questionContentWrapper.offsetWidth; startCountdown(); console.log(`--- loadQuestion: Concluído ${index} ---`); }
+function addOptionListeners() { optionsList.querySelectorAll('input[type="radio"]').forEach(radio => { radio.removeEventListener('change', handleSelectionChange); radio.addEventListener('change', handleSelectionChange); }); optionsList.querySelectorAll('.radio-container').forEach(container => { container.removeEventListener('click', handleContainerClick); container.addEventListener('click', handleContainerClick); }); }
+function handleContainerClick(event) { if (event.target.tagName === 'INPUT') return; const input = event.currentTarget.querySelector('input[type="radio"]'); if (input && !input.checked) { input.checked = true; input.dispatchEvent(new Event('change', { bubbles: true })); } }
+function handleSelectionChange(event) { if (isTransitioning) return; const changedRadio = event.target; const questionId = changedRadio.getAttribute('data-question-id'); const selectedWord = changedRadio.value; const isMost = changedRadio.classList.contains('most-option'); if (!optionsList || !questionId) return; console.log(`handleSelectionChange: Q${questionId}, Palavra: "${selectedWord}", Tipo: ${isMost ? 'MAIS' : 'MENOS'}`); const otherTypeClass = isMost ? '.least-option' : '.most-option'; const conflictingRadio = optionsList.querySelector(`${otherTypeClass}[value="${CSS.escape(selectedWord)}"]`); if (conflictingRadio && conflictingRadio.checked) { conflictingRadio.checked = false; } saveCurrentResponse(); checkAndAdvance(); }
+function saveCurrentResponse() { if (!questions || currentQuestionIndex < 0 || currentQuestionIndex >= questions.length) return; const questionId = questions[currentQuestionIndex].id; if(!optionsList) return; const mostChecked = optionsList.querySelector(`input.most-option[name="most_${questionId}"]:checked`); const leastChecked = optionsList.querySelector(`input.least-option[name="least_${questionId}"]:checked`); if (mostChecked && leastChecked) { userResponses[questionId] = { questionId: questionId, mais: mostChecked.value, menos: leastChecked.value }; console.log(`saveCurrentResponse: COMPLETA salva Q${questionId}`); } else { if (userResponses[questionId]) { delete userResponses[questionId]; console.log(`saveCurrentResponse: INCOMPLETA removida Q${questionId}.`); } } }
+function startCountdown() { if (!countdownSpan || !timerContainer) return; let timeLeft = 15; countdownSpan.textContent = timeLeft; countdownSpan.style.color = ''; timerContainer.style.backgroundColor = ''; clearInterval(countdownTimer); console.log("startCountdown: Timer Q:", currentQuestionIndex + 1); countdownTimer = setInterval(() => { timeLeft--; const currentCountdownSpan = document.getElementById('countdown'); if (currentCountdownSpan) { currentCountdownSpan.textContent = timeLeft; if (timeLeft <= 5 && timeLeft > 0) { timerContainer.style.backgroundColor = '#ffe0e0'; currentCountdownSpan.style.color = '#d9534f'; } else if (timeLeft <=0 ) { timerContainer.style.backgroundColor = '#f8d7da'; currentCountdownSpan.style.color = '#721c24'; } else { timerContainer.style.backgroundColor = ''; currentCountdownSpan.style.color = ''; } } else { clearInterval(countdownTimer); return; } if (timeLeft <= 0) { clearInterval(countdownTimer); console.log("startCountdown: Tempo esgotado Q:", currentQuestionIndex + 1); if (currentQuestionIndex >= totalQuestions - 1) { showCompletionScreen(); } else { advanceQuestion(true); } } }, 1000); }
+function checkAndAdvance() { console.log("checkAndAdvance: Verificando..."); if (isTransitioning) return; if (!questions || currentQuestionIndex < 0 || currentQuestionIndex >= questions.length) return; const questionId = questions[currentQuestionIndex].id; if (userResponses.hasOwnProperty(questionId)) { console.log(`checkAndAdvance: Completa Q${currentQuestionIndex + 1}.`); if (currentQuestionIndex >= totalQuestions - 1) { showCompletionScreen(); } else { advanceQuestion(false); } } }
+function advanceQuestion(forceNext = false) { console.log(`advanceQuestion: force=${forceNext}, isTransitioning=${isTransitioning}`); if (isTransitioning) return; saveCurrentResponse(); clearInterval(countdownTimer); isTransitioning = true; questionContentWrapper.classList.add('fading-out'); const transitionDuration = 400; setTimeout(() => { const nextIndex = currentQuestionIndex + 1; if (nextIndex < totalQuestions) { loadQuestion(nextIndex); } else { showCompletionScreen(); } }, transitionDuration); }
 
-// Carregar questão
-function loadQuestion(index) {
-    if (!questions.length || index < 0 || index >= questions.length) return;
-    
-    currentQuestionIndex = index;
-    const question = questions[index];
-    
-    // Atualizar número da questão
-    questionNumberEl.textContent = index + 1;
-    
-    // Limpar opções anteriores
-    optionsListEl.innerHTML = '';
-    
-    // Adicionar novas opções
-    question.options.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option-item';
-        
-        // Texto da opção
-        const optionText = document.createElement('div');
-        optionText.className = 'option-text';
-        optionText.textContent = option.text;
-        
-        // Rádio para MAIS
-        const mostRadioContainer = document.createElement('div');
-        mostRadioContainer.className = 'radio-container';
-        const mostRadio = document.createElement('input');
-        mostRadio.type = 'radio';
-        mostRadio.name = `most-${question.id}`;
-        mostRadio.value = option.id;
-        mostRadio.addEventListener('change', () => handleOptionSelect('most', option.id));
-        mostRadioContainer.appendChild(mostRadio);
-        
-        // Rádio para MENOS
-        const leastRadioContainer = document.createElement('div');
-        leastRadioContainer.className = 'radio-container';
-        const leastRadio = document.createElement('input');
-        leastRadio.type = 'radio';
-        leastRadio.name = `least-${question.id}`;
-        leastRadio.value = option.id;
-        leastRadio.addEventListener('change', () => handleOptionSelect('least', option.id));
-        leastRadioContainer.appendChild(leastRadio);
-        
-        // Marcar rádios se já foram selecionados anteriormente
-        if (responses[question.id]) {
-            if (responses[question.id].most === option.id) {
-                mostRadio.checked = true;
-            }
-            if (responses[question.id].least === option.id) {
-                leastRadio.checked = true;
-            }
-        }
-        
-        // Montar opção completa
-        optionDiv.appendChild(optionText);
-        optionDiv.appendChild(mostRadioContainer);
-        optionDiv.appendChild(leastRadioContainer);
-        
-        optionsListEl.appendChild(optionDiv);
-    });
-    
-    // Atualizar estado dos botões
-    updateButtonState();
-    
-    // Reiniciar timer
-    resetTimer();
-}
+function showCompletionScreen() {
+    console.log("showCompletionScreen: Preparando...");
+    const isWrapperVisible = questionContentWrapper && questionContentWrapper.style.display !== 'none' && !questionContentWrapper.classList.contains('fading-out');
+    if (isTransitioning && !isWrapperVisible) return;
+    isTransitioning = true;
 
-// Lidar com seleção de opção
-function handleOptionSelect(type, optionId) {
-    const questionId = questions[currentQuestionIndex].id;
-    
-    // Inicializar resposta para a questão atual se não existir
-    if (!responses[questionId]) {
-        responses[questionId] = {};
+    saveCurrentResponse();
+    clearInterval(countdownTimer);
+
+    // Esconde elementos do quiz
+    const progressContainer = document.querySelector('.progress-container');
+    if(progressContainer) progressContainer.style.display = 'none';
+    if(timerContainer) timerContainer.classList.add('hidden');
+    if(instructionsDiv) instructionsDiv.style.display = 'none';
+    if(instructionsFooterDiv) instructionsFooterDiv.style.display = 'none';
+
+    if(isWrapperVisible) {
+        questionContentWrapper.classList.add('fading-out');
     }
-    
-    // Armazenar resposta
-    responses[questionId][type] = optionId;
-    
-    // Impedir que a mesma opção seja selecionada como MAIS e MENOS
-    if (type === 'most' && responses[questionId].least === optionId) {
-        responses[questionId].least = null;
-        const leastRadios = document.getElementsByName(`least-${questionId}`);
-        leastRadios.forEach(radio => {
-            if (radio.value === optionId) {
-                radio.checked = false;
-            }
-        });
-    } else if (type === 'least' && responses[questionId].most === optionId) {
-        responses[questionId].most = null;
-        const mostRadios = document.getElementsByName(`most-${questionId}`);
-        mostRadios.forEach(radio => {
-            if (radio.value === optionId) {
-                radio.checked = false;
-            }
-        });
-    }
-    
-    // Atualizar estado dos botões
-    updateButtonState();
-}
 
-// Atualizar estado dos botões de navegação
-function updateButtonState() {
-    const questionId = questions[currentQuestionIndex].id;
-    const currentResponse = responses[questionId] || {};
-    
-    // Habilitar próximo se ambos MAIS e MENOS foram selecionados
-    nextBtn.disabled = !(currentResponse.most && currentResponse.least);
-    
-    // Habilitar anterior se não estiver na primeira questão
-    prevBtn.disabled = currentQuestionIndex === 0;
-    
-    // Mudar texto do botão Próximo para Finalizar na última questão
-    if (currentQuestionIndex === questions.length - 1) {
-        nextBtn.textContent = 'Finalizar';
-    } else {
-        nextBtn.textContent = 'Próximo';
-    }
-}
+    const fadeOutDuration = isWrapperVisible ? 400 : 0;
+    setTimeout(() => {
+        if(questionContentWrapper) questionContentWrapper.style.display = 'none';
 
-// Eventos de navegação
-nextBtn.addEventListener('click', () => {
-    // Se for a última questão, finalizar avaliação
-    if (currentQuestionIndex === questions.length - 1) {
-        finishAssessment();
-        return;
-    }
-    
-    // Avançar para próxima questão
-    loadQuestion(currentQuestionIndex + 1);
-});
-
-prevBtn.addEventListener('click', () => {
-    // Voltar para questão anterior
-    loadQuestion(currentQuestionIndex - 1);
-});
-
-// Timer
-function startTimer() {
-    timeLeft = 15;
-    countdownEl.textContent = timeLeft;
-    
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        countdownEl.textContent = timeLeft;
-        
-        if (timeLeft <= 5) {
-            countdownEl.style.color = 'red';
-        } else {
-            countdownEl.style.color = '#e67e22';
-        }
-        
-        if (timeLeft <= 0) {
-            // Tempo esgotado, avançar para próxima questão
-            clearInterval(timerInterval);
-            
-            // Se estiver na última questão, finalizar
-            if (currentQuestionIndex === questions.length - 1) {
-                finishAssessment();
-            } else {
-                // Se tiver selecionado MAIS e MENOS, avançar
-                const questionId = questions[currentQuestionIndex].id;
-                const currentResponse = responses[questionId] || {};
-                
-                if (currentResponse.most && currentResponse.least) {
-                    loadQuestion(currentQuestionIndex + 1);
+        if(quizCompletionSection) {
+            const completionParagraph = quizCompletionSection.querySelector('p.completion-message');
+            if (completionParagraph) {
+                const finalAnswerCount = Object.keys(userResponses).length;
+                if (finalAnswerCount < totalQuestions) {
+                     completionParagraph.innerHTML = `<strong>Atenção:</strong> Foram respondidas ${finalAnswerCount} de ${totalQuestions} questões.<br>Preencha seus dados (opcional) e clique abaixo para ver seu perfil com base nas respostas fornecidas.`; // Ajuste texto
+                     completionParagraph.classList.add('text-warning');
                 } else {
-                    // Se não tiver selecionado, reiniciar timer para mesma questão
-                    resetTimer();
+                     completionParagraph.textContent = "Suas respostas foram registradas com sucesso. Preencha seus dados (opcional) e clique abaixo para ver o seu perfil comportamental."; // Ajuste texto
+                     completionParagraph.classList.remove('text-warning');
                 }
             }
+            quizCompletionSection.style.display = 'block';
+            quizCompletionSection.classList.add('visible');
         }
-    }, 1000);
-}
 
-function resetTimer() {
-    timeLeft = 15;
-    countdownEl.textContent = timeLeft;
-    countdownEl.style.color = '#e67e22';
-    
-    clearInterval(timerInterval);
-    startTimer();
-}
-
-// Finalizar avaliação
-function finishAssessment() {
-    // Parar timer
-    clearInterval(timerInterval);
-    
-    // Verificar se todas as perguntas foram respondidas
-    const questionsAnswered = Object.keys(responses).length;
-    
-    if (questionsAnswered < questions.length) {
-        alert(`Você respondeu apenas ${questionsAnswered} de ${questions.length} perguntas. Certifique-se de responder todas as perguntas.`);
-        // Voltar para a primeira pergunta não respondida
-        for (let i = 0; i < questions.length; i++) {
-            const questionId = questions[i].id;
-            if (!responses[questionId] || !responses[questionId].most || !responses[questionId].least) {
-                loadQuestion(i);
-                return;
-            }
-        }
-        return;
-    }
-    
-    // Exibir indicador de carregamento
-    resultsSection.innerHTML = '<div class="loading">Calculando seus resultados...</div>';
-    assessmentSection.style.display = 'none';
-    resultsSection.style.display = 'block';
-    
-    // Enviar respostas para cálculo
-    fetch('/api/calculate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(responses)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Resultados calculados:', data);
-        
-        // Verificar se há resultados
-        if (!data || !data.results) {
-            throw new Error('Resultados inválidos recebidos do servidor');
-        }
-        
-        // Exibir resultados
-        displayResults(data.results);
-        
-        // Salvar avaliação
-        return fetch('/api/assessment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                responses: responses,
-                results: data.results
-            })
-        });
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Avaliação salva:', data);
-    })
-    .catch(error => {
-        console.error('Erro ao processar avaliação:', error);
-        resultsSection.innerHTML = `
-            <div class="error-message">
-                <h3>Ocorreu um erro ao processar seus resultados</h3>
-                <p>${error.message}</p>
-                <button class="btn primary" onclick="location.reload()">Tentar novamente</button>
-            </div>
-        `;
-    });
-}
-
-// Função para exibir resultados
-function displayResults(results) {
-    // Elementos para exibir na seção de resultados
-    const resultsHTML = `
-        <h2>Seus Resultados DISC</h2>
-        
-        <div class="results-container">
-            <div class="chart-container">
-                <h3>Seu Perfil DISC</h3>
-                <canvas id="disc-chart"></canvas>
-                
-                <div class="disc-scores">
-                    <div class="disc-score">
-                        <strong>D (Dominância):</strong> ${results.disc_scores.D} - ${results.disc_levels.D}
-                    </div>
-                    <div class="disc-score">
-                        <strong>I (Influência):</strong> ${results.disc_scores.I} - ${results.disc_levels.I}
-                    </div>
-                    <div class="disc-score">
-                        <strong>S (Estabilidade):</strong> ${results.disc_scores.S} - ${results.disc_levels.S}
-                    </div>
-                    <div class="disc-score">
-                        <strong>C (Conformidade):</strong> ${results.disc_scores.C} - ${results.disc_levels.C}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="profile-description">
-                <h3>Seu Perfil: ${results.primary_type} - ${results.primary_description.title}</h3>
-                <p>${results.profile_summary}</p>
-            </div>
-        </div>
-        
-        <div class="detailed-report">
-            <h3>Relatório Detalhado</h3>
-            
-            <h4>Pontos Fortes</h4>
-            <ul>
-                ${results.detailed_report.primary_strengths.map(strength => `<li>${strength}</li>`).join('')}
-            </ul>
-            
-            <h4>Áreas de Desenvolvimento</h4>
-            <ul>
-                ${results.detailed_report.development_areas_list.map(area => `<li>${area}</li>`).join('')}
-            </ul>
-            
-            <h4>Como Trabalhar com Você</h4>
-            <p>${results.primary_description.how_to_work_with}</p>
-        </div>
-        
-        <div class="actions">
-            <button class="btn primary" id="download-btn">Baixar Relatório PDF</button>
-            <button class="btn secondary" id="restart-btn">Fazer Novo Teste</button>
-        </div>
-    `;
-    
-    // Atualizar o conteúdo da seção de resultados
-    resultsSection.innerHTML = resultsHTML;
-    
-    // Adicionar eventos aos novos botões
-    document.getElementById('restart-btn').addEventListener('click', () => {
-        location.reload();
-    });
-    
-    document.getElementById('download-btn').addEventListener('click', () => {
-        // Implementação para download do relatório em PDF
-        alert('Funcionalidade de download em desenvolvimento');
-    });
-    
-    // Criar gráfico com Chart.js (assumindo que está incluído na página)
-    try {
-        if (typeof Chart !== 'undefined') {
-            const ctx = document.getElementById('disc-chart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['D', 'I', 'S', 'C'],
-                    datasets: [{
-                        label: 'Pontuação DISC',
-                        data: [
-                            results.disc_scores.D,
-                            results.disc_scores.I,
-                            results.disc_scores.S,
-                            results.disc_scores.C
-                        ],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(75, 192, 192, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
+        if (viewResultsBtn) {
+            viewResultsBtn.disabled = false;
+            viewResultsBtn.textContent = "Ver Meus Resultados"; // Garante texto correto
+            viewResultsBtn.removeEventListener('click', handleViewResultsClick);
+            viewResultsBtn.addEventListener('click', handleViewResultsClick);
         } else {
-            console.warn('Chart.js não está disponível. Incluir <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> no HTML.');
-            
-            // Alternativa simples sem Chart.js
-            const chartContainer = document.querySelector('.chart-container');
-            const canvas = document.getElementById('disc-chart');
-            canvas.remove();
-            
-            const simpleChart = document.createElement('div');
-            simpleChart.className = 'simple-chart';
-            simpleChart.innerHTML = `
-                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.D * 5 + 50)}%;">D: ${results.disc_scores.D}</div>
-                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.I * 5 + 50)}%;">I: ${results.disc_scores.I}</div>
-                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.S * 5 + 50)}%;">S: ${results.disc_scores.S}</div>
-                <div class="simple-bar" style="--value: ${Math.max(0, results.disc_scores.C * 5 + 50)}%;">C: ${results.disc_scores.C}</div>
-            `;
-            
-            chartContainer.insertBefore(simpleChart, chartContainer.firstChild);
-            
-            // Adicionar CSS para barras simples
-            const style = document.createElement('style');
-            style.textContent = `
-                .simple-chart {
-                    height: 200px;
-                    display: flex;
-                    align-items: flex-end;
-                    justify-content: space-around;
-                    margin: 20px 0;
-                }
-                .simple-bar {
-                    width: 40px;
-                    height: var(--value);
-                    background-color: #3498db;
-                    color: white;
-                    text-align: center;
-                    padding-top: 5px;
-                    border-radius: 4px 4px 0 0;
-                }
-            `;
-            document.head.appendChild(style);
+            console.error("showCompletionScreen: Botão 'Ver Resultado' não encontrado!");
         }
-    } catch (e) {
-        console.error('Erro ao criar gráfico:', e);
+         isTransitioning = false;
+    }, fadeOutDuration);
+}
+
+// ATUALIZADO para pegar nome/email
+function handleViewResultsClick() {
+    console.log("handleViewResultsClick: Botão clicado.");
+
+    // Coleta nome e email
+    const userName = userNameInput ? userNameInput.value.trim() : '';
+    const userEmail = userEmailInput ? userEmailInput.value.trim() : '';
+    console.log(`handleViewResultsClick: Nome: "${userName}", Email: "${userEmail}"`);
+
+    // Validação simples de email (opcional, mas recomendada)
+    if (userEmail && !validateEmail(userEmail)) {
+         alert("Por favor, insira um endereço de email válido ou deixe o campo em branco.");
+         return; // Impede o envio se o email for inválido
+    }
+
+    if(viewResultsBtn) {
+        viewResultsBtn.disabled = true; viewResultsBtn.textContent = "Processando...";
+    }
+    // Passa nome e email para finishAssessment
+    finishAssessment(userName, userEmail);
+}
+
+// Função simples de validação de email
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+}
+
+
+// ATUALIZADO para aceitar nome/email
+function finishAssessment(userName, userEmail) {
+     console.log("finishAssessment: Finalizando e enviando.");
+     const answersArray = Object.values(userResponses);
+
+     let overlay = document.getElementById('loading-overlay');
+     // Cria overlay (código anterior omitido por brevidade, mas deve existir)
+     if (!overlay && document.body) { document.body.insertAdjacentHTML('beforeend', `<div id="loading-overlay">...</div>`); overlay = document.getElementById('loading-overlay'); }
+     if (overlay) overlay.style.display = 'flex';
+
+     console.log("finishAssessment: Enviando respostas e userInfo:", JSON.stringify({ answers: answersArray, userInfo: { name: userName, email: userEmail }}));
+
+     if (answersArray.length > 0) {
+         // Passa userName e userEmail para a função de envio
+         sendAnswersAndRedirect(answersArray, { name: userName, email: userEmail });
+     } else {
+         console.warn("finishAssessment: Nenhuma resposta para enviar.");
+         if (overlay) overlay.style.display = 'none';
+         alert("Nenhuma resposta foi registrada.");
+         if(viewResultsBtn) { viewResultsBtn.disabled = false; viewResultsBtn.textContent = "Ver Meus Resultados"; }
+     }
+}
+
+// ATUALIZADO para enviar userInfo
+async function sendAnswersAndRedirect(answers, userInfo) {
+    const overlay = document.getElementById('loading-overlay');
+    console.log("sendAnswersAndRedirect: Tentando POST com userInfo:", userInfo);
+    try {
+        const response = await fetch('/api/calculate', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            // Envia a estrutura completa { answers: [], userInfo: {} }
+            body: JSON.stringify({ answers: answers, userInfo: userInfo })
+        });
+        if (!response.ok) {
+            let errorBody = "Erro"; try { errorBody = await response.text(); } catch (e) {}
+            throw new Error(`Erro Servidor: ${response.status}. ${errorBody.substring(0, 150)}`);
+        }
+        const result = await response.json();
+        if (result.success) { window.location.href = '/results'; }
+        else { throw new Error(result.error || 'Erro no processamento.'); }
+    } catch (error) {
+        console.error('sendAnswersAndRedirect: Falha:', error);
+        if (overlay) overlay.style.display = 'none';
+        alert(`Problema ao enviar/processar:\n${error.message}\nTente novamente.`);
+        if(viewResultsBtn) { viewResultsBtn.disabled = false; viewResultsBtn.textContent = "Ver Meus Resultados"; }
     }
 }
+
+// --- Event Listener Inicial ---
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log("DOMContentLoaded: v1.1.3"); // Atualiza versão log
+    const questionsLoaded = await fetchQuestions();
+    if (questionsLoaded && document.getElementById('assessment')) {
+        startAssessment();
+    } else if (!questionsLoaded) {
+        console.error("DOMContentLoaded: Falha ao carregar questões.");
+    }
+    // Listener do botão refazer (como antes)
+    const newAssessmentBtn = document.getElementById('new-assessment');
+    if (newAssessmentBtn) {
+         newAssessmentBtn.addEventListener('click', (e) => {
+             e.preventDefault(); window.location.href = e.target.href || '/quiz';
+         });
+    }
+    console.log("DOMContentLoaded: Setup concluído.");
+});

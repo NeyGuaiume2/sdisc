@@ -1,36 +1,46 @@
-# Arquivos de ambiente virtual Python
-venv/
-env/
+# Configuração e Instância
+prod_config.py
+instance/
 .env
 
-# Arquivos de cache Python
-__pycache__/
-*.py[cod]
-*$py.class
+# Ambiente Virtual
+venv/
+.venv/
 
-# Arquivos de distribuição
+# Python cache/compilados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Banco de dados e backups
+*.db
+*.sqlite3
+*.sqbpro
+*.bak
+
+# Logs
+logs/
+*.log
+
+# Ngrok e outros executáveis baixados
+ngrok/
+
+# Artefatos de teste/build/dist
+htmlcov/
+.coverage
+test-results/
+playwright-videos/
 dist/
 build/
 *.egg-info/
 
-# Arquivos de banco de dados SQLite
-*.sqlite
-*.db
-
-# Arquivos de log
-*.log
-
-# Arquivos específicos do VS Code
+# IDE/Editor specific
 .vscode/
+.idea/
 
-# Arquivos específicos do Node.js
-node_modules/
-package-lock.json
+# OS specific
+.DS_Store
+Thumbs.db
 
-# Arquivos temporários
-temp/
-tmp/
-
-# Configurações de produção
-prod_config.py
-*.bak ignorará o arquivo requirements.txt.bak-20250405100109
+# Outros específicos do projeto (adicione se necessário)

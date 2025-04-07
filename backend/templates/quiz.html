@@ -4,505 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação DISC - Questionário</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    {# Versão do CSS incrementada #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=1.0.12">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" sizes="any">
 </head>
 <body>
-    <div class="container">
+    <div class="container quiz-page-container">
         <header>
             <h1>Avaliação de Perfil Comportamental DISC</h1>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
         </header>
 
         <main id="quiz-container">
-            <div class="quiz-header">
-                <div class="timer-container">
-                    <span>Tempo restante: </span>
-                    <span id="timer">15</span> segundos
+            <div id="loading-indicator" style="display: none; text-align: center; padding: 20px;">
+                <p>Carregando questões...</p>
+                 <div class="spinner-border text-primary spinner-border-sm" role="status">
+                     <span class="visually-hidden">Carregando...</span>
+                 </div>
+            </div>
+
+            <section id="assessment" style="display: none;">
+                <div class="instructions">
+                    <p class="instruction-lead">Para cada questão com 4 características, selecione <strong>UMA</strong> única opção para:</p>
+                    <ul>
+                        <li><span class="badge bg-primary me-1">MAIS</span>: a característica que <strong>MAIS</strong> se assemelha a você.</li>
+                        <li><span class="badge bg-secondary me-1">MENOS</span>: a característica que <strong>MENOS</strong> se assemelha a você.</li>
+                    </ul>
                 </div>
-                <div class="question-counter">
-                    Questão <span id="currentQuestion">1</span> de <span id="totalQuestions">24</span>
+                <div class="progress-container mb-3">
+                    <div class="progress" style="height: 8px;">
+                        <div id="quiz-progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div id="progress-text" class="text-center text-muted small mt-1">Questão 1 / {{ total_questions | default(28) }}</div>
                 </div>
-            </div>
+                 <div class="instructions-footer mt-2">
+                    <p class="warning mb-2"><strong>Atenção:</strong> Você não pode marcar a mesma característica como MAIS e MENOS.</p>
+                    <p class="instruction-detail mb-2">Seja honesto(a) e rápido(a). O temporizador de <strong>15 segundos</strong> ajuda a capturar sua resposta mais instintiva.</p>
+                    <div class="timer-container moved-timer">
+                        <span>Tempo restante: </span>
+                        <span id="countdown">15</span> seg
+                    </div>
+                 </div>
+                <div id="question-content-wrapper">
+                    <div class="options-container">
+                        <div class="column-header">
+                            <div>Característica</div>
+                            <div>MAIS</div>
+                            <div>MENOS</div>
+                        </div>
+                        <div id="options-list"></div>
+                    </div>
+                </div>
 
-            <div class="instructions">
-                <p>Para cada grupo de 4 características, selecione:</p>
-                <ul>
-                    <li><strong>MAIS</strong>: a característica que <strong>MAIS</strong> se assemelha a você</li>
-                    <li><strong>MENOS</strong>: a característica que <strong>MENOS</strong> se assemelha a você</li>
-                </ul>
-                <p class="warning">Por favor, seja honesto com suas respostas. O temporizador de 15 segundos ajuda a capturar sua resposta mais instintiva.</p>
-            </div>
+                <!-- Seção de Conclusão com Campos de Nome/Email -->
+                <div id="quiz-completion">
+                    <h2>Avaliação Concluída!</h2>
 
-            <div id="questionContainer">
-                <!-- As questões serão inseridas dinamicamente pelo JavaScript -->
-            </div>
+                    {# Mensagem de status (atualizada por JS) #}
+                    <p class="completion-message mb-4">Suas respostas foram registradas. Preencha seus dados para ver o resultado.</p>
 
-            <div class="navigation-buttons">
-                <button id="prevBtn" class="btn secondary" disabled>Anterior</button>
-                <button id="nextBtn" class="btn primary" disabled>Próxima</button>
-                <button id="submitBtn" class="btn success" style="display: none;">Finalizar Avaliação</button>
-            </div>
+                    {# Formulário para Nome e Email #}
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="mb-3">
+                                <label for="user-name" class="form-label">Seu Nome (Opcional):</label>
+                                <input type="text" class="form-control" id="user-name" placeholder="Digite seu nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="user-email" class="form-label">Seu Email (Opcional):</label>
+                                <input type="email" class="form-control" id="user-email" placeholder="exemplo@dominio.com">
+                                <div id="emailHelp" class="form-text small text-muted">Usado apenas para associar a este resultado.</div>
+                            </div>
+                        </div>
+                    </div>
+                    {# Fim Formulário #}
+
+                    <div class="completion-actions">
+                         <button id="view-results-btn" class="btn primary large">Ver Meus Resultados</button>
+                    </div>
+                </div>
+
+            </section>
         </main>
 
-        <div id="results-container" style="display: none;">
-            <h2>Seus Resultados da Avaliação DISC</h2>
-            <div class="results-summary">
-                <p>O sistema está processando sua avaliação...</p>
-            </div>
-            <div class="chart-container">
-                <canvas id="discChart"></canvas>
-            </div>
-            <div class="actions">
-                <button id="viewDetailedResults" class="btn primary">Ver Resultados Detalhados</button>
-                <button id="exportPDF" class="btn secondary">Exportar como PDF</button>
-            </div>
-        </div>
-
-        <div id="confirmation-modal" class="modal">
-            <div class="modal-content">
-                <h3>Tem certeza?</h3>
-                <p>Interromper a avaliação agora resultará na perda de todo o progresso.</p>
-                <div class="modal-actions">
-                    <button id="cancelExit" class="btn secondary">Continuar Avaliação</button>
-                    <button id="confirmExit" class="btn danger">Sair Mesmo Assim</button>
-                </div>
-            </div>
-        </div>
+         <footer class="quiz-footer">
+             <p>© {{ current_year | default("2025") }} Sistema de Avaliação DISC</p>
+         </footer>
     </div>
 
-    <script src="{{ url_for('static', filename='js/disc_questions.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/disc_scoring.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentQuestionIndex = 0;
-            let timer;
-            let timeLeft = 15;
-            let userAnswers = [];
-            let questionsData = [];
-            
-            // Função para carregar as perguntas da API
-            async function loadQuestions() {
-                try {
-                    // Carrega as questões do arquivo JavaScript ou via API
-                    questionsData = window.discQuestions || [];
-                    if (questionsData.length === 0) {
-                        const response = await fetch('/api/disc/questions');
-                        questionsData = await response.json();
-                    }
-                    
-                    document.getElementById('totalQuestions').textContent = questionsData.length;
-                    displayQuestion(currentQuestionIndex);
-                } catch (error) {
-                    console.error('Erro ao carregar questões:', error);
-                    alert('Ocorreu um erro ao carregar o questionário. Por favor, tente novamente.');
-                }
-            }
-            
-            // Função para exibir uma pergunta
-            function displayQuestion(index) {
-                const questionData = questionsData[index];
-                const container = document.getElementById('questionContainer');
-                container.innerHTML = '';
-                
-                const questionElement = document.createElement('div');
-                questionElement.className = 'question-group';
-                
-                questionElement.innerHTML = `
-                    <div class="question-number">Grupo ${index + 1}</div>
-                    <div class="options-container">
-                        ${questionData.options.map((option, optIndex) => `
-                            <div class="option-item" data-index="${optIndex}" data-type="${option.type}">
-                                <div class="option-text">${option.text}</div>
-                                <div class="option-buttons">
-                                    <button class="option-btn more" data-action="more">MAIS</button>
-                                    <button class="option-btn less" data-action="less">MENOS</button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                
-                container.appendChild(questionElement);
-                
-                // Atualiza o contador de perguntas
-                document.getElementById('currentQuestion').textContent = index + 1;
-                
-                // Configura os botões de opção
-                setupOptionButtons();
-                
-                // Atualiza a barra de progresso
-                updateProgressBar();
-                
-                // Reinicia o temporizador
-                resetTimer();
-                
-                // Controle de botões de navegação
-                updateNavigationButtons();
-            }
-            
-            // Configura os botões de opção
-            function setupOptionButtons() {
-                const moreButtons = document.querySelectorAll('.option-btn.more');
-                const lessButtons = document.querySelectorAll('.option-btn.less');
-                
-                moreButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        handleOptionSelection(this, 'more');
-                    });
-                });
-                
-                lessButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        handleOptionSelection(this, 'less');
-                    });
-                });
-            }
-            
-            // Manipula a seleção de opções
-            function handleOptionSelection(button, action) {
-                const optionItem = button.closest('.option-item');
-                const optionIndex = optionItem.dataset.index;
-                const optionType = optionItem.dataset.type;
-                
-                // Remove seleção anterior do mesmo tipo
-                document.querySelectorAll(`.option-btn.${action}.selected`).forEach(btn => {
-                    btn.classList.remove('selected');
-                });
-                
-                // Seleciona o botão atual
-                button.classList.add('selected');
-                
-                // Salva a resposta
-                saveAnswer(currentQuestionIndex, optionIndex, optionType, action);
-                
-                // Habilita o botão de próxima se ambos MAIS e MENOS foram selecionados
-                checkIfQuestionCompleted();
-            }
-            
-            // Verifica se a pergunta atual foi respondida completamente
-            function checkIfQuestionCompleted() {
-                const moreSelected = document.querySelector('.option-btn.more.selected');
-                const lessSelected = document.querySelector('.option-btn.less.selected');
-                
-                if (moreSelected && lessSelected) {
-                    document.getElementById('nextBtn').disabled = false;
-                    
-                    // Habilita o botão de envio na última pergunta
-                    if (currentQuestionIndex === questionsData.length - 1) {
-                        document.getElementById('nextBtn').style.display = 'none';
-                        document.getElementById('submitBtn').style.display = 'inline-block';
-                    }
-                }
-            }
-            
-            // Salva a resposta do usuário
-            function saveAnswer(questionIndex, optionIndex, optionType, action) {
-                // Se já existe uma resposta para esta pergunta, atualize
-                let answerExists = false;
-                userAnswers = userAnswers.map(answer => {
-                    if (answer.questionIndex === questionIndex && answer.action === action) {
-                        answerExists = true;
-                        return {
-                            questionIndex,
-                            optionIndex: parseInt(optionIndex),
-                            optionType,
-                            action
-                        };
-                    }
-                    return answer;
-                });
-                
-                // Se não existe, adicione nova resposta
-                if (!answerExists) {
-                    userAnswers.push({
-                        questionIndex,
-                        optionIndex: parseInt(optionIndex),
-                        optionType,
-                        action
-                    });
-                }
-                
-                // Salva as respostas no localStorage para evitar perda de dados
-                localStorage.setItem('disc_answers', JSON.stringify(userAnswers));
-            }
-            
-            // Navega para a próxima pergunta
-            function goToNextQuestion() {
-                if (currentQuestionIndex < questionsData.length - 1) {
-                    currentQuestionIndex++;
-                    displayQuestion(currentQuestionIndex);
-                }
-            }
-            
-            // Navega para a pergunta anterior
-            function goToPreviousQuestion() {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    displayQuestion(currentQuestionIndex);
-                    
-                    // Restaura as seleções anteriores, se houver
-                    restorePreviousSelections();
-                }
-            }
-            
-            // Restaura seleções anteriores
-            function restorePreviousSelections() {
-                const previousAnswers = userAnswers.filter(
-                    answer => answer.questionIndex === currentQuestionIndex
-                );
-                
-                previousAnswers.forEach(answer => {
-                    const optionItems = document.querySelectorAll('.option-item');
-                    const targetOption = optionItems[answer.optionIndex];
-                    
-                    if (targetOption) {
-                        const actionBtn = targetOption.querySelector(`.option-btn.${answer.action}`);
-                        if (actionBtn) {
-                            actionBtn.classList.add('selected');
-                        }
-                    }
-                });
-                
-                // Verifica se a pergunta está completa para habilitar botões
-                checkIfQuestionCompleted();
-            }
-            
-            // Atualiza os botões de navegação
-            function updateNavigationButtons() {
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const submitBtn = document.getElementById('submitBtn');
-                
-                prevBtn.disabled = currentQuestionIndex === 0;
-                nextBtn.disabled = true; // Inicia desabilitado até que o usuário selecione opções
-                
-                // Mostra botão de enviar apenas na última pergunta
-                if (currentQuestionIndex === questionsData.length - 1) {
-                    nextBtn.style.display = 'none';
-                    submitBtn.style.display = 'inline-block';
-                    submitBtn.disabled = true; // Inicia desabilitado
-                } else {
-                    nextBtn.style.display = 'inline-block';
-                    submitBtn.style.display = 'none';
-                }
-            }
-            
-            // Atualiza a barra de progresso
-            function updateProgressBar() {
-                const progressPercentage = ((currentQuestionIndex + 1) / questionsData.length) * 100;
-                document.getElementById('progressBar').style.width = `${progressPercentage}%`;
-            }
-            
-            // Função para o temporizador
-            function startTimer() {
-                timeLeft = 15;
-                document.getElementById('timer').textContent = timeLeft;
-                
-                clearInterval(timer);
-                timer = setInterval(() => {
-                    timeLeft--;
-                    document.getElementById('timer').textContent = timeLeft;
-                    
-                    if (timeLeft <= 5) {
-                        document.getElementById('timer').classList.add('warning');
-                    } else {
-                        document.getElementById('timer').classList.remove('warning');
-                    }
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(timer);
-                        // Se o tempo acabou e o usuário não respondeu, vai para a próxima pergunta
-                        autoSelectIfNotSelected();
-                    }
-                }, 1000);
-            }
-            
-            // Seleção automática se o usuário não selecionar
-            function autoSelectIfNotSelected() {
-                const moreSelected = document.querySelector('.option-btn.more.selected');
-                const lessSelected = document.querySelector('.option-btn.less.selected');
-                
-                // Se não selecionou MAIS, seleciona aleatoriamente
-                if (!moreSelected) {
-                    const moreButtons = document.querySelectorAll('.option-btn.more');
-                    const randomIndex = Math.floor(Math.random() * moreButtons.length);
-                    moreButtons[randomIndex].click();
-                }
-                
-                // Se não selecionou MENOS, seleciona aleatoriamente
-                if (!lessSelected) {
-                    const lessButtons = document.querySelectorAll('.option-btn.less');
-                    const randomIndex = Math.floor(Math.random() * lessButtons.length);
-                    lessButtons[randomIndex].click();
-                }
-                
-                // Vai para a próxima pergunta após breve delay
-                setTimeout(() => {
-                    if (currentQuestionIndex < questionsData.length - 1) {
-                        goToNextQuestion();
-                    } else {
-                        document.getElementById('submitBtn').click();
-                    }
-                }, 1000);
-            }
-            
-            // Reinicia o temporizador
-            function resetTimer() {
-                clearInterval(timer);
-                startTimer();
-            }
-            
-            // Finaliza o questionário e envia as respostas
-            async function finishQuiz() {
-                clearInterval(timer);
-                
-                try {
-                    // Calcular pontuação usando a biblioteca de pontuação DISC
-                    const discScores = window.discScoring ? 
-                        window.discScoring.calculateScores(userAnswers) : 
-                        calculateScoresLocally();
-                    
-                    // Salvar resultados via API
-                    const response = await fetch('/api/disc/submit', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            answers: userAnswers,
-                            scores: discScores
-                        })
-                    });
-                    
-                    if (response.ok) {
-                        const result = await response.json();
-                        localStorage.setItem('disc_result_id', result.id);
-                        
-                        // Exibe resultados preliminares
-                        showResultsSummary(discScores);
-                    } else {
-                        throw new Error('Falha ao enviar respostas');
-                    }
-                } catch (error) {
-                    console.error('Erro ao finalizar questionário:', error);
-                    alert('Ocorreu um erro ao processar suas respostas. Por favor, tente novamente.');
-                }
-            }
-            
-            // Calcula pontuações localmente caso a biblioteca não esteja disponível
-            function calculateScoresLocally() {
-                // Contadores para cada tipo DISC
-                const counts = {
-                    D: { more: 0, less: 0 },
-                    I: { more: 0, less: 0 },
-                    S: { more: 0, less: 0 },
-                    C: { more: 0, less: 0 }
-                };
-                
-                // Conta as respostas MAIS e MENOS para cada tipo
-                userAnswers.forEach(answer => {
-                    if (answer.optionType in counts) {
-                        counts[answer.optionType][answer.action]++;
-                    }
-                });
-                
-                // Calcula as pontuações finais (MAIS - MENOS)
-                const scores = {
-                    D: counts.D.more - counts.D.less,
-                    I: counts.I.more - counts.I.less,
-                    S: counts.S.more - counts.S.less,
-                    C: counts.C.more - counts.C.less
-                };
-                
-                return scores;
-            }
-            
-            // Exibe o resumo dos resultados
-            function showResultsSummary(scores) {
-                document.getElementById('quiz-container').style.display = 'none';
-                document.getElementById('results-container').style.display = 'block';
-                
-                // Cria o gráfico
-                const ctx = document.getElementById('discChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
-                        datasets: [{
-                            label: 'Seu Perfil DISC',
-                            data: [scores.D, scores.I, scores.S, scores.C],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.7)',
-                                'rgba(255, 206, 86, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                suggestedMax: 10
-                            }
-                        }
-                    }
-                });
-                
-                // Botão para visualizar resultados detalhados
-                document.getElementById('viewDetailedResults').addEventListener('click', function() {
-                    const resultId = localStorage.getItem('disc_result_id');
-                    window.location.href = `/results/${resultId}`;
-                });
-                
-                // Botão para exportar PDF
-                document.getElementById('exportPDF').addEventListener('click', function() {
-                    const resultId = localStorage.getItem('disc_result_id');
-                    window.location.href = `/export-pdf/${resultId}`;
-                });
-            }
-            
-            // Adiciona listeners aos botões
-            document.getElementById('nextBtn').addEventListener('click', goToNextQuestion);
-            document.getElementById('prevBtn').addEventListener('click', goToPreviousQuestion);
-            document.getElementById('submitBtn').addEventListener('click', finishQuiz);
-            
-            // Previne que o usuário feche a página acidentalmente
-            window.addEventListener('beforeunload', function(e) {
-                if (currentQuestionIndex > 0 && currentQuestionIndex < questionsData.length - 1) {
-                    e.preventDefault();
-                    e.returnValue = '';
-                    
-                    // Mostra modal de confirmação
-                    document.getElementById('confirmation-modal').style.display = 'flex';
-                    return '';
-                }
-            });
-            
-            // Modal de confirmação para sair
-            document.getElementById('cancelExit').addEventListener('click', function() {
-                document.getElementById('confirmation-modal').style.display = 'none';
-            });
-            
-            document.getElementById('confirmExit').addEventListener('click', function() {
-                document.getElementById('confirmation-modal').style.display = 'none';
-                localStorage.removeItem('disc_answers');
-                window.location.href = '/';
-            });
-            
-            // Inicia o questionário
-            loadQuestions();
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    {# Versão do script incrementada #}
+    <script src="{{ url_for('static', filename='js/script.js') }}?v=1.1.3"></script>
 </body>
 </html>

@@ -1,4 +1,28 @@
-estas sessões descrevem o que ja foi feito no projeto
+# Importante
+1- responda sempre em português
+2- para correções/alterações de arquivos, peça arquivos não informados que forem necessários para a correção, antes de ir soltando soluções genéricas.
+3- importantíssimo, entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
+4- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
+5- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
+
+# ambiente de trabalho:
+SO windows 11
+Python 3.12.8 
+Ram 14GB
+armazenamento SSD
+GPU integrada
+REDE WIFI
+64 GB DE ARMAZENAMENTO LIVRE
+Nome do dispositivo	PC-NK1-LOJA
+Processador	Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz   3.40 GHz
+RAM instalada	14,0 GB (utilizável: 13,9 GB)
+Tipo de sistema	Sistema operacional de 64 bits, processador baseado em x64
+local de trabalho será: c:\pyp\sdisc
+editor que uso: vscode.
+
+# estas sessões descrevem o que ja foi feito no projeto
+# este arquivo é atualizado manualmente, então ele serve só como referência e praticamente sempre está desatualizado 
+
 
 sessão 1
 
@@ -60,7 +84,7 @@ Implementação Atual: Integração com GitHub e Segurança
 sessão 7
 1. Template HTML para o Questionário DISC resolvido, arquivo quiz.html criado com sucesso.
 
-sessão 8
+sessão 8 (em andamento)
 1. Implementação Atual: Deploy Final e Testes de Integração
 2. Corrigir o script de deploy que falhou anteriormente
 3. Implementar testes de integração para garantir que todas as partes funcionem corretamente
@@ -77,6 +101,4 @@ tests/integration_tests.py (novo)
 docs/manual_usuario.md (novo)
 docs/manual_tecnico.md (novo)
 prod_config.py (novo)
-
-proximo passo prod_config/secret_key pesquisar/implementar
 

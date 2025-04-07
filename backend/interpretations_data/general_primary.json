@@ -1,0 +1,130 @@
+{
+  "D": {
+    "moderate": {
+      "Descrição": "Você demonstra uma natural assertividade e orientação para resultados, expressando suas opiniões com firmeza, mas geralmente com ponderação. Busca direcionar situações para alcançar objetivos claros, equilibrando determinação com uma razoável capacidade de considerar alternativas.",
+      "Motivação": "Impulsionado por desafios que testam sua capacidade e pela conquista de metas bem definidas. A satisfação vem da sensação de progresso, de superar obstáculos e de ver as coisas acontecerem de forma eficaz.",
+      "Características": "Determinado(a), focado(a) em objetivos, assertivo(a) na comunicação, toma decisões com confiança (mesmo sob leve pressão), demonstra iniciativa e prefere um ritmo mais ágil.",
+      "Pontos Fortes": "Capacidade natural de tomar a iniciativa, clareza ao definir objetivos, tomada de decisão geralmente rápida e ponderada, energia para iniciar ações e resolver problemas de forma prática.",
+      "Áreas de Desenvolvimento": "Pode aprimorar a escuta ativa, especialmente quando confrontado(a) com pontos de vista muito diferentes. Desenvolver maior paciência com processos ou pessoas que considera lentos e aprender a valorizar mais a colaboração na construção de soluções.",
+      "Relacionamento/Dicas": "Seja objetivo(a) e direto(a) na comunicação. Apresente informações de forma lógica e focada em resultados. Valorize sua capacidade de decisão, mas reserve espaço genuíno para o diálogo e a troca de ideias antes da ação final.",
+      "Como Você É (Tendência Natural)": "Você tende a ser determinado(a), focado(a) em resolver as coisas e toma a iniciativa com confiança, buscando eficiência.",
+      "Como Pode Melhorar (Reflexão para Crescimento)": "Pratique pausas conscientes antes de responder em discussões, permitindo que outros concluam seus pensamentos. Questione-se sobre o impacto da sua assertividade nos outros e module sua intensidade conforme a situação e a pessoa."
+    },
+    "significant": {
+      "Descrição": "Sua forte orientação para resultados e assertividade são muito evidentes. Você é direto(a) na comunicação, competitivo(a) por natureza e busca ativamente ter controle sobre as situações para garantir a direção e a eficiência desejadas.",
+      "Motivação": "Fortemente motivado(a) por desafios estimulantes, autonomia para agir e pela obtenção rápida de resultados concretos e mensuráveis. O reconhecimento vem mais da conquista e da superação do que da aprovação social.",
+      "Características": "Direto(a) e franco(a) (podendo parecer abrupto(a)), decisivo(a) (mesmo com informações parciais), competitivo(a), muito assertivo(a) na defesa de suas ideias, preza pela independência, pode ser exigente com o ritmo e o progresso, demonstra alta energia.",
+      "Pontos Fortes": "Excelente capacidade de liderança e direcionamento em situações de pressão, habilidade natural para resolver problemas complexos de forma pragmática, tomada de decisão rápida que impulsiona a ação, foco intenso em metas que mobiliza energia.",
+      "Áreas de Desenvolvimento": "Necessita desenvolver ativamente a paciência com processos e estilos diferentes do seu. Aprimorar a sensibilidade interpessoal (percepção do impacto de suas palavras/ações nos sentimentos alheios) e a capacidade de confiar na execução dos outros ao delegar ou compartilhar responsabilidades.",
+      "Relacionamento/Dicas": "Comunique-se de forma clara, concisa e focada em soluções/objetivos. Respeite sua necessidade de autonomia e evite rodeios. No entanto, demonstre interesse pelas opiniões alheias (mesmo que discorde) e explique a lógica por trás das decisões para gerar maior aceitação.",
+      "Como Você É (Tendência Natural)": "Você é altamente focado(a) em resultados, direto(a) ao ponto, gosta de direcionar as ações e prefere estar no controle das situações.",
+      "Como Pode Melhorar (Reflexão para Crescimento)": "Pratique ativamente a escuta sem interrupções. Pergunte mais \"o quê?\" e \"como?\" em vez de apenas direcionar. Monitore conscientemente o impacto da sua intensidade nos outros e busque equilibrar a busca por resultados com a manutenção de relações positivas. Considere o valor da colaboração para soluções mais completas."
+    },
+    "high": {
+      "Descrição": "Você possui uma Dominância muito elevada, sendo extremamente assertivo(a), direto(a), competitivo(a) e intensamente focado(a) em superar desafios e controlar o ambiente ao seu redor para atingir seus objetivos ambiciosos.",
+      "Motivação": "Movido(a) por poder, autoridade, controle sobre o ambiente e a superação de grandes desafios, muitas vezes buscando ser o(a) número um ou o(a) melhor naquilo que faz. A competição é um forte combustível.",
+      "Características": "Extremamente direto(a) (podendo ser percebido(a) como intimidador(a)), enérgico(a), exigente, rápido(a), impaciente com lentidão ou indecisão, busca controle ativo das situações, visionário(a) e orientado(a) para grandes feitos.",
+      "Pontos Fortes": "Capacidade excepcional de liderança e direcionamento em crises ou situações de alta complexidade, visão estratégica aguçada, assume riscos calculados para grandes recompensas, altíssima energia e persistência inabalável diante de obstáculos.",
+      "Áreas de Desenvolvimento": "Risco significativo de ser percebido(a) como autoritário(a), insensível ou excessivamente controlador(a). Necessita fortemente desenvolver a escuta empática, a paciência com diferentes perspectivas e ritmos, e a colaboração genuína (não apenas direcionar tarefas). Reconhecer o valor das contribuições alheias é crucial.",
+      "Relacionamento/Dicas": "Mantenha a comunicação extremamente concisa, lógica e focada em resultados e eficiência. Apresente argumentos sólidos e esteja preparado(a) para defender seu ponto de vista. Demonstre competência e confiança. Evite hesitação, mas não tenha medo de discordar, desde que com bons argumentos. Ofereça autonomia e desafios.",
+      "Como Você É (Tendência Natural)": "Sua presença é marcante pela força, determinação implacável e foco absoluto em vencer e alcançar objetivos grandiosos.",
+      "Como Pode Melhorar (Reflexão para Crescimento)": "O maior desafio é equilibrar sua imensa força e impulso com a sensibilidade necessária para construir e manter relações saudáveis e colaborativas a longo prazo. Pratique ativamente buscar e *considerar* o feedback alheio. Desenvolva a consciência do impacto do seu poder e use-o de forma construtiva."
+    }
+  },
+  "I": {
+    "moderate": {
+        "Descrição": "Você é naturalmente comunicativo(a) e entusiasta, valorizando as relações interpessoais e tendo facilidade em influenciar os outros de maneira positiva e geralmente equilibrada. Aprecia um ambiente interativo e otimista.",
+        "Motivação": "Motivado(a) pelo reconhecimento social, pela oportunidade de interagir e colaborar com outros, e por um ambiente que seja positivo, estimulante e que valorize a expressão de ideias.",
+        "Características": "Sociável, otimista, persuasivo(a) de forma natural, expressivo(a) em suas emoções e ideias, colaborativo(a), gosta de conversar e de se conectar com as pessoas.",
+        "Pontos Fortes": "Excelente comunicação interpessoal, capacidade de motivar e engajar outros com seu otimismo, facilidade em criar um clima positivo e em construir relacionamentos.",
+        "Áreas de Desenvolvimento": "Pode precisar aprimorar a organização de tarefas e informações, manter o foco em detalhes importantes e gerenciar melhor o tempo para evitar a dispersão. A objetividade na análise de dados pode ser um ponto a desenvolver.",
+        "Relacionamento/Dicas": "Interaja de forma aberta, amigável e entusiasta. Demonstre interesse em suas ideias e em quem você é. Valorize suas contribuições sociais e evite um tom excessivamente crítico ou formal. Permita espaço para expressão.",
+        "Como Você É (Tendência Natural)": "Você é sociável, otimista, gosta de conversar e se sente energizado(a) pela interação com as pessoas.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "Desenvolva estratégias para organizar melhor suas tarefas e informações (agendas, listas). Pratique focar em uma coisa de cada vez e preste atenção consciente aos detalhes importantes antes de seguir em frente."
+    },
+    "significant": {
+        "Descrição": "Altamente comunicativo(a), sociável e persuasivo(a), você tem grande facilidade em criar conexões e influenciar pessoas com seu entusiasmo contagiante. Busca ativamente oportunidades de interação e expressão.",
+        "Motivação": "Fortemente motivado(a) por reconhecimento público, popularidade, liberdade para se expressar e interagir, e por ambientes sociais dinâmicos e cheios de energia. A aprovação social é importante.",
+        "Características": "Muito falante, otimista (às vezes excessivamente), altamente sociável, persuasivo(a), expressa emoções abertamente, espontâneo(a), inspirador(a) e pode ser um pouco desorganizado(a) com detalhes.",
+        "Pontos Fortes": "Grande habilidade de networking e construção de relacionamentos amplos, forte poder de persuasão e influência, capacidade natural de criar um ambiente positivo e motivador, habilidade de inspirar e energizar grupos.",
+        "Áreas de Desenvolvimento": "Pode ter dificuldade significativa com organização, seguir rotinas ou procedimentos detalhados, análise crítica e objetiva de fatos (confia mais na intuição e no sentimento), e em manter o foco em tarefas menos estimulantes. Pode prometer mais do que consegue entregar devido ao entusiasmo.",
+        "Relacionamento/Dicas": "Permita que se expressem livremente, ouça suas ideias com entusiasmo genuíno, ofereça reconhecimento público e feedback positivo. Evite rotinas muito rígidas ou ambientes muito formais. Ajude a manter o foco nos objetivos de forma colaborativa.",
+        "Como Você É (Tendência Natural)": "Você adora interagir, é muito persuasivo(a), otimista e busca ativamente a conexão e o reconhecimento social.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "Trabalhe ativamente a organização pessoal (ferramentas, métodos), a gestão do tempo (priorização) e a disciplina para concluir tarefas, mesmo as menos interessantes. Pratique a análise de dados e fatos antes de tomar decisões importantes."
+    },
+    "high": {
+        "Descrição": "Extremamente extrovertido(a), entusiasmado(a) e sociável, você busca constante interação e tem uma necessidade elevada de reconhecimento, aprovação e aceitação social. Sua energia social é muito alta e contagiante.",
+        "Motivação": "Movido(a) intensamente pela aclamação social, popularidade, por estar no centro das atenções e por ambientes altamente estimulantes, dinâmicos e que permitam muita interação e expressão.",
+        "Características": "Exuberante, muito falante (pode monopolizar conversas), emocionalmente muito expressivo(a), busca aprovação constante, impulsivo(a) em suas reações e decisões, otimista ao extremo (pode ignorar riscos), adora novidades.",
+        "Pontos Fortes": "Capacidade excepcional de conectar e energizar pessoas instantaneamente, carisma magnético, otimismo inabalável que pode ser muito motivador, grande poder de influência e persuasão em larga escala.",
+        "Áreas de Desenvolvimento": "Forte tendência à desorganização e dificuldade extrema em lidar com tarefas detalhadas, rotineiras ou que exijam foco prolongado. Pode parecer superficial ou falar excessivamente sem ouvir. Grande dificuldade em dizer \"não\" ou em lidar com críticas e rejeição. A falta de planejamento pode comprometer resultados.",
+        "Relacionamento/Dicas": "Ofereça muito reconhecimento, elogios e feedback positivo. Crie um ambiente socialmente estimulante e permita interação. Seja paciente com a falta de estrutura e ajude gentilmente a manter o foco em prioridades. Evite críticas diretas em público. Use o humor e o entusiasmo na comunicação.",
+        "Como Você É (Tendência Natural)": "Sua energia social é transbordante e você busca ativamente ser o centro das conexões e interações.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "É crucial desenvolver autodisciplina, técnicas de organização e foco em tarefas. Aprender a analisar situações de forma mais objetiva (além do entusiasmo inicial) e a gerenciar a impulsividade são passos essenciais para canalizar seu enorme carisma de forma produtiva. Praticar a escuta ativa é fundamental."
+    }
+  },
+  "S": {
+    "moderate": {
+        "Descrição": "Você valoriza a estabilidade, a segurança e a harmonia em seus relacionamentos e ambiente. É percebido(a) como um(a) colaborador(a) paciente, leal, previsível e um bom ouvinte.",
+        "Motivação": "Motivado(a) por segurança, ambientes previsíveis, relacionamentos de confiança e apoio mútuo. Aprecia a rotina e processos claros que evitem surpresas desagradáveis.",
+        "Características": "Calmo(a), paciente, leal, bom(a) ouvinte, cooperativo(a) por natureza, metódico(a) em suas ações, prefere um ritmo constante e previsível.",
+        "Pontos Fortes": "Excelente em trabalho colaborativo e em equipe, alta confiabilidade e consistência em suas entregas, grande capacidade de oferecer apoio e escuta aos outros, promove um ambiente harmonioso.",
+        "Áreas de Desenvolvimento": "Pode ter alguma dificuldade em lidar com mudanças rápidas ou inesperadas. Pode hesitar em tomar iniciativas que envolvam riscos ou em expressar discordância aberta para evitar conflitos.",
+        "Relacionamento/Dicas": "Ofereça um ambiente seguro, estável e com comunicação clara. Comunique mudanças com antecedência e explique o \"porquê\". Valorize sua lealdade e confiabilidade. Seja paciente e evite pressionar por decisões imediatas.",
+        "Como Você É (Tendência Natural)": "Você é calmo(a), paciente, valoriza a segurança, a cooperação e busca harmonia em suas interações.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "Desenvolva maior conforto com a incerteza, praticando pequenos passos fora da zona de conforto. Treine expressar suas opiniões e necessidades de forma assertiva e calma, mesmo quando discordar."
+    },
+    "significant": {
+        "Descrição": "Muito paciente, leal e metódico(a), você busca ativamente por segurança, estabilidade e harmonia duradouras nas relações e no ambiente ao seu redor. A previsibilidade é altamente valorizada.",
+        "Motivação": "Fortemente motivado(a) por segurança, estabilidade a longo prazo, relacionamentos profundos e confiáveis, e processos bem definidos que minimizem riscos e incertezas.",
+        "Características": "Extremamente calmo(a), muito paciente (pode parecer lento(a) para outros perfis), excepcionalmente leal, previsível em suas reações, resistente a mudanças (especialmente as abruptas), ótimo(a) ouvinte passivo, metódico(a) e consistente.",
+        "Pontos Fortes": "Altamente confiável e consistente em suas ações e compromissos, excelente em seguir procedimentos e manter padrões, promove ativamente a harmonia e a coesão em grupos, grande capacidade de escuta e apoio empático.",
+        "Áreas de Desenvolvimento": "Pode apresentar grande resistência a mudanças, mesmo as necessárias. Dificuldade em tomar decisões rápidas ou sob pressão. Pode ter dificuldade em expressar necessidades próprias ou em lidar com conflitos abertos, preferindo ceder ou evitar.",
+        "Relacionamento/Dicas": "Crie um ambiente seguro, previsível e de confiança mútua. Comunique mudanças de forma muito gradual, clara e com forte justificativa. Seja paciente, evite confrontos e demonstre apreço genuíno pela sua lealdade e estabilidade.",
+        "Como Você É (Tendência Natural)": "Você é a personificação da calma, lealdade, estabilidade e busca por um ambiente seguro e harmonioso.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "Trabalhe a adaptabilidade a mudanças, começando por situações de baixo risco. Pratique a comunicação assertiva para expressar suas opiniões e limites, entendendo que discordar não significa romper a harmonia. Desenvolva maior agilidade na tomada de decisão quando necessário."
+    },
+    "high": {
+        "Descrição": "Você tem uma necessidade extrema de estabilidade, segurança e previsibilidade em todos os aspectos. É excepcionalmente paciente, leal e profundamente avesso(a) a mudanças, incertezas e qualquer tipo de conflito interpessoal.",
+        "Motivação": "Movido(a) intensamente pela segurança absoluta, rotina imutável, relacionamentos profundos e estáveis, e um ambiente totalmente livre de conflitos e surpresas. A manutenção do status quo é primordial.",
+        "Características": "Extremamente calmo(a) e controlado(a), metódico(a) ao extremo, altamente previsível, muito resistente a qualquer tipo de mudança, evita conflitos a todo custo (mesmo que isso signifique reprimir suas próprias necessidades), excepcionalmente leal e dedicado(a) às pessoas e causas em que acredita.",
+        "Pontos Fortes": "Lealdade e confiabilidade inabaláveis, habilidade excepcional em tarefas que exigem extrema consistência, paciência e atenção a longo prazo, promove um ambiente de apoio e segurança para os mais próximos.",
+        "Áreas de Desenvolvimento": "Extrema dificuldade em lidar com qualquer tipo de mudança, incerteza ou ambiguidade. Pode ser excessivamente passivo(a) em situações que exigem ação ou posicionamento. Grande dificuldade em impor limites, expressar descontentamento ou tomar iniciativas que alterem a rotina. Risco de guardar ressentimentos por não expressá-los.",
+        "Relacionamento/Dicas": "Ofereça máxima segurança, estabilidade e previsibilidade. Introduza mudanças de forma extremamente lenta, com muito planejamento, comunicação e apoio contínuo. Evite confrontos diretos e ambientes caóticos. Valorize imensamente sua dedicação e lealdade. Seja extremamente paciente.",
+        "Como Você É (Tendência Natural)": "Sua busca incansável por segurança, harmonia e previsibilidade define suas ações, decisões e relacionamentos.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "O maior desafio é desenvolver resiliência e um mínimo de flexibilidade diante das inevitáveis mudanças da vida. Trabalhar a autoafirmação e a capacidade de se posicionar de forma calma, mas clara, mesmo que isso gere um desconforto inicial, é fundamental para seu bem-estar e crescimento."
+    }
+  },
+  "C": {
+    "moderate": {
+        "Descrição": "Você é naturalmente cuidadoso(a), preciso(a) e organizado(a), valorizando a qualidade, a lógica e a exatidão em suas ações e pensamentos, de forma geralmente equilibrada. Gosta de entender as regras e os porquês.",
+        "Motivação": "Motivado(a) pela qualidade do resultado, pela precisão da informação, pela lógica dos argumentos e por seguir regras, padrões e procedimentos estabelecidos que garantam a correção.",
+        "Características": "Analítico(a), organizado(a), preciso(a), diplomático(a) na comunicação (evita confrontos baseados em emoção), atento(a) aos detalhes, busca informações antes de agir.",
+        "Pontos Fortes": "Alta qualidade e precisão no que faz, atenção aos detalhes importantes, planejamento cuidadoso e estruturado, pensamento lógico e analítico, capacidade de seguir normas e procedimentos.",
+        "Áreas de Desenvolvimento": "Pode, por vezes, ser percebido(a) como perfeccionista ou excessivamente crítico(a) (consigo e com os outros). Pode ter alguma dificuldade em tomar decisões rápidas sob pressão ou em lidar com situações ambíguas ou sem informações completas.",
+        "Relacionamento/Dicas": "Forneça informações detalhadas, claras e precisas. Apresente argumentos baseados em lógica e fatos. Respeite sua necessidade de análise e tempo para pensar. Evite pressioná-lo(a) por decisões rápidas e não fundamentadas.",
+        "Como Você É (Tendência Natural)": "Você é analítico(a), organizado(a), busca a precisão e prefere entender bem as coisas antes de agir.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "Desenvolva maior flexibilidade para lidar com o \"bom o suficiente\" em vez de sempre buscar o perfeito. Pratique tomar decisões com informações incompletas quando necessário e confie um pouco mais na sua intuição informada."
+    },
+    "significant": {
+        "Descrição": "Altamente analítico(a), preciso(a) e organizado(a), você busca a exatidão e a qualidade superior em tudo que faz, seguindo regras, padrões e procedimentos de forma rigorosa. A lógica e os dados são seus guias.",
+        "Motivação": "Fortemente motivado(a) por qualidade impecável, precisão absoluta, lógica irrefutável, fatos comprovados, e por seguir regras e procedimentos corretos para evitar erros.",
+        "Características": "Muito analítico(a), extremamente detalhista, altamente organizado(a) e sistemático(a), cauteloso(a) antes de agir ou decidir, questionador(a) (busca entender profundamente), preciso(a) na comunicação e nas ações.",
+        "Pontos Fortes": "Excepcional atenção aos detalhes e capacidade de identificar falhas ou inconsistências, altíssima qualidade e precisão no trabalho, planejamento minucioso e estratégico, forte pensamento crítico e analítico.",
+        "Áreas de Desenvolvimento": "Pode ser excessivamente crítico(a) (consigo e com os outros), o que pode afetar relacionamentos. Resistente a correr riscos ou a tentar abordagens não comprovadas. Pode sofrer de \"paralisia por análise\" (dificuldade em decidir por excesso de análise). Dificuldade em lidar com ambiguidades ou mudanças de planos.",
+        "Relacionamento/Dicas": "Comunique-se primariamente com fatos, dados e lógica. Forneça informações completas e detalhadas. Dê tempo suficiente para análise e evite surpresas ou pressão por decisões rápidas. Reconheça e valorize a qualidade e a precisão do seu trabalho/pensamento.",
+        "Como Você É (Tendência Natural)": "Você busca a lógica, a precisão, a qualidade e a ordem em tudo, analisando cuidadosamente antes de agir.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "Trabalhe ativamente a flexibilidade e a adaptabilidade. Pratique a tomada de decisão com informações \"suficientes\" em vez de \"perfeitas\". Desenvolva a comunicação interpessoal focando em oferecer feedback construtivo em vez de apenas crítico. Aprenda a lidar melhor com a incerteza."
+    },
+    "high": {
+        "Descrição": "Você possui uma Conformidade extremamente elevada, sendo excepcionalmente analítico(a), preciso(a), organizado(a) e intensamente focado(a) em seguir regras, padrões e procedimentos com perfeição absoluta. A busca pela correção e pela lógica domina suas ações.",
+        "Motivação": "Movido(a) intensamente pela precisão absoluta, qualidade impecável, lógica irrefutável, dados comprovados e pela conformidade estrita com regras e padrões para eliminar qualquer possibilidade de erro.",
+        "Características": "Extremamente analítico(a) e cético(a), perfeccionista ao extremo, muito questionador(a), altamente organizado(a) e sistemático(a), cauteloso(a) ao extremo antes de qualquer ação, pode parecer distante ou frio devido ao foco na lógica sobre a emoção.",
+        "Pontos Fortes": "Nível extraordinário de precisão, qualidade e atenção aos detalhes, capacidade analítica profunda e minuciosa, planejamento e organização impecáveis, pensamento crítico aguçadíssimo, grande habilidade em identificar riscos e falhas potenciais.",
+        "Áreas de Desenvolvimento": "Risco muito elevado de perfeccionismo paralisante, onde a busca pela perfeição impede a conclusão. Excesso de crítica pode minar a moral de outros e prejudicar relacionamentos. Extrema resistência a qualquer desvio de regras ou planos. Lentidão extrema na tomada de decisão. Dificuldade em lidar com o 'cinza', vendo as coisas apenas como certas ou erradas.",
+        "Relacionamento/Dicas": "Baseie *toda* a comunicação em fatos, dados, evidências e lógica comprovada. Seja extremamente claro(a), detalhado(a) e preciso(a). Evite ambiguidades a todo custo. Dê tempo mais do que suficiente para análise e reflexão. Não espere decisões rápidas. Valorize a exatidão e a lógica acima de tudo.",
+        "Como Você É (Tendência Natural)": "Sua mente analítica busca incansavelmente a perfeição, a ordem lógica e a eliminação de qualquer erro ou imprecisão.",
+        "Como Pode Melhorar (Reflexão para Crescimento)": "O maior desafio é aceitar a imperfeição inerente ao mundo e às pessoas. Desenvolver a agilidade, a capacidade de aceitar o \"bom o suficiente\" para seguir em frente, a confiança na intuição (mesmo que mínima) e a habilidade de oferecer feedback de forma mais construtiva e menos crítica são essenciais para seu crescimento e bem-estar."
+    }
+  }
+}

@@ -1,0 +1,458 @@
+{
+  "D_moderate": {
+    "I": {
+      "Concentração e Objetivos": "Mantém o foco em resultados (D), mas a influência I o torna mais receptivo a objetivos que envolvam a equipe e a colaboração. Equilibra a entrega de metas com a manutenção de um bom clima.",
+      "Planejamento e Abordagem Estratégica": "Planejamento pragmático (D) com um toque de otimismo e foco no engajamento (I). Aberto a estratégias que sejam eficientes e também inspiradoras.",
+      "Tomada de Decisão": "Toma decisões com confiança (D), mas está mais disposto a ouvir a opinião da equipe (I) antes de finalizar. Busca um equilíbrio entre agilidade e comunicação.",
+      "Perspectiva e Especialização": "Visão prática (D), mas com maior capacidade de conectar-se com diferentes áreas através da interação (I). Pode desenvolver expertise em áreas que combinem resultados e relacionamento.",
+      "Estilo de Comunicação": "Comunicação direta e objetiva (D), porém mais quente, envolvente e persuasiva (I). Consegue ser firme e claro, mas com mais carisma.",
+      "Dinâmica de Interação Social": "Interage funcionalmente (D), mas com mais abertura social e amistosidade (I). Constrói relacionamentos baseados em competência e simpatia.",
+      "Organização e Administração": "Prefere autonomia (D), motivando a equipe para a auto-organização com foco nos resultados, mas pode ser menos atento aos detalhes organizacionais (I).",
+      "Ritmo e Fluxo de Trabalho": "Gosta de um ritmo dinâmico (D), tornando-se mais adaptável a interrupções sociais ou colaborativas (I). Mantém o foco na ação, mas com mais interação.",
+      "Inovação e Criatividade": "Aberto a inovações práticas (D) e também a ideias criativas que melhorem o ambiente ou a comunicação (I). Gera soluções eficientes e motivadoras.",
+      "Possibilidades Profissionais e Papéis": "Potencial para liderança de equipes (vendas, projetos), gestão comercial. Funções que exigem alcançar metas através do engajamento. Desenvolvimento: escuta ativa, planejamento detalhado."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco principal em resultados (D), mas com maior consideração pela estabilidade e bem-estar da equipe (S). Busca metas de forma consistente e planejada.",
+      "Planejamento e Abordagem Estratégica": "Planejamento pragmático (D) que incorpora análise de riscos e busca por segurança (S). Prefere estratégias eficientes, sustentáveis e que não causem instabilidade.",
+      "Tomada de Decisão": "Decisões confiantes (D), porém mais ponderadas e considerando o impacto na estabilidade (S). Busca equilíbrio entre rapidez e segurança.",
+      "Perspectiva e Especialização": "Visão prática (D) com valorização da consistência (S). Pode se especializar em áreas que permitam controle e previsibilidade.",
+      "Estilo de Comunicação": "Comunicação direta e clara (D), mas entregue de forma mais calma, paciente e diplomática (S). Consegue ser firme sem ser agressivo(a).",
+      "Dinâmica de Interação Social": "Interage de forma objetiva (D), mas valoriza relações de confiança e lealdade (S). Colabora de forma consistente e apoia os colegas.",
+      "Organização e Administração": "Prefere autonomia (D), mas valoriza e cria processos organizados e estáveis (S). Bom em seguir e otimizar procedimentos seguros.",
+      "Ritmo e Fluxo de Trabalho": "Prefere um ritmo constante e produtivo (D), mas sem a pressão excessiva que gera instabilidade (S). Gosta de planejamento e execução metódica.",
+      "Inovação e Criatividade": "Aberto a inovações que melhorem a eficiência (D) e a segurança/estabilidade (S). Criatividade focada em otimização prática e confiável.",
+      "Possibilidades Profissionais e Papéis": "Excelente para gestão de operações, supervisão de equipes, administração, planejamento. Funções que exigem entrega consistente e cuidado com processos/pessoas. Desenvolvimento: agilidade, adaptação a mudanças rápidas."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco em resultados (D) com forte ênfase na qualidade e precisão da entrega (C). Busca metas de forma estruturada, lógica e baseada em padrões.",
+      "Planejamento e Abordagem Estratégica": "Planejamento pragmático (D) combinado com análise lógica e atenção a detalhes (C). Prefere estratégias eficientes e bem fundamentadas.",
+      "Tomada de Decisão": "Decisões confiantes (D), mas baseadas em análise cuidadosa de fatos e dados (C). Busca equilíbrio entre agir rapidamente e garantir a correção.",
+      "Perspectiva e Especialização": "Visão prática (D) com inclinação para desenvolver expertise técnica (C) nas áreas que permitem controle e entrega de qualidade.",
+      "Estilo de Comunicação": "Comunicação direta e objetiva (D), porém mais precisa, lógica e baseada em fatos (C). Valoriza argumentos bem estruturados.",
+      "Dinâmica de Interação Social": "Interage com foco na tarefa (D), valorizando a competência e a lógica (C). Constrói respeito através da qualidade e clareza.",
+      "Organização e Administração": "Prefere autonomia (D) dentro de um sistema organizado e com regras claras (C). Gosta de controlar processos para garantir eficiência e qualidade.",
+      "Ritmo e Fluxo de Trabalho": "Gosta de um ritmo produtivo (D), mas que permita atenção aos detalhes e qualidade (C). Prefere planejamento que evite retrabalho.",
+      "Inovação e Criatividade": "Aberto a inovações lógicas (C) que comprovadamente aumentem a eficiência ou a qualidade (D). Criatividade analítica e focada em otimização.",
+      "Possibilidades Profissionais e Papéis": "Forte potencial para gestão técnica, engenharia, finanças, planejamento estratégico, controle de qualidade. Funções que exigem combinar resultado com rigor analítico. Desenvolvimento: flexibilidade, comunicação interpessoal (empatia)."
+    }
+  },
+  "D_significant": {
+    "I": {
+      "Concentração e Objetivos": "Foco intenso em resultados (D sig) com forte necessidade de reconhecimento (I sig). Motivado por desafios ambiciosos que tragam visibilidade.",
+      "Planejamento e Abordagem Estratégica": "Planejamento audacioso (D sig) comunicado com entusiasmo (I sig). Assume riscos para obter resultados espetaculares e reconhecimento.",
+      "Tomada de Decisão": "Decisões muito rápidas e assertivas (D sig), influenciadas pelo impacto social e entusiasmo (I sig). Pode ser impulsivo.",
+      "Perspectiva e Especialização": "Visão estratégica ampla (D sig) conectada a redes de influência (I sig). Foco em liderança de alto impacto.",
+      "Estilo de Comunicação": "Comunicação energética, carismática (I sig) e direta, assertiva (D sig). Inspirador, mas pode ser avassalador.",
+      "Dinâmica de Interação Social": "Busca interação e liderança (I sig + D sig). Usa carisma para controlar e direcionar. Precisa estar no comando e no centro.",
+      "Organização e Administração": "Aversão a detalhes (I sig) com necessidade de controle estratégico (D sig). Delega o operacional, exige resultados.",
+      "Ritmo e Fluxo de Trabalho": "Ritmo frenético, intenso, cheio de ação e interação (D sig + I sig). Prospera sob pressão e desafios.",
+      "Inovação e Criatividade": "Gera ideias disruptivas (D sig) e empolgantes (I sig). Foco em inovações de grande impacto e visibilidade.",
+      "Possibilidades Profissionais e Papéis": "CEO, empreendedor serial, líder de vendas, marketing de lançamento, político. Papéis que exigem visão, energia e mobilização. Desenvolvimento: disciplina, análise crítica, paciência, escuta."
+    },
+    "S": {
+      "Concentração e Objetivos": "Tensão entre resultados ambiciosos (D sig) e necessidade de segurança/estabilidade (S sig). Pode hesitar ou usar a força D para defender rigidamente a estabilidade.",
+      "Planejamento e Abordagem Estratégica": "Planejamento cauteloso (S sig) que freia o impulso D. Estratégias focadas em controle extremo para prevenir mudanças.",
+      "Tomada de Decisão": "Processo lento e difícil. Assertividade D usada para resistir a mudanças, não para decidir rapidamente. A necessidade S de segurança domina.",
+      "Perspectiva e Especialização": "Visão focada em controlar (D sig) uma área segura e estabelecida (S sig). Guardião inflexível do conhecimento existente.",
+      "Estilo de Comunicação": "Calma (S sig) mas com forte assertividade e inflexibilidade (D sig) ao defender regras ou resistir a mudanças.",
+      "Dinâmica de Interação Social": "Leal a um círculo restrito (S sig), usando a força D para proteger e resistir a influências externas. Interações controladas.",
+      "Organização e Administração": "Necessidade extrema de controle (D sig) sobre ambientes estruturados e previsíveis (S sig). Intolerância a desvios.",
+      "Ritmo e Fluxo de Trabalho": "Impõe um ritmo estável (S sig) com extrema firmeza (D sig). Resiste a pressão por velocidade ou mudança.",
+      "Inovação e Criatividade": "Praticamente inexistente. Resistência forte a novas ideias, vistas como ameaça.",
+      "Possibilidades Profissionais e Papéis": "Gestão de compliance rigorosa, segurança, auditoria de processos críticos. Papéis de \"guardião\" em ambientes regulados e estáveis. Desenvolvimento: flexibilidade, abertura ao novo, delegação com confiança."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco extremo em resultados rápidos (D sig) E perfeição absoluta (C sig). Exigência paralisante de velocidade impecável.",
+      "Planejamento e Abordagem Estratégica": "Tensão entre planejamento agressivo D e análise exaustiva C. Resulta em planos complexos e rígidos ou alternância entre impulso e análise.",
+      "Tomada de Decisão": "Difícil. Rapidez D conflita com necessidade C de certeza. Pode decidir rápido ignorando dados ou paralisar buscando erro zero.",
+      "Perspectiva e Especialização": "Hiperespecialização técnica (C sig) como base para controle e autoridade (D sig). Mestre controlador do seu domínio técnico.",
+      "Estilo de Comunicação": "Extremamente direta, assertiva (D sig), precisa, lógica e crítica (C sig). Fria, pedante, impaciente. Focada em correção e comando.",
+      "Dinâmica de Interação Social": "Formal, focada em tarefa, competência (C sig) e controle (D sig). Domina discussões técnicas, aponta erros, impõe visão.",
+      "Organização e Administração": "Necessidade compulsiva de controle (D sig) sobre ambientes organizados e padronizados (C sig). Impõe sistemas complexos e rígidos.",
+      "Ritmo e Fluxo de Trabalho": "Exige ritmo rápido (D sig) e perfeito (C sig). Intolerante com erro, lentidão. Pressão extrema.",
+      "Inovação e Criatividade": "Limitada a otimizações lógicas que aumentem controle e perfeição. Ceticismo extremo com ideias novas.",
+      "Possibilidades Profissionais e Papéis": "Funções ultra-especializadas exigindo controle total, zero erro e análise profunda sob pressão (cirurgia, controle aéreo). Risco de stress extremo. Desenvolvimento: flexibilidade, pragmatismo, inteligência emocional, colaboração."
+    }
+  },
+  "D_high": {
+    "I": {
+      "Concentração e Objetivos": "Foco absoluto em poder e vitória (D high), usando carisma (I sig) como ferramenta estratégica para mobilizar e persuadir.",
+      "Planejamento e Abordagem Estratégica": "Planejamento visionário e audacioso (D high), promovido com extremo carisma e energia (I sig). Assume riscos enormes para obter domínio e aclamação.",
+      "Tomada de Decisão": "Decisões instantâneas e autoritárias (D high), muitas vezes teatrais para impressionar e afirmar poder (I sig). Lógica secundária ao impacto.",
+      "Perspectiva e Especialização": "Visão estratégica ampla (D high), conectada a redes de influência (I sig). Líder carismático e dominador, mestre em política e imagem.",
+      "Estilo de Comunicação": "Extremamente direta, assertiva, controladora (D high) E altamente carismática, persuasiva, energética (I sig). Inspira e intimida. Egocêntrico.",
+      "Dinâmica de Interação Social": "Necessidade de dominar e ser o centro (D high + I sig). Usa carisma para controlar e direcionar. Interação é performance de poder.",
+      "Organização e Administração": "Exige controle total (D high), mas com pouca atenção a detalhes (I sig). Delega massivamente, exige resultados e lealdade.",
+      "Ritmo e Fluxo de Trabalho": "Impõe ritmo frenético, exigente, cheio de adrenalina (D high + I sig). Prospera em crise e alta pressão.",
+      "Inovação e Criatividade": "Inovações radicais e visionárias (D high), promovidas com paixão e carisma (I sig). Foco em poder e admiração.",
+      "Possibilidades Profissionais e Papéis": "Líder de movimentos de massa, CEO de crescimento explosivo, político poderoso. Papéis exigindo visão, carisma extremo e poder. Risco de abuso de poder. Desenvolvimento: autocontrole, ética, humildade, escuta."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco paradoxal: usar poder extremo (D high) para *impedir* qualquer mudança e manter um controle rígido sobre o status quo (S sig).",
+      "Planejamento e Abordagem Estratégica": "Planejamento focado obsessivamente em defesa, controle e eliminação de ameaças (D high + S sig). Estratégias reativas para manter a ordem existente.",
+      "Tomada de Decisão": "Paralisia proativa, mas poder autoritário (D high) para vetar e resistir a decisões que ameacem a segurança (S sig).",
+      "Perspectiva e Especialização": "Visão estreita focada em controlar totalmente (D high) o ambiente seguro e conhecido (S sig). Guardião autoritário do status quo.",
+      "Estilo de Comunicação": "Geralmente contida (S sig), mas com explosões de comando autoritário e inflexibilidade (D high) quando ameaçado.",
+      "Dinâmica de Interação Social": "Interage minimamente, preferindo controle à distância (D high) e previsibilidade (S sig). Interação defensiva e controladora.",
+      "Organização e Administração": "Necessidade compulsiva de controle total (D high) sobre um sistema imutável e regrado (S sig). Rigidez absoluta.",
+      "Ritmo e Fluxo de Trabalho": "Impõe ritmo estável ou lento (S sig) com autoridade implacável (D high). Resiste a qualquer aceleração ou mudança.",
+      "Inovação e Criatividade": "Inexistente e ativamente suprimida. Novidade é ameaça à ordem e ao poder.",
+      "Possibilidades Profissionais e Papéis": "Adaptação muito difícil. Talvez controle absoluto sobre sistemas legados isolados. Risco de tirania. Desenvolvimento: terapia intensiva focada em controle, medo da mudança, flexibilidade."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco absoluto em controle e poder (D high) casado com busca intensa por perfeição e precisão (C sig). Exigência paralisante de velocidade impecável.",
+      "Planejamento e Abordagem Estratégica": "Planejamento audacioso (D high), mas obsessivamente detalhado e avesso a erros (C sig). Estratégias complexas e rígidas para controle perfeito.",
+      "Tomada de Decisão": "Autoritária (D high), baseada em análise \"perfeita\" (C sig). Confiança absoluta na própria lógica, impermeável a outras visões. Risco de paralisia.",
+      "Perspectiva e Especialização": "Visão de poder (D high) baseada em hiperespecialização técnica (C sig). Autoridade suprema e incontestável em seu domínio.",
+      "Estilo de Comunicação": "Extremamente direta, controladora (D high), precisa, lógica e crítica (C sig). Implacável, frio, pedante, autoritário.",
+      "Dinâmica de Interação Social": "Controla (D high) pela superioridade intelectual e exigência de perfeição (C sig). Domina, corrige, comanda.",
+      "Organização e Administração": "Controle total (D high) através de sistemas obsessivamente organizados e regrados (C sig). Inflexível.",
+      "Ritmo e Fluxo de Trabalho": "Impõe ritmo rápido (D high) E exige perfeição absoluta (C sig). Pressão insustentável.",
+      "Inovação e Criatividade": "Limitada a otimizações lógicas que aumentem controle e perfeição. Ceticismo destrutivo a ideias novas.",
+      "Possibilidades Profissionais e Papéis": "Papéis raros exigindo controle absoluto, análise microscópica e decisão autoritária (cirurgia, controle de sistemas críticos). Risco de toxicidade. Desenvolvimento: flexibilidade, pragmatismo, inteligência emocional, confiança."
+    }
+  },
+  "I_moderate": {
+    "D": {
+      "Concentração e Objetivos": "Foco em interação e engajamento (I), mas com direcionamento para objetivos (D). Motiva a equipe (I) para metas específicas (D).",
+      "Planejamento e Abordagem Estratégica": "Planejamento otimista (I), com senso prático e orientação à ação (D). Aberto a estratégias inspiradoras com resultado viável.",
+      "Tomada de Decisão": "Prefere discutir (I), mas decide assertivamente (D) quando necessário, buscando equilíbrio entre colaboração e direcionamento.",
+      "Perspectiva e Especialização": "Visão ampla e conectada (I), direcionando a rede para objetivos práticos (D). Pode liderar marketing ou vendas com gestão.",
+      "Estilo de Comunicação": "Entusiasta e persuasiva (I), mas com clareza de objetivo e assertividade moderada (D). Carisma com direcionamento.",
+      "Dinâmica de Interação Social": "Sociável (I), usando interações para influenciar e direcionar (D). Lidera pelo engajamento.",
+      "Organização e Administração": "Prefere flexibilidade (I), mas com foco D na organização necessária para metas. Delega detalhes, mantém direcionamento.",
+      "Ritmo e Fluxo de Trabalho": "Gosta de ritmo dinâmico, interativo (I) e orientado à ação (D). Adapta-se a multitarefas com pessoas e resultados.",
+      "Inovação e Criatividade": "Criatividade para ideias que engajem (I) e possam ser implementadas com impacto (D). Brainstorming com foco prático.",
+      "Possibilidades Profissionais e Papéis": "Liderança inspiradora, gestão comercial, marketing, parcerias. Mobiliza pessoas para ação. Desenvolvimento: atenção a detalhes, planejamento de longo prazo."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco dividido entre interação (I) e manutenção da harmonia/estabilidade (S). Motivado por objetivos que fortaleçam a equipe.",
+      "Planejamento e Abordagem Estratégica": "Planejamento otimista (I) e colaborativo, preferindo abordagens seguras (S). Evita riscos ou rupturas.",
+      "Tomada de Decisão": "Fortemente orientado ao consenso (I+S). Busca decisões que agradem e mantenham estabilidade. Evita posições controversas.",
+      "Perspectiva e Especialização": "Visão relacional (I) focada na coesão do grupo (S). Especialização em 'people skills' (RH, mediação).",
+      "Estilo de Comunicação": "Muito amigável, calorosa, otimista (I) e paciente, diplomática (S). Excelente ouvinte, focado em apoiar.",
+      "Dinâmica de Interação Social": "Sociável (I), focado em construir relações leais e harmoniosas (S). Cria clima de confiança e apoio.",
+      "Organização e Administração": "Prefere flexibilidade (I), mas aprecia alguma estrutura (S). Organizado em tarefas que beneficiem o grupo.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo colaborativo, estável e positivo. Busca equilíbrio entre interação e execução tranquila.",
+      "Inovação e Criatividade": "Criatividade voltada para melhorar relacionamento e clima (I+S). Aberto a ideias que promovam harmonia.",
+      "Possibilidades Profissionais e Papéis": "RH (clima), aconselhamento, coaching de equipe, mediação, atendimento ao cliente focado em relacionamento. Exige empatia. Desenvolvimento: assertividade, decisão ágil."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco dividido entre interação/reconhecimento (I) e qualidade/precisão (C). Motivado por ser popular *e* competente.",
+      "Planejamento e Abordagem Estratégica": "Planejamento otimista (I), mas com atenção a detalhes e dados (C). Aberto a ideias novas, mas avalia lógica.",
+      "Tomada de Decisão": "Prefere discutir (I), mas analisa fatos (C). Equilibra interação e análise. Preocupado com correção e comunicação.",
+      "Perspectiva e Especialização": "Visão ampla (I), com capacidade de aprofundar em detalhes (C). Explica o complexo de forma clara.",
+      "Estilo de Comunicação": "Entusiasta e envolvente (I), mas precisa, lógica (C). Carismático e informativo.",
+      "Dinâmica de Interação Social": "Sociável (I), valoriza conversas com substância (C). Constrói relações com simpatia e competência.",
+      "Organização e Administração": "Gosta de flexibilidade (I), mas capaz de organização (C). Equilíbrio entre interação e ordem.",
+      "Ritmo e Fluxo de Trabalho": "Adapta-se a ritmo variado (I), mas precisa de tempo para qualidade (C). Colabora em tarefas criativas e rigorosas.",
+      "Inovação e Criatividade": "Combina ideias envolventes (I) com análise de viabilidade (C). Busca soluções inovadoras e bem executadas.",
+      "Possibilidades Profissionais e Papéis": "Marketing técnico, vendas consultivas, treinamento técnico, comunicação corporativa precisa. Combina social com analítico. Desenvolvimento: agilidade na decisão, lidar com ambiguidades."
+    }
+  },
+  "I_significant": {
+    "D": {
+      "Concentração e Objetivos": "Foco dividido entre interação/reconhecimento (I sig) e a forte necessidade de resultados e controle (D sig). Usa carisma (I) para atingir metas agressivas (D).",
+      "Planejamento e Abordagem Estratégica": "Planejamento assertivo (D sig), comunicado com entusiasmo (I sig). Disposto a correr riscos para obter resultados e reconhecimento.",
+      "Tomada de Decisão": "Rápida, combinando assertividade (D sig) com influência social (I sig). Pode decidir para impressionar ou liderar.",
+      "Perspectiva e Especialização": "Visão ampla (I sig) focada em oportunidades de liderança e impacto (D sig). Direciona e influencia simultaneamente.",
+      "Estilo de Comunicação": "Persuasiva e carismática (I sig), mas com forte assertividade e direcionamento (D sig). Motivador, mas impaciente.",
+      "Dinâmica de Interação Social": "Altamente interativo (I sig), com tendência a liderar e controlar o grupo (D sig). Usa a rede para promover metas.",
+      "Organização e Administração": "Prefere flexibilidade (I sig), mas D sig impõe alguma organização focada em controle e resultados.",
+      "Ritmo e Fluxo de Trabalho": "Muito rápido, dinâmico, cheio de ação e interação (I sig + D sig). Gosta de pressão e desafios.",
+      "Inovação e Criatividade": "Criatividade abundante (I sig), focada em ideias de alto impacto implementadas rapidamente (D sig).",
+      "Possibilidades Profissionais e Papéis": "Liderança executiva, empreendedorismo, vendas de ciclo rápido, marketing de lançamento. Exige energia, carisma e foco em resultados. Desenvolvimento: paciência, escuta, análise de riscos."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco fortemente dividido entre necessidade de interação/aprovação (I sig) e manutenção da harmonia/segurança (S sig). Evita metas que gerem conflito.",
+      "Planejamento e Abordagem Estratégica": "Planejamento muito otimista (I sig) e focado no bem-estar da equipe (S sig). Evita riscos e confrontos. Pode ser irrealista.",
+      "Tomada de Decisão": "Extrema dificuldade. Busca consenso máximo e aprovação social (I sig + S sig). Evita decisões controversas para não desagradar.",
+      "Perspectiva e Especialização": "Visão ampla e relacional (I sig), focada na harmonia (S sig). Facilitador social, sem foco técnico.",
+      "Estilo de Comunicação": "Muito calorosa, expressiva, otimista (I sig) e paciente, apaziguadora (S sig). Dificuldade em ser direto ou crítico.",
+      "Dinâmica de Interação Social": "Necessidade alta de interação (I sig), focada em harmonia e aceitação (S sig). Popular, mas evita atrito.",
+      "Organização e Administração": "Dificuldade com estrutura (I sig), exacerbada pela aversão a impor regras (S sig). Precisa de ambiente externo acolhedor.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo colaborativo, positivo, sem pressão (I sig + S sig). Desorganiza-se sob prazos ou conflitos.",
+      "Inovação e Criatividade": "Focada em melhorar clima e bem-estar. Resistente a inovações que causem desconforto.",
+      "Possibilidades Profissionais e Papéis": "Gestão de comunidades, eventos sociais corporativos, RH (bem-estar). Exige extrema habilidade social e foco em harmonia. Desenvolvimento: assertividade, lidar com conflitos, foco em resultados."
+    },
+    "C": {
+      "Concentração e Objetivos": "Tensão alta entre interação/reconhecimento (I sig) e busca por qualidade/precisão (C sig). Ansiedade por ser popular E perfeito.",
+      "Planejamento e Abordagem Estratégica": "Planejamento detalhado (C sig), comunicado com otimismo (I sig). Luta para equilibrar análise crítica com entusiasmo.",
+      "Tomada de Decisão": "Hesitante. Busca por aprovação social (I sig) e pela resposta \"certa\" (C sig). Medo de errar e ser criticado.",
+      "Perspectiva e Especialização": "Busca expertise técnica (C sig) para ganhar reconhecimento social (I sig). Foco em ser o \"especialista simpático\".",
+      "Estilo de Comunicação": "Cuidadosa, precisa (C sig), mas com esforço para ser agradável (I sig). Preocupado com exatidão e reação alheia.",
+      "Dinâmica de Interação Social": "Sociável (I sig), preferindo interações onde possa demonstrar competência (C sig). Busca aprovação pela inteligência.",
+      "Organização e Administração": "Altamente organizado (C sig), mas a necessidade I de interação pode prejudicar a consistência.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo metódico (C sig), mas aprecia interação (I sig). Resiste à pressão por velocidade.",
+      "Inovação e Criatividade": "Criatividade (I sig) com capacidade de avaliar lógica (C sig). Busca soluções inovadoras e bem fundamentadas.",
+      "Possibilidades Profissionais e Papéis": "Especialista de produto, analista com interface com usuário, consultor técnico. Combina técnico e social. Desenvolvimento: lidar com imperfeição, decisão ágil, reduzir autocrítica."
+    }
+  },
+  "I_high": {
+    "D": {
+      "Concentração e Objetivos": "Foco fortemente desviado para interação e aprovação (I high), com base D insuficiente para manter direcionamento consistente a resultados.",
+      "Planejamento e Abordagem Estratégica": "Planejamento superficial, focado em autopromoção (I high), sem estrutura D para torná-lo viável.",
+      "Tomada de Decisão": "Muito impulsiva, baseada em emoção e validação social (I high), sem lógica ou assertividade D consistente.",
+      "Perspectiva e Especialização": "Visão dispersa, focada na imagem social (I high). A base D não direciona para especialização.",
+      "Estilo de Comunicação": "Excessiva, carismática mas superficial (I high), com lampejos de assertividade D. Dificuldade em ouvir.",
+      "Dinâmica de Interação Social": "Necessidade extrema de atenção (I high), usando assertividade D para garantir espaço social.",
+      "Organização e Administração": "Organização muito baixa (I high), sem força D para impor estrutura mínima.",
+      "Ritmo e Fluxo de Trabalho": "Caótico, dependente de estímulos (I high). Base D não mantém fluxo consistente.",
+      "Inovação e Criatividade": "Explosão de ideias (I high), sem foco D para avaliar ou implementar. Criatividade como performance.",
+      "Possibilidades Profissionais e Papéis": "Funções específicas em entretenimento/animação. Requer desenvolvimento massivo em disciplina, foco, escuta (D). Desenvolvimento: autoconsciência, técnicas de organização."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco totalmente paralisado pela evitação de conflitos (S mod) e busca incessante por aprovação (I high). Incapaz de focar em tarefas.",
+      "Planejamento e Abordagem Estratégica": "Inexistente ou focado apenas em agradar e evitar desconforto (S mod + I high). Aversão a riscos.",
+      "Tomada de Decisão": "Paralisia crônica. Medo de conflito (S mod) e rejeição (I high) impede qualquer posição.",
+      "Perspectiva e Especialização": "Focada na dinâmica social imediata e segura (S mod + I high). Sem visão de longo prazo.",
+      "Estilo de Comunicação": "Excessivamente agradável, apologética, focada em validação (I high) e passividade S.",
+      "Dinâmica de Interação Social": "Necessidade compulsiva de agradar (I high) em ambiente seguro (S mod). Relações superficiais.",
+      "Organização e Administração": "Dificuldade extrema, a menos que seguir regras seja forma de evitar conflito.",
+      "Ritmo e Fluxo de Trabalho": "Totalmente dependente da aprovação e clima social (I high), dentro de zona segura (S mod).",
+      "Inovação e Criatividade": "Nenhuma. Medo e necessidade de agradar inibem.",
+      "Possibilidades Profissionais e Papéis": "Adaptação muito difícil. Suporte básico em ambiente protegido. Requer desenvolvimento profundo em autoestima, assertividade, enfrentamento. Desenvolvimento: Terapia focada em dependência de aprovação e evitação."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco paralisado pela tensão entre agradar (I high) e medo extremo de errar (C sig). Dificuldade em agir.",
+      "Planejamento e Abordagem Estratégica": "Bloqueado. Análise C nunca termina por medo de imperfeição, necessidade I impede estratégias controversas.",
+      "Tomada de Decisão": "Bloqueio extremo. Medo C de errar + medo I de desagradar. Busca validação impossível.",
+      "Perspectiva e Especialização": "Busca hiperespecialização C para validação I, mas insegurança impede aplicação.",
+      "Estilo de Comunicação": "Hesitante, ansiosa, focada em evitar críticas (C sig) com tentativas de agradar (I high).",
+      "Dinâmica de Interação Social": "Interação marcada por ansiedade (C sig) e busca por aprovação (I high). Evita avaliação.",
+      "Organização e Administração": "Obsessivamente organizado no pessoal (C sig), mas incapaz de lidar com sistemas externos.",
+      "Ritmo e Fluxo de Trabalho": "Extremamente lento, interrompido por auto-verificação e busca por validação.",
+      "Inovação e Criatividade": "Bloqueado pelo medo de errar e desagradar.",
+      "Possibilidades Profissionais e Papéis": "Adaptação muito difícil. Pesquisa isolada sem pressão. Requer desenvolvimento intenso em autoconfiança, pragmatismo. Desenvolvimento: Terapia para perfeccionismo e ansiedade social."
+    }
+  },
+  "S_moderate": {
+    "D": {
+      "Concentração e Objetivos": "Foco em execução consistente (S) com capacidade de iniciativa (D) para garantir estabilidade ou cumprir metas importantes.",
+      "Planejamento e Abordagem Estratégica": "Metódico e seguro (S), com disposição para estratégias assertivas (D) se o benefício para a estabilidade for claro.",
+      "Tomada de Decisão": "Prefere colaboração (S), mas decide com firmeza (D) para proteger a equipe ou manter a ordem. Assertividade calma.",
+      "Perspectiva e Especialização": "Especialista (S) com foco D em áreas que permitam controle seguro (ex: supervisão de processos).",
+      "Estilo de Comunicação": "Calma e paciente (S), mas capaz de ser clara e firme (D) ao defender procedimentos.",
+      "Dinâmica de Interação Social": "Valoriza relações estáveis (S), mas toma iniciativa (D) para resolver problemas ou garantir harmonia.",
+      "Organização e Administração": "Gosta de ordem (S) e tem iniciativa (D) para criar ou manter essa ordem. Bom em implementar processos.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo estável (S), mas acelera ou direciona (D) quando a situação exige.",
+      "Inovação e Criatividade": "Foco em melhorias práticas e seguras (S), com iniciativa para implementar otimizações (D).",
+      "Possibilidades Profissionais e Papéis": "Supervisão operacional, gestão de processos, administração estável. Exige consistência e cuidado. Desenvolvimento: adaptação a mudanças, tomada de riscos calculados."
+    },
+    "I": {
+      "Concentração e Objetivos": "Foco dividido entre consistência (S) e manutenção de clima positivo (I). Motivado por objetivos colaborativos.",
+      "Planejamento e Abordagem Estratégica": "Metódico (S) com abordagem otimista e comunicativa (I). Prefere estratégias seguras e bem aceitas.",
+      "Tomada de Decisão": "Orientado ao consenso (S+I). Busca decisões que agradem e mantenham estabilidade. Evita posições controversas.",
+      "Perspectiva e Especialização": "Especialista (S) com boa capacidade de conectar e comunicar (I). Ponto de apoio confiável e amigável.",
+      "Estilo de Comunicação": "Calma e paciente (S), combinada com tom amigável e otimista (I). Excelente ouvinte, focado em apoiar.",
+      "Dinâmica de Interação Social": "Valoriza relações estáveis (S) e busca interações positivas (I). Cria clima de equipe coeso.",
+      "Organização e Administração": "Gosta de ordem (S), mas com flexibilidade para interação (I). Consistente em tarefas de apoio ao grupo.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo estável (S) com espaço para interação (I). Busca fluxo harmonioso e agradável.",
+      "Inovação e Criatividade": "Focada em melhorar relacionamento e clima (S+I). Aberto a ideias que fortaleçam harmonia.",
+      "Possibilidades Profissionais e Papéis": "RH (clima), aconselhamento, coaching de equipe, mediação, atendimento ao cliente focado em relacionamento. Exige empatia. Desenvolvimento: assertividade, decisão ágil."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco duplo na qualidade/precisão (C) e na execução segura/estável (S). Motivado por entregar trabalho correto em ambiente estável.",
+      "Planejamento e Abordagem Estratégica": "Planejamento detalhado, lógico (C) e focado na segurança (S). Prefere estratégias comprovadas e de baixo risco.",
+      "Tomada de Decisão": "Ponderado, baseado em análise (C) e busca por segurança/consenso (S). Evita decisões apressadas ou arriscadas.",
+      "Perspectiva e Especialização": "Especialização técnica (C) com foco na aplicação consistente e confiável (S). Especialista meticuloso e seguro.",
+      "Estilo de Comunicação": "Calma, paciente (S), precisa, lógica e factual (C). Prefere clareza e correção, evitando confrontos.",
+      "Dinâmica de Interação Social": "Interação focada na tarefa, baseada em competência (C) e confiança (S). Colabora bem em ambientes estruturados.",
+      "Organização e Administração": "Altamente organizado e metódico (S+C). Segue regras para garantir qualidade e previsibilidade.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo estável, metódico (S+C) que permita atenção a detalhes e execução segura. Lida mal com pressão.",
+      "Inovação e Criatividade": "Criatividade focada na otimização segura e precisa (S+C). Cético com inovações, prefere melhorias incrementais.",
+      "Possibilidades Profissionais e Papéis": "Controle de qualidade, adm. de sistemas, contabilidade, suporte técnico, documentação. Ambientes estáveis e com processos claros. Desenvolvimento: flexibilidade, agilidade na decisão, comunicação proativa."
+    }
+  },
+  "S_significant": {
+    "D": {
+      "Concentração e Objetivos": "Foco intenso na manutenção da estabilidade (S sig) com capacidade moderada de iniciativa (D mod) para defender essa estabilidade.",
+      "Planejamento e Abordagem Estratégica": "Planejamento detalhado e avesso a riscos (S sig) com disposição para estratégias assertivas (D mod) que reforcem a segurança.",
+      "Tomada de Decisão": "Processo lento (S sig), mas com capacidade de decisão firme (D mod) para proteger o status quo.",
+      "Perspectiva e Especialização": "Especialização profunda (S sig) com iniciativa (D mod) para ser autoridade na área segura.",
+      "Estilo de Comunicação": "Extremamente calma (S sig), mas capaz de firmeza (D mod) ao defender regras.",
+      "Dinâmica de Interação Social": "Prefere círculo restrito (S sig), mas pode tomar iniciativa (D mod) para proteger o grupo.",
+      "Organização e Administração": "Necessita de estrutura (S sig) e tem iniciativa (D mod) para criar e manter a ordem.",
+      "Ritmo e Fluxo de Trabalho": "Necessita de ritmo estável (S sig), com capacidade de direcionar (D mod) para manter a rotina.",
+      "Inovação e Criatividade": "Baixíssima. Criatividade (D mod) usada para otimizar a segurança (S sig).",
+      "Possibilidades Profissionais e Papéis": "Supervisão de compliance, gestão de processos críticos, auditoria interna estável. Papéis de guardião com alguma autonomia. Desenvolvimento: flexibilidade, adaptação, decisão sob incerteza."
+    },
+    "I": {
+      "Concentração e Objetivos": "Foco paralisado pela tensão entre interação/aprovação (I sig) e segurança/harmonia (S sig). Evita objetivos controversos.",
+      "Planejamento e Abordagem Estratégica": "Otimista (I sig) mas extremamente cauteloso (S sig). Planos focados em manter todos felizes e seguros.",
+      "Tomada de Decisão": "Extrema dificuldade (I sig + S sig). Busca consenso absoluto e evita posições firmes.",
+      "Perspectiva e Especialização": "Visão relacional (I sig) focada na manutenção de harmonia segura (S sig). Facilitador social.",
+      "Estilo de Comunicação": "Extremamente calorosa, expressiva, paciente e apaziguadora (I sig + S sig). Dificuldade em dizer não.",
+      "Dinâmica de Interação Social": "Necessidade alta de interação (I sig) em ambientes seguros e harmoniosos (S sig). Popular, mas sem firmeza.",
+      "Organização e Administração": "Dificuldade com estrutura (I sig), exacerbada pela aversão a impor regras (S sig).",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo colaborativo, positivo, sem pressão (I sig + S sig). Desestruturado por conflitos.",
+      "Inovação e Criatividade": "Focada em melhorar clima social. Resistente a inovações disruptivas.",
+      "Possibilidades Profissionais e Papéis": "Hospitalidade, eventos sociais de baixo risco, animação sociocultural. Exige extrema habilidade social e foco em harmonia. Desenvolvimento: assertividade, lidar com conflito, responsabilidade."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco absoluto na execução perfeita, segura e conforme as regras (S sig + C sig). Evita objetivos que ameacem estabilidade.",
+      "Planejamento e Abordagem Estratégica": "Planejamento obsessivamente detalhado, analítico e avesso a riscos (S sig + C sig). Resistência extrema a mudanças.",
+      "Tomada de Decisão": "Extremamente lento e propenso à paralisia (S sig + C sig). Busca regras que ditem a resposta.",
+      "Perspectiva e Especialização": "Hiperespecialização técnica (C sig) focada na manutenção segura (S sig). Visão muito focada.",
+      "Estilo de Comunicação": "Muito precisa, lógica (C sig), entregue de forma extremamente calma e paciente (S sig). Evita ambiguidades e confrontos.",
+      "Dinâmica de Interação Social": "Interação muito reservada, formal, focada em detalhes (S sig + C sig). Prefere trabalhar sozinho.",
+      "Organização e Administração": "Necessidade extrema de ordem e regras (S sig + C sig). Segue e impõe sistemas rígidos.",
+      "Ritmo e Fluxo de Trabalho": "Extremamente lento, metódico, previsível (S sig + C sig). Incapaz de lidar com pressão.",
+      "Inovação e Criatividade": "Nenhuma. Resistência ativa a novas ideias.",
+      "Possibilidades Profissionais e Papéis": "Funções ultra-especializadas exigindo zero erro, consistência e paciência (controle qualidade crítico, arquivista). Desenvolvimento: flexibilidade, pragmatismo, habilidades sociais."
+    }
+  },
+  "S_high": {
+    "D": {
+      "Concentração e Objetivos": "Foco quase totalmente dominado pela necessidade avassaladora de segurança (S high). Energia D usada defensivamente para *resistir* a mudanças.",
+      "Planejamento e Abordagem Estratégica": "Planejamento obsessivo focado em defesa e controle (D sig + S high). Rejeita ativamente qualquer estratégia de mudança.",
+      "Tomada de Decisão": "Paralisia proativa, mas poder autoritário (D high) para vetar ameaças à segurança.",
+      "Perspectiva e Especialização": "Perspectiva muito estreita, focada em controlar rigidamente (D high) a rotina segura (S high).",
+      "Estilo de Comunicação": "Mínima e passiva (S high) com explosões de assertividade extrema (D high) quando ameaçado.",
+      "Dinâmica de Interação Social": "Evita interações (S high), usando força D para controlar seu espaço seguro.",
+      "Organização e Administração": "Necessidade compulsiva de controle (D high) sobre rotina imutável (S high). Rigidez extrema.",
+      "Ritmo e Fluxo de Trabalho": "Impõe ritmo lento e imutável (S high) com controle autoritário (D high).",
+      "Inovação e Criatividade": "Totalmente inexistente e ativamente combatida.",
+      "Possibilidades Profissionais e Papéis": "Adaptação extremamente difícil. Alto risco de comportamento obstrutivo e tirânico. Desenvolvimento: Terapia intensiva para controle, medo da mudança, flexibilidade."
+    },
+    "I": {
+      "Concentração e Objetivos": "Foco totalmente paralisado pela evitação de conflitos (S high) e busca incessante por aprovação (I high).",
+      "Planejamento e Abordagem Estratégica": "Inexistente ou focado apenas em agradar e evitar desconforto (S high + I high).",
+      "Tomada de Decisão": "Paralisia crônica. Medo extremo de conflito (S high) e rejeição (I high) impede qualquer posição.",
+      "Perspectiva e Especialização": "Focada na dinâmica social imediata e segura (S high + I high).",
+      "Estilo de Comunicação": "Excessivamente agradável, apologética, focada em validação (I high) e passividade S.",
+      "Dinâmica de Interação Social": "Necessidade compulsiva de agradar (I high) em ambiente seguro (S high).",
+      "Organização e Administração": "Dificuldade extrema, a menos que regra evite conflito.",
+      "Ritmo e Fluxo de Trabalho": "Totalmente dependente da aprovação e clima social (I high), dentro de zona segura (S high).",
+      "Inovação e Criatividade": "Nenhuma. Medo e necessidade de agradar inibem.",
+      "Possibilidades Profissionais e Papéis": "Adaptação muito difícil. Suporte básico em ambiente protegido. Requer desenvolvimento profundo. Desenvolvimento: Terapia para dependência de aprovação e evitação."
+    },
+    "C": {
+      "Concentração e Objetivos": "Foco absoluto e paralisante na eliminação de erros (C high) e manutenção da rotina segura (S high).",
+      "Planejamento e Abordagem Estratégica": "Planejamento obsessivo e paralisante (C high + S high). Rejeição total a mudanças.",
+      "Tomada de Decisão": "Incapacidade crônica. Medo extremo de errar (C high) e necessidade de segurança (S high).",
+      "Perspectiva e Especialização": "Perspectiva microscópica focada na execução perfeita da rotina segura (C high + S high).",
+      "Estilo de Comunicação": "Mínima, hesitante, focada em evitar erros ou conflitos (C high + S high).",
+      "Dinâmica de Interação Social": "Evita interações, busca isolamento para controle e segurança (C high + S high).",
+      "Organização e Administração": "Necessidade compulsiva de ordem e regras imutáveis (C high + S high). Rigidez extrema.",
+      "Ritmo e Fluxo de Trabalho": "Extremamente lento, focado em verificação obsessiva (C high) em rotina imutável (S high).",
+      "Inovação e Criatividade": "Inexistente e ativamente temida.",
+      "Possibilidades Profissionais e Papéis": "Adaptação funcional improvável. Requer intervenção terapêutica intensiva. Desenvolvimento: Foco em saúde mental."
+    }
+  },
+  "C_moderate": {
+    "D": {
+      "Concentração e Objetivos": "Foco na qualidade/precisão (C) com direcionamento para objetivos concretos (D). Busca solução \"certa\" e age para implementá-la.",
+      "Planejamento e Abordagem Estratégica": "Lógico e detalhado (C) com abordagem pragmática e orientada à ação (D). Estratégias bem fundamentadas com resultados mensuráveis.",
+      "Tomada de Decisão": "Baseada em análise (C) com confiança e assertividade para decidir (D). Equilibra análise e ação.",
+      "Perspectiva e Especialização": "Especialista técnico (C) com visão de aplicar expertise para resultados (D).",
+      "Estilo de Comunicação": "Precisa, lógica (C), entregue com clareza e assertividade (D). Defende conclusões com argumentos racionais.",
+      "Dinâmica de Interação Social": "Baseada em competência (C) com iniciativa e direcionamento (D). Respeita expertise, aponta falhas lógicas.",
+      "Organização e Administração": "Organizado (C) com iniciativa para criar sistemas eficientes (D). Controla processos para qualidade e produtividade.",
+      "Ritmo e Fluxo de Trabalho": "Permite análise (C) mas com energia para progresso (D). Busca fluxo eficiente e livre de erros.",
+      "Inovação e Criatividade": "Analítica (C) focada em soluções lógicas e eficientes (D). Aberto a inovações baseadas em dados.",
+      "Possibilidades Profissionais e Papéis": "Gestão técnica, engenharia, finanças, planejamento estratégico, controle de qualidade. Combina rigor e resultado. Desenvolvimento: flexibilidade, empatia, colaboração."
+    },
+    "I": {
+      "Concentração e Objetivos": "Foco na qualidade (C) com abertura para objetivos colaborativos (I). Motivado por fazer bem feito e comunicar bem.",
+      "Planejamento e Abordagem Estratégica": "Lógico e detalhado (C), comunicado de forma otimista (I). Aberto a estratégias fundamentadas e interessantes.",
+      "Tomada de Decisão": "Baseada em análise (C) com consideração pelo impacto social (I). Busca solução correta e comunicável.",
+      "Perspectiva e Especialização": "Especialista técnico (C) com capacidade de explicar de forma acessível (I).",
+      "Estilo de Comunicação": "Precisa e lógica (C), mas calorosa e expressiva (I). Explica dados de forma clara e engajadora.",
+      "Dinâmica de Interação Social": "Baseada em competência (C), mas amigável e aberta (I). Constrói respeito técnico e simpatia.",
+      "Organização e Administração": "Organizado (C) com flexibilidade para facilitar colaboração (I).",
+      "Ritmo e Fluxo de Trabalho": "Permite precisão (C) mas gosta de interação (I). Busca fluxo eficiente e agradável.",
+      "Inovação e Criatividade": "Analítica (C) combinada com capacidade de apresentar ideias (I). Busca inovações lógicas com boa aceitação.",
+      "Possibilidades Profissionais e Papéis": "Marketing técnico, vendas consultivas, treinamento, analista de negócios com cliente. Explica o complexo. Desenvolvimento: agilidade na decisão, lidar com críticas."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco duplo na qualidade/precisão (C) e na execução segura/estável (S). Motivado por entregar trabalho correto em ambiente estável.",
+      "Planejamento e Abordagem Estratégica": "Planejamento detalhado, lógico (C) e focado na segurança (S). Prefere estratégias comprovadas e de baixo risco.",
+      "Tomada de Decisão": "Ponderado, baseado em análise (C) e busca por segurança/consenso (S). Evita decisões apressadas ou arriscadas.",
+      "Perspectiva e Especialização": "Especialização técnica (C) com foco na aplicação consistente e confiável (S). Especialista meticuloso e seguro.",
+      "Estilo de Comunicação": "Calma, paciente (S), precisa, lógica e factual (C). Prefere clareza e correção, evitando confrontos.",
+      "Dinâmica de Interação Social": "Interação focada na tarefa, baseada em competência (C) e confiança (S). Colabora bem em ambientes estruturados.",
+      "Organização e Administração": "Altamente organizado e metódico (S+C). Segue regras para garantir qualidade e previsibilidade.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo estável, metódico (S+C) que permita atenção a detalhes e execução segura. Lida mal com pressão.",
+      "Inovação e Criatividade": "Criatividade focada na otimização segura e precisa (S+C). Cético com inovações, prefere melhorias incrementais.",
+      "Possibilidades Profissionais e Papéis": "Controle de qualidade, adm. de sistemas, contabilidade, suporte técnico, documentação. Ambientes estáveis e com processos claros. Desenvolvimento: flexibilidade, agilidade na decisão, comunicação proativa."
+    }
+  },
+  "C_significant": {
+    "D": {
+      "Concentração e Objetivos": "Foco intenso na precisão (C sig) com energia moderada para direcionar (D mod) a implementação correta.",
+      "Planejamento e Abordagem Estratégica": "Extremamente detalhado e analítico (C sig) com abordagem pragmática (D mod) na defesa do plano.",
+      "Tomada de Decisão": "Lento e analítico (C sig), mas com assertividade (D mod) para implementar a decisão \"correta\".",
+      "Perspectiva e Especialização": "Hiperespecialização técnica (C sig) com iniciativa (D mod) para ser autoridade na área.",
+      "Estilo de Comunicação": "Muito precisa, lógica (C sig), entregue com clareza e firmeza (D mod). Crítico e exigente.",
+      "Dinâmica de Interação Social": "Formal, focada em conteúdo (C sig), com iniciativa para corrigir ou direcionar (D mod).",
+      "Organização e Administração": "Necessidade de ambientes regrados (C sig), com iniciativa (D mod) para impor sistemas.",
+      "Ritmo e Fluxo de Trabalho": "Metódico para garantir zero erro (C sig), com energia (D mod) para impulsionar execução correta.",
+      "Inovação e Criatividade": "Focada em otimização analítica (C sig) com determinação para implementar (D mod).",
+      "Possibilidades Profissionais e Papéis": "Auditoria técnica líder, engenharia de qualidade sênior, especialista em compliance com poder de execução. Autoridade técnica. Desenvolvimento: flexibilidade, visão do todo, comunicação interpessoal."
+    },
+    "I": {
+      "Concentração e Objetivos": "Tensão alta entre interação/reconhecimento (I sig) e busca por qualidade/precisão (C sig). Ansiedade por ser popular E perfeito.",
+      "Planejamento e Abordagem Estratégica": "Detalhado (C sig), comunicado com otimismo (I sig). Luta para equilibrar análise crítica com entusiasmo.",
+      "Tomada de Decisão": "Hesitante. Busca por aprovação social (I sig) e pela resposta \"certa\" (C sig). Medo de errar e ser criticado.",
+      "Perspectiva e Especialização": "Busca expertise técnica (C sig) para ganhar reconhecimento social (I sig). Foco em ser o \"especialista simpático\".",
+      "Estilo de Comunicação": "Cuidadosa, precisa (C sig), mas com esforço para ser agradável (I sig). Preocupado com exatidão e reação alheia.",
+      "Dinâmica de Interação Social": "Sociável (I sig), preferindo interações onde possa demonstrar competência (C sig). Busca aprovação pela inteligência.",
+      "Organização e Administração": "Altamente organizado (C sig), mas a necessidade I de interação pode prejudicar a consistência.",
+      "Ritmo e Fluxo de Trabalho": "Prefere ritmo metódico (C sig), mas aprecia interação (I sig). Resiste à pressão por velocidade.",
+      "Inovação e Criatividade": "Criatividade (I sig) com capacidade de avaliar lógica (C sig). Busca soluções inovadoras e bem fundamentadas.",
+      "Possibilidades Profissionais e Papéis": "Especialista de produto, analista com interface com usuário, consultor técnico. Combina técnico e social. Desenvolvimento: lidar com imperfeição, decisão ágil, reduzir autocrítica."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco absoluto na execução perfeita, segura e conforme as regras (S sig + C sig). Evita objetivos que ameacem estabilidade.",
+      "Planejamento e Abordagem Estratégica": "Obsessivamente detalhado, analítico e avesso a riscos (S sig + C sig). Resistência extrema a mudanças.",
+      "Tomada de Decisão": "Extremamente lento e propenso à paralisia (S sig + C sig). Busca regras que ditem a resposta.",
+      "Perspectiva e Especialização": "Hiperespecialização técnica (C sig) focada na manutenção segura (S sig). Visão muito focada.",
+      "Estilo de Comunicação": "Muito precisa, lógica (C sig), entregue de forma extremamente calma e paciente (S sig). Evita ambiguidades e confrontos.",
+      "Dinâmica de Interação Social": "Interação muito reservada, formal, focada em detalhes (S sig + C sig). Prefere trabalhar sozinho.",
+      "Organização e Administração": "Necessidade extrema de ordem e regras (S sig + C sig). Segue e impõe sistemas rígidos.",
+      "Ritmo e Fluxo de Trabalho": "Extremamente lento, metódico, previsível (S sig + C sig). Incapaz de lidar com pressão.",
+      "Inovação e Criatividade": "Nenhuma. Resistência ativa a novas ideias.",
+      "Possibilidades Profissionais e Papéis": "Funções ultra-especializadas exigindo zero erro, consistência e paciência (controle qualidade crítico, arquivista). Desenvolvimento: flexibilidade, pragmatismo, habilidades sociais."
+    }
+  },
+  "C_high": {
+    "D": {
+      "Concentração e Objetivos": "Foco absoluto em controle e poder (D high), usando análise C significativa como ferramenta para justificar e planejar a dominação.",
+      "Planejamento e Abordagem Estratégica": "Autoritário e controlador (D high), baseado em análise exaustiva (C sig) para otimizar estratégias de controle total.",
+      "Tomada de Decisão": "Rápida e autoritária (D high), baseada na própria análise \"perfeita\" (C sig). Impermeável a opiniões contrárias.",
+      "Perspectiva e Especialização": "Visão de poder (D high) fundamentada em expertise técnica incontestável (C sig).",
+      "Estilo de Comunicação": "Extremamente direta, controladora (D high) E altamente precisa, lógica e crítica (C sig). Implacável, frio, autoritário.",
+      "Dinâmica de Interação Social": "Controla (D high) através da superioridade intelectual e exigência de perfeição (C sig).",
+      "Organização e Administração": "Controle total (D high) através de sistemas complexos, rígidos e obsessivamente detalhados (C sig).",
+      "Ritmo e Fluxo de Trabalho": "Impõe ritmo rápido (D high) E exige perfeição absoluta (C sig). Pressão insustentável.",
+      "Inovação e Criatividade": "Nenhuma. Controle (D high) e perfeição (C sig) impedem novas ideias.",
+      "Possibilidades Profissionais e Papéis": "Adaptação difícil, risco de tirania. Talvez poder absoluto sobre sistemas críticos. Desenvolvimento: Terapia para controle, perfeccionismo, empatia."
+    },
+    "I": {
+      "Concentração e Objetivos": "Foco totalmente paralisado. Necessidade I avassaladora de aprovação conflita com busca C significativa por perfeição.",
+      "Planejamento e Abordagem Estratégica": "Bloqueado. Análise C nunca termina (medo de erro), necessidade I impede estratégias controversas.",
+      "Tomada de Decisão": "Incapacidade crônica. Medo C de errar + Medo I de desagradar. Busca validação impossível.",
+      "Perspectiva e Especialização": "Busca hiperespecialização C para validação I, mas insegurança impede aplicação.",
+      "Estilo de Comunicação": "Hesitante, ansiosa, focada em evitar críticas (C sig) tentando agradar (I high).",
+      "Dinâmica de Interação Social": "Interação com extrema ansiedade (C sig) e busca por aprovação (I high). Evita avaliação.",
+      "Organização e Administração": "Caos. Aversão I a regras + incapacidade C de lidar com sistemas externos.",
+      "Ritmo e Fluxo de Trabalho": "Caótico, dependente de validação (I high) e paralisado pelo medo (C sig).",
+      "Inovação e Criatividade": "Bloqueada pelo medo de erro e necessidade de aprovação.",
+      "Possibilidades Profissionais e Papéis": "Adaptação improvável. Talvez entretenimento superficial. Requer intervenção terapêutica intensiva. Desenvolvimento: Foco em saúde mental."
+    },
+    "S": {
+      "Concentração e Objetivos": "Foco absoluto e paralisante na eliminação de erros (C high) e manutenção da rotina segura (S sig).",
+      "Planejamento e Abordagem Estratégica": "Planejamento obsessivo e paralisante (C high + S sig). Rejeição total a mudanças.",
+      "Tomada de Decisão": "Incapacidade crônica. Medo extremo de errar (C high) e necessidade de segurança (S sig).",
+      "Perspectiva e Especialização": "Perspectiva microscópica focada na execução perfeita da rotina segura (C high + S sig).",
+      "Estilo de Comunicação": "Mínima, hesitante, focada em evitar erros ou conflitos (C high + S sig).",
+      "Dinâmica de Interação Social": "Evita interações, busca isolamento para controle e segurança (C high + S sig).",
+      "Organização e Administração": "Necessidade compulsiva de ordem e regras imutáveis (C high + S sig).",
+      "Ritmo e Fluxo de Trabalho": "Extremamente lento, focado em verificação obsessiva (C high) em rotina imutável (S sig).",
+      "Inovação e Criatividade": "Inexistente e ativamente temida.",
+      "Possibilidades Profissionais e Papéis": "Adaptação funcional improvável. Requer intervenção terapêutica intensiva. Desenvolvimento: Foco em saúde mental."
+    }
+  }
+}
