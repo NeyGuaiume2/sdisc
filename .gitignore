@@ -1,41 +1,72 @@
-# Arquivos de ambiente virtual Python
+# Ambientes Virtuais Python
 venv/
 env/
-.env
+.venv/
+*/venv/ # Cobre venvs dentro de subpastas se houver
 
-# Arquivos de cache Python
+# Arquivos de Segredo e Configuração Local/Instância
+.env*
+instance/
+
+# Cache e Bytecode Python
 __pycache__/
-*.py[cod]
-*$py.class
+*.py[cod] # Cobre .pyc, .pyo, .pyd
+.pytest_cache/
 
-# Arquivos de distribuição
-dist/
+# Artefatos de Build/Distribuição Python
 build/
+dist/
 *.egg-info/
+pip-wheel-metadata/
+*.manifest
+*.spec
 
-# Arquivos de banco de dados SQLite
-*.sqlite
+# Bancos de Dados (Locais/Desenvolvimento - especialmente fora de instance/)
 *.db
+*.sqlite
+*.sqlite3
+*.sql
+*.sqbpro # Adicionado para arquivos de projeto SQLiteBrowser
 
-# Arquivos de log
+# Logs
 *.log
+logs/
+*.log.*
 
-# Arquivos específicos do VS Code
+# Arquivos de IDE/Editor
 .vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
-# Arquivos específicos do Node.js
-node_modules/
-package-lock.json
+# Arquivos Node.js (Se aplicável - Revise package-lock.json!)
+# node_modules/
+# package-lock.json # Geralmente NÃO deve ser ignorado para aplicações
+# yarn.lock         # Geralmente NÃO deve ser ignorado para aplicações
 
-# Arquivos temporários
+# Arquivos Temporários e Backup
 temp/
 tmp/
+*.tmp
+*.bak
+*.bak-*
 
-# Configurações de produção
-prod_config.py
-.pytest_cache/
-uso windows.txt
-__pycache__/
-sessões.txt
-backend/pyrightconfig.jsonbackend/static/images/
-.env
+# Arquivos específicos do Sistema Operacional
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Artefatos de Teste (Playwright, etc.)
+playwright-videos/
+test-results/
+tests/screenshots/
+
+# Outros específicos do projeto (REVISE ESTES)
+# sessões.txt # Ignorar apenas se forem notas locais NÃO essenciais
+# uso windows.txt # Ignorar apenas se forem notas locais
+ngrok/ # Ignorar se contém executável/config local
+# backend/pyrightconfig.json # Opcional: ignore se for config local, versione se for config do time
+
+# Arquivos que NUNCA devem ser ignorados (Exemplos)
+# requirements.txt # Essencial!
+# migrations/      # Essencial!
+# backend/static/images/ # Essencial!
