@@ -33,3 +33,4 @@ tmp/
 
 # Configurações de produção
 prod_config.py
+*.bak ignorará o arquivo requirements.txt.bak-20250405100109
