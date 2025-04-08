@@ -55,7 +55,7 @@ markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 matplotlib==3.10.1
 mdurl==0.1.2
-more-itertools==10.3.0
+more-itertools==10.6.0
 msgspec==0.19.0
 numpy==2.2.4
 ordered-set==4.1.0
