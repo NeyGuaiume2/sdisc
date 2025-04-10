@@ -1,3 +1,4 @@
+Procfile
 README.md
 backend/
     __init__.py
@@ -27,11 +28,16 @@ backend/
         css/
             styles.css
         images/
+            corel logo.svg
             favicon.ico
             favicon_16.ico
             favicon_32.ico
             favicon_48.ico
             favicon_64.ico
+            images.png
+            logo.png
+            logomarca.png
+            logotipo.png
         js/
             script.js
     templates/
@@ -50,6 +56,7 @@ gunicorn_config.py
 instance/
     dev.db
     dev.sqbpro
+    dev_sdisc.db
 interpretacoes_disc.md
 migrations/
     README
@@ -71,7 +78,6 @@ palavras.md
 playwright-videos/
 prod_config.py
 requirements.txt
-requirements.txt.bak-20250405100109
 run_test_video.py
 scripts/
     update_requirements.py

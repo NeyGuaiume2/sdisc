@@ -1,60 +1,55 @@
 {% extends 'base.html' %}
-
-{% block title %}Seu Perfil DISC - Resultado Detalhado{% endblock %}
-
+{% block title %}MeuDISCPro - Seu Perfil Detalhado{% endblock %}
 {% block content %}
-<div class="container mt-4">
-
-    {# Verifica se temos resultado E interpretações E se o primário geral existe #}
+<div class="container mt-4 results-page">
     {% if result and result.id and interpretations and interpretations.general and interpretations.general.primary and interpretations.general.primary.type %}
-
-        {# Define variáveis para facilitar acesso e checagem #}
+        {# --- Variáveis Jinja --- #}
         {% set primary_gen = interpretations.general.primary %}
-        {% set secondary_gen = interpretations.general.get('secondary') %} {# Usa .get() para segurança #}
-        {% set primary_prof = interpretations.professional.get('primary') %} {# Usa .get() para segurança #}
-        {% set secondary_prof = interpretations.professional.get('secondary') %} {# Usa .get() para segurança #}
-        {# Pega os scores do método do modelo #}
+        {% set secondary_gen = interpretations.general.get('secondary') %}
+        {% set primary_prof = interpretations.professional.get('primary') %}
+        {% set secondary_prof = interpretations.professional.get('secondary') %}
         {% set scores_display = result.get_scores() %}
-
+        {% set primary_color_map = {'D': '#EF4444', 'I': '#FACC15', 'S': '#22C55E', 'C': '#3B82F6'} %}
+        {% set primary_color = primary_color_map.get(primary_gen.type, '#6c757d') %}
         <div id="report-content">
-            {# Título e Info do Usuário #}
-            <h1 class="mb-3 text-center">Seu Perfil DISC</h1>
+            <div class="text-center mb-4">
+                <!-- Tamanho do logo aumentado para 400px -->
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="MeuDISCPro Logo" class="report-logo" style="width: 400px; height: auto;">
+            </div>
+            <h1 class="mb-1 text-center report-title">Seu Perfil Comportamental DISC</h1>
+            {# --- User Info --- #}
             {% if result.user_name or result.user_email %}
-            <p class="text-center text-muted mb-4">
-                Resultado para:
-                {% if result.user_name %}{{ result.user_name }}{% endif %}
-                {% if result.user_name and result.user_email %} ({{ result.user_email }}){% elif result.user_email %}{{ result.user_email }}{% endif %}
+            <p class="text-center text-muted mb-4 user-info">
+                Resultado para: <strong>{% if result.user_name %}{{ result.user_name }}{% endif %}{% if result.user_name and result.user_email %} ({{ result.user_email }}){% elif result.user_email %}{{ result.user_email }}{% endif %}</strong>
                 <br>
                 <span class="small">Gerado em: {{ result.timestamp.strftime('%d/%m/%Y %H:%M') if result.timestamp else 'N/A' }} (UTC)</span>
             </p>
             {% else %}
-             <p class="text-center text-muted mb-4 small">
+             <p class="text-center text-muted mb-4 small user-info">
                 Gerado em: {{ result.timestamp.strftime('%d/%m/%Y %H:%M') if result.timestamp else 'N/A' }} (UTC)
              </p>
             {% endif %}
-
-            {# --- Bloco Resumo e Gráfico --- #}
-            <div class="results-summary-grid mb-4">
-                <div class="chart-column">
-                    <div class="card shadow-sm">
-                        <div class="card-header text-center">Gráfico do Perfil (Normalizado %)</div>
-                        <div class="card-body">
-                            <div class="chart-container"><canvas id="discChart"></canvas></div>
-                            <div id="chartFallback" class="text-center mt-3" style="display: none;"></div>
-                        </div>
+            {# --- Gráfico do Perfil --- #}
+            <div class="chart-full-width mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header text-center">Gráfico do Perfil (Scores Originais)</div>
+                    <div class="card-body">
+                        <div class="chart-container horizontal-bar-chart-container"><canvas id="discHorizontalBarChart"></canvas></div>
+                        <div id="chartFallback" class="text-center mt-3" style="display: none;"></div>
                     </div>
                 </div>
+            </div>
+            {# --- Resumo e Pontuações DISC Lado a Lado --- #}
+            <div class="summary-and-scores-grid mb-4">
                 <div class="summary-column">
                     <div class="card shadow-sm">
                         <div class="card-header text-center">Resumo</div>
                         <div class="card-body">
-                            {# Usa as variáveis definidas no início #}
-                            <p>
+                             <p>
                                 <strong>Perfil Primário:</strong>
                                 {{ primary_gen.type | default('N/A') }} ({{ primary_gen.title | default('?') }})
-                                <span class="badge bg-secondary">{{ primary_gen.level | default('?') | capitalize }}</span>
+                                <span class="badge" style="background-color: {{ primary_color }}; color: #fff;">{{ primary_gen.level | default('?') | capitalize }}</span>
                             </p>
-                            {# Mostra secundário apenas se existir E tiver um tipo #}
                             {% if secondary_gen and secondary_gen.type %}
                             <p>
                                 <strong>Influência Secundária:</strong>
@@ -64,297 +59,308 @@
                             {% else %}
                             <p><strong>Influência Secundária:</strong> Nenhuma significativa</p>
                             {% endif %}
-                            <hr>
-                            <p><strong>Pontuações DISC (Originais):</strong></p>
-                            {# Usa a variável scores_display #}
+                        </div>
+                    </div>
+                </div>
+                <div class="scores-column">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center">Pontuações DISC (Originais)</div>
+                        <div class="card-body">
                             {% if scores_display %}
-                            <ul>
-                                {# Usa .get() com fallback para segurança extra #}
-                                <li>D (Dominância): {{ scores_display.get('D', 'N/A') }}</li>
-                                <li>I (Influência): {{ scores_display.get('I', 'N/A') }}</li>
-                                <li>S (Estabilidade): {{ scores_display.get('S', 'N/A') }}</li>
-                                <li>C (Conformidade): {{ scores_display.get('C', 'N/A') }}</li>
+                            <ul class="scores-list">
+                                <li><span class="disc-color-indicator" style="background-color: {{ primary_color_map.D }};"></span> D (Dominância): {{ scores_display.get('D', 'N/A') }}</li>
+                                <li><span class="disc-color-indicator" style="background-color: {{ primary_color_map.I }};"></span> I (Influência): {{ scores_display.get('I', 'N/A') }}</li>
+                                <li><span class="disc-color-indicator" style="background-color: {{ primary_color_map.S }};"></span> S (Estabilidade): {{ scores_display.get('S', 'N/A') }}</li>
+                                <li><span class="disc-color-indicator" style="background-color: {{ primary_color_map.C }};"></span> C (Conformidade): {{ scores_display.get('C', 'N/A') }}</li>
                             </ul>
                             {% else %}
-                                 <p class="text-danger small">Pontuações indisponíveis.</p> {# Mensagem mais clara #}
+                                 <p class="text-danger small">Pontuações indisponíveis.</p>
                             {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            {# --- Fim Bloco Resumo e Gráfico --- #}
-
-
-            {# --- Abas para Geral e Profissional --- #}
-            <div class="card shadow-sm mb-4">
-                 <div class="card-header">
-                     <ul class="nav nav-tabs card-header-tabs" id="interpretationTabs" role="tablist">
-                         <li class="nav-item" role="presentation">
-                             <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-panel" type="button" role="tab" aria-controls="general-panel" aria-selected="true">Visão Geral</button>
-                         </li>
-                         <li class="nav-item" role="presentation">
-                             <button class="nav-link" id="professional-tab" data-bs-toggle="tab" data-bs-target="#professional-panel" type="button" role="tab" aria-controls="professional-panel" aria-selected="false">Análise Profissional</button>
-                         </li>
-                     </ul>
-                 </div>
-                 <div class="card-body">
-                     <div class="tab-content" id="interpretationTabsContent">
-
-                         {# --- Painel Visão Geral --- #}
-                         <div class="tab-pane fade show active" id="general-panel" role="tabpanel" aria-labelledby="general-tab" tabindex="0">
-                             <h3 class="mb-3">Visão Geral do Perfil</h3>
-
-                             {# Primário Geral (já checado no if principal) #}
-                             <div class="mb-4 p-3 border rounded bg-light">
-                                 <h4>Perfil Primário: {{ primary_gen.title | default('?') }} ({{ primary_gen.type }}) - Intensidade {{ primary_gen.level | default('?') | capitalize }}</h4>
+            {# --- Links Rápidos --- #}
+            <div class="text-center mb-4 mt-n3 quick-links">
+                <small>
+                    Navegar para:
+                    <a href="#visao-geral" class="text-decoration-none">Visão Geral</a> |
+                    <a href="#analise-profissional" class="text-decoration-none">Análise Profissional</a>
+                </small>
+            </div>
+            {# --- Seção Visão Geral --- #}
+            <section id="visao-geral" class="mb-4 content-section">
+                <div class="card shadow-sm">
+                    <div class="card-header"><h3 class="mb-0">Visão Geral do Perfil</h3></div>
+                    <div class="card-body">
+                         <div class="mb-4 section-primary interpretation-block">
+                             <h4>Perfil Primário: {{ primary_gen.title | default('?') }} ({{ primary_gen.type }}) - Intensidade {{ primary_gen.level | default('?') | capitalize }}</h4>
+                             <hr>
+                             {% if primary_gen.get('Descrição') %}<div class="highlight-section highlight-description"><h5>Descrição</h5><p>{{ primary_gen['Descrição'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                             {% if primary_gen.get('Motivação') %}<div><h5>Motivação</h5><p>{{ primary_gen['Motivação'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                             {% if primary_gen.get('Características') %}<div class="highlight-section highlight-characteristics"><h5>Características</h5><p>{{ primary_gen['Características'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                             {% if primary_gen.get('Pontos Fortes') %}<div class="highlight-section highlight-pontos-fortes"><h5>Pontos Fortes</h5><p>{{ primary_gen['Pontos Fortes'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                             {% if primary_gen.get('Áreas de Desenvolvimento') %}<div><h5>Áreas de Desenvolvimento</h5><p>{{ primary_gen['Áreas de Desenvolvimento'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                             {% if primary_gen.get('Relacionamento/Dicas') %}<div><h5>Relacionamento/Dicas</h5><p>{{ primary_gen['Relacionamento/Dicas'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                             {% if primary_gen.get('Como Você É (Tendência Natural)') %}<div class="alert alert-info mt-3 highlight-tendency"><strong>Tendência Natural:</strong> {{ primary_gen['Como Você É (Tendência Natural)'] | replace('\n', '<br>') | safe }}</div>{% endif %}
+                             {% if primary_gen.get('Como Pode Melhorar (Reflexão para Crescimento)') %}<div class="alert alert-warning mt-3 highlight-reflection"><strong>Reflexão para Crescimento:</strong> {{ primary_gen['Como Pode Melhorar (Reflexão para Crescimento)'] | replace('\n', '<br>') | safe }}</div>{% endif %}
+                          </div>
+                         {# Secundário Geral #}
+                         {% if secondary_gen and secondary_gen.type %}
+                             <div class="mb-4 section-secondary interpretation-block">
+                                 <h4>Influência Secundária: {{ secondary_gen.title | default('?') }} ({{ secondary_gen.type }}) - Intensidade {{ secondary_gen.level | default('?') | capitalize }}</h4>
+                                 <p><em>Esta influência secundária complementa suas características principais.</em></p>
                                  <hr>
-                                 {# Usa .get() com if para checar se a chave existe E não é vazia #}
-                                 {% if primary_gen.get('Descrição') %}<h5>Descrição</h5><p>{{ primary_gen['Descrição'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                 {% if primary_gen.get('Motivação') %}<h5>Motivação</h5><p>{{ primary_gen['Motivação'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                 {% if primary_gen.get('Características') %}<h5>Características</h5><p>{{ primary_gen['Características'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                 {% if primary_gen.get('Pontos Fortes') %}<h5>Pontos Fortes</h5><p>{{ primary_gen['Pontos Fortes'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                 {% if primary_gen.get('Áreas de Desenvolvimento') %}<h5>Áreas de Desenvolvimento</h5><p>{{ primary_gen['Áreas de Desenvolvimento'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                 {% if primary_gen.get('Relacionamento/Dicas') %}<h5>Relacionamento/Dicas</h5><p>{{ primary_gen['Relacionamento/Dicas'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                 {% if primary_gen.get('Como Você É (Tendência Natural)') %}<div class="alert alert-info mt-3"><strong>Tendência Natural:</strong> {{ primary_gen['Como Você É (Tendência Natural)'] | replace('\n', '<br>') | safe }}</div>{% endif %}
-                                 {% if primary_gen.get('Como Pode Melhorar (Reflexão para Crescimento)') %}<div class="alert alert-warning mt-3"><strong>Reflexão para Crescimento:</strong> {{ primary_gen['Como Pode Melhorar (Reflexão para Crescimento)'] | replace('\n', '<br>') | safe }}</div>{% endif %}
+                                 {% if secondary_gen.get('Descrição') %}<div class="highlight-section highlight-description"><h5>Descrição (Influência)</h5><p>{{ secondary_gen['Descrição'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                                 {% if secondary_gen.get('Motivação') %}<div><h5>Motivação (Influência)</h5><p>{{ secondary_gen['Motivação'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                                 {% if secondary_gen.get('Características') %}<div class="highlight-section highlight-characteristics"><h5>Características (Influência)</h5><p>{{ secondary_gen['Características'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                                 {% if secondary_gen.get('Pontos Fortes') %}<div class="highlight-section highlight-pontos-fortes"><h5>Pontos Fortes (Influência)</h5><p>{{ secondary_gen['Pontos Fortes'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                                 {% if secondary_gen.get('Áreas de Desenvolvimento') %}<div><h5>Áreas de Desenvolvimento (Influência)</h5><p>{{ secondary_gen['Áreas de Desenvolvimento'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
+                                 {% if secondary_gen.get('Relacionamento/Dicas') %}<div><h5>Relacionamento/Dicas (Considerando Influência)</h5><p>{{ secondary_gen['Relacionamento/Dicas'] | replace('\n', '<br>') | safe }}</p></div>{% endif %}
                               </div>
-
-                             {# Secundário Geral (Combinação) - Verifica se existe e tem tipo #}
-                             {% if secondary_gen and secondary_gen.type %}
-                                 <div class="mb-4 p-3 border rounded">
-                                     <h4>Influência Secundária: {{ secondary_gen.title | default('?') }} ({{ secondary_gen.type }}) - Intensidade {{ secondary_gen.level | default('?') | capitalize }}</h4>
-                                     <p><em>Esta influência secundária complementa suas características principais.</em></p>
-                                     <hr>
-                                     {% if secondary_gen.get('Descrição') %}<h5>Descrição (Influência)</h5><p>{{ secondary_gen['Descrição'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                     {% if secondary_gen.get('Motivação') %}<h5>Motivação (Influência)</h5><p>{{ secondary_gen['Motivação'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                     {% if secondary_gen.get('Características') %}<h5>Características (Influência)</h5><p>{{ secondary_gen['Características'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                     {% if secondary_gen.get('Pontos Fortes') %}<h5>Pontos Fortes (Influência)</h5><p>{{ secondary_gen['Pontos Fortes'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                     {% if secondary_gen.get('Áreas de Desenvolvimento') %}<h5>Áreas de Desenvolvimento (Influência)</h5><p>{{ secondary_gen['Áreas de Desenvolvimento'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                     {% if secondary_gen.get('Relacionamento/Dicas') %}<h5>Relacionamento/Dicas (Considerando Influência)</h5><p>{{ secondary_gen['Relacionamento/Dicas'] | replace('\n', '<br>') | safe }}</p>{% endif %}
-                                  </div>
-                             {% elif result.secondary_type and result.secondary_type != '?' %} {# Mostra aviso se deveria ter um secundário mas não veio #}
-                                 <p class="text-warning">Interpretação da influência secundária ({{ result.secondary_type }}) não encontrada.</p>
-                             {% endif %}
-                         </div>
-                         {# --- Fim Painel Visão Geral --- #}
-
-
-                         {# --- Painel Análise Profissional --- #}
-                         <div class="tab-pane fade" id="professional-panel" role="tabpanel" aria-labelledby="professional-tab" tabindex="0">
-                             <h3 class="mb-3">Análise Profissional</h3>
-
-                             {# Primário Profissional - Verifica se existe e tem tipo #}
-                             {% if primary_prof and primary_prof.type %}
-                                 <div class="mb-4 p-3 border rounded bg-light">
-                                     {# Usa os dados do primário geral para o título aqui, para consistência #}
-                                     <h4>Tendências Profissionais - {{ primary_gen.title | default('?') }} ({{ primary_gen.type }}) - Intensidade {{ primary_gen.level | default('?') | capitalize }}</h4>
-                                     <hr>
-                                     {# Itera sobre as chaves, excluindo as de controle #}
-                                     {% for key, value in primary_prof.items() if key not in ['type', 'level', 'title', 'score'] %}
-                                        {% if value %} {# Só mostra se tiver valor #}
+                         {% elif result.secondary_type and result.secondary_type != '?' %}
+                             <p class="text-warning">Interpretação da influência secundária ({{ result.secondary_type }}) não encontrada.</p>
+                         {% endif %}
+                    </div>
+                    <div class="card-footer text-right">
+                        <img src="{{ url_for('static', filename='images/logotipo.svg') }}" alt="Logotipo" style="width: 100px; height: auto;">
+                    </div>
+                </div>
+            </section>
+            {# --- Seção Análise Profissional --- #}
+            <section id="analise-profissional" class="mb-4 content-section">
+                <div class="card shadow-sm">
+                    <div class="card-header"><h3 class="mb-0">Análise Profissional</h3></div>
+                    <div class="card-body">
+                         {# Primário Profissional #}
+                         {% if primary_prof and primary_prof.type %}
+                             <div class="mb-4 section-primary interpretation-block">
+                                 <h4>Tendências Profissionais - {{ primary_gen.title | default('?') }} ({{ primary_gen.type }})</h4>
+                                 <hr>
+                                 {% for key, value in primary_prof.items() if key not in ['type', 'level', 'title', 'score'] %}
+                                    {% if value %}
+                                        {% set is_highlighted = key in ['Dinâmica de Interação Social', 'Organização e Administração', 'Possibilidades Profissionais e Papéis'] %}
+                                        {% set highlight_class = 'highlight-section highlight-' + key|lower|replace(' ', '-')|replace('ã', 'a')|replace('ç', 'c')|replace('ê', 'e')|replace('ó', 'o')|replace('ô', 'o') %}
+                                        <div class="{{ highlight_class if is_highlighted else '' }}">
                                             <h5>{{ key }}</h5>
-                                            {# Adiciona replace para quebras de linha do JSON serem renderizadas como <br> #}
                                             <p>{{ value | replace('\n', '<br>') | safe }}</p>
-                                        {% endif %}
-                                     {% endfor %}
-                                 </div>
-                             {% else %}
-                                 <p class="text-danger">Análise profissional primária não disponível.</p>
-                             {% endif %}
-
-                             {# Secundário Profissional (Combinação) - Verifica se existe e tem tipo #}
-                             {% if secondary_prof and secondary_prof.type %}
-                                 <div class="mb-4 p-3 border rounded">
-                                      {# Usa os dados do secundário geral para o título aqui #}
-                                      <h4>Influência Profissional Secundária - {{ secondary_gen.title | default('?') }} ({{ secondary_gen.type }}) - Intensidade {{ secondary_gen.level | default('?') | capitalize }}</h4>
-                                      <p><em>Como a influência secundária molda suas tendências profissionais.</em></p>
-                                      <hr>
-                                      {# Itera sobre as chaves, excluindo as de controle #}
-                                      {% for key, value in secondary_prof.items() if key not in ['type', 'level', 'title', 'score'] %}
-                                        {% if value %} {# Só mostra se tiver valor #}
+                                        </div>
+                                    {% endif %}
+                                 {% endfor %}
+                             </div>
+                         {% else %}
+                             <p class="text-danger">Análise profissional primária não disponível.</p>
+                         {% endif %}
+                         {# Secundário Profissional #}
+                         {% if secondary_prof and secondary_prof.type %}
+                             <div class="mb-4 section-secondary interpretation-block">
+                                  <h4>Influência Profissional Secundária - {{ secondary_gen.title | default('?') }} ({{ secondary_gen.type }})</h4>
+                                  <p><em>Como a influência secundária molda suas tendências profissionais.</em></p>
+                                  <hr>
+                                  {% for key, value in secondary_prof.items() if key not in ['type', 'level', 'title', 'score'] %}
+                                    {% if value %}
+                                        {% set is_highlighted = key in ['Dinâmica de Interação Social', 'Organização e Administração', 'Possibilidades Profissionais e Papéis'] %}
+                                        {% set highlight_class = 'highlight-section highlight-' + key|lower|replace(' ', '-')|replace('ã', 'a')|replace('ç', 'c')|replace('ê', 'e')|replace('ó', 'o')|replace('ô', 'o') %}
+                                         <div class="{{ highlight_class if is_highlighted else '' }}">
                                              <h5>{{ key }} (Influência)</h5>
-                                             {# Adiciona replace para quebras de linha do JSON serem renderizadas como <br> #}
                                              <p>{{ value | replace('\n', '<br>') | safe }}</p>
-                                        {% endif %}
-                                      {% endfor %}
-                                 </div>
-                             {% elif result.secondary_type and result.secondary_type != '?' %} {# Aviso se deveria ter mas não veio #}
-                                <p class="text-warning">Análise da influência profissional secundária ({{ result.secondary_type }}) não encontrada.</p>
-                             {% endif %}
-                         </div>
-                         {# --- Fim Painel Análise Profissional --- #}
-
-                     </div> {# Fim tab-content #}
-                 </div> {# Fim card-body #}
-            </div> {# Fim card #}
-            {# --- Fim Abas --- #}
-
+                                         </div>
+                                    {% endif %}
+                                  {% endfor %}
+                             </div>
+                         {% elif result.secondary_type and result.secondary_type != '?' %}
+                            <p class="text-warning">Análise da influência profissional secundária ({{ result.secondary_type }}) não disponível.</p> {# Corrigido: Não disponível #}
+                         {% endif %}
+                    </div>
+                    <div class="card-footer text-right">
+                        <img src="{{ url_for('static', filename='images/logotipo.svg') }}" alt="Logotipo" style="width: 100px; height: auto;">
+                    </div>
+                </div>
+            </section>
         </div> {# Fim #report-content #}
-
-        {# --- NOVA SEÇÃO: Links Rápidos para Abas --- #}
-        <div class="text-center mb-4 mt-n3"> {# Margem negativa para subir um pouco #}
-            <small>
-                Navegar para:
-                <a href="#" data-bs-toggle="tab" data-bs-target="#general-panel" class="text-decoration-none">Visão Geral</a> |
-                <a href="#" data-bs-toggle="tab" data-bs-target="#professional-panel" class="text-decoration-none">Análise Profissional</a>
-            </small>
-        </div>
-        {# --- FIM NOVA SEÇÃO --- #}
-
-
         {# --- Botões de Ação --- #}
         <div class="text-center mt-4 mb-5 actions">
-            <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Voltar ao Início</a>
-            <a href="{{ url_for('main.quiz') }}" class="btn btn-primary" id="new-assessment">Refazer Teste</a>
-            {# Alterado o nome do botão PDF para refletir que será mais completo #}
-            <a href="{{ url_for('main.download_pdf', result_id=result.id) }}" class="btn btn-info" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-                </svg>
-                Baixar Relatório PDF
-            </a>
+           <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Voltar ao Início</a>
+           <a href="{{ url_for('main.quiz') }}" class="btn btn-primary" id="new-assessment">Refazer Teste</a>
+           <a href="{{ url_for('main.download_pdf', result_id=result.id) }}" class="btn btn-info" target="_blank">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+               </svg>
+               Baixar Relatório PDF
+           </a>
         </div>
-
     {% else %}
-        {# Mensagem de erro (melhorada) #}
         <div class="alert alert-warning text-center" role="alert">
              {% if result and not result.id %}
                  Ocorreu um erro ao carregar o resultado (ID inválido).
              {% elif interpretations is none or not interpretations.general or not interpretations.general.primary or not interpretations.general.primary.type %}
-                 Ocorreu um erro ao carregar as interpretações para o seu perfil (dados ausentes ou inválidos).
-             {% else %}
-                 Nenhum resultado de avaliação válido encontrado ou a sessão expirou.
+                  Ocorreu um erro ao carregar as interpretações para o seu perfil (dados ausentes ou inválidos).
+              {% else %}
+                  Nenhum resultado de avaliação válido encontrado ou a sessão expirou.
              {% endif %}
              Por favor, <a href="{{ url_for('main.quiz') }}" class="alert-link">inicie um novo teste</a>.
-             {% if result and (not result.id or result.primary_type == '?') %}
-                  <br><small>(O resultado anterior pode ter sido salvo com erro/incompleto - ID: {{ result.id if result.id else 'Inválido' }})</small>
-             {% endif %}
+              {% if result and (not result.id or result.primary_type == '?') %}
+                   <br><small>(O resultado anterior pode ter sido salvo com erro/incompleto - ID: {{ result.id if result.id else 'Inválido' }})</small>
+              {% endif %}
         </div>
-    {% endif %} {# Fim do if principal #}
+     {% endif %}
+ </div>
+ {% endblock %}
 
-</div>
-{% endblock %}
+ {% block extra_js %}
+ <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+ <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         const canvasElement = document.getElementById('discHorizontalBarChart');
+         const fallbackElement = document.getElementById('chartFallback');
+         const scoresData = {{ scores_for_chart | tojson | safe if scores_for_chart is not none else 'null' }};
+         const discColors = {
+             D: { hex: '#EF4444', rgba: 'rgba(239, 68, 68, 0.7)' },
+             I: { hex: '#FACC15', rgba: 'rgba(250, 204, 21, 0.7)' },
+             S: { hex: '#22C55E', rgba: 'rgba(34, 197, 94, 0.7)' },
+             C: { hex: '#3B82F6', rgba: 'rgba(59, 130, 246, 0.7)' }
+         };
+         let scoresAreValid = false;
+         let dScore = 0, iScore = 0, sScore = 0, cScore = 0;
 
-{% block extra_js %}
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script>
-    // --- INÍCIO DO BLOCO JAVASCRIPT ---
-    // (Mantido igual à última versão fornecida, que deve estar correta)
-    document.addEventListener('DOMContentLoaded', function() {
-        const canvasElement = document.getElementById('discChart');
-        const fallbackElement = document.getElementById('chartFallback');
-        const scoresData = {{ scores_for_chart | tojson | safe if scores_for_chart is not none else 'null' }};
+         if (scoresData && typeof scoresData === 'object' &&
+             scoresData.hasOwnProperty('D') && typeof scoresData.D === 'number' && !isNaN(scoresData.D) &&
+             scoresData.hasOwnProperty('I') && typeof scoresData.I === 'number' && !isNaN(scoresData.I) &&
+             scoresData.hasOwnProperty('S') && typeof scoresData.S === 'number' && !isNaN(scoresData.S) &&
+             scoresData.hasOwnProperty('C') && typeof scoresData.C === 'number' && !isNaN(scoresData.C))
+         {
+             scoresAreValid = true;
+             dScore = scoresData.D;
+             iScore = scoresData.I;
+             sScore = scoresData.S;
+             cScore = scoresData.C;
+         } else {
+             console.warn("Scores inválidos ou ausentes para o gráfico Horizontal Bar JS:", scoresData);
+         }
 
-        let scoresAreValid = false;
-        let dScore = 0, iScore = 0, sScore = 0, cScore = 0;
-        let dScoreNormalized = 0, iScoreNormalized = 0, sScoreNormalized = 0, cScoreNormalized = 0;
+         if (scoresAreValid && canvasElement) {
+             const ctx = canvasElement.getContext('2d');
+             const scoreToFloatingBar = (score) => {
+                 const numericScore = (typeof score === 'number' && !isNaN(score)) ? score : 0;
+                 return numericScore >= 0 ? [0, numericScore] : [numericScore, 0];
+             };
+             const chartData = [
+                 scoreToFloatingBar(dScore),
+                 scoreToFloatingBar(iScore),
+                 scoreToFloatingBar(sScore),
+                 scoreToFloatingBar(cScore)
+             ];
+             const originalScores = [dScore, iScore, sScore, cScore];
+             const backgroundColors = [discColors.D.rgba, discColors.I.rgba, discColors.S.rgba, discColors.C.rgba];
+             const borderColors = [discColors.D.hex, discColors.I.hex, discColors.S.hex, discColors.C.hex];
 
-        function normalizeScoreTo100(score, minPossible = -28, maxPossible = 28) {
-            const range = maxPossible - minPossible;
-            if (range === 0) return 50;
-            const numericScore = (typeof score === 'number' && !isNaN(score)) ? score : 0;
-            let normalizedScore = ((numericScore - minPossible) / range) * 100;
-            return Math.max(0, Math.min(100, normalizedScore));
-        }
+             try {
+                 new Chart(ctx, {
+                     type: 'bar',
+                     data: {
+                         labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
+                         datasets: [{
+                             label: 'Score Original',
+                             data: chartData,
+                             backgroundColor: backgroundColors,
+                             borderColor: borderColors,
+                             borderWidth: 1,
+                             originalScores: originalScores
+                         }]
+                     },
+                     options: {
+                         indexAxis: 'y',
+                         scales: {
+                             x: {
+                                 beginAtZero: false,
+                                 min: -30,
+                                 max: 30,
+                                 grid: {
+                                     color: function(context) {
+                                       if (context.tick.value === 0) {
+                                         return 'rgba(0, 0, 0, 0.5)';
+                                       }
+                                       return 'rgba(0, 0, 0, 0.08)';
+                                     },
+                                     lineWidth: function(context) {
+                                       if (context.tick.value === 0) {
+                                         return 1.5;
+                                       }
+                                       return 1;
+                                     },
+                                 },
+                                 ticks: {
+                                     stepSize: 5
+                                 },
+                                 title: {
+                                     display: true,
+                                     text: 'Score Original'
+                                 } // Fechamento de title correto
+                             }, // Fechamento de x correto
+                             y: {
+                                 beginAtZero: true,
+                                 grid: {
+                                     display: false
+                                 }
+                             } // Fechamento de y correto
+                         }, // fechamento de scales correto
+                         plugins: {
+                             legend: { display: false }, // Corrigido "legend", não "Legenda"
+                             tooltip: {
+                                 enabled: true,
+                                 callbacks: {
+                                     title: function(tooltipItems){ return tooltipItems[0].label || ''; },
+                                     label: function(context){
+                                         let origValue = context.dataset.originalScores[context.dataIndex];
+                                         return `Score: ${origValue !== undefined ? origValue.toFixed(1) : 'N/A'}`;
+                                     }
+                                 } // Fechamento de callbacks correto
+                             } // Fechamento de tooltip correto
+                         }, // Fechamento de plugins correto
+                         responsive: true,
+                         maintainAspectRatio: false
+                     } // Fechamento de options correto
+                 }); // Fechamento de New Chart correto
+                 console.log("Gráfico Horizontal Bar criado com scores originais.");
+                 if (fallbackElement) { fallbackElement.style.display = 'none'; }
 
-        if (scoresData && typeof scoresData === 'object' &&
-            scoresData.hasOwnProperty('D') && typeof scoresData.D === 'number' && !isNaN(scoresData.D) &&
-            scoresData.hasOwnProperty('I') && typeof scoresData.I === 'number' && !isNaN(scoresData.I) &&
-            scoresData.hasOwnProperty('S') && typeof scoresData.S === 'number' && !isNaN(scoresData.S) &&
-            scoresData.hasOwnProperty('C') && typeof scoresData.C === 'number' && !isNaN(scoresData.C))
-        {
-            scoresAreValid = true;
-            dScore = scoresData.D;
-            iScore = scoresData.I;
-            sScore = scoresData.S;
-            cScore = scoresData.C;
-            dScoreNormalized = normalizeScoreTo100(dScore);
-            iScoreNormalized = normalizeScoreTo100(iScore);
-            sScoreNormalized = normalizeScoreTo100(sScore);
-            cScoreNormalized = normalizeScoreTo100(cScore);
-        } else {
-            console.warn("Scores inválidos ou ausentes para o gráfico JS:", scoresData);
-        }
+             } catch (e) {
+                  console.error("Erro ao criar Gráfico Horizontal Bar:", e); // Mensagem corrigida
+                  if (fallbackElement) {
+                      fallbackElement.innerHTML = '<p class="text-danger fw-bold">Erro ao exibir o gráfico.</p>';
+                      fallbackElement.style.display = 'block';
+                  }
+                  if (canvasElement) { canvasElement.style.display = 'none'; }
+             }
+         } else {
+              let fbMsg = '';
+              if (!canvasElement) {
+                   fbMsg = '<p class="text-warning">Elemento do gráfico não encontrado na página.</p>'; // Mensagem corrigida
+               } else {
+                   fbMsg = '<p class="text-muted">Gráfico indisponível (scores inválidos ou ausentes).</p>';
+                    if (canvasElement) { canvasElement.style.display = 'none'; }
+               }
+               if (fallbackElement) {
+                   fallbackElement.innerHTML = fbMsg;
+                   fallbackElement.style.display = 'block';
+               }
+         }
 
-        if (scoresAreValid && canvasElement) {
-            const ctx = canvasElement.getContext('2d');
-            const discBG = { D: 'rgba(239, 68, 68, 0.7)', I: 'rgba(250, 204, 21, 0.7)', S: 'rgba(34, 197, 94, 0.7)', C: 'rgba(59, 130, 246, 0.7)' };
-            const discB = { D: 'rgb(239, 68, 68)', I: 'rgb(250, 204, 21)', S: 'rgb(34, 197, 94)', C: 'rgb(59, 130, 246)' };
-            const normScores = [dScoreNormalized, iScoreNormalized, sScoreNormalized, cScoreNormalized];
-            const origScores = [dScore, iScore, sScore, cScore];
-
-            try {
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
-                        datasets: [{
-                            label: 'Intensidade (%)',
-                            data: normScores,
-                            backgroundColor: [discBG.D, discBG.I, discBG.S, discBG.C],
-                            borderColor: [discB.D, discB.I, discB.S, discB.C],
-                            borderWidth: 1,
-                            originalScores: origScores
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { color: 'rgba(0, 0, 0, 0.08)' },
-                                title: { display: true, text: 'Intensidade Normalizada (%)' },
-                                ticks: { callback: function(value) { return value + '%'; } }
-                            },
-                            x: { grid: { display: false } }
-                        },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                enabled: true,
-                                callbacks: {
-                                    title: function(tooltipItems){ return tooltipItems[0].label || ''; },
-                                    label: function(context){
-                                        let normValue = context.parsed.y;
-                                        let origValue = context.dataset.originalScores[context.dataIndex];
-                                        return [
-                                            `Intensidade Norm.: ${normValue.toFixed(1)}%`,
-                                            `Valor Original: ${origValue.toFixed(1)}`
-                                        ];
-                                    }
-                                }
-                            }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-                console.log("Gráfico Chart.js criado na página.");
-                if (fallbackElement) { fallbackElement.style.display = 'none'; }
-            } catch (e) {
-                console.error("Erro ao criar Chart.js:", e);
-                 if (fallbackElement) {
-                     fallbackElement.innerHTML = '<p class="text-danger fw-bold">Erro ao exibir o gráfico.</p>';
-                     fallbackElement.style.display = 'block';
+         // Scroll suave para links rápidos
+         document.querySelectorAll('.quick-links a[href^="#"]').forEach(anchor => {
+             anchor.addEventListener('click', function (e) {
+                 e.preventDefault();
+                 const targetId = this.getAttribute('href');
+                 const targetElement = document.querySelector(targetId);
+                 if (targetElement) {
+                     targetElement.scrollIntoView({
+                         behavior: 'smooth',
+                         block: 'start'
+                     });
                  }
-                 if (canvasElement) { canvasElement.style.display = 'none'; }
-            }
-        } else {
-            let fbMsg = '';
-             if (!canvasElement) {
-                 fbMsg = '<p class="text-warning">Elemento do gráfico não encontrado na página.</p>';
-             } else {
-                 fbMsg = '<p class="text-muted">Gráfico indisponível (scores inválidos ou ausentes).</p>';
-                 if (canvasElement) { canvasElement.style.display = 'none'; }
-             }
-             if (fallbackElement) {
-                 fallbackElement.innerHTML = fbMsg;
-                 fallbackElement.style.display = 'block';
-             }
-        }
-    }); // Fim do DOMContentLoaded
-    // --- FIM DO BLOCO JAVASCRIPT ---
-</script>
-{% endblock %}
+             });
+         });
+     });
+ </script>
+ {% endblock %}

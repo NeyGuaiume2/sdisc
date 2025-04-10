@@ -2,8 +2,6 @@
 1- responda sempre em português
 2- para correções/alterações de arquivos, peça arquivos não informados que forem necessários para a correção, antes de ir soltando soluções genéricas.
 3- importantíssimo, entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
-4- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
-5- SEMPRE entregue os códigos completos dos arquivos corrigidos, não suprima as demais linhas dos arquivos corrigidos, exceto claro se o código estiver produzindo erro.
 
 # ambiente de trabalho:
 SO windows 11

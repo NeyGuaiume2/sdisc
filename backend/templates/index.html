@@ -3,8 +3,13 @@
 {% block title %}Início - Sistema de Avaliação DISC{% endblock %}
 
 {% block content %}
+    <!-- Logo Principal -->
+    <div class="text-center mt-3 mb-4">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo MeuDISCPro" style="width: 200px; height: auto;">
+    </div>
+
     <!-- Header centralizado -->
-    <div class="text-center pt-3 pb-3">
+    <div class="text-center pt-1 pb-3"> <!-- Reduzido o pt para evitar muito espaço após logo -->
         <h1>Sistema de Avaliação DISC</h1>
         <p class="lead">Descubra seu perfil comportamental</p>
     </div>
@@ -13,22 +18,25 @@
     <section id="intro" class="mb-4">
         <div class="row justify-content-center">
              <div class="col-md-10 col-lg-8">
-                <h2 class="text-center mb-3">Bem-vindo à Avaliação DISC</h2>
+                 <h2 class="text-center mb-3">Bem-vindo à Avaliação DISC</h2>
                 <p class="text-center px-md-3">A avaliação DISC ajuda a identificar seu estilo comportamental predominante, baseado na metodologia de William Moulton Marston.</p>
 
-                <!-- Card para Instruções (Conteúdo ATUALIZADO) -->
+                 <!-- Título de Destaque com Alert Vermelho -->
+                 <div class="alert alert-danger text-center my-4" role="alert">
+                     <h3 class="alert-heading mb-0 fw-bold">Leia com Atenção Antes de iniciar a Avaliação!</h3>
+                 </div>
+
+                <!-- Card para Instruções -->
                 <div class="card my-3 shadow-sm">
-                    <div class="card-header text-center bg-primary text-white">
-                         {# Título do Card Atualizado #}
-                         <h3 class="mb-0">Instruções para a Avaliação</h3>
+                    <div class="card-header text-center bg-primary"> {# text-white classe pode ser redundante se o inline style for usado #}
+                        {# Adicionado estilo inline para garantir cor branca. INVESTIGAR CSS depois se desejado. #}
+                         <h3 class="mb-0" style="color: white !important;">Instruções para a Avaliação</h3>
                     </div>
                     <div class="card-body">
-                        {# Lista UL substituída por parágrafos com as novas instruções #}
-                        <p><strong>Encontre um ambiente ideal:</strong> Antes de começar, procure um <strong>local tranquilo e confortável</strong>, onde você possa se concentrar totalmente no teste. Minimize distrações para garantir a precisão dos seus resultados.</p>
-                        <p><strong>Leia atentamente:</strong> Siga as instruções com <strong>atenção</strong> em cada etapa. Para cada questão, você selecionará a palavra que <strong>MAIS</strong> e a que <strong>MENOS</strong> se assemelha a você.</p> {# Adaptado para DISC #}
+                         <p><strong>Encontre um ambiente ideal:</strong> Antes de começar, procure um <strong>local tranquilo e confortável</strong>, onde você possa se concentrar totalmente no teste. Minimize distrações para garantir a precisão dos seus resultados.</p>
+                        <p><strong>Leia atentamente:</strong> Siga as instruções com <strong>atenção</strong> em cada etapa. Para cada questão, você selecionará a palavra que <strong>MAIS</strong> e a que <strong>MENOS</strong> se assemelha a você.</p>
                         <p><strong>Seja honesto(a):</strong> Sua <strong>honestidade</strong> é crucial para obter um resultado confiável e útil. Responda com base em sua experiência e percepção pessoal, sem se preocupar com julgamentos. Não há respostas certas ou erradas; o objetivo é entender melhor você mesmo(a).</p>
-                        <p><strong>Dedicação e tempo:</strong> Reserve <strong>tempo adequado</strong> (geralmente menos de 10 minutos) para completar o teste sem pressa. O temporizador de 15 segundos por questão ajuda a capturar sua resposta instintiva.</p> {# Adaptado e menciona o timer #}
-                        {# Removida a frase final "Espero que estas instruções..." #}
+                        <p><strong>Dedicação e tempo:</strong> Reserve <strong>tempo adequado</strong> (geralmente menos de 10 minutos) para completar o teste sem pressa. O temporizador de 15 segundos por questão ajuda a capturar sua resposta instintiva.</p>
                     </div>
                 </div>
 
@@ -37,14 +45,19 @@
                     <a href="{{ url_for('main.quiz') }}" id="start-btn" class="btn btn-success btn-lg px-4 py-2 shadow">
                         Iniciar Avaliação Agora!
                     </a>
-                    <p class="text-muted mt-2"><small>Clique no botão acima para começar.</small></p>
+                     <p class="text-muted mt-2"><small>Clique no botão acima para começar.</small></p>
                 </div>
-             </div>
+
+                 <!-- Logotipo Inferior Direito -->
+                 <div class="text-end mt-4">
+                     {# Corrigido src removendo as aspas extras "" "" #}
+                     <img src="{{ url_for('static', filename='images/logotipo.svg') }}" alt="Logotipo" style="width: 120px; height: auto;">
+                 </div>
+            </div>
         </div>
     </section>
 {% endblock %}
 
 {% block extra_js %}
-<!-- Adicionar ícones Bootstrap se não estiverem em base.html -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> -->
+{# Bloco extra_js limpo e vazio, a menos que precise de JS específico para esta página #}
 {% endblock %}
